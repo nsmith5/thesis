@@ -13,9 +13,31 @@ The first major goal, and probably the simpliest is to demonstrate that with the
 
 
 1.1 The Syntectic Reaction :math:`l_1 + l_2 \rightarrow \alpha` 
----------------------------------------------------------------------
+----------------------------------------------------------------
 
 To demonstrate the syntectic reaction we must complete the following tasks:
 
 - Construct a free energy with the appropriate properties
 - Construct a phase diagram
+- Demonstrate that the system numerically. 
+- Show nucleation of the :math:`\alpha` phase in simulation
+
+Note: The spinodal in the liquid is *not* accurate. The coarsening of such a system requires hydrodynamics to be accurately described
+
+1.2 The Monotectic Reaction :math:`l_1 \righarrow l_1 + \alpha`
+---------------------------------------------------------------- 
+
+To demonstrate the monotectic reaction we must complete the following tasks:
+
+- Construct a free energy with the appropriate properties
+- Construct a phase diagram
+- Demonstrate that the system numerically. 
+
+1.3 The Eutectoid Reaction :math:`\gamma \rightarrow \alpha + \epsilon`
+-----------------------------------------------------------------------
+
+To demonstrate the eutectoid reaction we must complete the following tasks:
+
+- Construct a free energy with the appropriate properties
+- Construct a phase diagram
+- Demonstrate that the system numerically.
