@@ -103,6 +103,10 @@ This amounts to looking at what happens under recalescense of the metastable and
 
 This work is completely seperate from the first two major goals. The foundations of a multiscale phase field crystal model have already been laid down, the basic idea is that the reference density should be promoted to a long wavelength field and both fields should be dynamical quantities. A supporting idea for this is that the correlation functions can now be considered as expansions of any long wavelength reference density!
 
+.. math::
+
+    \mathcal{F}[\rho_0, \delta\rho] = \mathcal{F}_0[\rho_0] + kbT \int \rho_0 \left( \frac{n^2}{2} - \frac{n^3}{6} + \frac{n^4}{12} \right) - kbT\int \mu_0 \delta\rho - \frac{kbT}{2}\int \delta\rho(r) \int^\prime C_0^{(2)}(r, r^\prime; \rho_0) \delta\rho(r^\prime)
+
 3.1 Construct a Hard Sphere Inspired Model
 -----------------------------------
 
@@ -114,7 +118,10 @@ Here are the tasks for the Hard Sphere Model
 3.2 Construct a Van der Waals Inspired Model
 ---------------------------------------------
 
+Here are the tasks for the Van der Waals Model
 
+- Justify some form for the direct correlation function
+- Do a local density approx on the Van der Waals free energy
 
 
 
