@@ -85,6 +85,34 @@ Show that :math:`\gamma^\prime` all by itself at moderate undercoolings. Perhaps
 2.3 Demonstrate that a Growing Front can break down into Lamellar Eutectic
 ---------------------------------------------------------------------------
 
+It is suspected that the mechanism for this is fluctuations in the concentrations at the interface. Is this true?
+
+2.4 Show with an Amplitude model that Elastic Energy can Stabilize :math:`\gamma^\prime`
+-----------------------------------------------------------------------------------------
+
+Either by using the Elder model that has already been published or by deriving a new model from your theory, justify the fact that elastic energy is playing a role in the stability of the metastable state that can not be seen from the bulk free energy surface.
+
+2.5 Show, if possible, that all of this can explain the Anomolous Eutectics of AgCu
+------------------------------------------------------------------------------------
+
+This amounts to looking at what happens under recalescense of the metastable and lamellar composite system. The metastable state is the least stable so it should melt first, leading to regrowth of the lamellar system back into the melt
+
+
+3.0 Multiscale Phase field Crystal Model
+=========================================
+
+This work is completely seperate from the first two major goals. The foundations of a multiscale phase field crystal model have already been laid down, the basic idea is that the reference density should be promoted to a long wavelength field and both fields should be dynamical quantities. A supporting idea for this is that the correlation functions can now be considered as expansions of any long wavelength reference density!
+
+3.1 Construct a Hard Sphere Inspired Model
+-----------------------------------
+
+Here are the tasks for the Hard Sphere Model
+
+- Use the Percus-Yevick closure to make a direct correlation function
+- Do a local density approximation of the hard sphere free energy for the reference free energy
+
+3.2 Construct a Van der Waals Inspired Model
+---------------------------------------------
 
 
 
