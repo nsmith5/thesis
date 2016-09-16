@@ -1,3 +1,5 @@
+export step!
+
 function ΔFmix(c::Float64, s::State)
 	ϵ = -4.0 + s.ϵ₀*(s.σ - s.σ₀)
 	return s.ω*(c*log(2.0c) + (1-c)*log(2.0*(1-c)) + 0.5*ϵ*(c-0.5)^2)

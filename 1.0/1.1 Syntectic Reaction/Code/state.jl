@@ -1,4 +1,13 @@
+import Base: show,
+			 get
+             
+export State,
+       set,
+       get
+
 type State
+	N_init::Bool
+	
 	# Free Energy Parameters
 	η::Float64
 	χ::Float64
@@ -48,10 +57,10 @@ type State
 	n::Array{Float64, 2}
 	c::Array{Float64, 2}
 
-	State() = new()			
+	State() = new(false)			
 end
 
-function Base.show(io::IO, s::State)
+function show(io::IO, s::State)
 	# Pretty printing of a state
 	println(io, "Simulation State")
 	symbols = [:η, :χ, :Wc, :ϵ₀, :σ₀, :c₀, :σ, :ω, :kbT]
@@ -71,7 +80,9 @@ end
 function set!(s::State, sym::Symbol, val)
 	if sym ∉ fieldnames(State)
 		error("$sym not a field of type State")
-	elseif sym == :σ
+	elseif sim ≠ :N && !s.N_init
+		error("N must be initialized before all other state parameters")
+	elseif sym ∈ [:σ, :k′, :α, :β, :ρ]
 		@assert typeof(val) == Float64
 		@eval s.$sym = $val
 		setC₂!(s)
@@ -82,6 +93,7 @@ function set!(s::State, sym::Symbol, val)
 		set∇²!(s)
 		return nothing
 	elseif sym == :N
+		s.N_init = true
 		s.N = val
 		for arr_sym in [:ñₙₗ, :c̃ₙₗ, :c̃, :ñ, :kC₂n, :ξₙ, :ξc]
 			@eval s.$arr_sym = Array(Complex128, $val>>1 + 1, $val)
@@ -102,7 +114,7 @@ function set!(s::State, sym::Symbol, val)
 	end
 end			
 
-function Base.get(sym::Symbol, s::State)
+function get(sym::Symbol, s::State)
 	if sym ∈ fieldnames(State	)
 		return @eval s.$sym
 	else
