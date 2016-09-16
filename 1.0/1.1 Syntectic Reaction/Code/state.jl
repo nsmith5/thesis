@@ -2,7 +2,7 @@ import Base: show,
 			 get
              
 export State,
-       set,
+       set!,
        get
 
 type State
@@ -66,7 +66,7 @@ function show(io::IO, s::State)
 	symbols = [:η, :χ, :Wc, :ϵ₀, :σ₀, :c₀, :σ, :ω, :kbT]
 	println(io, "\nThermodynamic Parameters:")
 	for sym in symbols
-		println(io, "    ", sym, " = ", eval(:(s.$sym)))
+		println(io, "    ", sym, " = ", eval(:($s.$sym)))
 	end
 	println(io, "\nDynamic Parameters")
 	println(io, "    Mₙ = ", s.Mₙ)
@@ -80,11 +80,11 @@ end
 function set!(s::State, sym::Symbol, val)
 	if sym ∉ fieldnames(State)
 		error("$sym not a field of type State")
-	elseif sim ≠ :N && !s.N_init
+	elseif sym ≠ :N && !s.N_init
 		error("N must be initialized before all other state parameters")
 	elseif sym ∈ [:σ, :k′, :α, :β, :ρ]
 		@assert typeof(val) == Float64
-		@eval s.$sym = $val
+		@eval $s.$sym = $val
 		setC₂!(s)
 		return nothing
 	elseif sym == :Δx
@@ -96,27 +96,27 @@ function set!(s::State, sym::Symbol, val)
 		s.N_init = true
 		s.N = val
 		for arr_sym in [:ñₙₗ, :c̃ₙₗ, :c̃, :ñ, :kC₂n, :ξₙ, :ξc]
-			@eval s.$arr_sym = Array(Complex128, $val>>1 + 1, $val)
+			@eval $s.$arr_sym = Array(Complex128, $val>>1 + 1, $val)
 		end
 		for arr_sym in [:∇², :C₂]
-			@eval s.$arr_sym = Array(Float64, $val>>1 + 1, $val)
+			@eval $s.$arr_sym = Array(Float64, $val>>1 + 1, $val)
 		end
 		for arr_sym in [:C₂n, :nₙₗ, :cₙₗ, :n, :c]
-			@eval s.$arr_sym = Array(Float64, $val, $val)
+			@eval $s.$arr_sym = Array(Float64, $val, $val)
 		end
 		FFTW.set_num_threads(4)
 		s.fftplan = plan_rfft(s.nₙₗ, (1, 2), flags=FFTW.MEASURE)
 		return nothing
 	else
-		@assert @eval typeof(s.$sym) == typeof($val)
-		@eval s.$sym = $val
+		@assert @eval typeof($s.$sym) == typeof($val)
+		@eval $s.$sym = $val
 		return nothing
 	end
 end			
 
 function get(sym::Symbol, s::State)
 	if sym ∈ fieldnames(State	)
-		return @eval s.$sym
+		return @eval $s.$sym
 	else
 		error("$sym not a field of type State")			
 	end
@@ -144,8 +144,8 @@ end
 
 function setC₂!(s::State)
 	symlist = [:N, :σ, :k′, :α, :β, :ρ]
-	for sym in simlist
-		@eval $sym = s.$sym
+	for sym in symlist
+		@eval $sym = $s.$sym
 	end
 	C = Array(Float64, N>>1 + 1, N)
 	for j in 1:N

@@ -17,10 +17,10 @@ function noise!(s::State)
 	return nothing
 end
 
-function set_nonlinear!(s::state)
+function set_nonlinear!(s::State)
 	third = 1/3
 	for i in 1:s.N*s.N
-		s.nₙₗ[i] = s.n[i]^2*(-0.5*s.η + third*χ*n[i]) + ΔFmix(s.c[i], s) - exp(-(s.c[i]-0.5)^2/(2s.αc^2))*s.C₂n[i]
+		s.nₙₗ[i] = s.n[i]^2*(-0.5*s.η + third*s.χ*s.n[i]) + ΔFmix(s.c[i], s) - exp(-(s.c[i]-0.5)^2/(2s.αc^2))*s.C₂n[i]
 		s.cₙₗ[i] = (s.n[i] + 1.)*δΔFmixδc(s.c[i], s) - 0.5*s.n[i]*(-(s.c[i]-0.5)/s.αc^2*exp(-(s.c[i]-0.5)^2/(2s.αc^2))*s.C₂n[i])
 	end
 end
@@ -41,10 +41,10 @@ function step!(s::State)
 	A_mul_B!(s.ñₙₗ, s.fftplan, s.nₙₗ)
 	A_mul_B!(s.c̃ₙₗ, s.fftplan, s.cₙₗ)
 	noise!(s)
-	ϵ = -4.0 + s.ϵ₀(s.σ - s.σ₀)
+	ϵ = -4.0 + s.ϵ₀*(s.σ - s.σ₀)
 	for i in 1:(s.N>>1 + 1)*s.N
 		s.ñ[i] = 1.0/(1.0-s.Δt*s.∇²[i])*(s.ñ[i] + s.Δt*s.∇²[i]*(s.ñₙₗ[i]+s.ξₙ[i]))
-		s.c̃[i] = 1.0/(1.0-s.Δt*s.∇²[i]*(ϵ-s.Wc*s.∇²[i]))*(s.c̃[i] + s.Δt*s.∇²[i]*(s.c̃ₙₗ[i]))	
+		s.c̃[i] = 1.0/(1.0-s.Δt*s.∇²[i]*(s.ω*ϵ-s.Wc*s.∇²[i]))*(s.c̃[i] + s.Δt*s.∇²[i]*(s.c̃ₙₗ[i] + s.ξc[i]))	
 	end
 	A_ldiv_B!(s.n, s.fftplan, s.ñ)
 	A_ldiv_B!(s.c, s.fftplan, s.c̃)
