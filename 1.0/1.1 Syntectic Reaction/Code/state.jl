@@ -38,6 +38,7 @@ type State
 	C₂n::Array{Float64, 2}
 	nₙₗ::Array{Float64, 2}
 	cₙₗ::Array{Float64, 2}
+	fftplan::Base.DFT.FFTW.FFTWPlan
 
 	# Operators
 	∇²::Array{Float64, 2}
@@ -74,13 +75,14 @@ function set!(s::State, sym::Symbol, val)
 		@assert typeof(val) == Float64
 		@eval s.$sym = $val
 		setC₂!(s)
-		return
+		return nothing
 	elseif sym == :Δx
 		@assert typeof(val) == Float64
 		s.Δx = val
 		set∇²!(s)
-		return
+		return nothing
 	elseif sym == :N
+		s.N = val
 		for arr_sym in [:ñₙₗ, :c̃ₙₗ, :c̃, :ñ, :kC₂n, :ξₙ, :ξc]
 			@eval s.$arr_sym = Array(Complex128, $val>>1 + 1, $val)
 		end
@@ -90,12 +92,13 @@ function set!(s::State, sym::Symbol, val)
 		for arr_sym in [:C₂n, :nₙₗ, :cₙₗ, :n, :c]
 			@eval s.$arr_sym = Array(Float64, $val, $val)
 		end
-		s.N = val
-		return
+		FFTW.set_num_threads(4)
+		s.fftplan = plan_rfft(s.nₙₗ, (1, 2), flags=FFTW.MEASURE)
+		return nothing
 	else
 		@assert @eval typeof(s.$sym) == typeof($val)
 		@eval s.$sym = $val
-		return
+		return nothing
 	end
 end			
 
