@@ -1,0 +1,38 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath}
+\usepackage{array}
+
+\newenvironment{conditions}
+  {\par\vspace{\abovedisplayskip}\noindent\begin{tabular}{>{$}l<{$} @{${}={}$} l}}
+  {\end{tabular}\par\vspace{\belowdisplayskip}}
+
+\begin{document}
+
+\section{Pair correlation function of PY closure of the Hard Sphere system}
+
+In 1963 Wertheim solved for the exact analytical form of the pair correlation function of the hard sphere system using the Percus-Yevick closure of the Ornstien-Zernicke equation. In real space the direct correlation function is, 
+
+\begin{align}
+C(r) &=
+	\begin{cases}
+	\alpha + \beta r + \gamma r^2 + \delta r^3 & \text{if } r < R \\
+	0 & \text{if } r > R.
+	\end{cases}
+\end{align} 
+Where,
+\begin{conditions}
+R		& 	The hard sphere diameter, \\
+\alpha	& 	$-(1 + 2\eta)^2/(1-\eta)^4$, \\
+\beta	& 	$6\eta(1 + \eta/2)^2/(1-\eta)^4$, \\
+\gamma 	&	0 ,\\
+\delta	&	$-\eta(1+2\eta)^2/(2(1-\eta)^4)$.
+\end{conditions}
+and $\eta = \pi\rho R/6$ is the hard sphere packing fraction. For the purposes of our density functional theory we would like to know the form of direct correlation function in fourier space, $\tilde{C}(k)$
+
+\begin{equation}
+\tilde{C}(k) = 4\pi \int_o^{\infty} C(r) \frac{\sin(kr)}{kr} r^2 dr
+\end{equation}
+
+See the maxima file in this folder for the solution. Its sort of long.
+
+\end{document}
