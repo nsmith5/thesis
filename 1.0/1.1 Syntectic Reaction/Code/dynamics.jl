@@ -37,6 +37,8 @@ function calccorr!(s::State)
     A_ldiv_B!(s.C₂n, s.fftplan, s.kC₂n)
     return nothing
 end
+ 
+Λ(i::Int, s::State) = s.Mc*s.∇²[i]*(s.ω*(-4.0+s.ϵ₀*(s.σ-s.σ₀)) - s.Wc*s.∇²[i])
 
 function step!(s::State)
 	A_mul_B!(s.ñ, s.fftplan, s.n)
@@ -48,11 +50,10 @@ function step!(s::State)
 	noise!(s)
 	ϵ = -4.0 + s.ϵ₀*(s.σ - s.σ₀)
 	for i in 1:(s.N>>1 + 1)*s.N
-		Λ = s.Mc*s.∇²[i]*(s.ω*ϵ - s.Wc*s.∇²[i])
 		prefn = 1.0/(1.0 - s.ζ*s.Δt*s.Mₙ*s.∇²[i])
-		prefc = 1.0/(1.0 - s.ζ*s.Δt*Λ)
+		prefc = 1.0/(1.0 - s.ζ*s.Δt*Λ(i, s))
 		s.ñ[i] = prefn*((1.0 + (1 - s.ζ)*s.Δt*s.Mₙ*s.∇²[i])*s.ñ[i] + s.Mₙ*s.Δt*s.∇²[i]*s.ñₙₗ[i]+s.Δt*s.ξₙ[i])
-		s.c̃[i] = prefc*((1.0 + (1 - s.ζ)*s.Δt*Λ)*s.c̃[i] + s.Mc*s.Δt*s.∇²[i]*s.c̃ₙₗ[i] + s.Δt*s.ξc[i])	
+		s.c̃[i] = prefc*((1.0 + (1 - s.ζ)*s.Δt*Λ(i, s))*s.c̃[i] + s.Mc*s.Δt*s.∇²[i]*s.c̃ₙₗ[i] + s.Δt*s.ξc[i])	
 	end
 	A_ldiv_B!(s.n, s.fftplan, s.ñ)
 	A_ldiv_B!(s.c, s.fftplan, s.c̃)
