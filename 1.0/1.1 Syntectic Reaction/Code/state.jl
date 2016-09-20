@@ -1,9 +1,6 @@
 import Base: show,
 			 get
 
-import JLD: save,
-		    load
-             
 export State,
        set!,
        get,
@@ -163,11 +160,3 @@ function setC₂!(s::State)
 	s.C₂ = C
 	return
 end		
-
-function save(filename, s::State)
-	# TODO Make a function to save a state
-end		
-
-function load!(filename)
-	# TODO make a function to load a state from file
-end

@@ -51,12 +51,10 @@ function step!(s::State)
 		Λ = Mc*∇²[i]*(ω*ϵ - Wc*∇²[i])
 		prefn = 1.0/(1.0 - ζ*Δt*Mₙ*∇²[i])
 		prefc = 1.0/(1.0 - ζ*Δt*Λ)
-		s.ñ[i] = prefn*((1.0 - (1 - ζ)*Δt*Mₙ*∇²[i])*ñ[i] + Mn*Δt*∇²[i]*s.ñₙₗ[i]+Δt*ξₙ[i])
+		s.ñ[i] = prefn*((1.0 + (1 - ζ)*Δt*Mₙ*∇²[i])*ñ[i] + Mₙ*Δt*∇²[i]*s.ñₙₗ[i]+Δt*ξₙ[i])
 		s.c̃[i] = prefc*((1.0 + (1 - ζ)*Δt*Λ)*c̃[i] + Mc*Δt*∇²[i]*s.c̃ₙₗ[i] + Δt*ξc[i])	
 	end
 	A_ldiv_B!(s.n, s.fftplan, s.ñ)
 	A_ldiv_B!(s.c, s.fftplan, s.c̃)
 	return nothing
 end
-
-
