@@ -1,9 +1,14 @@
 import Base: show,
 			 get
+
+import JLD: save,
+		    load
              
 export State,
        set!,
-       get
+       get,
+       save,
+	   load
 
 type State
 	N_init::Bool
@@ -156,4 +161,12 @@ function setC₂!(s::State)
 	end
 	s.C₂ = C
 	return
-end				
+end		
+
+function save(filename, s::State)
+	# TODO Make a function to save a state
+end		
+
+function load!(filename)
+	# TODO make a function to load a state from file
+end

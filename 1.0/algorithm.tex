@@ -1,0 +1,106 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{array}
+
+\title{Algorithms for the Binary XPFC Model}
+\author{Nathan Smith}
+
+\newenvironment{conditions}
+  {\par\vspace{\abovedisplayskip}\noindent\begin{tabular}{>{$}l<{$} @{${}={}$} l}}
+  {\end{tabular}\par\vspace{\belowdisplayskip}}
+
+\newcommand{\f}{\frac}
+\newcommand{\D}{\Delta}
+\newcommand{\til}{\tilde}
+
+\begin{document}
+
+\maketitle
+
+\section{Algorithm for the Concentration $c(x,t)$}
+
+To construct algorithm for the equation of motion of the concentration field we follow the outline of Danzig on pg 195. The equation of motion is, 
+
+\begin{equation}
+\partial_t \tilde{c} = -M_c k^2\left(\omega\epsilon\tilde{c} + W_c k^2\tilde{c} + \mathcal{F}\lbrace NL(c) \rbrace\right) + \tilde{\zeta}.
+\end{equation}
+
+Where $NL(c)$ is the non-linear term and $\zeta$ is the drive noise. 
+
+\begin{equation}
+NL(c) = \omega(1+n)\left(\ln\left(\frac{c}{c_0}\right) - \ln\left(\frac{1-c}{1-c_0}\right)\right) - \frac{1}{2} n \left(C_{eff}^n\ast n\right)
+\end{equation}
+
+Now if we think about the solution to this equation at time $t^{n+\xi}$ time between $t^n$ and $t^{n+1}$ we express the solution as an interpolation between the solutions at the earlier and later times.
+
+\begin{equation}
+\tilde{c}_k^{n + \xi} = (1-\xi)\tilde{c}_k^n + \xi\tilde{c}_k^{n+1}
+\end{equation}
+
+We also find that we can express the time derivative as finite difference plus a correction term. 
+
+\begin{equation}
+\partial_t \tilde{c} = \frac{\tilde{c}_k^{n+1} - \tilde{c}_k^{n}}{\Delta t} + 
+\frac{1 - 2\xi}{2} \frac{\partial^2 \tilde{c}}{\partial t^2}\Delta t + ...
+\end{equation}
+
+Using each of these ideas we can rewrite the equation of motion completely, with the exception of the nonlinear term, which we evaluate a the time $t^n$ in keeping with many of the semi-implicit methods published.
+
+\begin{equation}
+\frac{\tilde{c}_k^{n+1} - \tilde{c}_k^{n}}{\Delta t} + 
+\frac{1 - 2\xi}{2} \frac{\partial^2 \tilde{c}}{\partial t^2}\Delta t = 
+\Lambda(k)\left[(1-\xi)\tilde{c}_k^n + \xi\tilde{c}_k^{n+1}\right] - M_c k^2 \mathcal{F}\lbrace NL(c^n)\rbrace + \tilde{\zeta}_k^n
+\end{equation}
+where, 
+
+\begin{equation}
+\Lambda(k) = -M_c k^2\left(\omega\epsilon + W_c k^2\right).
+\end{equation}
+
+Moving future times to the left and past times to the right we find, 
+\begin{equation}
+\tilde{c}_k^{n+1} = \hat{P}\tilde{c}_k^n + \hat{Q}\mathcal{F}\lbrace NL(c^n)\rbrace_k + \hat{L}\tilde{\zeta}_k^n + \frac{2\xi - 1}{2}\frac{\partial^2 \tilde{c}}{\partial t^2}\Delta t^2
+\end{equation}
+Where the operators $\hat{P}$, $\hat{Q}$ and $\hat{L}$ are,
+
+\begin{align}
+\hat{P} &= 1 + \frac{\Delta t \Lambda(k)}{1 - \xi\Delta t \Lambda(k)}  \\
+\hat{Q} &= -\frac{M_c k^2 \Delta t}{1 - \Delta t \xi \Lambda(k)} \\
+\hat{L} &= \frac{\Delta t}{1 - \Delta t \xi \Lambda(k)} 
+\end{align}
+
+Different values of $\xi$ lead to different integration schemes. The $\xi = 0$ corresponds to euler time stepping in fourier space, while $\xi = 1$ yields the often used semi-implicit fourier method. There is an import case in which we choose $\xi = 1/2$ where the algorithm becomes accurate to second order in time. This is the Crank-Nicholson fourier method. 
+
+\section{Algorithm for the Total Density $n(x,t)$}
+
+We can develop an algorithm for the equation of motion fo the total density in the same way that we did with concentration. The equation of motion for the total density in fourier space looks like, 
+
+\begin{equation}
+\partial_t \tilde{n}(k, t) = -M_n k^2 \left(\tilde{n} + \mathcal{F}\lbrace NL(n)\rbrace\right) + \tilde{\zeta}
+\end{equation}
+
+Where now the nonlinear term is, 
+
+\begin{equation}
+NL(n) = -\eta \f{n^2}{2} + \chi \f{n^3}{3}  + \D f_{mix}(c) - C_{eff}^n \ast n  
+\end{equation}
+
+Note that the convolution term is nonlinear because of an implicit dependance on the concentration. Now, in principle, you could compute that pair correlation function every time step for a more accurate linear propagator, but here we will not consider that. 
+
+Here again, we find the same structure as previously:
+
+\begin{equation}
+\til{n}_k^{n+1} = \hat{P}\til{n}_k^n + \hat{Q}\mathcal{F}\lbrace NL(n^n)\rbrace_k + \hat{L} \til{\zeta}_k
+\end{equation}
+
+Here, the operators $\hat{P}$, $\hat{Q}$ and $\hat{L}$ are:
+
+\begin{align}
+\hat{P} &= 1 - \frac{\Delta t M_n k^2}{1 + \xi\Delta t M_n k^2}  \\
+\hat{Q} &= -\frac{M_c k^2 \Delta t}{1 + \Delta t \xi M_n k^2} \\
+\hat{L} &= \frac{\Delta t}{1 + \Delta t \xi M_n k^2} 
+\end{align}
+
+
+\end{document}

@@ -1,0 +1,31 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{array}
+
+\newenvironment{conditions}
+  {\par\vspace{\abovedisplayskip}\noindent\begin{tabular}{>{$}l<{$} @{${}={}$} l}}
+  {\end{tabular}\par\vspace{\belowdisplayskip}}
+
+\begin{document}
+
+\section*{Free Energy of the Binary XPFC Model}
+
+The free energy of the binary xpfc model can be written as, 
+
+\begin{equation}
+\frac{\beta \mathcal{F}[n, c]}{\rho_0} = \int dr \,\, \frac{n^2}{2} - \chi\frac{n^3}{6}
+ + \eta \frac{n^4}{12} + \frac{W_c}{2}\lvert\nabla c\rvert^2 + \Delta f_{mix}(c) - \frac{1}{2}n\int dr^\prime C_{eff}^n(r-r^\prime; c)n(r^\prime).
+\end{equation}
+Where the free energy of mixing is, 
+\begin{equation}
+\Delta f_{mix}(c) = \omega\left(c\ln\left(\frac{c}{c_0}\right)+(1-c)\ln\left(\frac{1-c}{1-c_0}\right) + \frac{\epsilon(T)}{2} (c-c_0)^2\right).
+\end{equation}
+
+We assume that both the total density, $n$, and the concentration, $c$, follow conservative, diffusive dynamics to relax to equilibrium. 
+
+\begin{equation}
+\frac{\partial c}{\partial t} = M_c\nabla^2\left(\right)
+\end{equation}
+
+\end{document}

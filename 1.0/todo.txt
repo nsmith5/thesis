@@ -1,0 +1,4 @@
+TODO:
+
+(1) Write up overview theory of where the epsilon term comes from 
+(2) Write thing about fully implicit versus crank-nicholson algorithm
