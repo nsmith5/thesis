@@ -1,9 +1,8 @@
 export step!
 
 function ΔFmix(c::Float64, s::State)
-	@unpack ω, σ, σ₀, ϵ₀ = s
-	ϵ = -4.0 + ϵ₀*(σ - σ₀)
-	return ω * (c * log(2.0 * c) + (1 - c)*log(2.0 * (1. - c)) + 0.5 * ϵ * (c - 0.5) ^ 2)
+	ϵ = -4.0 + s.ϵ₀*(s.σ - s.σ₀)
+	return s.ω * (c * log(2.0 * c) + (1 - c)*log(2.0 * (1. - c)) + 0.5 * ϵ * (c - 0.5) ^ 2)
 end
 
 δΔFmixδc(c::Float64, s::State) = s.ω*(log(2.0 * c) - log(2.0 * (1 - c)))
@@ -27,9 +26,9 @@ end
 function set_nonlinear!(s::State)
 	@unpack N, n, c, η, χ, αc, C₂n = s
 	third = 1./3.
-	for i in 1:N*N
-		s.nₙₗ[i] = n[i]^2*(-0.5*η + third*χ*n[i]) + ΔFmix(c[i], s) - λ(c[i], s)*C₂n[i]
-		s.cₙₗ[i] = (1+n[i])*δΔFmixδc(c[i], s) + 0.5*n[i]*((c[i]-0.5)/αc^2*λ(c[i], s))*C₂n[i]
+	for i in 1:s.N*s.N
+		s.nₙₗ[i] = n[i]^2*(-0.5*η + third*χ*n[i]) + ΔFmix(c[i], s) - exp(-(c[i]-0.5)^2/(2.0*s.αc^2))*C₂n[i]
+		s.cₙₗ[i] = (1+n[i])*δΔFmixδc(c[i], s) + 0.5*n[i]*((c[i]-0.5)/αc^2*exp(-(c[i]-0.5)^2/(2.0*αc^2)))*C₂n[i]
 	end
 end
 
@@ -57,7 +56,7 @@ function step!(s::State)
 		prefn = 1.0/(1.0 - ζ*Δt*Mₙ*∇²[i])
 		prefc = 1.0/(1.0 - ζ*Δt*Λ)
 		s.ñ[i] = prefn*((1.0 + (1 - ζ)*Δt*Mₙ*∇²[i])*ñ[i] + Mₙ*Δt*∇²[i]*s.ñₙₗ[i]+Δt*ξₙ[i])
-		s.c̃[i] = prefc*((1.0 + (1 - ζ)*Δt*Λ)*c̃[i] + Mc*Δt*∇²[i]*s.c̃ₙₗ[i] + Δt*ξc[i])	
+		s.c̃[i] = prefc*((1.0 + (1 - ζ)*Δt*Λ)*s.c̃[i] + Mc*Δt*∇²[i]*s.c̃ₙₗ[i] + Δt*ξc[i])	
 	end
 	A_ldiv_B!(s.n, s.fftplan, s.ñ)
 	A_ldiv_B!(s.c, s.fftplan, s.c̃)
