@@ -8,9 +8,8 @@ end
 δΔFmixδc(c::Float64, s::State) = s.ω*(log(2.0 * c) - log(2.0 * (1 - c)))
 
 function noise!(s::State)
-	@unpack N, kbT, Mc, Mₙ, Δx, Δt = s
-	c_scale = im*√(kbT*Mc/(Δx^2*Δt))
-	n_scale = im*√(kbT*Mₙ/(Δx^2*Δt))
+	c_scale = im*√(s.kbT*s.Mc/(s.Δx^2*s.Δt))
+	n_scale = im*√(s.kbT*s.Mₙ/(s.Δx^2*s.Δt))
 	for j in 1:N
 		for i in 1:N>>1 + 1
 			k = index_to_k(s, i, j)
@@ -24,27 +23,24 @@ end
 λ(c::Float64, s::State) = exp(-(c-0.5)^2/(2.0*s.αc^2))
 
 function set_nonlinear!(s::State)
-	@unpack N, n, c, η, χ, αc, C₂n = s
 	third = 1./3.
 	for i in 1:s.N*s.N
-		s.nₙₗ[i] = n[i]^2*(-0.5*η + third*χ*n[i]) + ΔFmix(c[i], s) - exp(-(c[i]-0.5)^2/(2.0*s.αc^2))*C₂n[i]
-		s.cₙₗ[i] = (1+n[i])*δΔFmixδc(c[i], s) + 0.5*n[i]*((c[i]-0.5)/αc^2*exp(-(c[i]-0.5)^2/(2.0*αc^2)))*C₂n[i]
+		s.nₙₗ[i] = s.n[i]^2*(-0.5*s.η + third*s.χ*s.n[i]) + ΔFmix(s.c[i], s) - exp(-(s.c[i]-0.5)^2/(2.0*s.αc^2))*s.C₂n[i]
+		s.cₙₗ[i] = (1.+s.n[i])*δΔFmixδc(s.c[i], s) + 0.5*s.n[i]*((s.c[i]-0.5)/s.αc^2*exp(-(s.c[i]-0.5)^2/(2.0*s.αc^2)))*s.C₂n[i]
 	end
 end
 
 function calccorr!(s::State)
-	@unpack N, C₂n, kC₂n, C₂, ñ, fftplan = s
 	for i in 1:(s.N>>1+1)*s.N
-        kC₂n[i] = C₂[i]*ñ[i]
+        s.kC₂n[i] = s.C₂[i]*s.ñ[i]
     end
-    A_ldiv_B!(C₂n, fftplan, kC₂n)
+    A_ldiv_B!(s.C₂n, s.fftplan, s.kC₂n)
     return nothing
 end
 
 function step!(s::State)
-	@unpack ζ, Δt, ∇², Mₙ, Mc, ω, c̃, ñ, n, c, Wc, ξc, ξₙ = s
-	A_mul_B!(ñ, s.fftplan, n)
-	A_mul_B!(c̃, s.fftplan, c)
+	A_mul_B!(s.ñ, s.fftplan, s.n)
+	A_mul_B!(s.c̃, s.fftplan, s.c)
 	calccorr!(s)
 	set_nonlinear!(s)
 	A_mul_B!(s.ñₙₗ, s.fftplan, s.nₙₗ)
@@ -52,11 +48,11 @@ function step!(s::State)
 	noise!(s)
 	ϵ = -4.0 + s.ϵ₀*(s.σ - s.σ₀)
 	for i in 1:(s.N>>1 + 1)*s.N
-		Λ = Mc*∇²[i]*(ω*ϵ - Wc*∇²[i])
-		prefn = 1.0/(1.0 - ζ*Δt*Mₙ*∇²[i])
-		prefc = 1.0/(1.0 - ζ*Δt*Λ)
-		s.ñ[i] = prefn*((1.0 + (1 - ζ)*Δt*Mₙ*∇²[i])*ñ[i] + Mₙ*Δt*∇²[i]*s.ñₙₗ[i]+Δt*ξₙ[i])
-		s.c̃[i] = prefc*((1.0 + (1 - ζ)*Δt*Λ)*s.c̃[i] + Mc*Δt*∇²[i]*s.c̃ₙₗ[i] + Δt*ξc[i])	
+		Λ = s.Mc*s.∇²[i]*(s.ω*ϵ - s.Wc*s.∇²[i])
+		prefn = 1.0/(1.0 - s.ζ*s.Δt*s.Mₙ*s.∇²[i])
+		prefc = 1.0/(1.0 - s.ζ*s.Δt*Λ)
+		s.ñ[i] = prefn*((1.0 + (1 - s.ζ)*s.Δt*s.Mₙ*s.∇²[i])*s.ñ[i] + s.Mₙ*s.Δt*s.∇²[i]*s.ñₙₗ[i]+s.Δt*s.ξₙ[i])
+		s.c̃[i] = prefc*((1.0 + (1 - s.ζ)*s.Δt*Λ)*s.c̃[i] + s.Mc*s.Δt*s.∇²[i]*s.c̃ₙₗ[i] + s.Δt*s.ξc[i])	
 	end
 	A_ldiv_B!(s.n, s.fftplan, s.ñ)
 	A_ldiv_B!(s.c, s.fftplan, s.c̃)
