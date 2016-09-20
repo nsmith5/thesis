@@ -8,11 +8,15 @@ end
 δΔFmixδc(c::Float64, s::State) = s.ω*(log(2.0c) - log(2.0*(1-c)))
 
 function noise!(s::State)
-	c_scale = sqrt(2)*s.kbT*s.Mc/(s.Δx^2*s.Δt)
-	n_scale = sqrt(2)*s.kbT*s.Mₙ/(s.Δx^2*s.Δt)
-	for i in 1:length(s.ξc)
-		s.ξc[i] = c_scale*complex(randn(), randn())
-		s.ξₙ[i] = n_scale*complex(randn(), randn()) 
+	N = s.N
+	c_scale = im*√(s.kbT*s.Mc/(s.Δx^2*s.Δt))
+	n_scale = im*√(s.kbT*s.Mₙ/(s.Δx^2*s.Δt))
+	for j in 1:N
+		for i in 1:N>>1 + 1
+			k = index_to_k(s, i, j)
+			s.ξc[i, j] = k*c_scale*complex(randn(), randn())
+			s.ξₙ[i, j] = k*n_scale*complex(randn(), randn()) 
+		end
 	end
 	return nothing
 end
@@ -34,6 +38,7 @@ function calccorr!(s::State)
 end
 
 function step!(s::State)
+	@unpack ζ, Δt, ∇², Mₙ, Mc, ω, c̃, ñ, Wc, ξc, ξₙ = s
 	A_mul_B!(s.ñ, s.fftplan, s.n)
 	A_mul_B!(s.c̃, s.fftplan, s.c)
 	calccorr!(s)
@@ -43,8 +48,11 @@ function step!(s::State)
 	noise!(s)
 	ϵ = -4.0 + s.ϵ₀*(s.σ - s.σ₀)
 	for i in 1:(s.N>>1 + 1)*s.N
-		s.ñ[i] = 1.0/(1.0-s.Δt*s.∇²[i])*(s.ñ[i] + s.Δt*s.∇²[i]*(s.ñₙₗ[i]+s.ξₙ[i]))
-		s.c̃[i] = 1.0/(1.0-s.Δt*s.∇²[i]*(s.ω*ϵ-s.Wc*s.∇²[i]))*(s.c̃[i] + s.Δt*s.∇²[i]*(s.c̃ₙₗ[i] + s.ξc[i]))	
+		Λ = Mc*∇²[i]*(ω*ϵ - Wc*∇²[i])
+		prefn = 1.0/(1.0 - ζ*Δt*Mₙ*∇²[i])
+		prefc = 1.0/(1.0 - ζ*Δt*Λ)
+		s.ñ[i] = prefn*((1.0 - (1 - ζ)*Δt*Mₙ*∇²[i])*ñ[i] + Mn*Δt*∇²[i]*s.ñₙₗ[i]+Δt*ξₙ[i])
+		s.c̃[i] = prefc*((1.0 + (1 - ζ)*Δt*Λ)*c̃[i] + Mc*Δt*∇²[i]*s.c̃ₙₗ[i] + Δt*ξc[i])	
 	end
 	A_ldiv_B!(s.n, s.fftplan, s.ñ)
 	A_ldiv_B!(s.c, s.fftplan, s.c̃)

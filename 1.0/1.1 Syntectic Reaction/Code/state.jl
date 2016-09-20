@@ -39,6 +39,7 @@ type State
 	Δx::Float64
 	Δt::Float64
 	N::Int
+	ζ::Float64
 
 	# Temporary Fields
 	ñₙₗ::Array{Complex128, 2}
@@ -100,7 +101,7 @@ function set!(s::State, sym::Symbol, val)
 	elseif sym == :N
 		s.N_init = true
 		s.N = val
-		for arr_sym in [:ñₙₗ, :c̃ₙₗ, :c̃, :ñ, :kC₂n, :ξₙ, :ξc]
+		for arr_sym in [:ñₙₗ, :c̃ₙₗ, :c̃, :ñ, :kC₂n, :ξₙ, :ξc] 
 			@eval $s.$arr_sym = Array(Complex128, $val>>1 + 1, $val)
 		end
 		for arr_sym in [:∇², :C₂]

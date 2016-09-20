@@ -6,6 +6,7 @@ s = State()
 set!(s, :N, 256)
 set!(s, :Δx, 0.125)
 set!(s, :Δt, 0.00125)
+set!(s, :ζ, 0.50)
 
 # Correlation Function Parameters
 set!(s, :k′, 2π)
