@@ -163,10 +163,10 @@ function setC₂!(s::State)
 	return
 end		
 
-function save(filename, s::State)
-	# TODO Make a function to save a state
-end		
+#function save(filename, s::State)
+#	 TODO Make a function to save a state
+#end		
 
-function load!(filename)
-	# TODO make a function to load a state from file
-end
+#function load!(filename)
+#	# TODO make a function to load a state from file
+#end
