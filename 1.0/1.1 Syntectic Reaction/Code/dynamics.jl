@@ -8,11 +8,13 @@ end
 δΔFmixδc(c::Float64, s::State) = s.ω*(log(2.0c) - log(2.0*(1-c)))
 
 function noise!(s::State)
-	c_scale = sqrt(2)*s.kbT*s.Mc/(s.Δx^2*s.Δt)
-	n_scale = sqrt(2)*s.kbT*s.Mₙ/(s.Δx^2*s.Δt)
-	for i in 1:length(s.ξc)
-		s.ξc[i] = c_scale*complex(randn(), randn())
-		s.ξₙ[i] = n_scale*complex(randn(), randn()) 
+	c_scale = im*√(s.kbT*s.Mc/(s.Δx^2*s.Δt))
+	n_scale = im*√(s.kbT*s.Mₙ/(s.Δx^2*s.Δt))
+	@threads for j in 1:s.N
+		for i in 1:s.N>>1 + 1
+			s.ξc[i, j] = index_to_k(s, i, j)*c_scale*complex(randn(), randn())
+			s.ξₙ[i, j] = index_to_k(s, i, j)*n_scale*complex(randn(), randn())
+		end 
 	end
 	return nothing
 end
@@ -43,8 +45,8 @@ function step!(s::State)
 	noise!(s)
 	ϵ = -4.0 + s.ϵ₀*(s.σ - s.σ₀)
 	for i in 1:(s.N>>1 + 1)*s.N
-		s.ñ[i] = 1.0/(1.0-s.Δt*s.∇²[i])*(s.ñ[i] + s.Δt*s.∇²[i]*(s.ñₙₗ[i]+s.ξₙ[i]))
-		s.c̃[i] = 1.0/(1.0-s.Δt*s.∇²[i]*(s.ω*ϵ-s.Wc*s.∇²[i]))*(s.c̃[i] + s.Δt*s.∇²[i]*(s.c̃ₙₗ[i] + s.ξc[i]))	
+		s.ñ[i] = 1.0/(1.0-s.Δt*s.∇²[i])*(s.ñ[i] + s.Δt*s.∇²[i]*s.ñₙₗ[i] + s.Δt*s.ξₙ[i])
+		s.c̃[i] = 1.0/(1.0-s.Δt*s.∇²[i]*(s.ω*ϵ-s.Wc*s.∇²[i]))*(s.c̃[i] + s.Δt*s.∇²[i]*s.c̃ₙₗ[i] + s.Δt*s.ξc[i])	
 	end
 	A_ldiv_B!(s.n, s.fftplan, s.ñ)
 	A_ldiv_B!(s.c, s.fftplan, s.c̃)

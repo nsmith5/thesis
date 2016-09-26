@@ -1,14 +1,9 @@
 import Base: show,
 			 get
 
-import JLD: save,
-		    load
-             
 export State,
        set!,
-       get,
-       save,
-	   load
+       get
 
 type State
 	N_init::Bool
