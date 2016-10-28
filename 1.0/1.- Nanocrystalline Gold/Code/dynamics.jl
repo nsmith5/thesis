@@ -22,8 +22,8 @@ end
 function set_nonlinear!(s::State)
 	third = 1/3
 	for i in 1:s.N*s.N
-		s.nₙₗ[i] = s.n[i]^2*(-0.5*s.η + third*s.χ*s.n[i]) + ΔFmix(s.c[i], s) - exp(-(s.c[i]-0.5)^2/(2s.αc^2))*s.C₂n[i]
-		s.cₙₗ[i] = (s.n[i] + 1.)*δΔFmixδc(s.c[i], s) - 0.5*s.n[i]*(-(s.c[i]-0.5)/s.αc^2*exp(-(s.c[i]-0.5)^2/(2s.αc^2))*s.C₂n[i])
+		s.nₙₗ[i] = s.n[i]^2*(-0.5*s.η + third*s.χ*s.n[i]) + ΔFmix(s.c[i], s) - exp(-(s.c[i]-1.0)^2/(2s.αc^2))*s.C₂n[i]
+		s.cₙₗ[i] = (s.n[i] + 1.)*δΔFmixδc(s.c[i], s) - 0.5*s.n[i]*(-(s.c[i]-1.0)/s.αc^2*exp(-(s.c[i]-1.0)^2/(2s.αc^2))*s.C₂n[i])
 	end
 end
 

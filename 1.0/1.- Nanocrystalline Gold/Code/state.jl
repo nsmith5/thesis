@@ -14,7 +14,6 @@ type State
 	Wc::Float64
 	ϵ₀::Float64
 	σ₀::Float64
-	c₀::Float64
 	σ::Float64
 	ω::Float64
 	kbT::Float64
@@ -63,7 +62,7 @@ end
 function show(io::IO, s::State)
 	# Pretty printing of a state
 	println(io, "Simulation State")
-	symbols = [:η, :χ, :Wc, :ϵ₀, :σ₀, :c₀, :σ, :ω, :kbT]
+	symbols = [:η, :χ, :Wc, :ϵ₀, :σ₀, :σ, :ω, :kbT]
 	println(io, "\nThermodynamic Parameters:")
 	for sym in symbols
 		println(io, "    ", sym, " = ", eval(:($s.$sym)))
