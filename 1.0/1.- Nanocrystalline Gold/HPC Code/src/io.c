@@ -46,54 +46,9 @@
      return file_id;
  }
 
- void io_finalize (hid_t file_id)
+ herr_t io_finalize (hid_t file_id)
  {
-     /*
-      *  Close file
-      */
-     herr_t err;
-     err = H5Fclose (file_id);
-     assert (err != FAIL);
-     return;
- }
-
- herr_t save_state (state* s, hid_t file_id)
- {
-     hid_t group_id;
-     herr_t status;
-
-     /* Make Group from simulation time `t` */
-     char groupname[50];
-     sprintf(groupname, "%d", s->step);
-     group_id = H5Gcreate (file_id,
-                           groupname,
-                           H5P_DEFAULT,
-                           H5P_DEFAULT,
-                           H5P_DEFAULT);
-
-     /* Write state attributes */
-     status = write_double_attribute ("eta", group_id, %s->eta);
-     status = write_double_attribute ("chi", group_id, %s->chi);
-     status = write_double_attribute ("epsilon_0", group_id, %s->epsilon0);
-     status = write_double_attribute ("sigma0", group_id, %s->sigma0);
-     status = write_double_attribute ("sigma", group_id, %s->sigma);
-     status = write_double_attribute ("omega", group_id, %s->omega);
-     status = write_double_attribute ("kbT", group_id, %s->kbT);
-     status = write_double_attribute ("Wc", group_id, %s->Wc);
-
-     status = write_double_attribute ("Mn", group_id, %s->Mn);
-     status = write_double_attribute ("Mc", group_id, %s->Mc);
-
-     status = write_double_attribute ("dx", group_id, %s->dx);
-     status = write_double_attribute ("dt", group_id, %s->dt);
-     status = write_double_attribute ("Time", group_id, %s->t);
-     status = write_int_attribute ("Time Step", group_id, %s->step);
-
-     status = write_array_dataset ("Concentration", group_id, s->c, s);
-     status = write_array_dataset ("Density", group_id, s->n, s);
-
-     status = H5Gclose (group_id);
-     return status;
+     return H5Fclose(file_id);
  }
 
  herr_t write_array_dataset (const char *name,
@@ -161,7 +116,6 @@
      return status;
  }
 
-
  herr_t write_double_attribute (const char *name,
                                 hid_t group_id,
                                 double *value)
@@ -169,6 +123,7 @@
      hsize_t size = 1;
      herr_t status;
      hid_t attr_id, dataspace;
+
      dataspace = H5Screate_simple(1, &size, NULL);
      attr_id = H5Acreate2 (group_id,
                            name,
@@ -176,8 +131,10 @@
                            dataspace,
                            H5P_DEFAULT,
                            H5P_DEFAULT);
+
      status = H5Awrite (attr_id, H5T_NATIVE_DOUBLE, value);
      status = H5Aclose (attr_id);
+
      return status;
  }
 
@@ -188,6 +145,7 @@
      hsize_t size = 1;
      herr_t status;
      hid_t attr_id, dataspace;
+
      dataspace = H5Screate_simple (1, &size, NULL);
      attr_id = H5Acreate2 (group_id,
                            name,
@@ -195,7 +153,50 @@
                            dataspace,
                            H5P_DEFAULT,
                            H5P_DEFAULT);
+
      status = H5Awrite (attr_id, H5T_NATIVE_INT, value);
      status = H5Aclose (attr_id);
+
+     return status;
+ }
+
+ herr_t save_state (state* s, hid_t file_id)
+ {
+     hid_t group_id;
+     herr_t status;
+
+     /* Make Group from simulation time `t` */
+     char groupname[50];
+     sprintf(groupname, "%d", s->step);
+     group_id = H5Gcreate (file_id,
+                           groupname,
+                           H5P_DEFAULT,
+                           H5P_DEFAULT,
+                           H5P_DEFAULT);
+
+     /* Write state attributes */
+
+     status = write_double_attribute ("eta", group_id, &s->eta);
+     status = write_double_attribute ("chi", group_id, &s->chi);
+     status = write_double_attribute ("epsilon_0", group_id, &s->epsilon0);
+     status = write_double_attribute ("sigma0", group_id, &s->sigma0);
+     status = write_double_attribute ("sigma", group_id, &s->sigma);
+     status = write_double_attribute ("omega", group_id, &s->omega);
+     status = write_double_attribute ("kbT", group_id, &s->kbT);
+     status = write_double_attribute ("Wc", group_id, &s->Wc);
+
+     status = write_double_attribute ("Mn", group_id, &s->Mn);
+     status = write_double_attribute ("Mc", group_id, &s->Mc);
+
+     status = write_double_attribute ("dx", group_id, &s->dx);
+     status = write_double_attribute ("dt", group_id, &s->dt);
+     status = write_double_attribute ("Time", group_id, &s->t);
+     status = write_int_attribute ("Time Step", group_id, &s->step);
+
+     status = write_array_dataset ("Concentration", group_id, s->c, s);
+     status = write_array_dataset ("Density", group_id, s->n, s);
+
+     status = H5Gclose (group_id);
+
      return status;
  }

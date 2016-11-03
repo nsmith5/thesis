@@ -6,20 +6,18 @@
 #include "dynamics.h"
 #include "random.h"
 
-static void normalize (state *s, fftw_complex *field))
+static void normalize (state *s, fftw_complex *field)
 {
-    /* Method for normalizing a field that has been fourier */
-    /* transformed. By default fftw does an unnormalized    */
-    /* transform.                                           */
+    /* Normalize a fourier space field after fft */
 
     int ij;
-    double norm_scale = 1.0 /(double)(s->N * s->N);
+    double norm_scale = 1.0 /(s->N * s->N);
 
     for (int i = 0; i < s->local_n0; i++)
     {
-        for (int j = 0; j < s->N; j++)
+        for (int j = 0; j < (s->N>>1) + 1; j++)
         {
-            ij = i*2*(s->N/2 + 1) + j;
+            ij = i*(s->N/2 + 1) + j;
 
             field[ij] *= norm_scale;
         }
@@ -85,11 +83,11 @@ static void set_nonlinear (state *s)
 
             s->nnl[ij]  = pow(s->n[ij], 2)*( -0.5 * s->eta + third * s->n[ij]);
             s->nnl[ij] += F_mix (s->c[ij], s);
-            s->nnl[ij] += -exp(-pow(s->c[ij] - 1.0, 2)/(2.0*pow(s->alphac, 2));
+            s->nnl[ij] += -exp(-pow(s->c[ij] - 1.0, 2)/(2.0*pow(s->alphac, 2)));
 
             s->cnl[ij]  = (s->n[ij] + 1.0) *  dF_mixdc (s->c[ij], s);
             s->cnl[ij] += 0.5 * s->n[ij] * (s->c[ij] - 1.0) / pow(s->alphac, 2) *
-                          exp(-pow(s->c[ij] - 1.0, 2)/(2.0*pow(s->alphac, 2)) *
+                          exp(-pow(s->c[ij] - 1.0, 2)/(2.0*pow(s->alphac, 2))) *
                           s->Cn[ij];
         }
     }
@@ -107,13 +105,13 @@ static void calccorr (state *s)
     {
         for (int j = 0; j < (s->N>>1) + 1; j++)
         {
-            ij = i*(s->N>>1 + 1) + j;
+            ij = i*((s->N>>1) + 1) + j;
 
-            s->kCn[ij] = s->C[ij]*s->fn[ij];
+            s->fCn[ij] = s->C[ij]*s->fn[ij];
         }
     }
 
-    fftw_mpi_execute_dft_c2r (s->ifft_plan, s->Cn, s->kCn);
+    fftw_mpi_execute_dft_c2r (s->ifft_plan, s->fCn, s->Cn);
 
     return;
 }
@@ -130,10 +128,10 @@ static void propagate (state *s)
             ij = i*((s->N>>1) + 1) + j;
 
             s->fn[ij]  = 1.0 / (1.0 + s->dt * s->k2[ij]);
-            s->fn[ij] *= s->fn[ij] - s->dt * s->k2[ij] * s->fnnl[ij] + s->dt * s->fxin[ij];
+            s->fn[ij] *= s->fn[ij] - s->dt * s->k2[ij] * s->fnnl[ij]; /*+ s->dt * s->fxin[ij] */
 
-            s->fc[ij]  = 1.0 / (1.0 + s->dt * s.k2[ij] * (s->omega + s->Wc * s->k2[ij]));
-            s->fc[ij] *= s->fc[ij] - s->dt * s.k2[ij] * s->fcnl[ij] + s->dt * s.fxic[ij]);
+            s->fc[ij]  = 1.0 / (1.0 + s->dt * s->k2[ij] * (s->omega * epsilon + s->Wc * s->k2[ij]));
+            s->fc[ij] *= s->fc[ij] - s->dt * s->k2[ij] * s->fcnl[ij];  /* + s->dt * s->fxic[ij] */
         }
     }
 
@@ -148,15 +146,15 @@ void step(state *s)
     fftw_mpi_execute_dft_r2c (s->fft_plan, s->n, s->fn);
     fftw_mpi_execute_dft_r2c (s->fft_plan, s->c, s->fc);
     normalize (s, s->fn);
-    normalize (s, f->fc);
+    normalize (s, s->fc);
 
     /* Calculate (C * n) and the nonlinear term */
     calccorr (s);
     set_nonlinear (s);
 
     /* Fourier transform the nonlinear terms */
-    fftw_mpi_execute_r2c (s->fft_plan, s->nnl, s->fnnl);
-    fftw_mpi_execute_r2c (s->fft_plan, s->cnl, s->fcnl);
+    fftw_mpi_execute_dft_r2c (s->fft_plan, s->nnl, s->fnnl);
+    fftw_mpi_execute_dft_r2c (s->fft_plan, s->cnl, s->fcnl);
     normalize (s, s->fnnl);
     normalize (s, s->fcnl);
 
@@ -165,8 +163,8 @@ void step(state *s)
     propagate (s);
 
     /* Inverse fourier transform the propagated fields */
-    fftw_mpi_execute_c2r (s->ifft_plan, s->fn, s->n);
-    fftw_mpi_execute_c2r (s->ifft_plan, s->fc, s->c);
+    fftw_mpi_execute_dft_c2r (s->ifft_plan, s->fn, s->n);
+    fftw_mpi_execute_dft_c2r (s->ifft_plan, s->fc, s->c);
 
     /* Update the time and step #   */
     s->t += s->dt;

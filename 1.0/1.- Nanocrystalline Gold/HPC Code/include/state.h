@@ -55,15 +55,12 @@ typedef struct
 	double *C;
 
 	/* Fourier transform plans */
-	fftw_plan fftw_plan;
-	fftw_plan ifftw_plan;
+	fftw_plan fft_plan;
+	fftw_plan ifft_plan;
 }
 state;
 
-state* create_state (int    N,
-                     double dx,
-                     double dt,
-                     double D);
+state* create_state (int N, double dx,double dt);
 
 void destroy_state (state* s);
 
