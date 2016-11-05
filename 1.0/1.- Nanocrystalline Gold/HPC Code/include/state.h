@@ -1,4 +1,5 @@
 #include <fftw3.h>
+#include <gsl/gsl_rng.h>
 
 /* Definition of the simulation state */
 typedef struct
@@ -32,6 +33,8 @@ typedef struct
 	ptrdiff_t N;
 	ptrdiff_t local_n0;
 	ptrdiff_t local_0_start;
+	ptrdiff_t local_n1;
+	ptrdiff_t local_1_start;
 
 	/* Fields */
 	double *c;
@@ -57,6 +60,9 @@ typedef struct
 	/* Fourier transform plans */
 	fftw_plan fft_plan;
 	fftw_plan ifft_plan;
+
+	/* Random Number Generator */
+	gsl_rng *rng;
 }
 state;
 

@@ -6,56 +6,58 @@
  */
 
 
- #include <mpi.h>
- #include <hdf5.h>
- #include <stdlib.h>
- #include <unistd.h>     // access() to check if file exists
- #include <stdbool.h>
- #include <assert.h>
+#include <mpi.h>
+#include <hdf5.h>
+#include <stdlib.h>
+#include <unistd.h>     // access() to check if file exists
+#include <stdbool.h>
+#include <assert.h>
+#include <string.h>
 
- #include "error.h"
- #include "state.h"
- #include "io.h"
+#include "error.h"
+#include "state.h"
+#include "io.h"
 
- #define FAIL -1
+#define FAIL -1
+#define LEN 8
 
- const int io_verbose = true;
+const int io_verbose = true;
 
- hid_t io_init (const char *filename)
- {
-     /*
-      *  Create a file to save data to for this session
-      */
-     MPI_Comm comm = MPI_COMM_WORLD;
-     MPI_Info info = MPI_INFO_NULL;
-     hid_t plist_id;     /* Property list id */
-     hid_t file_id;      /* File id */
-     herr_t err;         /* Error status */
+hid_t io_init (const char *filename)
+{
+    /*
+    *  Create a file to save data to for this session
+    */
+    MPI_Comm comm = MPI_COMM_WORLD;
+    MPI_Info info = MPI_INFO_NULL;
+    hid_t plist_id;     /* Property list id */
+    hid_t file_id;      /* File id */
+    herr_t err;         /* Error status */
 
-     plist_id = H5Pcreate (H5P_FILE_ACCESS);
+    plist_id = H5Pcreate (H5P_FILE_ACCESS);
 
-     H5Pset_fapl_mpio (plist_id, comm, info);
+    H5Pset_fapl_mpio (plist_id, comm, info);
 
-     file_id = H5Fcreate (filename,
-                          H5F_ACC_TRUNC,
-                          H5P_DEFAULT,
-                          plist_id);
+    file_id = H5Fcreate (filename,
+                         H5F_ACC_TRUNC,
+                         H5P_DEFAULT,
+                         plist_id );
 
-     err = H5Pclose (plist_id);
-     assert (err != FAIL);
-     return file_id;
- }
+    err = H5Pclose (plist_id);
+    assert (err != FAIL);
+    return file_id;
+}
 
- herr_t io_finalize (hid_t file_id)
- {
-     return H5Fclose(file_id);
- }
+herr_t io_finalize (hid_t file_id)
+{
+    return H5Fclose(file_id);
+}
 
- herr_t write_array_dataset (const char *name,
-                             hid_t       group_id,
-                             double     *arr,
-                             state      *s)
- {
+herr_t write_array_dataset (const char *name,
+                         hid_t       group_id,
+                         double     *arr,
+                         state      *s)
+{
      hid_t dset_id, dataspace;
      hid_t memspace, plist_id;
      herr_t status;
@@ -114,12 +116,12 @@
      status = H5Sclose (dataspace);
 
      return status;
- }
+}
 
- herr_t write_double_attribute (const char *name,
-                                hid_t group_id,
-                                double *value)
- {
+herr_t write_double_attribute (const char *name,
+                               hid_t       group_id,
+                               double     *value)
+{
      hsize_t size = 1;
      herr_t status;
      hid_t attr_id, dataspace;
@@ -136,12 +138,12 @@
      status = H5Aclose (attr_id);
 
      return status;
- }
+}
 
- herr_t write_int_attribute (const char *name,
-                             hid_t       group_id,
-                             int        *value)
- {
+herr_t write_int_attribute (const char *name,
+                         hid_t       group_id,
+                         int        *value)
+{
      hsize_t size = 1;
      herr_t status;
      hid_t attr_id, dataspace;
@@ -158,16 +160,19 @@
      status = H5Aclose (attr_id);
 
      return status;
- }
+}
 
- herr_t save_state (state* s, hid_t file_id)
- {
+herr_t save_state (state *s,
+                hid_t  file_id)
+{
      hid_t group_id;
      herr_t status;
 
      /* Make Group from simulation time `t` */
      char groupname[50];
-     sprintf(groupname, "%d", s->step);
+     char step_str[10];
+     sprintf(step_str, "%d", s->step);
+     sprintf(groupname, "%0*d%s", LEN-(int)strlen(step_str), 0, step_str);
      group_id = H5Gcreate (file_id,
                            groupname,
                            H5P_DEFAULT,
@@ -176,27 +181,27 @@
 
      /* Write state attributes */
 
-     status = write_double_attribute ("eta", group_id, &s->eta);
-     status = write_double_attribute ("chi", group_id, &s->chi);
+     status = write_double_attribute ("eta",    group_id, &s->eta);
+     status = write_double_attribute ("chi",    group_id, &s->chi);
      status = write_double_attribute ("epsilon_0", group_id, &s->epsilon0);
      status = write_double_attribute ("sigma0", group_id, &s->sigma0);
-     status = write_double_attribute ("sigma", group_id, &s->sigma);
-     status = write_double_attribute ("omega", group_id, &s->omega);
-     status = write_double_attribute ("kbT", group_id, &s->kbT);
-     status = write_double_attribute ("Wc", group_id, &s->Wc);
+     status = write_double_attribute ("sigma",  group_id, &s->sigma);
+     status = write_double_attribute ("omega",  group_id, &s->omega);
+     status = write_double_attribute ("kbT",    group_id, &s->kbT);
+     status = write_double_attribute ("Wc",     group_id, &s->Wc);
 
-     status = write_double_attribute ("Mn", group_id, &s->Mn);
-     status = write_double_attribute ("Mc", group_id, &s->Mc);
+     status = write_double_attribute ("Mn",     group_id, &s->Mn);
+     status = write_double_attribute ("Mc",     group_id, &s->Mc);
 
-     status = write_double_attribute ("dx", group_id, &s->dx);
-     status = write_double_attribute ("dt", group_id, &s->dt);
-     status = write_double_attribute ("Time", group_id, &s->t);
+     status = write_double_attribute ("dx",     group_id, &s->dx);
+     status = write_double_attribute ("dt",     group_id, &s->dt);
+     status = write_double_attribute ("Time",   group_id, &s->t);
      status = write_int_attribute ("Time Step", group_id, &s->step);
 
      status = write_array_dataset ("Concentration", group_id, s->c, s);
-     status = write_array_dataset ("Density", group_id, s->n, s);
+     status = write_array_dataset ("Density",   group_id, s->n, s);
 
      status = H5Gclose (group_id);
 
      return status;
- }
+}

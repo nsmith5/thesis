@@ -6,7 +6,6 @@
 #include <math.h>
 #include <assert.h>
 
-#include "random.h"
 #include "error.h"
 #include "state.h"
 #include "dynamics.h"
@@ -18,11 +17,13 @@
 void init (int argc, char **argv);
 void finalize (void);
 
-int main (int argc, char **argv)
+int main (int    argc,
+          char **argv)
 {
     int N = 512;
     double dx = 0.125;
     double dt = 0.00125;
+    int rank, size;
     state *s;
     hid_t file_id;
 
@@ -31,6 +32,8 @@ int main (int argc, char **argv)
     s = create_state (N, dx, dt);
     file_id = io_init (FILENAME);
     assert (s != NULL);
+    MPI_Comm_rank (MPI_COMM_WORLD, &rank);
+    MPI_Comm_size (MPI_COMM_WORLD, &size);
 
     /* Set Free Energies Parameters */
     s->eta      = 2.0;
@@ -40,7 +43,7 @@ int main (int argc, char **argv)
     s->sigma    = 0.07;
     s->omega    = 0.30;
     s->Wc       = 1.0;
-    s->kbT      = 0.0028;
+    s->kbT      = 0.00002;
 
     /* Dynamic Parameters */
     s->Mn = 1.0;
@@ -55,49 +58,37 @@ int main (int argc, char **argv)
     set_C (s);
 
     for (int i = 0; i < s->local_n0; i++)
+    {
         for (int j = 0; j < s->N; j++)
         {
             s->n[i*2*(s->N/2 + 1) + j] = 0.0;
-            s->c[i*2*(s->N/2 + 1) + j] = 0.5;
+            s->c[i*2*(s->N/2 + 1) + j] = 0.9;
         }
+    }
 
-    /*
-     * - Time Step the state
-     * - Save each time step
-     * - Measure the time for the whole loop
-     */
-    save_state (s, file_id);
+    /* Do stuff */
 
-	MPI_Barrier (MPI_COMM_WORLD);
-     double t1 = MPI_Wtime();
-    //for (int i = 0; i < 10; i++)
-    //{
-    //  step (s);
-    //  save_state (s, file_id);
-    //}
-    step(s);
-    step(s);
+    double t1 = MPI_Wtime ();
 
+    for (int i = 0; i < 100; i++)
+    {
+        step (s);
+        // if (i % 50 == 0)
+        // {
+        //       if (rank == 0) printf ("Now at step %d\n", i);
+        //       save_state (s, file_id);
+        // }
+    }
 
-	MPI_Barrier (MPI_COMM_WORLD);
-    double t2 = MPI_Wtime();
-    /*
-     * Print out the results of the time trial
-     */
-	int rank;
-	MPI_Comm_rank (MPI_COMM_WORLD, &rank);
-	if (rank == 0)
-    	printf("Elapsed time for loop is %f\n", t2-t1);
+    double t2 = MPI_Wtime ();
 
-    /*
-     * Do clean up of the system before exiting
-     */
+    printf("Time for 100 times steps is %gs\n", t2-t1);
 
+    /* Shut 'er down */
     io_finalize (file_id);
     destroy_state (s);
-    printf ("Got here!");
-    MPI_Barrier (MPI_COMM_WORLD);
     finalize ();
+
     return 0;
 }
 
@@ -105,13 +96,13 @@ void init (int    argc,
            char **argv)
 {
     MPI_Init(&argc, &argv);
-    seed (20);
+    int rank;
+    MPI_Comm_rank (MPI_COMM_WORLD, &rank);
 
     // Initialize fftw
     fftw_mpi_init ();
 
     // Import wisdom from file and broadcast
-    int rank;
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
     if (rank == 0 && access ("data/plans.wisdom", F_OK) != -1)
@@ -119,10 +110,11 @@ void init (int    argc,
         int err = fftw_import_wisdom_from_filename ("data/plans.wisdom");
         if (err == 0) my_error("Importing FFTW wisdom failed!");
     }
+
     fftw_mpi_broadcast_wisdom (MPI_COMM_WORLD);
 
     MPI_Barrier (MPI_COMM_WORLD);
-  return;
+    return;
 }
 
 void finalize (void)

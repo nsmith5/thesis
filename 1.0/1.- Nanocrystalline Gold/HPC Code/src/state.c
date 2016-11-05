@@ -2,9 +2,19 @@
 #include <math.h>
 #include <fftw3-mpi.h>
 #include <fftw3.h>
+#include <gsl/gsl_rng.h>
+
 #include "state.h"
 
+#define RNG_SEED 123
 #define PI 2*acos(0)
+
+static double ipow (double x, int p)
+{
+    /* Unsafe x^p computation */
+    if (p == 1) return x;
+    else return x*ipow(x, p-1);
+}
 
 double calc_k (int i, int j, int N, double dx)
 {
@@ -12,8 +22,8 @@ double calc_k (int i, int j, int N, double dx)
 
     double L = N*dx;
 
-    double kx2 = i < (N>>1) + 1 ? pow (2*PI*i/L, 2) : pow (2*PI*(N-i)/L, 2);
-    double ky2 = j < (N>>1) + 1 ? pow (2*PI*j/L, 2) : pow (2*PI*(N-j)/L, 2);
+    double kx2 = i < (N>>1) + 1 ? ipow (2*PI*i/L, 2) : ipow (2*PI*(N-i)/L, 2);
+    double ky2 = j < (N>>1) + 1 ? ipow (2*PI*j/L, 2) : ipow (2*PI*(N-j)/L, 2);
 
     return sqrt(kx2 + ky2);
 }
@@ -23,14 +33,12 @@ void set_k2 (state* s)
     double k;
     int ij;
 
-    for (int i = 0; i < s->local_n0; i++)
+    for (int i = 0; i < s->local_n1; i++)
     {
-        for (int j = 0; j < s->N/2 + 1; j++)
+        for (int j = 0; j < s->N; j++)
         {
-            k = calc_k (i + s->local_0_start, j, s->N, s->dx);
-
-            ij = i*(s->N/2 + 1) + j;
-
+            k = calc_k (i + s->local_1_start, j, s->N, s->dx);
+            ij = i*s->N + j;
             s->k2[ij] = k*k;
         }
     }
@@ -38,28 +46,40 @@ void set_k2 (state* s)
     return;
 }
 
-
 state* create_state (int N, double dx, double dt)
 {
     /* Make a state pointer */
+    int rank;
+    ptrdiff_t local_alloc;
+
     state *s = malloc (sizeof (state));
-    if (s == NULL)
-    {
-        printf ("allocating state failed");
-        return NULL;
-    }
+    if (s == NULL) return NULL;
 
     /* Get numerical parameters sorted */
     s->N = N;
     s->dx = dx;
     s->dt = dt;
-    s->t = 0;
+    s->t = 0.0;
     s->step = 0;
 
-    ptrdiff_t local_alloc = fftw_mpi_local_size_2d (N, N/2 + 1,
-                                                    MPI_COMM_WORLD,
-                                                    &s->local_n0,
-                                                    &s->local_0_start);
+    /* Allocate RNG and seed */
+    s->rng = gsl_rng_alloc (gsl_rng_default);
+    if (s->rng == NULL)
+    {
+        gsl_rng_free (s->rng);
+        return NULL;
+    }
+    MPI_Comm_rank (MPI_COMM_WORLD, &rank);
+    gsl_rng_set (s->rng, RNG_SEED * (rank + 1));
+
+    local_alloc =
+        fftw_mpi_local_size_2d_transposed (N,
+                                           N/2 + 1,
+                                           MPI_COMM_WORLD,
+                                           &s->local_n0,
+                                           &s->local_0_start,
+                                           &s->local_n1,
+                                           &s->local_1_start);
 
     /* Allocate soo much memory */
     s->c    = fftw_alloc_real (2 * local_alloc);
@@ -93,37 +113,39 @@ state* create_state (int N, double dx, double dt)
          s->k2    == NULL  ||
          s->C     == NULL)
     {
-        free (s->c);
-        free (s->n);
-        free (s->fnnl);
-        free (s->fcnl);
-        free (s->fc);
-        free (s->fn);
-        free (s->fCn);
-        free (s->fxin);
-        free (s->fxic);
-        free (s->Cn);
-        free (s->nnl);
-        free (s->cnl);
-        free (s->k2);
-        free (s->C);
+        fftw_free (s->c);
+        fftw_free (s->n);
+        fftw_free (s->fnnl);
+        fftw_free (s->fcnl);
+        fftw_free (s->fc);
+        fftw_free (s->fn);
+        fftw_free (s->fCn);
+        fftw_free (s->fxin);
+        fftw_free (s->fxic);
+        fftw_free (s->Cn);
+        fftw_free (s->nnl);
+        fftw_free (s->cnl);
+        fftw_free (s->k2);
+        fftw_free (s->C);
         return NULL;
     }
 
     /* Make FFT Plans */
-    s->fft_plan = fftw_mpi_plan_dft_r2c_2d (N,
-                                            N,
-                                            s->c,
-                                            s->fc,
-                                            MPI_COMM_WORLD,
-                                            FFTW_MEASURE);
+    s->fft_plan =
+        fftw_mpi_plan_dft_r2c_2d (N,
+                                  N,
+                                  s->c,
+                                  s->fc,
+                                  MPI_COMM_WORLD,
+                                  FFTW_MEASURE | FFTW_MPI_TRANSPOSED_OUT);
 
-    s->ifft_plan = fftw_mpi_plan_dft_c2r_2d (N,
-                                             N,
-                                             s->fc,
-                                             s->c,
-                                             MPI_COMM_WORLD,
-                                             FFTW_MEASURE);
+    s->ifft_plan =
+        fftw_mpi_plan_dft_c2r_2d (N,
+                                  N,
+                                  s->fc,
+                                  s->c,
+                                  MPI_COMM_WORLD,
+                                  FFTW_MEASURE | FFTW_MPI_TRANSPOSED_IN);
 
     /* Make k2 operator */
     set_k2 (s);
@@ -153,6 +175,7 @@ void destroy_state (state* s)
         fftw_free (s->cnl);
         fftw_free (s->k2);
         fftw_free (s->C);
+        gsl_rng_free (s->rng);
   	    free (s);
     }
 }
@@ -166,14 +189,14 @@ void set_C (state* s)
     double k;
     int ij;
 
-    for (int i = 0; i < s->local_n0; i++)
+    for (int i = 0; i < s->local_n1; i++)
     {
-        for (int j = 0; j < s->N/2 + 1; j++)
+        for (int j = 0; j < s->N; j++)
         {
-            k = calc_k(i, j, s->N, s->dx);
-            ij = i * (s->N/2 + 1) + j;
-            s->C[ij]  = exp(- pow (s->sigma * s->k0, 2.0) / (2.0 * s->rho * s->beta));
-            s->C[ij] *= exp(-pow (k - s->k0, 2.0) / (2.0 * pow(s->alphac, 2)));
+            k = calc_k(i + s->local_1_start, j, s->N, s->dx);
+            ij = i * s->N + j;
+            s->C[ij]  = exp(-ipow (s->sigma * s->k0, 2.0) / (2.0 * s->rho * s->beta));
+            s->C[ij] *= exp(-ipow (k - s->k0, 2.0) / (2.0 * ipow(s->alphac, 2)));
         }
     }
 

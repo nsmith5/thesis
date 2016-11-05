@@ -1,10 +1,16 @@
 #include <math.h>
 #include <complex.h>
 #include <fftw3-mpi.h>
+#include <gsl/gsl_randist.h>
 
 #include "state.h"
 #include "dynamics.h"
-#include "random.h"
+
+static double ipow (double x, int p)
+{
+    if (p == 1) return x;
+    else return x * ipow (x, p-1);
+}
 
 static void normalize (state *s, fftw_complex *field)
 {
@@ -13,12 +19,11 @@ static void normalize (state *s, fftw_complex *field)
     int ij;
     double norm_scale = 1.0 /(s->N * s->N);
 
-    for (int i = 0; i < s->local_n0; i++)
+    for (int i = 0; i < s->local_n1; i++)
     {
-        for (int j = 0; j < (s->N>>1) + 1; j++)
+        for (int j = 0; j < s->N; j++)
         {
-            ij = i*(s->N/2 + 1) + j;
-
+            ij = i*s->N + j;
             field[ij] *= norm_scale;
         }
     }
@@ -33,35 +38,34 @@ static double F_mix (double c, state *s)
     double epsilon = -4.0 + s->epsilon0*(s->sigma - s->sigma0);
 
     return s->omega*(
-                c*log(2.0*c) + (1-c)*log(2.0-2.0*c) +
-                0.5 * epsilon * pow(c-0.5, 2)
+                c * log(2.0 * c) + (1 - c) * log(2.0 - 2.0 * c) +
+                0.5 * epsilon * ipow(c - 0.5, 2)
             );
 }
 
 static double dF_mixdc (double c, state *s)
 {
-    return s->omega*log(c/(1.0-c));
+    return s->omega * log(c / (1.0 - c));
 }
 
 static void noise(state *s)
 {
     fftw_complex c_scale, n_scale;
-    c_scale = I*sqrt(s->kbT * s->Mc / s->dx / s->dx / s->dt);
-    n_scale = I*sqrt(s->kbT * s->Mn / s->dx / s->dx / s->dt);
+    c_scale = I*sqrt(s->kbT * s->Mc * s->dt / (s->dx * s->dx));
+    n_scale = I*sqrt(s->kbT * s->Mn * s->dt / (s->dx * s->dx));
 
     int ij;
 
-    for (int i = 0; i < s->local_n0; i++)
+    for (int i = 0; i < s->local_n1; i++)
     {
-        for (int j = 0; j < (s->N>>1) + 1; j++)
+        for (int j = 0; j < s->N; j++)
         {
-            ij = i*((s->N>>1) + 1) + j;
+            ij = i*s->N + j;
+            s->fxin[ij] = sqrt(s->k2[ij]) * n_scale * gsl_ran_gaussian_ziggurat(s->rng, 1.0) +
+                      I * sqrt(s->k2[ij]) * n_scale * gsl_ran_gaussian_ziggurat(s->rng, 1.0);
 
-            s->fxin[ij] = calc_k (i + s->local_0_start, j, s->N, s->dx) *
-                          rand_normal_complex () * n_scale;
-
-            s->fxic[ij] = calc_k (i + s->local_0_start, j, s->N, s->dx) *
-                          rand_normal_complex () * c_scale;
+            s->fxic[ij] = sqrt(s->k2[ij]) * c_scale * gsl_ran_gaussian_ziggurat(s->rng, 1.0) +
+                      I * sqrt(s->k2[ij]) * c_scale * gsl_ran_gaussian_ziggurat(s->rng, 1.0);
         }
     }
 
@@ -81,13 +85,13 @@ static void set_nonlinear (state *s)
         {
             ij = i*2*((s->N>>1) + 1) + j;
 
-            s->nnl[ij]  = pow(s->n[ij], 2)*( -0.5 * s->eta + third * s->n[ij]);
+            s->nnl[ij]  = ipow(s->n[ij], 2)*( -0.5 * s->eta + third * s->n[ij]);
             s->nnl[ij] += F_mix (s->c[ij], s);
-            s->nnl[ij] += -exp(-pow(s->c[ij] - 1.0, 2)/(2.0*pow(s->alphac, 2)));
+            s->nnl[ij] += -exp(-ipow(s->c[ij] - 1.0, 2)/(2.0*ipow(s->alphac, 2))) * s->Cn[ij];
 
             s->cnl[ij]  = (s->n[ij] + 1.0) *  dF_mixdc (s->c[ij], s);
-            s->cnl[ij] += 0.5 * s->n[ij] * (s->c[ij] - 1.0) / pow(s->alphac, 2) *
-                          exp(-pow(s->c[ij] - 1.0, 2)/(2.0*pow(s->alphac, 2))) *
+            s->cnl[ij] += 0.5 * s->n[ij] * (s->c[ij] - 1.0) / ipow(s->alphac, 2) *
+                          exp(-ipow(s->c[ij] - 1.0, 2)/(2.0*ipow(s->alphac, 2))) *
                           s->Cn[ij];
         }
     }
@@ -100,13 +104,14 @@ static void set_nonlinear (state *s)
 static void calccorr (state *s)
 {
     int ij;
+    double norm = 1.0/(s->N * s->N);
 
-    for (int i = 0; i < s->local_n0; i++)
+    for (int i = 0; i < s->local_n1; i++)
     {
-        for (int j = 0; j < (s->N>>1) + 1; j++)
+        for (int j = 0; j < s->N; j++)
         {
-            ij = i*((s->N>>1) + 1) + j;
-
+            ij = i * s->N + j;
+            s->fn[ij] *= norm;
             s->fCn[ij] = s->C[ij]*s->fn[ij];
         }
     }
@@ -119,19 +124,25 @@ static void calccorr (state *s)
 static void propagate (state *s)
 {
     double epsilon = -4.0 + s->epsilon0 * (s->sigma - s->sigma0);
+    double norm = 1.0 / (s->N * s->N);
     int ij;
 
-    for (int i = 0; i < s->local_n0; i++)
+    for (int i = 0; i < s->local_n1; i++)
     {
-        for (int j = 0; j < (s->N>>1) + 1; j++)
+        for (int j = 0; j < s->N; j++)
         {
-            ij = i*((s->N>>1) + 1) + j;
+            ij = i * s->N + j;
 
-            s->fn[ij]  = 1.0 / (1.0 + s->dt * s->k2[ij]);
-            s->fn[ij] *= s->fn[ij] - s->dt * s->k2[ij] * s->fnnl[ij]; /*+ s->dt * s->fxin[ij] */
+            /* Do some normalization quickly */
+            s->fc[ij] *= norm;
+            s->fnnl[ij] *= norm;
+            s->fcnl[ij] *= norm;
 
-            s->fc[ij]  = 1.0 / (1.0 + s->dt * s->k2[ij] * (s->omega * epsilon + s->Wc * s->k2[ij]));
-            s->fc[ij] *= s->fc[ij] - s->dt * s->k2[ij] * s->fcnl[ij];  /* + s->dt * s->fxic[ij] */
+            s->fn[ij]  = 1.0 / (1.0 + s->dt * s->k2[ij]) *
+                        (s->fn[ij] - s->dt * s->k2[ij] * s->fnnl[ij] + s->dt * s->fxin[ij]);
+
+            s->fc[ij]  = 1.0 / (1.0 + s->dt * s->k2[ij] * (s->omega * epsilon + s->Wc * s->k2[ij])) *
+                        (s->fc[ij] - s->dt * s->k2[ij] * s->fcnl[ij] + s->dt * s->fxic[ij]);
         }
     }
 
@@ -145,8 +156,6 @@ void step(state *s)
     /* Fourier transform fields */
     fftw_mpi_execute_dft_r2c (s->fft_plan, s->n, s->fn);
     fftw_mpi_execute_dft_r2c (s->fft_plan, s->c, s->fc);
-    normalize (s, s->fn);
-    normalize (s, s->fc);
 
     /* Calculate (C * n) and the nonlinear term */
     calccorr (s);
@@ -155,9 +164,7 @@ void step(state *s)
     /* Fourier transform the nonlinear terms */
     fftw_mpi_execute_dft_r2c (s->fft_plan, s->nnl, s->fnnl);
     fftw_mpi_execute_dft_r2c (s->fft_plan, s->cnl, s->fcnl);
-    normalize (s, s->fnnl);
-    normalize (s, s->fcnl);
-
+    
     /* Make some noise and propagate the fields in fourier space */
     noise (s);
     propagate (s);
