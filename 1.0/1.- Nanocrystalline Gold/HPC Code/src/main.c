@@ -5,6 +5,7 @@
 #include <unistd.h>		// access () file existance
 #include <math.h>
 #include <assert.h>
+#include <signal.h>     // interupt process at end of run with SIGINT
 
 #include "error.h"
 #include "state.h"
@@ -17,16 +18,20 @@ hid_t file_id;
 
 void init (int argc, char **argv);
 void finalize (void);
+void sig_handler (int signo);
+hid_t file_id;
+state *s;
 
 int main (int    argc,
           char **argv)
 {
-    int N = 512;
+
+    if (signal(SIGINT, sig_handler) == SIG_ERR);
+
+    int N = 1024;
     double dx = 0.125;
     double dt = 0.00125;
     int rank, size;
-    state *s;
-    hid_t file_id;
 
     /* Initialize the system */
     init (argc, argv);
@@ -62,23 +67,23 @@ int main (int    argc,
     {
         for (int j = 0; j < s->N; j++)
         {
-            s->n[i*2*(s->N/2 + 1) + j] = 0.0;
-            s->c[i*2*(s->N/2 + 1) + j] = 0.9;
+            s->n[i*2*(s->N/2 + 1) + j] = 0.05;
+        s->c[i*2*(s->N/2 + 1) + j] = 0.30;
         }
     }
 
     /* Do stuff */
 
     double t1 = MPI_Wtime ();
+    int step = 0;
 
-    for (int i = 0; i < 100; i++)
+    while (true)
     {
         step (s);
-        // if (i % 50 == 0)
-        // {
-        //       if (rank == 0) printf ("Now at step %d\n", i);
-        //       save_state (s, file_id);
-        // }
+        if (s->step % 100 == 0)
+        {
+               save_state (s, file_id);
+        }
     }
 
     double t2 = MPI_Wtime ();
@@ -140,4 +145,14 @@ void finalize (void)
     fftw_mpi_cleanup ();
     MPI_Finalize ();
     return;
+}
+
+void sig_handler (int signo)
+{
+    if (signo == SIGINT)
+    {
+        io_finalize (file_id);
+        destroy_state(s);
+        finalize();
+    }
 }
