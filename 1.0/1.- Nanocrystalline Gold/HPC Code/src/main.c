@@ -13,6 +13,7 @@
 
 #define PI 2.0*acos(0.0)
 #define FILENAME "data/Data.h5"
+hid_t file_id;
 
 void init (int argc, char **argv);
 void finalize (void);
