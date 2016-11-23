@@ -26,8 +26,6 @@ int main (int    argc,
           char **argv)
 {
 
-    if (signal(SIGINT, sig_handler) == SIG_ERR);
-
     int N = 1024;
     double dx = 0.125;
     double dt = 0.00125;
@@ -35,7 +33,9 @@ int main (int    argc,
 
     /* Initialize the system */
     init (argc, argv);
-    s = create_state (N, dx, dt);
+    printf("Started!\n");
+	if (signal(SIGUSR1, sig_handler) == SIG_ERR);
+	s = create_state (N, dx, dt);
     file_id = io_init (FILENAME);
     assert (s != NULL);
     MPI_Comm_rank (MPI_COMM_WORLD, &rank);
@@ -73,22 +73,14 @@ int main (int    argc,
     }
 
     /* Do stuff */
-
-    double t1 = MPI_Wtime ();
-    int step = 0;
-
-    while (true)
+    while (1)
     {
         step (s);
-        if (s->step % 100 == 0)
+        if (s->step % 300 == 0)
         {
                save_state (s, file_id);
         }
     }
-
-    double t2 = MPI_Wtime ();
-
-    printf("Time for 100 times steps is %gs\n", t2-t1);
 
     /* Shut 'er down */
     io_finalize (file_id);
@@ -149,8 +141,9 @@ void finalize (void)
 
 void sig_handler (int signo)
 {
-    if (signo == SIGINT)
+    if (signo == SIGUSR1)
     {
+		MPI_Barrier (MPI_COMM_WORLD);
         io_finalize (file_id);
         destroy_state(s);
         finalize();
