@@ -1,0 +1,73 @@
+\documentclass[12pt, twoside]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {figures/} }
+\usepackage[margin=1in]{geometry}
+\usepackage{biblatex}
+\addbibresource{references.bib}
+
+\usepackage[hidelinks]{hyperref}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage[utf8]{inputenc}
+
+\renewcommand{\d}{\delta}
+\newcommand{\F}{\mathcal{F}}
+\renewcommand{\l}{\left}
+\renewcommand{\r}{\right}
+\newcommand{\f}{\frac}
+\newcommand{\Z}{\mathcal{Z}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\fphi}{\tilde{\phi}}
+\newcommand{\fh}{\tilde{h}}
+\newcommand{\fxi}{\tilde{\xi}}
+
+
+\title{
+	{Structural Phase Field Crystal Models as a Lense on Nonequilibrium Kinetic Pathways}\\
+	{\large McGill University}\\
+}
+\author{Nathan Smith}
+\date{\today}
+
+\begin{document}
+
+%  -- Front Matter --
+\maketitle
+\tableofcontents
+
+\chapter*{Abstract}
+Abstract goes here
+
+\chapter*{Dedication}
+To mum and dad
+
+\chapter*{Declaration}
+I declare that..
+
+\chapter*{Acknowledgements}
+I want to thank...
+
+\tableofcontents
+
+% -- Main Matter --
+\chapter{Introduction}
+
+\chapter{Theory of Phase Field Crystal Models}
+\input{chapters/fundamentals}
+
+\chapter{Chapter Three Title}
+
+\chapter{Chapter Four Title}
+
+\chapter{Conclusion}
+
+% -- Back Matter --
+\appendix
+\chapter{Noise in Nonlinear Langevin Equations}
+
+\input{chapters/noise}
+
+\end{document}

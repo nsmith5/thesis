@@ -1,26 +1,13 @@
-\documentclass[11pt]{article}
-\usepackage[margin=1.2in]{geometry}
-\usepackage{amsmath}
-\usepackage[utf8]{inputenc}
+When using Langevin equations to study non-equilibrium statistical mechanics the noise strength can be linked to the transport coefficients through the fluctuation-dissipation theorem. The typical strategy for 
+deriving such a relationship is to evaluate the equilibrium pair correlation function by two separate methods: the equilibrium partition functional and the stochastic equation of motion. 
 
-\title{\textbf{Fluctuation Dissipation Theorem In Statistical Field Theories}}
-\author{Nathan Smith}
-\date{\today}
+While the equilibrium partition functional gives pair correlation through the typical statistical mechanical calculation, the equation of motion can be used to derive a dynamic pair correlation function that must be equal to the equilibrium pair correlation function in the long time limit. 
 
-\newcommand{\F}{\mathcal{F}}
-\newcommand{\f}{\frac}
-\newcommand{\Z}{\mathcal{Z}}
-\newcommand{\D}{\mathcal{D}}
-\newcommand{\fphi}{\tilde{\phi}}
-\newcommand{\fh}{\tilde{h}}
-\newcommand{\fxi}{\tilde{\xi}}
-\renewcommand{\l}{\left}
-\renewcommand{\r}{\right}
+\begin{equation}
+	\lim_{t \rightarrow \infty} \l\langle \phi(x, t) \phi(x^\prime, t) \r\rangle = \l\langle\phi(x)\phi(x^\prime) \r\rangle_{eq}
+\end{equation}
 
-\begin{document}
-
-\maketitle
-\tableofcontents
+In what follows we'll look at how this strategy can be used in the relatively simply case of Model A dynamics with a $\phi^4$ free energy functional and then move on to the slightly more subtle case of a generic dynamic density functional theory (DDFT).
 
 \section{Fluctuation Dissipation in Model A}
 
@@ -31,16 +18,14 @@ Consider the following free energy functional under non-conservative, dissipativ
 \f{\partial \phi(x,t)}{\partial t} = -\Gamma \left(\f{\delta \beta \F[\phi]}{\delta \phi(x)}\right) + \xi(x, t) 
 \end{gather}
 
-The random driving force, $\xi$, is Gaussian white noise. 
+The random driving force, $\xi$, is Gaussian white noise with some scalar noise strength $\lambda$.
 
 \begin{align}
 \l\langle \xi (x, t) \r\rangle &= 0 \\
 \l\langle \xi (x, t) \xi(x^\prime, t^\prime) \r\rangle  &= \lambda \delta(x - x^\prime) \delta (t - t^\prime)
 \end{align}
 
-The fluctuation-dissipation theorem will ultimately show us that the noise strength $\lambda$ and the transport coefficient $\Gamma$ are related when the system is close to an equilibrium state by $\lambda = 2\Gamma$.
-
-To show that this is the case we consider two different routes to evaluating the equilibrium pair correlation function. 
+The fluctuation-dissipation theorem will ultimately show us that the noise strength $\lambda$ and the transport coefficient $\Gamma$ are related when the system is close to an equilibrium state by $\lambda = 2\Gamma$. To see how this might come about we start by evaluating the equilibrium pair correlation function using the partition functional of our theory
 
 \subsection{The partition function route}
 
@@ -50,7 +35,7 @@ In equilibrium the probability of particular field configuration is given by the
 \mathcal{P}_{eq}[\phi] = \f{e^{-\beta\F[\phi]}}{\mathcal{Z}[h(x)]}
 \end{equation}
 
-The partition function is given by functional integral over all field configurations. 
+Where, $\mathcal{Z}[h(x)]$ is the partition functional and is given by a path integral over all field configurations. 
 
 \begin{equation}
 \mathcal{Z}[h(x)] = \int \mathcal{D}[\phi] e^{-\beta\F[\phi]}
@@ -156,7 +141,7 @@ Setting, $t = t^\prime$ and taking the limit as $t\rightarrow\infty$ we recover 
 
 \subsection{Remarks}
 
-Comparing with the result we got from the partition function route and the equation of motion route we see that for our answers to be equal we must have $\lambda = 2\Gamma$. It should be noted that this answer may seem to differ from other definitions of the fluctuation-dissipation theorem which state that $\lambda = 2k_bT\Gamma$. The discrepancy comes from what we mean by the coefficent $\Gamma$ and how we write the equation of motion. If we write the equation of motion as in equation \ref{eom}, the coefficient $\Gamma$ is the traditional Onsager transport coefficient and we recover traditional fluctuation-dissipation theorem. 
+Comparing with the result we got from the partition function route and the equation of motion route we see that for our answers to be equal we must have $\lambda = 2\Gamma$. It should be noted that this answer may seem to differ from other definitions of the fluctuation-dissipation theorem which state that $\lambda = 2k_b\,T\Gamma$. The discrepancy comes from what we mean by the coefficent $\Gamma$ and how we write the equation of motion. If we write the equation of motion as in equation \ref{eom}, the coefficient $\Gamma$ is the traditional Onsager transport coefficient and we recover traditional fluctuation-dissipation theorem. 
 
 \begin{equation}\label{eom}
 	\f{\partial \phi(x,t)}{\partial t} = -\Gamma \left(\f{\delta \F[\phi]}{\delta \phi(x)}\right) - \xi(x,t)
@@ -164,4 +149,39 @@ Comparing with the result we got from the partition function route and the equat
 
 Comparing with our result we see that the factor of $k_bT$ is absorbed into our definition of the transport coefficient $\Gamma$.
 
-\end{document}
+\section{Fluctuation Dissipation Theorem in Dynamic Density Functional Theory}
+
+In dynamic density functional theory (DDFT) we have an equation of motion of the following form, 
+
+\begin{equation}
+	\f{\partial \rho(r, t)}{\partial t} = D_0 \nabla \cdot \l[\rho(r,t)\nabla \l(\f{\d \F[\rho]}{\d \rho}\r)\r] + \xi(r, t)
+\end{equation}
+
+Where, $D_0$ is the equilibrium diffusion constant and $\xi$ is the stochastic driving force. We assume once again that the driving force has no bias, but we now allow the noise strength to be a generic linear operator $\mathcal{L}$.
+
+\begin{align}
+	\langle \xi(r,t) \rangle &= 0 \\
+	\l\langle \xi(r, t) \xi(r^\prime, t^\prime) \r\rangle &= \mathcal{L} \d (r-r^\prime) \d (t -t^\prime)
+\end{align}
+
+We ask ourselves now, what constrains can we apply to this operator if our system must decay to a Boltzmann distribution in equilibrium?
+
+\subsection{Pair Correlation from the Partition Functional}
+
+Just like with the $phi^4$ model we want to expand our free energy functional around an equilibrium solution. In this case our free energy functional is generic so this expansion is purely formal. 
+
+\begin{equation}
+	\F[\rho] = \F_{eq} + \beta\int dr \l(\l.\f{\d \F[\rho]}{\d \rho(r)}\r)\r\vert_{\rho_{eq}}\Delta\rho(r) + \f{1}{2} \int dr \int dr^\prime \Delta\rho(r) \l(\l.\f{\d^2 \F[\rho]}{\d \rho(r) \d \rho(r^\prime)}\r)\r\vert_{\rho_{eq}} \Delta\rho(r^\prime)
+\end{equation}
+
+The first term we can neglect as it adds an overall scale to the partition function that will not affect any of moments. Second moment only shifts the average so we can ignore it as well and so we're left with a simple quadratic free energy once again. 
+
+\begin{equation}
+	\F[\rho] = \f{1}{2}\int dr \int dr^\prime \Delta \rho(r) H(r, r^\prime) \Delta \rho(r^\prime)
+\end{equation}
+
+Where, $H(r, r^\prime)$ is the second functional derivative of the free energy functional in equilibrium. Computing the pair correlation function from the partition function yields, as might be expected, 
+
+\begin{equation}
+	\l\langle \Delta\rho(r) \Delta\rho(r^\prime) \r\rangle = H(r, r^\prime)
+\end{equation}
