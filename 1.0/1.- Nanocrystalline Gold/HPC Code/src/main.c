@@ -22,11 +22,11 @@ bool time_to_leave = false;
 void init (int argc, char **argv);
 void finalize (void);
 void sig_handler (int signo);
- 
+
 int main (int    argc,
           char **argv)
 {
-    int N = 1024;
+    int N = 256;
     double dx = 0.125;
     double dt = 0.00125;
     int rank, size;
@@ -64,6 +64,7 @@ int main (int    argc,
     s->alphac = 0.5;
     set_C (s);
 
+    mpi_print("Initializing");
     for (int i = 0; i < s->local_n0; i++)
     {
         for (int j = 0; j < s->N; j++)
@@ -73,16 +74,21 @@ int main (int    argc,
         }
     }
 
+    mpi_print("Time Stepping");
     /* Do stuff */
    	while (true)
     {
         step (s);
-		if (s->step % 300 == 0) save_state (s, file_id);
+		if (s->step % 300 == 0) 
+		{
+			mpi_print("Saving state");
+			save_state (s, file_id);
+		}
 		if (time_to_leave) break;
     }
 
 	/* Shut 'er down */
-	printf("Shut er down!\n");
+	mpi_print("Shut er down!");
     io_finalize (file_id);
     destroy_state (s);
     finalize ();
@@ -94,7 +100,7 @@ void init (int    argc,
            char **argv)
 {
     MPI_Init(&argc, &argv);
-	
+
 	int rank;
     MPI_Comm_rank (MPI_COMM_WORLD, &rank);
 
@@ -144,10 +150,9 @@ void sig_handler(int signo)
 {
 	/* If we receive SIGUSR1 its time to get the hell out */
     if (signo == SIGUSR1)
-    {	
+    {
 		MPI_Barrier (MPI_COMM_WORLD);
-    	printf("Caught SIGUSR1, time to leave\n");
-		time_to_leave = true;		
+    	mpi_print("Caught SIGUSR1, time to leave\n");
+		time_to_leave = true;
 	}
 }
-

@@ -23,6 +23,14 @@
 
 const int io_verbose = true;
 
+void mpi_print (const char *str)
+{
+    int rank;
+    MPI_Comm_rank (MPI_COMM_WORLD, &rank);
+    if (rank == 0) printf("%s\n", str);
+    MPI_Barrier (MPI_COMM_WORLD);
+}
+
 hid_t io_init (const char *filename)
 {
     /*

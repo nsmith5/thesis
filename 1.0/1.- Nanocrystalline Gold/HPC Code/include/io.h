@@ -1,3 +1,5 @@
+void mpi_print (const char *str);
+
 hid_t io_init (const char *filename);
 
 herr_t io_finalize (hid_t file_id);
