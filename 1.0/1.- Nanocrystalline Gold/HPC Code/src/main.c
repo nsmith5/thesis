@@ -2,11 +2,14 @@
 #include <hdf5.h>
 #include <fftw3-mpi.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>		// access () file existance
 #include <math.h>
 #include <assert.h>
 #include <signal.h>     // interupt process at end of run with SIGINT
+#include <stdbool.h>
 
+/* Local Headers */
 #include "error.h"
 #include "state.h"
 #include "dynamics.h"
@@ -14,29 +17,28 @@
 
 #define PI 2.0*acos(0.0)
 #define FILENAME "data/Data.h5"
+bool time_to_leave = false;
 
 void init (int argc, char **argv);
 void finalize (void);
 void sig_handler (int signo);
-hid_t file_id;
-state *s;
-
+ 
 int main (int    argc,
           char **argv)
 {
-
-    if (signal(SIGINT, sig_handler) == SIG_ERR);
-
     int N = 1024;
     double dx = 0.125;
     double dt = 0.00125;
     int rank, size;
+	hid_t file_id;
+	state* s;
 
     /* Initialize the system */
     init (argc, argv);
-    s = create_state (N, dx, dt);
-    file_id = io_init (FILENAME);
+	signal(SIGUSR1, sig_handler);
+	s = create_state (N, dx, dt);
     assert (s != NULL);
+	file_id = io_init (FILENAME);
     MPI_Comm_rank (MPI_COMM_WORLD, &rank);
     MPI_Comm_size (MPI_COMM_WORLD, &size);
 
@@ -67,29 +69,20 @@ int main (int    argc,
         for (int j = 0; j < s->N; j++)
         {
             s->n[i*2*(s->N/2 + 1) + j] = 0.05;
-        s->c[i*2*(s->N/2 + 1) + j] = 0.30;
+        	s->c[i*2*(s->N/2 + 1) + j] = 0.30;
         }
     }
 
     /* Do stuff */
-
-    double t1 = MPI_Wtime ();
-    int step = 0;
-
-    while (true)
+   	while (true)
     {
         step (s);
-        if (s->step % 100 == 0)
-        {
-               save_state (s, file_id);
-        }
+		if (s->step % 300 == 0) save_state (s, file_id);
+		if (time_to_leave) break;
     }
 
-    double t2 = MPI_Wtime ();
-
-    printf("Time for 100 times steps is %gs\n", t2-t1);
-
-    /* Shut 'er down */
+	/* Shut 'er down */
+	printf("Shut er down!\n");
     io_finalize (file_id);
     destroy_state (s);
     finalize ();
@@ -101,7 +94,8 @@ void init (int    argc,
            char **argv)
 {
     MPI_Init(&argc, &argv);
-    int rank;
+	
+	int rank;
     MPI_Comm_rank (MPI_COMM_WORLD, &rank);
 
     // Initialize fftw
@@ -146,12 +140,14 @@ void finalize (void)
     return;
 }
 
-void sig_handler (int signo)
+void sig_handler(int signo)
 {
-    if (signo == SIGINT)
-    {
-        io_finalize (file_id);
-        destroy_state(s);
-        finalize();
-    }
+	/* If we receive SIGUSR1 its time to get the hell out */
+    if (signo == SIGUSR1)
+    {	
+		MPI_Barrier (MPI_COMM_WORLD);
+    	printf("Caught SIGUSR1, time to leave\n");
+		time_to_leave = true;		
+	}
 }
+
