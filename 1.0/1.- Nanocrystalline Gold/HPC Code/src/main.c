@@ -34,7 +34,7 @@ int main (int    argc,
     MPI_Comm_rank (MPI_COMM_WORLD, &rank);
     MPI_Comm_size (MPI_COMM_WORLD, &size);
 
-	load_state (s, file_id, "00003000");
+	load_state (s, file_id, "00001800");
 
     mpi_print("Time Stepping");
     /* Do stuff */

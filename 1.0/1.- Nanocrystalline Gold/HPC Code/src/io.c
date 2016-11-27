@@ -32,7 +32,28 @@ void mpi_print (const char *str)
     MPI_Barrier (MPI_COMM_WORLD);
 }
 
-hid_t io_init (const char *filename)
+hid_t io_init_from_file (const char *filename)
+{
+    MPI_Comm comm = MPI_COMM_WORLD;
+    MPI_Info info = MPI_INFO_NULL;
+    hid_t plist_id;
+    hid_t file_id;
+    herr_t status;
+
+    plist_id = H5Pcreate (H5P_FILE_ACCESS);
+
+    H5Pset_fapl_mpio (plist_id, comm, info);
+
+    file_id = H5Fopen (filename, H5F_ACC_RDWR, plist_id);
+
+    status = H5Pclose (plist_id);
+    assert (status != FAIL);
+
+    return file_id;
+}
+
+
+hid_t io_init_new_file (const char *filename)
 {
     /*
     *  Create a file to save data to for this session
@@ -251,6 +272,9 @@ herr_t read_int_attribute (const char *name,
     status = H5Aread (attr_id, H5T_NATIVE_INT, value);
 
     status = H5Aclose (attr_id);
+
+    printf ("Loaded %s from file with value %d", name, *value);
+
     return status;
 }
 
@@ -309,13 +333,13 @@ herr_t load_state (state      *s,
     hid_t group_id;
     herr_t status;
 
-    group_id = H5Gopen1 (file_id, datafile);
+    group_id = H5Gopen2 (file_id, datafile, H5P_DEFAULT);
 
     /* Read state attributes */
 
     status = read_double_attribute ("eta",      group_id, &s->eta);
     status = read_double_attribute ("chi",      group_id, &s->chi);
-    status = read_double_attribute ("epsilon_0", group_id, &s->epsilon0);
+    status = read_double_attribute ("epsilon_0",group_id, &s->epsilon0);
     status = read_double_attribute ("sigma0",   group_id, &s->sigma0);
     status = read_double_attribute ("sigma",    group_id, &s->sigma);
     status = read_double_attribute ("omega",    group_id, &s->omega);
