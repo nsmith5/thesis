@@ -1,0 +1,4 @@
+obj/*
+data/*.png
+data/Data.h5
+main
