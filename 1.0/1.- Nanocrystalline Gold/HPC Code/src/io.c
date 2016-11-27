@@ -62,9 +62,9 @@ herr_t io_finalize (hid_t file_id)
 }
 
 herr_t write_array_dataset (const char *name,
-                         hid_t       group_id,
-                         double     *arr,
-                         state      *s)
+                            hid_t       group_id,
+                            double     *arr,
+                            state      *s)
 {
      hid_t dset_id, dataspace;
      hid_t memspace, plist_id;
@@ -126,6 +126,59 @@ herr_t write_array_dataset (const char *name,
      return status;
 }
 
+herr_t read_array_dataset (const char *name,
+                           hid_t       group_id,
+                           double     *arr,
+                           state      *s)
+{
+    hid_t dset_id, dataspace;
+    hid_t memspace, plist_id;
+    herr_t status;
+    hsize_t count[2], offset[2];
+
+    /* Open Dataset */
+    dset_id = H5Dopen (group_id, name);
+
+    /* Describe memory shape, property list and data shape */
+    count[0] = 1;
+    count[1] = s->N;
+    offset[1] = 0;
+    memspace = H5Screate_simple (2, count, NULL);
+
+    /* Set up some of the MPI things */
+    dataspace = H5Dget_space (dset_id);
+    plist_id = H5Pcreate (H5P_DATASET_XFER);
+    H5Pset_dxpl_mpio (plist_id, H5FD_MPIO_COLLECTIVE);
+
+    /* Write data row by row in slabs */
+    for (int row = 0; row < s->local_n0; row++)
+    {
+        offset[0] = s->local_0_start + row;
+
+        status = H5Sselect_hyperslab (dataspace,
+                                      H5S_SELECT_SET,
+                                      offset,
+                                      NULL,
+                                      count,
+                                      NULL);
+
+        status = H5Dread (dset_id,
+                          H5T_NATIVE_DOUBLE,
+                          memspace,
+                          dataspace,
+                          plist_id,
+                          arr + row*2*(s->N/2 + 1));
+    }
+
+    /* Close everything you opened */
+    status = H5Pclose (plist_id);
+    status = H5Sclose (memspace);
+    status = H5Dclose (dset_id);
+    status = H5Sclose (dataspace);
+
+    return status;
+}
+
 herr_t write_double_attribute (const char *name,
                                hid_t       group_id,
                                double     *value)
@@ -148,9 +201,24 @@ herr_t write_double_attribute (const char *name,
      return status;
 }
 
+herr_t read_double_attribute (const char *name,
+                              hid_t       group_id,
+                              double     *value)
+{
+    /* Read integer attribute from dataset 'group_id' */
+    hid_t attr_id;
+    herr_t status;
+
+    attr_id = H5Aopen (group_id, name, H5P_DEFAULT);
+    status = H5Aread (attr_id, H5T_NATIVE_DOUBLE, value);
+
+    status = H5Aclose (attr_id);
+    return status;
+}
+
 herr_t write_int_attribute (const char *name,
-                         hid_t       group_id,
-                         int        *value)
+                            hid_t       group_id,
+                            int        *value)
 {
      hsize_t size = 1;
      herr_t status;
@@ -170,17 +238,34 @@ herr_t write_int_attribute (const char *name,
      return status;
 }
 
+herr_t read_int_attribute (const char *name,
+                           hid_t       group_id,
+                           int        *value)
+{
+    /* Read integer attribute from dataset 'group_id' */
+    hid_t attr_id;
+    herr_t status;
+
+    attr_id = H5Aopen (group_id, name, H5P_DEFAULT);
+    status = H5Aread (attr_id, H5T_NATIVE_INT, value);
+
+    status = H5Aclose (attr_id);
+    return status;
+}
+
 herr_t save_state (state *s,
-                hid_t  file_id)
+                   hid_t  file_id)
 {
      hid_t group_id;
      herr_t status;
 
      /* Make Group from simulation time `t` */
+
      char groupname[50];
      char step_str[10];
      sprintf(step_str, "%d", s->step);
      sprintf(groupname, "%0*d%s", LEN-(int)strlen(step_str), 0, step_str);
+
      group_id = H5Gcreate (file_id,
                            groupname,
                            H5P_DEFAULT,
@@ -212,4 +297,41 @@ herr_t save_state (state *s,
      status = H5Gclose (group_id);
 
      return status;
+}
+
+herr_t load_state (state      *s,
+                   hid_t       file_id,
+                   const char *datafile)
+{
+    hid_t group_id;
+    herr_t status;
+
+    group_id = H5Gopen (file_id, datafile);
+
+    /* Read state attributes */
+
+    status = read_double_attribute ("eta",      group_id, &s->eta);
+    status = read_double_attribute ("chi",      group_id, &s->chi);
+    status = read_double_attribute ("epsilon_0", group_id, &s->epsilon0);
+    status = read_double_attribute ("sigma0",   group_id, &s->sigma0);
+    status = read_double_attribute ("sigma",    group_id, &s->sigma);
+    status = read_double_attribute ("omega",    group_id, &s->omega);
+    status = read_double_attribute ("kbT",      group_id, &s->kbT);
+    status = read_double_attribute ("Wc",       group_id, &s->Wc);
+
+    status = read_double_attribute ("Mn", group_id, &s->Mn);
+    status = read_double_attribute ("Mc", group_id, &s->Mc);
+
+    status = read_double_attribute ("dx",     group_id, &s->dx);
+    status = read_double_attribute ("dt",     group_id, &s->dt);
+    status = read_double_attribute ("Time",   group_id, &s->t);
+    status = read_int_attribute ("Time Step", group_id, &s->step);
+
+    status = read_array_dataset ("Concentration", group_id, s->c, s);
+    status = read_array_dataset ("Density",   group_id, s->n, s);
+
+    status = H5Gclose (group_id);
+
+    return status;
+
 }
