@@ -13,6 +13,7 @@
 #include <stdbool.h>
 #include <assert.h>
 #include <string.h>
+#include <yaml.h>
 
 #include "error.h"
 #include "state.h"
@@ -137,7 +138,7 @@ herr_t read_array_dataset (const char *name,
     hsize_t count[2], offset[2];
 
     /* Open Dataset */
-    dset_id = H5Dopen (group_id, name);
+    dset_id = H5Dopen1 (group_id, name);
 
     /* Describe memory shape, property list and data shape */
     count[0] = 1;
@@ -294,6 +295,8 @@ herr_t save_state (state *s,
      status = write_array_dataset ("Concentration", group_id, s->c, s);
      status = write_array_dataset ("Density",   group_id, s->n, s);
 
+     set_C (s);
+
      status = H5Gclose (group_id);
 
      return status;
@@ -306,7 +309,7 @@ herr_t load_state (state      *s,
     hid_t group_id;
     herr_t status;
 
-    group_id = H5Gopen (file_id, datafile);
+    group_id = H5Gopen1 (file_id, datafile);
 
     /* Read state attributes */
 
