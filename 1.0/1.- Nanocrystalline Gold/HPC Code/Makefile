@@ -2,7 +2,7 @@ CC = h5pcc
 CFLAGS = -I./include -Wall -O3 -ffast-math -std=c11
 LIBS = -lfftw3_mpi -lfftw3 -lm -lgsl -lgslcblas
 
-main: obj/state.o obj/main.o obj/io.o obj/dynamics.o obj/error.o 
+main: obj/state.o obj/main.o obj/io.o obj/dynamics.o obj/error.o obj/setup.o
 	$(CC) obj/* $(CFLAGS) $(LIBS) -o main
 
 obj/main.o: src/main.c
@@ -20,6 +20,8 @@ obj/dynamics.o: src/dynamics.c include/dynamics.h
 obj/error.o: src/error.c include/error.h
 	$(CC) -c src/error.c $(CFLAGS) -o obj/error.o
 
+obj/setup.o: src/setup.c include/setup.h
+	$(CC) -c src/setup.c $(CFLAGS) -o obj/setup.o
 
 .PHONY: clean
 
