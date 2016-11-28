@@ -16,7 +16,7 @@
 int main (int    argc,
           char **argv)
 {
-    int N = 256;
+    int N = 1024;
     double dx = 0.125;
     double dt = 0.00125;
     int rank, size;
@@ -27,24 +27,29 @@ int main (int    argc,
     init (argc, argv);
 	s = create_state (N, dx, dt);
     assert (s != NULL);
+	mpi_print("Loading file\n");
+	sleep(1);
 	file_id = io_init_from_file (FILENAME);
     MPI_Comm_rank (MPI_COMM_WORLD, &rank);
     MPI_Comm_size (MPI_COMM_WORLD, &size);
+   	mpi_print("Done loading file");
+	sleep(1); 
 
-    
-    load_state (s, file_id, "00003900");
+	mpi_print("Loading state from file");
+    load_state (s, file_id, "00191000");
+
+	mpi_print("Done loading state from file\n");
 
     mpi_print("Time Stepping");
     /* Do stuff */
-   	while (true)
+   	while (!time_to_leave)
     {
         step (s);
-		if (s->step % 300 == 0)
+		if (s->step % 1000 == 0)
 		{
 			mpi_print("Saving state");
 			save_state (s, file_id);
 		}
-		if (time_to_leave) break;
     }
 
 	/* Shut 'er down */

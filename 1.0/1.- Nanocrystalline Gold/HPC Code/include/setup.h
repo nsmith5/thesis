@@ -1,6 +1,6 @@
-#include <stdbool.h>
+#include <signal.h>
 
-extern bool time_to_leave;
+extern volatile sig_atomic_t time_to_leave;
 
 void init (int argc, char **argv);
 

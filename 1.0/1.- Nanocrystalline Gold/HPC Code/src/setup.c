@@ -15,7 +15,7 @@
 #include "error.h"
 #include "io.h"
 
-bool time_to_leave = false;
+volatile sig_atomic_t time_to_leave = 0;
 
 static void sig_handler(int signo)
 {
@@ -24,7 +24,7 @@ static void sig_handler(int signo)
     {
 		MPI_Barrier (MPI_COMM_WORLD);
     	mpi_print("Caught SIGUSR1, time to leave\n");
-		time_to_leave = true;
+		time_to_leave = 1;
 	}
 }
 

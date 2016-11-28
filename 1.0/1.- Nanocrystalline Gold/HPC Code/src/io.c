@@ -192,6 +192,9 @@ herr_t read_array_dataset (const char *name,
                           arr + row*2*(s->N/2 + 1));
     }
 
+	MPI_Barrier(MPI_COMM_WORLD);
+	printf("Loaded an array!\n");
+
     /* Close everything you opened */
     status = H5Pclose (plist_id);
     status = H5Sclose (memspace);
@@ -272,8 +275,6 @@ herr_t read_int_attribute (const char *name,
     status = H5Aread (attr_id, H5T_NATIVE_INT, value);
 
     status = H5Aclose (attr_id);
-
-    printf ("Loaded %s from file with value %d", name, *value);
 
     return status;
 }
