@@ -25,16 +25,14 @@ int main (int    argc,
 
     /* Initialize the system */
     init (argc, argv);
-
 	s = create_state (N, dx, dt);
     assert (s != NULL);
-
-	file_id = io_init (FILENAME);
-
+	file_id = io_init_from_file (FILENAME);
     MPI_Comm_rank (MPI_COMM_WORLD, &rank);
     MPI_Comm_size (MPI_COMM_WORLD, &size);
 
-	load_state (s, file_id, "00001800");
+    
+    load_state (s, file_id, "00003900");
 
     mpi_print("Time Stepping");
     /* Do stuff */

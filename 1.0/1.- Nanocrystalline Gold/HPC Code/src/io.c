@@ -311,6 +311,12 @@ herr_t save_state (state *s,
      status = write_double_attribute ("Mn",     group_id, &s->Mn);
      status = write_double_attribute ("Mc",     group_id, &s->Mc);
 
+     status = write_double_attribute ("k0",     group_id, &s->k0);
+     status = write_double_attribute ("alpha",     group_id, &s->alpha);
+     status = write_double_attribute ("beta",     group_id, &s->beta);
+     status = write_double_attribute ("rho",     group_id, &s->rho);
+     status = write_double_attribute ("alphac",     group_id, &s->alphac);
+
      status = write_double_attribute ("dx",     group_id, &s->dx);
      status = write_double_attribute ("dt",     group_id, &s->dt);
      status = write_double_attribute ("Time",   group_id, &s->t);
@@ -348,6 +354,12 @@ herr_t load_state (state      *s,
 
     status = read_double_attribute ("Mn", group_id, &s->Mn);
     status = read_double_attribute ("Mc", group_id, &s->Mc);
+
+    status = read_double_attribute ("k0",     group_id, &s->k0);
+    status = read_double_attribute ("alpha",  group_id, &s->alpha);
+    status = read_double_attribute ("beta",   group_id, &s->beta);
+    status = read_double_attribute ("rho",    group_id, &s->rho);
+    status = read_double_attribute ("alphac", group_id, &s->alphac);
 
     status = read_double_attribute ("dx",     group_id, &s->dx);
     status = read_double_attribute ("dt",     group_id, &s->dt);
