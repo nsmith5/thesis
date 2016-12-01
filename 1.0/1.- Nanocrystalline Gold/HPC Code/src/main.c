@@ -29,7 +29,7 @@ int main (int    argc,
     assert (s != NULL);
 	mpi_print("Loading file\n");
 	sleep(1);
-	file_id = io_init_new_file (FILENAME);
+	file_id = io_init_from_file (FILENAME);
     MPI_Comm_rank (MPI_COMM_WORLD, &rank);
     MPI_Comm_size (MPI_COMM_WORLD, &size);
    	mpi_print("Done loading file");
@@ -46,8 +46,9 @@ int main (int    argc,
 	mpi_print("Loading state from file");
 
 
-    //load_state (s, file_id, "00000100");
+    load_state (s, file_id, "00002000");
 
+    /*
     s->eta = 2.0;
     s->chi = 1.0;
     s->epsilon0 = 30.0;
@@ -77,7 +78,7 @@ int main (int    argc,
             s->n[ij] = 0.05;
         }
     }
-
+    */
 	mpi_print("Done loading state from file\n");
 
     mpi_print("Time Stepping");

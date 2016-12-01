@@ -169,7 +169,7 @@ herr_t read_array_dataset (const char *name,
     /* Set up some of the MPI things */
     dataspace = H5Dget_space (dset_id);
     plist_id = H5Pcreate (H5P_DATASET_XFER);
-    H5Pset_dxpl_mpio (plist_id, H5FD_MPIO_COLLECTIVE);
+    H5Pset_dxpl_mpio (plist_id, H5FD_MPIO_INDEPENDENT);
 
     /* Write data row by row in slabs */
     for (int row = 0; row < s->local_n0; row++)
@@ -190,9 +190,6 @@ herr_t read_array_dataset (const char *name,
                           plist_id,
                           arr + row*2*(s->N/2 + 1));
     }
-
-	MPI_Barrier(MPI_COMM_WORLD);
-	printf("Loaded an array!\n");
 
     /* Close everything you opened */
     status = H5Pclose (plist_id);
