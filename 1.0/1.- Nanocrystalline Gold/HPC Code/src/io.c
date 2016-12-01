@@ -115,9 +115,8 @@ herr_t write_array_dataset (const char *name,
      memspace = H5Screate_simple (2, count, NULL);
 
      /* Set up some of the MPI things */
-     dataspace = H5Dget_space (dset_id);
      plist_id = H5Pcreate (H5P_DATASET_XFER);
-     H5Pset_dxpl_mpio (plist_id, H5FD_MPIO_COLLECTIVE);
+     H5Pset_dxpl_mpio (plist_id, H5FD_MPIO_INDEPENDENT);
 
      /* Write data row by row in slabs */
      for (int row = 0; row < s->local_n0; row++)
@@ -136,7 +135,7 @@ herr_t write_array_dataset (const char *name,
                             memspace,
                             dataspace,
                             plist_id,
-                            arr + row*2*(s->N/2 + 1));
+                            arr + row*2*((s->N>>1) + 1));
      }
 
      /* Close everything you opened */
