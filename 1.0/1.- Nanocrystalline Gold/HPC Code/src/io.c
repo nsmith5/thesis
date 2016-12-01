@@ -370,6 +370,8 @@ herr_t load_state (state      *s,
     status = read_array_dataset ("Concentration", group_id, s->c, s);
     status = read_array_dataset ("Density",   group_id, s->n, s);
 
+    set_C(s);
+
     status = H5Gclose (group_id);
 
     return status;
