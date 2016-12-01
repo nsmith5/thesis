@@ -1,4 +1,5 @@
 obj/*
 data/*.png
 data/Data.h5
+data/plans.wisdom
 main
