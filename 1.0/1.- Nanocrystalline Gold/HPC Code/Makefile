@@ -1,5 +1,5 @@
 CC = h5pcc
-CFLAGS = -I./include -Wall -g -std=c11
+CFLAGS = -I./include -Wall -O3 -ffast-math -std=c11
 LIBS = -lfftw3_mpi -lfftw3 -lm -lgsl -lgslcblas
 
 main: obj/state.o obj/main.o obj/io.o obj/dynamics.o obj/error.o obj/setup.o
