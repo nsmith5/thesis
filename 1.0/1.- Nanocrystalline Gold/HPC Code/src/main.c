@@ -56,7 +56,6 @@ int main (int    argc,
     s->sigma = 0.07;
     s->omega = 0.30;
     s->Wc = 1.0;
-    s->kbT = 0.00002;
 
     s->Mn = 1.0;
     s->Mc = 1.0;

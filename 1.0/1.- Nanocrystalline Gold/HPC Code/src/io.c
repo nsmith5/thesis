@@ -302,7 +302,6 @@ herr_t save_state (state *s,
      status = write_double_attribute ("sigma0", group_id, &s->sigma0);
      status = write_double_attribute ("sigma",  group_id, &s->sigma);
      status = write_double_attribute ("omega",  group_id, &s->omega);
-     status = write_double_attribute ("kbT",    group_id, &s->kbT);
      status = write_double_attribute ("Wc",     group_id, &s->Wc);
 
      status = write_double_attribute ("Mn",     group_id, &s->Mn);
@@ -346,7 +345,6 @@ herr_t load_state (state      *s,
     status = read_double_attribute ("sigma0",   group_id, &s->sigma0);
     status = read_double_attribute ("sigma",    group_id, &s->sigma);
     status = read_double_attribute ("omega",    group_id, &s->omega);
-    status = read_double_attribute ("kbT",      group_id, &s->kbT);
     status = read_double_attribute ("Wc",       group_id, &s->Wc);
 
     status = read_double_attribute ("Mn", group_id, &s->Mn);

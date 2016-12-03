@@ -11,7 +11,6 @@ typedef struct
 	double sigma0;
 	double sigma;
 	double omega;
-	double kbT;
 	double Wc;
 
 	/* Dynamic Parameters */

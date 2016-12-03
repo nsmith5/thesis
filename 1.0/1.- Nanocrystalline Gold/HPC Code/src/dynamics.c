@@ -51,8 +51,8 @@ static double dF_mixdc (double c, state *s)
 static void noise(state *s)
 {
     fftw_complex c_scale, n_scale;
-    c_scale = I*sqrt(s->kbT * s->Mc * s->dt / (s->dx * s->dx));
-    n_scale = I*sqrt(s->kbT * s->Mn * s->dt / (s->dx * s->dx));
+    c_scale = I*sqrt(s->Mc / (s->dx * s->dx * s->dt));
+    n_scale = I*sqrt(s->Mn / (s->dx * s->dx * s->dt));
 
     int ij;
 
@@ -164,7 +164,7 @@ void step(state *s)
     /* Fourier transform the nonlinear terms */
     fftw_mpi_execute_dft_r2c (s->fft_plan, s->nnl, s->fnnl);
     fftw_mpi_execute_dft_r2c (s->fft_plan, s->cnl, s->fcnl);
-    
+
     /* Make some noise and propagate the fields in fourier space */
     noise (s);
     propagate (s);
