@@ -7,7 +7,7 @@ export State,
 
 type State
 	N_init::Bool
-	
+
 	# Free Energy Parameters
 	η::Float64
 	χ::Float64
@@ -16,12 +16,11 @@ type State
 	σ₀::Float64
 	σ::Float64
 	ω::Float64
-	kbT::Float64
 
 	# Dynamic Parameters
 	Mₙ::Float64
 	Mc::Float64
-				
+
 	# Correlation Function Parameters
 	k′::Float64
 	α::Float64
@@ -51,18 +50,18 @@ type State
 	# Operators
 	∇²::Array{Float64, 2}
 	C₂::Array{Float64, 2}
-	
+
 	# Actual State
 	n::Array{Float64, 2}
 	c::Array{Float64, 2}
 
-	State() = new(false)			
+	State() = new(false)
 end
 
 function show(io::IO, s::State)
 	# Pretty printing of a state
 	println(io, "Simulation State")
-	symbols = [:η, :χ, :Wc, :ϵ₀, :σ₀, :σ, :ω, :kbT]
+	symbols = [:η, :χ, :Wc, :ϵ₀, :σ₀, :σ, :ω]
 	println(io, "\nThermodynamic Parameters:")
 	for sym in symbols
 		println(io, "    ", sym, " = ", eval(:($s.$sym)))
@@ -111,13 +110,13 @@ function set!(s::State, sym::Symbol, val)
 		@eval $s.$sym = $val
 		return nothing
 	end
-end			
+end
 
 function get(sym::Symbol, s::State)
 	if sym ∈ fieldnames(State	)
 		return @eval $s.$sym
 	else
-		error("$sym not a field of type State")			
+		error("$sym not a field of type State")
 	end
 end
 
@@ -126,7 +125,7 @@ function index_to_k(s::State, i::Int64, j::Int64)
 	L = s.N*s.Δx
 	kx² = i < N>>1 ? (2π*(i-1)/L)^2 : (2π*(i-N-1)/L)^2
 	ky² = j < N>>1 ? (2π*(j-1)/L)^2 : (2π*(j-N-1)/L)^2
-	sqrt(kx² + ky²)	
+	sqrt(kx² + ky²)
 end
 
 function set∇²!(s::State)
@@ -151,15 +150,15 @@ function setC₂!(s::State)
 		for i in 1:N>>1 + 1
 			k = index_to_k(s, i, j)
 			C[i,j] = exp(-σ^2*k′^2/(2*ρ*β))*exp(-(k-k′)^2/(2α^2))
-		end	
+		end
 	end
 	s.C₂ = C
 	return
-end		
+end
 
 #function save(filename, s::State)
 #	 TODO Make a function to save a state
-#end		
+#end
 
 #function load!(filename)
 #	# TODO make a function to load a state from file
