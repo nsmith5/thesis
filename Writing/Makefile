@@ -1,4 +1,4 @@
-main.pdf: chapters/noise.tex chapters/fundamentals.tex
+main.pdf: chapters/noise.tex chapters/binary_pfc.tex
 	pdflatex main.tex
 	pdflatex main.tex
 	rm main.bcf

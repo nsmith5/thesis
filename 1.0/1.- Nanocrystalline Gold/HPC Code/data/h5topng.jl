@@ -16,11 +16,15 @@ function make_pictures(filename)
 		concentration = group["Concentration"] |> read
 	
 		imshow(density, cmap="gray")
+		clim(-1, 1)		
+
 		imshow(concentration, cmap="coolwarm", alpha=0.5)	
 		clim(0, 1)
 		colorbar()	
 		
 		savefig(time*".png")
+		println("Wrote figure $time.png")		
+
 		clf()
 	end
 
