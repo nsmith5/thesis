@@ -1,7 +1,6 @@
-When using Langevin equations to study non-equilibrium statistical mechanics the noise strength can be linked to the transport coefficients through the fluctuation-dissipation theorem. The typical strategy for 
-deriving such a relationship is to evaluate the equilibrium pair correlation function by two separate methods: the equilibrium partition functional and the stochastic equation of motion. 
+When using Langevin equations to study non-equilibrium statistical mechanics the noise strength can be linked to the transport coefficients through the fluctuation-dissipation theorem. The typical strategy for deriving such a relationship is to evaluate the equilibrium pair correlation function by two separate methods: the equilibrium partition functional and the stochastic equation of motion.
 
-While the equilibrium partition functional gives pair correlation through the typical statistical mechanical calculation, the equation of motion can be used to derive a dynamic pair correlation function that must be equal to the equilibrium pair correlation function in the long time limit. 
+While the equilibrium partition functional gives pair correlation through the typical statistical mechanical calculation, the equation of motion can be used to derive a dynamic pair correlation function that must be equal to the equilibrium pair correlation function in the long time limit.
 
 \begin{equation}
 	\lim_{t \rightarrow \infty} \l\langle \phi(x, t) \phi(x^\prime, t) \r\rangle = \l\langle\phi(x)\phi(x^\prime) \r\rangle_{eq}
@@ -9,13 +8,23 @@ While the equilibrium partition functional gives pair correlation through the ty
 
 In what follows we'll look at how this strategy can be used in the relatively simply case of Model A dynamics with a $\phi^4$ free energy functional and then move on to the slightly more subtle case of a generic dynamic density functional theory (DDFT).
 
+\section{Generalized Einstein Relations in an Arbitrary Model}
+
+We start by considering a set of fields, $\alpha_i(r, t)$, that are governed by a nonlinear Langevin equation,
+
+\begin{equation}
+	\f{\partial \underline{\alpha}(r, t)}{\partial t} = F[\underline{\alpha}(r,t)] + \underline{\xi}(r,t).
+\end{equation}
+
+Where, $\underline{\alpha}$, denotes a vector of our fields of interest. ... Continue here
+
 \section{Fluctuation Dissipation in Model A}
 
-Consider the following free energy functional under non-conservative, dissipative dynamics. 
+Consider the following free energy functional under non-conservative, dissipative dynamics.
 
 \begin{gather}
 \beta \F[\phi] = \int dr \left\lbrace \f{1}{2}\vert \nabla \phi(x) \vert^2 + \f{r}{2}\phi^2(x) + \f{u}{4!}\phi^4(x)  + h(x)\phi(x)\right\rbrace \\
-\f{\partial \phi(x,t)}{\partial t} = -\Gamma \left(\f{\delta \beta \F[\phi]}{\delta \phi(x)}\right) + \xi(x, t) 
+\f{\partial \phi(x,t)}{\partial t} = -\Gamma \left(\f{\delta \beta \F[\phi]}{\delta \phi(x)}\right) + \xi(x, t)
 \end{gather}
 
 The random driving force, $\xi$, is Gaussian white noise with some scalar noise strength $\lambda$.
@@ -29,19 +38,19 @@ The fluctuation-dissipation theorem will ultimately show us that the noise stren
 
 \subsection{The partition function route}
 
-In equilibrium the probability of particular field configuration is given by the Boltzmann distribution. 
+In equilibrium the probability of particular field configuration is given by the Boltzmann distribution.
 
 \begin{equation}
 \mathcal{P}_{eq}[\phi] = \f{e^{-\beta\F[\phi]}}{\mathcal{Z}[h(x)]}
 \end{equation}
 
-Where, $\mathcal{Z}[h(x)]$ is the partition functional and is given by a path integral over all field configurations. 
+Where, $\mathcal{Z}[h(x)]$ is the partition functional and is given by a path integral over all field configurations.
 
 \begin{equation}
 \mathcal{Z}[h(x)] = \int \mathcal{D}[\phi] e^{-\beta\F[\phi]}
 \end{equation}
 
-Evaluation of the partition function is of some importance because it plays the role of a moment generating function. 
+Evaluation of the partition function is of some importance because it plays the role of a moment generating function.
 
 \begin{equation}\label{gen}
 \f{1}{\Z[h]}\f{\delta^n \Z[h]}{\delta h(x_1)...\delta h(x_n)} = \langle \phi(x_1)...\phi(x_n)\rangle
@@ -53,41 +62,41 @@ In general the partition function cannot be computed directly, but in the specia
 \beta\F[\Delta\phi] = \int dr \,\left\lbrace \f{1}{2}\Delta\phi(x) \left(r - \nabla^2 + \f{u}{2}\phi_0^2\right) \Delta\phi(x) - h(x)\Delta\phi(x) \right\rbrace
 \end{equation}
 
-Here the partition function is written in a suggestive form. As stated previously, functional integrals are difficult to compute in general, but Gaussian functional integrals do have a solution. 
+Here the partition function is written in a suggestive form. As stated previously, functional integrals are difficult to compute in general, but Gaussian functional integrals do have a solution.
 
 \subsubsection{Gaussian Functional Integrals}
 
-Consider a functional integral of the following form. 
+Consider a functional integral of the following form.
 
 \begin{equation}
 \Z[h(x)] = \int \D[\phi] \exp\left\lbrace - \int dx \int dx^\prime \left[ \f{1}{2}\phi(x) \mathbf{K}(x, x^\prime) \phi(x^\prime)\right] +  \int dx \left[h(x) \phi(x)\right]\right\rbrace
 \end{equation}
 
-This integral is simply the continuum limit of a multivariable Gaussian integral, 
+This integral is simply the continuum limit of a multivariable Gaussian integral,
 
 \begin{equation}
 \Z[\mathbf{h}] = \int \prod_i dx_i \exp \left\lbrace - \f{1}{2}\sum_i \sum_j x_i\, \mathbf{K}_{ij}\, x_j  + \sum_i h_i x_i\right\rbrace,
 \end{equation}
-For which the solution is, 
+For which the solution is,
 
 \begin{equation}
 \Z[\mathbf{h}] = \sqrt{\f{2\pi}{\det(\mathbf{K})}} \exp\left\lbrace \f{1}{2} \sum_i \sum_j h_i \mathbf{K}_{ij}^{-1} h_j\right\rbrace.
 \end{equation}
-In the continuum limit, the solution has an analogous form. 
+In the continuum limit, the solution has an analogous form.
 
 \begin{equation}\label{part}
 \Z[h(x)] \propto \exp\left\lbrace \int dx \int dx^\prime \left[ \f{1}{2}h(x) \mathbf{K}^{-1}(x, x^\prime) h(x^\prime)\right] \right\rbrace
 \end{equation}
-Where $\mathbf{K}^{-1}$ is defined by, 
+Where $\mathbf{K}^{-1}$ is defined by,
 
 \begin{equation}
 \int dx^\prime \mathbf{K}(x, x^\prime)\mathbf{K}^{-1}(x^\prime, x^{\prime\prime}) = \delta(x - x^{\prime\prime}).
 \end{equation}
-Ultimately, we don't need to worry about the constant of proportionality in equation \ref{part} because we'll be dividing this contribution when calculating correlation functions. 
+Ultimately, we don't need to worry about the constant of proportionality in equation \ref{part} because we'll be dividing this contribution when calculating correlation functions.
 
 \subsubsection{Computing the Pair correlation function in the Gaussian approximation}
 
-To compute the pair correlation function we use the Fourier space variant of the partition function, 
+To compute the pair correlation function we use the Fourier space variant of the partition function,
 
 \begin{equation}
 \Z[\tilde{h}(k)] \propto \exp\left\lbrace \f{1}{2}\int dk\,\f{h(k)h^{*}(k)}{r + \f{u}{2}\phi_0^2 +  \vert k \vert^2}\right\rbrace.
@@ -95,18 +104,18 @@ To compute the pair correlation function we use the Fourier space variant of the
 The pair correlation function, $\langle \Delta\tilde{\phi}(k)\Delta\tilde{\phi}^{*}(k)\rangle$, is then computed using equation \ref{gen}.
 
 \begin{equation}
-\l\langle \Delta\fphi(k)\Delta\fphi^{*}(k^\prime) \r\rangle = \f{2\pi \delta(k+k^\prime)}{r + \f{u}{2}\phi_0^2 + \vert k \vert^2} 
+\l\langle \Delta\fphi(k)\Delta\fphi^{*}(k^\prime) \r\rangle = \f{2\pi \delta(k+k^\prime)}{r + \f{u}{2}\phi_0^2 + \vert k \vert^2}
 \end{equation}
 
 \subsection{The Equation of Motion Route}
 
-The equation of motion supplies a second method for evaluating the pair correlation function in equilibrium. 
+The equation of motion supplies a second method for evaluating the pair correlation function in equilibrium.
 
 \begin{equation}
 \f{\partial \phi}{\partial t} = -\Gamma\left((r-\nabla^2)\phi(x,t) + \f{u}{3!}\phi^3(x,t)\right) + \xi(x, t),
 \end{equation}
 
-Our equation of motion, can be linearized around an equilibrium solution, $\phi_0$, just as we did in the partition function route to the pair correlation function. In a similar vain, we will Fourier transform the equation of motion as well. 
+Our equation of motion, can be linearized around an equilibrium solution, $\phi_0$, just as we did in the partition function route to the pair correlation function. In a similar vain, we will Fourier transform the equation of motion as well.
 
 \begin{equation}
 \f{\partial \Delta\fphi(k, t)}{\partial t} = -\Gamma\left((r + \f{u}{2}\phi_0 + \vert k \vert^2)\Delta\fphi(k,t)\right) + \xi(x,t)
@@ -120,20 +129,20 @@ Where, $\Omega = \Gamma (r + \f{u}{2}\phi_0^2 + \vert k \vert^2)$.
 
 \subsubsection{Computing the Pair correlation function}
 
-We now have the tools to compute the dynamical pair correlation function, $\langle \Delta\fphi(k, t)\Delta\fphi(k^\prime, t^\prime) \rangle $, and in limit as time goes to infinity, we will have another expression for the equilibrium pair correlation function. We begin by inserting the Green's function solutions into the pair correlation expression 
+We now have the tools to compute the dynamical pair correlation function, $\langle \Delta\fphi(k, t)\Delta\fphi(k^\prime, t^\prime) \rangle $, and in limit as time goes to infinity, we will have another expression for the equilibrium pair correlation function. We begin by inserting the Green's function solutions into the pair correlation expression
 
 \begin{align}
 \l\langle \Delta\fphi(k, t) \Delta\fphi(k^\prime, t^\prime)\r\rangle &=  e^{-\Omega(t+t^\prime)}\Delta\fphi(k, 0)\Delta\fphi(k^\prime, 0) \nonumber \\
  &+ e^{-\Omega (t+t^\prime)} \int_0^t d\tau \int_0^{t^\prime} d\tau^\prime e^{\Omega(\tau+\tau^\prime)}\l\langle \fxi(k, \tau) \fxi(k^\prime, \tau^\prime) \r\rangle.
 \end{align}
-Using the noise correlation we can compute the second term to find the final form of the dynamic correlation function. 
+Using the noise correlation we can compute the second term to find the final form of the dynamic correlation function.
 
 \begin{align}
 	\left\langle \Delta\fphi(k, t) \Delta\fphi(k^\prime, t^\prime)\right\rangle &=  e^{-\Omega(t+t^\prime)}\left(\Delta\fphi(k, 0)\Delta\fphi(k^\prime, 0) - \f{2\pi\delta(k+k^\prime)\lambda}{2\Omega}\right) \nonumber \\
 	&+ \f{2\pi\delta(k+k^\prime)\lambda}{2\Omega}e^{-\Omega \vert t-t^\prime \vert}
 \end{align}
 
-Setting, $t = t^\prime$ and taking the limit as $t\rightarrow\infty$ we recover another form for the equilibrium pair correlation function. 
+Setting, $t = t^\prime$ and taking the limit as $t\rightarrow\infty$ we recover another form for the equilibrium pair correlation function.
 
 \begin{equation}
 	\left\langle \Delta\fphi(k, t) \Delta\fphi(k^\prime, t^\prime)\right\rangle = \f{2\pi\delta(k+k^\prime)\lambda}{2\Gamma(r + \f{u}{2}\phi_0^2 + \vert k\vert^2)}
@@ -141,17 +150,17 @@ Setting, $t = t^\prime$ and taking the limit as $t\rightarrow\infty$ we recover 
 
 \subsection{Remarks}
 
-Comparing with the result we got from the partition function route and the equation of motion route we see that for our answers to be equal we must have $\lambda = 2\Gamma$. It should be noted that this answer may seem to differ from other definitions of the fluctuation-dissipation theorem which state that $\lambda = 2k_b\,T\Gamma$. The discrepancy comes from what we mean by the coefficent $\Gamma$ and how we write the equation of motion. If we write the equation of motion as in equation \ref{eom}, the coefficient $\Gamma$ is the traditional Onsager transport coefficient and we recover traditional fluctuation-dissipation theorem. 
+Comparing with the result we got from the partition function route and the equation of motion route we see that for our answers to be equal we must have $\lambda = 2\Gamma$. It should be noted that this answer may seem to differ from other definitions of the fluctuation-dissipation theorem which state that $\lambda = 2k_b\,T\Gamma$. The discrepancy comes from what we mean by the coefficent $\Gamma$ and how we write the equation of motion. If we write the equation of motion as in equation \ref{eom}, the coefficient $\Gamma$ is the traditional Onsager transport coefficient and we recover traditional fluctuation-dissipation theorem.
 
 \begin{equation}\label{eom}
 	\f{\partial \phi(x,t)}{\partial t} = -\Gamma \left(\f{\delta \F[\phi]}{\delta \phi(x)}\right) - \xi(x,t)
-\end{equation}   
+\end{equation}
 
 Comparing with our result we see that the factor of $k_bT$ is absorbed into our definition of the transport coefficient $\Gamma$.
 
 \section{Fluctuation Dissipation Theorem in Dynamic Density Functional Theory}
 
-In dynamic density functional theory (DDFT) we have an equation of motion of the following form, 
+In dynamic density functional theory (DDFT) we have an equation of motion of the following form,
 
 \begin{equation}
 	\f{\partial \rho(r, t)}{\partial t} = D_0 \nabla \cdot \l[\rho(r,t)\nabla \l(\f{\d \F[\rho]}{\d \rho}\r)\r] + \xi(r, t)
@@ -168,19 +177,19 @@ We ask ourselves now, what constrains can we apply to this operator if our syste
 
 \subsection{Pair Correlation from the Partition Functional}
 
-Just like with the $phi^4$ model we want to expand our free energy functional around an equilibrium solution. In this case our free energy functional is generic so this expansion is purely formal. 
+Just like with the $phi^4$ model we want to expand our free energy functional around an equilibrium solution. In this case our free energy functional is generic so this expansion is purely formal.
 
 \begin{equation}
 	\F[\rho] = \F_{eq} + \beta\int dr \l(\l.\f{\d \F[\rho]}{\d \rho(r)}\r)\r\vert_{\rho_{eq}}\Delta\rho(r) + \f{1}{2} \int dr \int dr^\prime \Delta\rho(r) \l(\l.\f{\d^2 \F[\rho]}{\d \rho(r) \d \rho(r^\prime)}\r)\r\vert_{\rho_{eq}} \Delta\rho(r^\prime)
 \end{equation}
 
-The first term we can neglect as it adds an overall scale to the partition function that will not affect any of moments. Second moment only shifts the average so we can ignore it as well and so we're left with a simple quadratic free energy once again. 
+The first term we can neglect as it adds an overall scale to the partition function that will not affect any of moments. Second moment only shifts the average so we can ignore it as well and so we're left with a simple quadratic free energy once again.
 
 \begin{equation}
 	\F[\rho] = \f{1}{2}\int dr \int dr^\prime \Delta \rho(r) H(r, r^\prime) \Delta \rho(r^\prime)
 \end{equation}
 
-Where, $H(r, r^\prime)$ is the second functional derivative of the free energy functional in equilibrium. Computing the pair correlation function from the partition function yields, as might be expected, 
+Where, $H(r, r^\prime)$ is the second functional derivative of the free energy functional in equilibrium. Computing the pair correlation function from the partition function yields, as might be expected,
 
 \begin{equation}
 	\l\langle \Delta\rho(r) \Delta\rho(r^\prime) \r\rangle = H(r, r^\prime)
