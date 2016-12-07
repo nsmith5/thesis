@@ -8,11 +8,12 @@
 
 static double ipow (double x, int p)
 {
+    /* Integer power of a number x^p */
     if (p == 1) return x;
     else return x * ipow (x, p-1);
 }
 
-static void normalize (state *s, fftw_complex *field)
+void normalize (state *s, fftw_complex *field)
 {
     /* Normalize a fourier space field after fft */
 
@@ -35,6 +36,7 @@ static void normalize (state *s, fftw_complex *field)
 
 static double F_mix (double c, state *s)
 {
+    /* Free energy of mixing */
     double epsilon = -4.0 + s->epsilon0*(s->sigma - s->sigma0);
 
     return s->omega*(
@@ -45,11 +47,13 @@ static double F_mix (double c, state *s)
 
 static double dF_mixdc (double c, state *s)
 {
+    /* Ideal chemical potential of mixing */
     return s->omega * log(c / (1.0 - c));
 }
 
 static void noise(state *s)
 {
+    /* Gaussian Noise in Fourier Space */
     fftw_complex c_scale, n_scale;
     c_scale = I*sqrt(s->Mc / (s->dx * s->dx * s->dt));
     n_scale = I*sqrt(s->Mn / (s->dx * s->dx * s->dt));
@@ -76,6 +80,7 @@ static void noise(state *s)
 
 static void set_nonlinear (state *s)
 {
+    /* Compute the nonlinear part of the equation of motion */
     double third = 1.0/3.0;
     int ij;
 
@@ -103,6 +108,7 @@ static void set_nonlinear (state *s)
 
 static void calccorr (state *s)
 {
+    /* Calculates the correlation term of the equation of motion */
     int ij;
     double norm = 1.0/(s->N * s->N);
 
@@ -123,6 +129,7 @@ static void calccorr (state *s)
 
 static void propagate (state *s)
 {
+    /* Propagate the fields forward in fourier space */
     double epsilon = -4.0 + s->epsilon0 * (s->sigma - s->sigma0);
     double norm = 1.0 / (s->N * s->N);
     int ij;
@@ -137,6 +144,8 @@ static void propagate (state *s)
             s->fc[ij] *= norm;
             s->fnnl[ij] *= norm;
             s->fcnl[ij] *= norm;
+            s->fxin[ij] *= norm;
+            s->fxic[ij] *= norm;
 
             s->fn[ij]  = 1.0 / (1.0 + s->dt * s->k2[ij]) *
                         (s->fn[ij] - s->dt * s->k2[ij] * s->fnnl[ij] + s->dt * s->fxin[ij]);

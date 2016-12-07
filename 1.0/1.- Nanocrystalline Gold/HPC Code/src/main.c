@@ -28,18 +28,16 @@ int main (int    argc,
 	s = create_state (N, dx, dt);
     assert (s != NULL);
 	mpi_print("Loading file\n");
-	sleep(1);
 	file_id = io_init_new_file (FILENAME);
     MPI_Comm_rank (MPI_COMM_WORLD, &rank);
     MPI_Comm_size (MPI_COMM_WORLD, &size);
    	mpi_print("Done loading file");
-	sleep(1);
 
     for (int i = 0; i < size; i++)
     {
         if (rank == i)
         {
-            printf("Hi!, Im proc rank %d and my local_n0 is %d\n", rank, s->local_n0);
+            printf("Hi!, Im proc rank %d and my local_n0 is %d\n", rank, (int)s->local_n0);
         }
     }
 
@@ -80,10 +78,10 @@ int main (int    argc,
 
     mpi_print("Time Stepping");
     /* Do stuff */
-    while (!time_to_leave)
+    for (int i = 0; i < 100; i++)
 	{
         step (s);
-		if (s->step % 1000 == 0)
+		if (s->step % 1 == 0)
 		{
 			mpi_print("Saving state");
 			save_state (s, file_id);
