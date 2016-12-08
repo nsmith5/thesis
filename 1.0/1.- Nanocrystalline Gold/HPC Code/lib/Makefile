@@ -1,9 +1,8 @@
 # C Compiler
 CC = h5pcc
-IDIR = ./include
+IDIR = ../include
 ODIR = ./obj
-LDIR = ./lib
-SDIR = ./src
+SDIR = ../src
 
 CFLAGS = -I$(IDIR) -Wall -O3 -ffast-math -std=c11
 LIBS = -lfftw3_mpi -lfftw3 -lm -lgsl -lgslcblas
@@ -13,18 +12,18 @@ _DEPS = state.h io.h setup.h error.h dynamics.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
 # Objects we'd like to compile
-_OBJ = main.o io.o state.o dynamics.o error.o setup.o
+_OBJ = io.o state.o dynamics.o error.o setup.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
-main: $(OBJ)
-	$(CC) $^ $(CFLAGS) $(LIBS) -o $@
+libbinary.so: $(OBJ)
+	$(CC) -shared $^ $(CFLAGS) $(LIBS) -o $@
 
 $(ODIR)/%.o: $(SDIR)/%.c $(DEPS)
-	$(CC) -c $< $(CFLAGS) -o $@
+	$(CC) -fPIC -c $< $(CFLAGS) -o $@
 
 
 .PHONY: clean
 
 clean:
 	rm -f obj/*
-	rm -f main
+	rm -f libbinary.so
