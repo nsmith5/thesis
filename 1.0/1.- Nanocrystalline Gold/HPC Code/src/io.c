@@ -13,7 +13,6 @@
 #include <stdbool.h>
 #include <assert.h>
 #include <string.h>
-#include <yaml.h>
 
 #include "error.h"
 #include "state.h"

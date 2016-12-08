@@ -22,8 +22,6 @@ static void sig_handler(int signo)
 	/* If we receive SIGUSR1 its time to get the hell out */
     if (signo == SIGUSR1)
     {
-		MPI_Barrier (MPI_COMM_WORLD);
-    	mpi_print("Caught SIGUSR1, time to leave\n");
 		time_to_leave = 1;
 	}
 }
