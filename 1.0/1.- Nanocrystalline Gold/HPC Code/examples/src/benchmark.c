@@ -1,8 +1,10 @@
 /*
- *      New Simulation
+ *      Benchmark Algorithm
  *
- * $ timeout -s SIGUSR1 <walltime> mpiexec -np <procs> newsim <outputfile>
+ * Usage:
+ *  $ mpiexec -np <procs> benchmark
  *
+ * Test how long it takes to time step 100 times with <procs> processes
  */
 
 /* Library headers */
@@ -12,14 +14,9 @@
 #include <assert.h>
 
 /* Local Headers */
-#include "error.h"
-#include "state.h"
-#include "dynamics.h"
-#include "io.h"
-#include "setup.h"
+#include "binary.h"
 
 #define PI 2.0*acos(0.0)
-#define FILENAME "data/Data.h5"
 
 int main (int    argc,
           char **argv)
@@ -27,32 +24,12 @@ int main (int    argc,
     int N = 1024;
     double dx = 0.125;
     double dt = 0.00125;
-    int rank, size;
-	hid_t file_id;
 	state* s;
 
     /* Initialize the system */
     init (argc, argv);
 	s = create_state (N, dx, dt);
     assert (s != NULL);
-
-	mpi_print("Initializing I/O..\n");
-	file_id = io_init_new_file (FILENAME);
-
-	MPI_Comm_rank (MPI_COMM_WORLD, &rank);
-    MPI_Comm_size (MPI_COMM_WORLD, &size);
-
-	MPI_Barrier (MPI_COMM_WORLD);
-    for (int i = 0; i < size; i++)
-    {
-        if (rank == i)
-        {
-            printf("Hi!, Im proc rank %d and my local_n0 is %d\n", rank, (int)s->local_n0);
-        }
-    }
-	MPI_Barrier (MPI_COMM_WORLD);
-
-    //load_state (s, file_id, "00422000");
 
     s->eta = 2.0;
     s->chi = 1.0;
@@ -83,6 +60,7 @@ int main (int    argc,
         }
     }
 
+    mpi_print("Starting...");
     MPI_Barrier (MPI_COMM_WORLD);
     double t1 = MPI_Wtime ();
 
@@ -98,7 +76,6 @@ int main (int    argc,
 
 	/* Shut 'er down */
 	mpi_print("Shut er down!");
-    io_finalize (file_id);
     destroy_state (s);
     finalize ();
 

@@ -1,11 +1,11 @@
 /*
- *      New Simulation
+ *      Restart Simulation
  *
  * Usage:
- *  >> timeout -s SIGUSR1 <walltime> mpiexec -np <procs> newsim <outputfile>
+ *  $ timeout -s SIGUSR1 <walltime> mpiexec -np <procs> newsim <datafile> <groupname>
  *
- * Will start a new simulation that will run for <walltime> using <procs>
- * processes and dump output into <outputfile> in hdf5 format
+ * Restart a simulation from hdf5 datafile <datafile> from state in group <groupname>
+ * with <procs> processes and run for <walltime>
  */
 
 /* Library headers */
@@ -15,17 +15,14 @@
 #include <assert.h>
 
 /* Local Headers */
-#include "error.h"
-#include "state.h"
-#include "dynamics.h"
-#include "io.h"
-#include "setup.h"
+#include "binary.h"
 
 #define PI 2.0*acos(0.0)
 
 int main (int    argc,
           char **argv)
 {
+    // TODO: fix these magic numbers, this parameters should be loaded from file
     int N = 256;
     double dx = 0.125;
     double dt = 0.00125;
@@ -39,7 +36,7 @@ int main (int    argc,
     assert (s != NULL);
 
 	mpi_print("Initializing I/O..\n");
-	file_id = io_init_new_file (argv[1]);
+	file_id = io_init_from_file (argv[1]);
 
 	MPI_Comm_rank (MPI_COMM_WORLD, &rank);
     MPI_Comm_size (MPI_COMM_WORLD, &size);
@@ -49,42 +46,12 @@ int main (int    argc,
     {
         if (rank == i)
         {
-            printf("Hi!, Im proc rank %d and my local_n0 is %d\n", rank, (int)s->local_n0);
+            printf("Hi!, Im process %d and I've got %d row of data\n", rank, (int)s->local_n0);
         }
     }
 	MPI_Barrier (MPI_COMM_WORLD);
 
-    //load_state (s, file_id, "00422000");
-
-    s->eta = 2.0;
-    s->chi = 1.0;
-    s->epsilon0 = 30.0;
-    s->sigma0 = 0.15;
-    s->sigma = 0.07;
-    s->omega = 0.30;
-    s->Wc = 1.0;
-
-    s->Mn = 1.0;
-    s->Mc = 1.0;
-
-    s->k0 = 2*PI;
-    s->alpha = 0.8;
-    s->beta = 6.0;
-    s->rho = 0.8660254037844386;
-    s->alphac = 0.5;
-
-    set_C(s);
-
-    for (int i = 0; i < s->local_n0; i++)
-    {
-        for (int j = 0; j < N; j++)
-        {
-            int ij = i*2*((N>>1) + 1) + j;
-            s->c[ij] = 0.3;
-            s->n[ij] = 0.05;
-        }
-    }
-
+    load_state (s, file_id, argv[2]);
 
     mpi_print("\nTime Stepping...\n");
     /* Do stuff */

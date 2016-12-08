@@ -4,7 +4,7 @@
 #include <fftw3.h>
 #include <gsl/gsl_rng.h>
 
-#include "state.h"
+#include "binary.h"
 
 #define RNG_SEED 123
 #define PI 2*acos(0)

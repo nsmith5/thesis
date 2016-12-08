@@ -14,9 +14,7 @@
 #include <assert.h>
 #include <string.h>
 
-#include "error.h"
-#include "state.h"
-#include "io.h"
+#include "binary.h"
 
 #define FAIL -1
 #define LEN 8

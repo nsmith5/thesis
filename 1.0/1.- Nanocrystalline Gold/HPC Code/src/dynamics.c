@@ -3,8 +3,7 @@
 #include <fftw3-mpi.h>
 #include <gsl/gsl_randist.h>
 
-#include "state.h"
-#include "dynamics.h"
+#include "binary.h"
 
 static double ipow (double x, int p)
 {

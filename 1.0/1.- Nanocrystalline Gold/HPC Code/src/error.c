@@ -9,7 +9,7 @@
 #include <mpi.h>
 #include <stdio.h>
 
-#include "error.h"
+#include "binary.h"
 
 void my_error (const char* error_string)
 {

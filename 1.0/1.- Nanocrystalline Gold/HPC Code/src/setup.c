@@ -10,10 +10,9 @@
 #include <signal.h>
 #include <stdbool.h>
 
-#include "setup.h"
-#include "state.h"
-#include "error.h"
-#include "io.h"
+#include "binary.h"
+
+#define WISDOM_FILE "fft_wisdom"
 
 volatile sig_atomic_t time_to_leave = 0;
 
@@ -43,9 +42,9 @@ void init (int    argc,
     /* Import wisdom from file and broadcast */
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
-    if (rank == 0 && access ("data/plans.wisdom", F_OK) != -1)
+    if (rank == 0 && access (WISDOM_FILE, F_OK) != -1)
     {
-        err = fftw_import_wisdom_from_filename ("data/plans.wisdom");
+        err = fftw_import_wisdom_from_filename (WISDOM_FILE);
         if (err == 0) my_error("Importing FFTW wisdom failed!");
     }
 
@@ -65,10 +64,10 @@ void finalize (void)
     MPI_Comm_rank (MPI_COMM_WORLD, &rank);
     if (rank == 0)
     {
-        err = fftw_export_wisdom_to_filename ("data/plans.wisdom");
+        err = fftw_export_wisdom_to_filename (WISDOM_FILE);
         if (err == 0)
         {
-            remove ("data/plans.wisdom");
+            remove (WISDOM_FILE);
             my_error ("Failed to correctly export FFTW wisdom");
         }
     }

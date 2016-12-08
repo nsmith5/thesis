@@ -17,7 +17,7 @@ newsim: $(ODIR)/newsim.o
 restart: $(ODIR)/restart.o
 	$(CC) $< $(CFLAGS) $(DYLIBS) -Bstatic $(STLIBS) -o $@
 
-$(ODIR)/%.o: %.c
+$(ODIR)/%.o: ./src/%.c
 	$(CC) -c $^ $(CFLAGS) -o $@
 
 .PHONY: clean
