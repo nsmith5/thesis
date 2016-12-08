@@ -1,3 +1,4 @@
+/* Library headers */
 #include <mpi.h>
 #include <hdf5.h>
 #include <math.h>
@@ -16,7 +17,7 @@
 int main (int    argc,
           char **argv)
 {
-    int N = 256;
+    int N = 2048;
     double dx = 0.125;
     double dt = 0.00125;
     int rank, size;
@@ -27,12 +28,14 @@ int main (int    argc,
     init (argc, argv);
 	s = create_state (N, dx, dt);
     assert (s != NULL);
-	mpi_print("Loading file\n");
-	file_id = io_init_from_file (FILENAME);
-    MPI_Comm_rank (MPI_COMM_WORLD, &rank);
+	
+	mpi_print("Initializing I/O..\n");
+	file_id = io_init_new_file (FILENAME);
+    
+	MPI_Comm_rank (MPI_COMM_WORLD, &rank);
     MPI_Comm_size (MPI_COMM_WORLD, &size);
-   	mpi_print("Done loading file");
 
+	MPI_Barrier (MPI_COMM_WORLD);
     for (int i = 0; i < size; i++)
     {
         if (rank == i)
@@ -40,13 +43,10 @@ int main (int    argc,
             printf("Hi!, Im proc rank %d and my local_n0 is %d\n", rank, (int)s->local_n0);
         }
     }
+	MPI_Barrier (MPI_COMM_WORLD);
 
-	mpi_print("Loading state from file");
+    //load_state (s, file_id, "00422000");
 
-
-    load_state (s, file_id, "00422000");
-
-	/*
     s->eta = 2.0;
     s->chi = 1.0;
     s->epsilon0 = 30.0;
@@ -75,21 +75,21 @@ int main (int    argc,
             s->n[ij] = 0.05;
         }
     }
-	*/
 
-	mpi_print("Done loading state from file\n");
 
-    mpi_print("Time Stepping");
+    mpi_print("\nTime Stepping...\n");
     /* Do stuff */
     while (!time_to_leave)
 	{
         step (s);
-	    if (s->step % 1000 == 0)
+	    mpi_print("\tStep!");
+		if (s->step % 1000 == 0)
 		{
-			mpi_print("Saving state");
+			mpi_print("\tSaving state");
 			save_state (s, file_id);
 		}
     }
+	MPI_Barrier (MPI_COMM_WORLD);	
 
 	/* Shut 'er down */
 	mpi_print("Shut er down!");
