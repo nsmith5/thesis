@@ -24,7 +24,7 @@
 int main (int    argc,
           char **argv)
 {
-    int N = 2048;
+    int N = 1024;
     double dx = 0.125;
     double dt = 0.00125;
     int rank, size;
@@ -83,20 +83,18 @@ int main (int    argc,
         }
     }
 
+    MPI_Barrier (MPI_COMM_WORLD);
+    double t1 = MPI_Wtime ();
 
-    mpi_print("\nTime Stepping...\n");
-    /* Do stuff */
-    while (!time_to_leave)
+    for (int i = 0; i < 100; i++)
 	{
         step (s);
-	    mpi_print("\tStep!");
-		if (s->step % 1000 == 0)
-		{
-			mpi_print("\tSaving state");
-			save_state (s, file_id);
-		}
     }
+
 	MPI_Barrier (MPI_COMM_WORLD);
+    double t2 = MPI_Wtime ();
+
+    printf("Time for 100 time steps = %gs\n", t2-t1);
 
 	/* Shut 'er down */
 	mpi_print("Shut er down!");
