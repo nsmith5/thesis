@@ -1,3 +1,13 @@
+/*
+ *      New Simulation
+ *
+ * Usage:
+ *  >> timeout -s SIGUSR1 <walltime> mpiexec -np <procs> newsim <outputfile>
+ *
+ * Will start a new simulation that will run for <walltime> using <procs>
+ * processes and dump output into <outputfile> in hdf5 format
+ */
+
 /* Library headers */
 #include <mpi.h>
 #include <hdf5.h>
@@ -12,12 +22,11 @@
 #include "setup.h"
 
 #define PI 2.0*acos(0.0)
-#define FILENAME "data/Data.h5"
 
 int main (int    argc,
           char **argv)
 {
-    int N = 2048;
+    int N = 256;
     double dx = 0.125;
     double dt = 0.00125;
     int rank, size;
@@ -28,10 +37,10 @@ int main (int    argc,
     init (argc, argv);
 	s = create_state (N, dx, dt);
     assert (s != NULL);
-	
+
 	mpi_print("Initializing I/O..\n");
-	file_id = io_init_new_file (FILENAME);
-    
+	file_id = io_init_new_file (argv[1]);
+
 	MPI_Comm_rank (MPI_COMM_WORLD, &rank);
     MPI_Comm_size (MPI_COMM_WORLD, &size);
 
@@ -82,14 +91,13 @@ int main (int    argc,
     while (!time_to_leave)
 	{
         step (s);
-	    mpi_print("\tStep!");
 		if (s->step % 1000 == 0)
 		{
 			mpi_print("\tSaving state");
 			save_state (s, file_id);
 		}
     }
-	MPI_Barrier (MPI_COMM_WORLD);	
+	MPI_Barrier (MPI_COMM_WORLD);
 
 	/* Shut 'er down */
 	mpi_print("Shut er down!");

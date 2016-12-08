@@ -15,15 +15,15 @@ DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 _OBJ = io.o state.o dynamics.o error.o setup.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
-libbinary.so: $(OBJ)
-	$(CC) -shared $^ $(CFLAGS) $(LIBS) -o $@
+libbinary.a: $(OBJ)
+	ar rc $@ $^
 
 $(ODIR)/%.o: $(SDIR)/%.c $(DEPS)
-	$(CC) -fPIC -c $< $(CFLAGS) -o $@
+	$(CC) -c $< $(CFLAGS) -o $@
 
 
 .PHONY: clean
 
 clean:
 	rm -f obj/*
-	rm -f libbinary.so
+	rm -f libbinary.a
