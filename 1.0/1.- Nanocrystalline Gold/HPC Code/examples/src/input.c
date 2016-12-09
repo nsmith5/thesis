@@ -1,11 +1,12 @@
 /*
- *      Restart Simulation
+ *      Simulation from Input file
  *
  * Usage:
- *  $ timeout -s SIGUSR1 <walltime> mpiexec -np <procs> newsim <datafile> <groupname>
+ *  >> timeout -s SIGUSR1 <walltime> mpiexec -np <procs> input <inputfile> <outputfile>
  *
- * Restart a simulation from hdf5 datafile <datafile> from state in group <groupname>
- * with <procs> processes and run for <walltime>
+ * Will start a new simulation that will run for <walltime> using <procs>
+ * processes. Parameters will be loaded from an input file <inputfile> and output
+ * will be saved to <outputfile>
  */
 
 /* Library headers */
@@ -14,7 +15,7 @@
 #include <math.h>
 #include <assert.h>
 
-/* Local Headers */
+/* Local Header */
 #include "binary.h"
 
 #define PI 2.0*acos(0.0)
@@ -28,22 +29,9 @@ int main (int    argc,
 
     /* Initialize the system */
     init (argc, argv);
-    file_id = io_init_from_file (argv[1]);
-	s = load_state (file_id, argv[2]);
+	s = new_state_from_file (argv[1]);
+    file_id = io_init_new_file (argv[2]);
     assert (s != NULL);
-
-	MPI_Comm_rank (MPI_COMM_WORLD, &rank);
-    MPI_Comm_size (MPI_COMM_WORLD, &size);
-
-	MPI_Barrier (MPI_COMM_WORLD);
-    for (int i = 0; i < size; i++)
-    {
-        if (rank == i)
-        {
-            printf("Hi!, Im process %d and I've got %d row of data\n", rank, (int)s->local_n0);
-        }
-    }
-	MPI_Barrier (MPI_COMM_WORLD);
 
     mpi_print("\nTime Stepping...\n");
     /* Do stuff */
