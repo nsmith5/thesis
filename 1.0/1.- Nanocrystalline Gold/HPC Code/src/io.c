@@ -277,6 +277,7 @@ herr_t save_state (state *s,
 {
      hid_t group_id;
      herr_t status;
+     int N_int;
 
      /* Make Group from simulation time `t` */
 
@@ -315,6 +316,9 @@ herr_t save_state (state *s,
      status = write_double_attribute ("Time",   group_id, &s->t);
      status = write_int_attribute ("Time Step", group_id, &s->step);
 
+     N_int = (int)s->N;
+     status = write_int_attribute ("N", group_id, &N_int);
+
      status = write_array_dataset ("Concentration", group_id, s->c, s);
      status = write_array_dataset ("Density",   group_id, s->n, s);
 
@@ -325,14 +329,26 @@ herr_t save_state (state *s,
      return status;
 }
 
-herr_t load_state (state      *s,
-                   hid_t       file_id,
+state* load_state (hid_t       file_id,
                    const char *datafile)
 {
+    state* s;
+    ptrdiff_t N;
+    int N_int;
+    double dx, dt;
     hid_t group_id;
     herr_t status;
 
     group_id = H5Gopen2 (file_id, datafile, H5P_DEFAULT);
+
+    read_int_attribute ("N", group_id, &N_int);
+    read_double_attribute ("dx", group_id, &dx);
+    read_double_attribute ("dt", group_id, &dt);
+
+    N = (ptrdiff_t)N_int;
+
+    s = create_state (N, dx, dt);
+    assert (s != NULL);
 
     /* Read state attributes */
 
@@ -353,8 +369,6 @@ herr_t load_state (state      *s,
     status = read_double_attribute ("rho",    group_id, &s->rho);
     status = read_double_attribute ("alphac", group_id, &s->alphac);
 
-    status = read_double_attribute ("dx",     group_id, &s->dx);
-    status = read_double_attribute ("dt",     group_id, &s->dt);
     status = read_double_attribute ("Time",   group_id, &s->t);
     status = read_int_attribute ("Time Step", group_id, &s->step);
 
@@ -365,6 +379,66 @@ herr_t load_state (state      *s,
 
     status = H5Gclose (group_id);
 
-    return status;
+    return s;
+}
 
+state* new_state_from_file (const char *filename)
+{
+    FILE *ifp;
+    char *mode = "r";
+    state* s;
+    char name[20];
+    double value;
+    int N;
+    double dt, dx;
+    double n0, c0;
+
+    ifp = fopen (filename, mode);
+    assert (ifp != NULL);
+
+    while (fscanf(ifp, "%s : %lf", name, &value) != EOF)
+    {
+        if (strcmp (name, "N") == 0)        N = (int)value;
+        else if (strcmp(name, "dx") == 0)   dx = value;
+        else if (strcmp(name, "dt") == 0)   dt = value;
+    }
+
+    s = create_state (N, dx, dt);
+    assert (s != NULL);
+    rewind (ifp);
+
+    while (fscanf(ifp, "%s : %lf", name, &value) != EOF)
+    {
+        if (strcmp (name, "eta") == 0)          s->eta = value;
+        else if (strcmp (name, "chi") == 0)     s->chi = value;
+        else if (strcmp (name, "epsilon0") == 0) s->epsilon0 = value;
+        else if (strcmp (name, "sigma0") == 0)  s->sigma0 = value;
+        else if (strcmp (name, "sigma") == 0)   s->sigma = value;
+        else if (strcmp (name, "omega") == 0)   s->omega = value;
+        else if (strcmp (name, "Wc") == 0)      s->Wc = value;
+        else if (strcmp (name, "k0") == 0)      s->k0 = value;
+        else if (strcmp (name, "alpha") == 0)   s->alpha = value;
+        else if (strcmp (name, "beta") == 0)    s->beta = value;
+        else if (strcmp (name, "rho") == 0)     s->rho = value;
+        else if (strcmp (name, "alphac") == 0)  s->alphac = value;
+        else if (strcmp (name, "n0") == 0)      n0 = value;
+        else if (strcmp (name, "c0") == 0)      c0 = value;
+    }
+
+    for (int i = 0; i < s->local_n0; i++)
+    {
+        for (int j = 0; j < N; j++)
+        {
+            int ij = i*2*((N>>1) + 1) + j;
+            s->c[ij] = c0;
+            s->n[ij] = n0;
+        }
+    }
+
+
+    s->step = 0;
+    s->t = 0.0;
+    set_C (s);
+
+    return s;
 }
