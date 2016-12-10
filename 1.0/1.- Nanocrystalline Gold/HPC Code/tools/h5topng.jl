@@ -1,8 +1,13 @@
-println("Compiling Modules...")
+# h5topng.jl
+#
+# Usage:
+# 	julia h5topng.jl <filename>
+#
+# Convert an HDF5 Simulation record  <filename> into a mountain 
+# of png images
+
 using HDF5
 using PyPlot
-
-filename = "Data.h5"
 
 function make_pictures(filename)
 	println("Loading hdf5 datafile...")
@@ -33,4 +38,4 @@ function make_pictures(filename)
 	return nothing
 end
 
-make_pictures(filename)
+make_pictures(ARGS[1])
