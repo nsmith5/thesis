@@ -4,7 +4,7 @@ IDIR = ../include
 ODIR = ./obj
 SDIR = ../src
 
-CFLAGS = -I$(IDIR) -Wall -O3 -ffast-math -std=c11
+CFLAGS = -I$(IDIR) -Wall -O3 -std=c11
 LIBS = -lfftw3_mpi -lfftw3 -lm -lgsl -lgslcblas
 
 # Headers
