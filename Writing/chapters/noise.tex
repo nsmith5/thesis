@@ -1,26 +1,68 @@
-When using Langevin equations to study non-equilibrium statistical mechanics the noise strength can be linked to the transport coefficients through the fluctuation-dissipation theorem. The typical strategy for deriving such a relationship is to evaluate the equilibrium pair correlation function by two separate methods: the equilibrium partition functional and the stochastic equation of motion.
+When using Langevin equations to study non-equilibrium statistical mechanics the noise strength can be linked to the transport coefficients through a generalization of the Einstein relation, $D = \mu k_bT$. The typical strategy for deriving such a relationship is to evaluate the equilibrium pair correlation function by two separate methods: the equilibrium partition functional and the equation of motion.
 
 While the equilibrium partition functional gives pair correlation through the typical statistical mechanical calculation, the equation of motion can be used to derive a dynamic pair correlation function that must be equal to the equilibrium pair correlation function in the long time limit.
 
-\begin{equation}
-	\lim_{t \rightarrow \infty} \l\langle \phi(x, t) \phi(x^\prime, t) \r\rangle = \l\langle\phi(x)\phi(x^\prime) \r\rangle_{eq}
-\end{equation}
-
-In what follows we'll look at how this strategy can be used in the relatively simply case of Model A dynamics with a $\phi^4$ free energy functional and then move on to the slightly more subtle case of a generic dynamic density functional theory (DDFT).
+In what follows we'll look at how to formulate a generalized Einstein relation from a generic Langevin equation and then calculate two specific examples using Model A dynamics and a $phi^4$ theory and Time Dependent Density Functional Theory (TDDFT) and a general Helmholtz free energy.
 
 \section{Generalized Einstein Relations in an Arbitrary Model}
 
-We start by considering a set of fields, $\alpha_i(r, t)$, that are governed by a nonlinear Langevin equation,
+We start by considering a set of microscopic observables, $a_i(r, t)$, that are governed by a nonlinear Langevin equation,
 
 \begin{equation}
-	\f{\partial \underline{\alpha}(r, t)}{\partial t} = F[\underline{\alpha}(r,t)] + \underline{\xi}(r,t).
+	\f{\partial \mathbf{a}(r, t)}{\partial t} = F[\mathbf{a}(r,t)] + \boldsymbol{\xi}(r,t).
 \end{equation}
 
-Where, $\underline{\alpha}$, denotes a vector of our fields of interest. ... Continue here
+Where, $\mathbf{a}$, denotes a vector of our fields of interest. These microscopic equation of motion may have been derived from linear response, projection operators or some other non-equilibrium formalism. We assume that the random driving force, $\boldsymbol{\xi}(r, t)$ is unbaised, Gaussian noise that is uncorrelated in time.
+
+\begin{gather}
+	\l\langle \boldsymbol{\xi}(r,t)\r\rangle = 0 \\
+	\l\langle \boldsymbol{\xi}(r,t)\boldsymbol{\xi}^\dagger(r^\prime,t^\prime)\r\rangle =
+	\mathbf{L}(r, r^\prime)\d(t-t^\prime)
+\end{gather}
+
+We wish to constrain the form of the covariance matrix, $\mathbf{L}$ of $\boldsymbol{\xi}$ by demanding that the solution to the Langevin equation eventually decays to equilibrium and that correlations in equilibrium are given by Boltzmann statistics.
+
+We begin by linearizing the equation of motion about an equilibrium solution, $\mathbf{a}(r, t) = \mathbf{a}_{eq}(r) + \hat{\mathbf{a}}(r, t)$.
+
+\begin{equation}
+	\f{\partial \hat{\mathbf{a}} (r, t)}{\partial t} = \mathbf{M}(r, r^\prime) \ast \hat{\mathbf{a}}(r^\prime, t) + \boldsymbol{\xi}(r, t)
+\end{equation}
+
+Where, $\ast$ denotes an inner product and integration over the repeated variable. eg:
+
+\begin{equation}
+	\mathbf{M}(r, r^\prime)\ast \hat{\mathbf{a}}(r^\prime) = \sum_j \int\,dr^\prime M_{ij}(r, r^\prime) \hat{a}_j(r^\prime).
+\end{equation}
+
+We can formally solve our linearized equation of motion.
+
+\begin{equation}
+	\hat{\mathbf{a}}(r, t) = e^{\mathbf{M}(r, r^\prime)t}\ast\hat{\mathbf{a}}(r^\prime, 0) + \int_0^t d\tau\, e^{\mathbf{M}(r, r^\prime)(t-\tau)} \ast \boldsymbol{\xi} (r^\prime, \tau)
+\end{equation}
+
+We can use this formal solution to evaluate the equilibrium pair correlation function.
+
+\begin{align}
+	\l\langle \hat{\mathbf{a}}(r, t)\hat{\mathbf{a}}^\dagger(r^\prime, t^\prime) \r\rangle &= e^{\mathbf{M}(r, r_1)t}\ast\l\langle \hat{\mathbf{a}}(r_1, 0)\hat{\mathbf{a}}^\dagger(r_2, 0) \r\rangle \ast e^{\mathbf{M}^\dagger(r^\prime, r_2)t^\prime} \nonumber \\
+	&+ \int_0^t \int_0^{t^\prime}d\tau d\tau^\prime\, e^{\mathbf{M}(r, r_1)(t-\tau)}\ast\l\langle \boldsymbol{\xi}(r_1, 0)\boldsymbol{\xi}^\dagger(r_2, 0) \r\rangle \ast e^{\mathbf{M}^\dagger(r^\prime, r_2)(t^\prime-\tau^\prime)}
+\end{align}
+
+It is important to note that every eigenvalue of $\mathbf{M}$ must be negative for our solution to decay to equilibrium in the long time limit (eg. $lim_{t\rightarrow\infty}\hat{\mathbf{a}}(r, t) = 0$) and as such the first term in our dynamic correlation function won't contribute to the equilibrium pair correlation. This is as we might expect as the first term holds the contributions to the correlation function from the initial conditions. The second term can be evalutated by substituting the noise correlation and evaluating the delta function.
+
+\begin{equation}
+	\mathbf{\Gamma}(r, r^\prime) = \lim_{t\rightarrow\infty} \l\langle \hat{\mathbf{a}}(r, t)\hat{\mathbf{a}}^\dagger(r^\prime, t) \r\rangle =
+	\int_0^\infty dz \,e^{\mathbf{M}(r, r_1)z}\ast\mathbf{L}(r_1, r_2)\ast e^{\mathbf{M}^\dagger(r^\prime, r_2)z}
+\end{equation}
+
+Considering the product $\mathbf{M}(r, r_1)\ast\mathbf{\Gamma}(r_1, r^\prime)$ and performing an integration by parts gives the final generalized Einstein relation.
+
+\begin{equation}
+	\mathbf{M}(r, r_1)\ast\mathbf{\Gamma}(r_1, r^\prime) + \mathbf{\Gamma}(r, r_1)\ast\mathbf{M}^\dagger(r_1, r^\prime) = -\mathbf{L}(r, r^\prime)
+\end{equation}
 
 \section{Fluctuation Dissipation in Model A}
 
-Consider the following free energy functional under non-conservative, dissipative dynamics.
+As a first example of calculating an Einstein relation consider the following free energy functional under non-conservative, dissipative dynamics.
 
 \begin{gather}
 \beta \F[\phi] = \int dr \left\lbrace \f{1}{2}\vert \nabla \phi(x) \vert^2 + \f{r}{2}\phi^2(x) + \f{u}{4!}\phi^4(x)  + h(x)\phi(x)\right\rbrace \\

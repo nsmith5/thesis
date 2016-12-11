@@ -410,6 +410,8 @@ state* new_state_from_file (const char *filename)
     while (fscanf(ifp, "%s : %lf", name, &value) != EOF)
     {
         if (strcmp (name, "eta") == 0)          s->eta = value;
+        else if (strcmp (name, "Mc") == 0)      s->Mc = value;
+        else if (strcmp (name, "Mn") == 0)      s->Mn = value;
         else if (strcmp (name, "chi") == 0)     s->chi = value;
         else if (strcmp (name, "epsilon0") == 0) s->epsilon0 = value;
         else if (strcmp (name, "sigma0") == 0)  s->sigma0 = value;
