@@ -20,7 +20,7 @@ Where, $\mathbf{a}$, denotes a vector of our fields of interest. These microscop
 	\mathbf{L}(r, r^\prime)\d(t-t^\prime)
 \end{gather}
 
-We wish to constrain the form of the covariance matrix, $\mathbf{L}$ of $\boldsymbol{\xi}$ by demanding that the solution to the Langevin equation eventually decays to equilibrium and that correlations in equilibrium are given by Boltzmann statistics.
+We wish to constrain the form of the covariance matrix, $\mathbf{L}$, by demanding that the solution to the Langevin equation eventually decays to equilibrium and that correlations in equilibrium are given by Boltzmann statistics.
 
 We begin by linearizing the equation of motion about an equilibrium solution, $\mathbf{a}(r, t) = \mathbf{a}_{eq}(r) + \hat{\mathbf{a}}(r, t)$.
 
@@ -34,20 +34,20 @@ Where, $\ast$ denotes an inner product and integration over the repeated variabl
 	\mathbf{M}(r, r^\prime)\ast \hat{\mathbf{a}}(r^\prime) = \sum_j \int\,dr^\prime M_{ij}(r, r^\prime) \hat{a}_j(r^\prime).
 \end{equation}
 
-We can formally solve our linearized equation of motion.
+We can formally solve our linearized equation of motion,
 
 \begin{equation}
-	\hat{\mathbf{a}}(r, t) = e^{\mathbf{M}(r, r^\prime)t}\ast\hat{\mathbf{a}}(r^\prime, 0) + \int_0^t d\tau\, e^{\mathbf{M}(r, r^\prime)(t-\tau)} \ast \boldsymbol{\xi} (r^\prime, \tau)
+	\hat{\mathbf{a}}(r, t) = e^{\mathbf{M}(r, r^\prime)t}\ast\hat{\mathbf{a}}(r^\prime, 0) + \int_0^t d\tau\, e^{\mathbf{M}(r, r^\prime)(t-\tau)} \ast \boldsymbol{\xi} (r^\prime, \tau),
 \end{equation}
 
-We can use this formal solution to evaluate the equilibrium pair correlation function.
+And use this formal solution to evaluate the dynamic pair correlation function.
 
 \begin{align}
 	\l\langle \hat{\mathbf{a}}(r, t)\hat{\mathbf{a}}^\dagger(r^\prime, t^\prime) \r\rangle &= e^{\mathbf{M}(r, r_1)t}\ast\l\langle \hat{\mathbf{a}}(r_1, 0)\hat{\mathbf{a}}^\dagger(r_2, 0) \r\rangle \ast e^{\mathbf{M}^\dagger(r^\prime, r_2)t^\prime} \nonumber \\
 	&+ \int_0^t \int_0^{t^\prime}d\tau d\tau^\prime\, e^{\mathbf{M}(r, r_1)(t-\tau)}\ast\l\langle \boldsymbol{\xi}(r_1, 0)\boldsymbol{\xi}^\dagger(r_2, 0) \r\rangle \ast e^{\mathbf{M}^\dagger(r^\prime, r_2)(t^\prime-\tau^\prime)}
 \end{align}
 
-It is important to note that every eigenvalue of $\mathbf{M}$ must be negative for our solution to decay to equilibrium in the long time limit (eg. $lim_{t\rightarrow\infty}\hat{\mathbf{a}}(r, t) = 0$) and as such the first term in our dynamic correlation function won't contribute to the equilibrium pair correlation. This is as we might expect as the first term holds the contributions to the correlation function from the initial conditions. The second term can be evalutated by substituting the noise correlation and evaluating the delta function.
+To evaluate the equilibrium correlation function we take the limit as each time goes to infinity together ($t = t^\prime \rightarrow \infty$). It is important to note that every eigenvalue of $\mathbf{M}$ must be negative for our solution to decay to equilibrium in the long time limit (eg. $lim_{t\rightarrow\infty}\hat{\mathbf{a}}(r, t) = 0$) and as such the first term in our dynamic correlation function won't contribute to the equilibrium pair correlation. This is as we might expect as the first term holds the contributions to the dynamic correlation function from the initial conditions. The second term can be evalutated by substituting the noise correlation and evaluating the delta function.
 
 \begin{equation}
 	\mathbf{\Gamma}(r, r^\prime) = \lim_{t\rightarrow\infty} \l\langle \hat{\mathbf{a}}(r, t)\hat{\mathbf{a}}^\dagger(r^\prime, t) \r\rangle =
@@ -60,7 +60,8 @@ Considering the product $\mathbf{M}(r, r_1)\ast\mathbf{\Gamma}(r_1, r^\prime)$ a
 	\mathbf{M}(r, r_1)\ast\mathbf{\Gamma}(r_1, r^\prime) + \mathbf{\Gamma}(r, r_1)\ast\mathbf{M}^\dagger(r_1, r^\prime) = -\mathbf{L}(r, r^\prime)
 \end{equation}
 
-\section{Fluctuation Dissipation in Model A}
+%%------------------------------------------------------------------------------
+\section{Example 1 - Model A}
 
 As a first example of calculating an Einstein relation consider the following free energy functional under non-conservative, dissipative dynamics.
 
@@ -69,14 +70,14 @@ As a first example of calculating an Einstein relation consider the following fr
 \f{\partial \phi(x,t)}{\partial t} = -\Gamma \left(\f{\delta \beta \F[\phi]}{\delta \phi(x)}\right) + \xi(x, t)
 \end{gather}
 
-The random driving force, $\xi$, is Gaussian white noise with some scalar noise strength $\lambda$.
+The random driving force, $\xi$, is Gaussian noise, uncorrelated in time.
 
 \begin{align}
 \l\langle \xi (x, t) \r\rangle &= 0 \\
-\l\langle \xi (x, t) \xi(x^\prime, t^\prime) \r\rangle  &= \lambda \delta(x - x^\prime) \delta (t - t^\prime)
+\l\langle \xi (x, t) \xi(x^\prime, t^\prime) \r\rangle  &= L(x-x^\prime) \delta (t - t^\prime)
 \end{align}
 
-The fluctuation-dissipation theorem will ultimately show us that the noise strength $\lambda$ and the transport coefficient $\Gamma$ are related when the system is close to an equilibrium state by $\lambda = 2\Gamma$. To see how this might come about we start by evaluating the equilibrium pair correlation function using the partition functional of our theory
+To compute the Einstein relation for this theory we start by calculating the pair correlation function using the equilibrium partition function and Boltzmann statistics.
 
 \subsection{The partition function route}
 
@@ -162,60 +163,40 @@ Our equation of motion, can be linearized around an equilibrium solution, $\phi_
 \begin{equation}
 \f{\partial \Delta\fphi(k, t)}{\partial t} = -\Gamma\left((r + \f{u}{2}\phi_0 + \vert k \vert^2)\Delta\fphi(k,t)\right) + \xi(x,t)
 \end{equation}
-This equation can be solved formally using a Green's function solution.
+
+Comparing with our generalized approach we can read of $M(k, k^\prime)$ from the lineared equation of motion:
 
 \begin{equation}
-\Delta\fphi(k, t) = e^{-\Omega t}\Delta\fphi(k, 0) + e^{-\Omega t}\int_0^t d\tau \,e^{\Omega \tau} \fxi(k, \tau)
+	M(k, k^\prime) = -\Gamma\l((r + \f{u}{2}\phi_0 + \vert k \vert^2)\r)\d(k + k^\prime)
 \end{equation}
-Where, $\Omega = \Gamma (r + \f{u}{2}\phi_0^2 + \vert k \vert^2)$.
 
-\subsubsection{Computing the Pair correlation function}
-
-We now have the tools to compute the dynamical pair correlation function, $\langle \Delta\fphi(k, t)\Delta\fphi(k^\prime, t^\prime) \rangle $, and in limit as time goes to infinity, we will have another expression for the equilibrium pair correlation function. We begin by inserting the Green's function solutions into the pair correlation expression
-
-\begin{align}
-\l\langle \Delta\fphi(k, t) \Delta\fphi(k^\prime, t^\prime)\r\rangle &=  e^{-\Omega(t+t^\prime)}\Delta\fphi(k, 0)\Delta\fphi(k^\prime, 0) \nonumber \\
- &+ e^{-\Omega (t+t^\prime)} \int_0^t d\tau \int_0^{t^\prime} d\tau^\prime e^{\Omega(\tau+\tau^\prime)}\l\langle \fxi(k, \tau) \fxi(k^\prime, \tau^\prime) \r\rangle.
-\end{align}
-Using the noise correlation we can compute the second term to find the final form of the dynamic correlation function.
-
-\begin{align}
-	\left\langle \Delta\fphi(k, t) \Delta\fphi(k^\prime, t^\prime)\right\rangle &=  e^{-\Omega(t+t^\prime)}\left(\Delta\fphi(k, 0)\Delta\fphi(k^\prime, 0) - \f{2\pi\delta(k+k^\prime)\lambda}{2\Omega}\right) \nonumber \\
-	&+ \f{2\pi\delta(k+k^\prime)\lambda}{2\Omega}e^{-\Omega \vert t-t^\prime \vert}
-\end{align}
-
-Setting, $t = t^\prime$ and taking the limit as $t\rightarrow\infty$ we recover another form for the equilibrium pair correlation function.
+Finally, once we compute the generalized Einstein relation with our specific pair correlation and $M(k, k^\prime)$ we find,
 
 \begin{equation}
-	\left\langle \Delta\fphi(k, t) \Delta\fphi(k^\prime, t^\prime)\right\rangle = \f{2\pi\delta(k+k^\prime)\lambda}{2\Gamma(r + \f{u}{2}\phi_0^2 + \vert k\vert^2)}
+	L(k, k^\prime) = 2\Gamma \d(k + k^\prime),
 \end{equation}
 
-\subsection{Remarks}
+Or equivalently,
 
-Comparing with the result we got from the partition function route and the equation of motion route we see that for our answers to be equal we must have $\lambda = 2\Gamma$. It should be noted that this answer may seem to differ from other definitions of the fluctuation-dissipation theorem which state that $\lambda = 2k_b\,T\Gamma$. The discrepancy comes from what we mean by the coefficent $\Gamma$ and how we write the equation of motion. If we write the equation of motion as in equation \ref{eom}, the coefficient $\Gamma$ is the traditional Onsager transport coefficient and we recover traditional fluctuation-dissipation theorem.
-
-\begin{equation}\label{eom}
-	\f{\partial \phi(x,t)}{\partial t} = -\Gamma \left(\f{\delta \F[\phi]}{\delta \phi(x)}\right) - \xi(x,t)
+\begin{equation}
+	L(x, x^\prime) = 2\Gamma \d(x - x^\prime).
 \end{equation}
 
-Comparing with our result we see that the factor of $k_bT$ is absorbed into our definition of the transport coefficient $\Gamma$.
+%% -----------------------------------------------------------------------------
+\section{Example 2 - Time Dependent Density Functional Theory}
 
-\section{Fluctuation Dissipation Theorem in Dynamic Density Functional Theory}
-
-In dynamic density functional theory (DDFT) we have an equation of motion of the following form,
+In time dependent density functional theory (TDDFT) we have an equation of motion of the following form,
 
 \begin{equation}
 	\f{\partial \rho(r, t)}{\partial t} = D_0 \nabla \cdot \l[\rho(r,t)\nabla \l(\f{\d \F[\rho]}{\d \rho}\r)\r] + \xi(r, t)
 \end{equation}
 
-Where, $D_0$ is the equilibrium diffusion constant and $\xi$ is the stochastic driving force. We assume once again that the driving force has no bias, but we now allow the noise strength to be a generic linear operator $\mathcal{L}$.
+Where, $D_0$ is the equilibrium diffusion constant and $\xi$ is the stochastic driving force. We assume once again that the driving force has no bias, but we now allow the noise strength to be a generic kernel $L(r, r^\prime)$.
 
 \begin{align}
 	\langle \xi(r,t) \rangle &= 0 \\
-	\l\langle \xi(r, t) \xi(r^\prime, t^\prime) \r\rangle &= \mathcal{L} \d (r-r^\prime) \d (t -t^\prime)
+	\l\langle \xi(r, t) \xi(r^\prime, t^\prime) \r\rangle &= L(r, r^\prime) \d (t -t^\prime)
 \end{align}
-
-We ask ourselves now, what constrains can we apply to this operator if our system must decay to a Boltzmann distribution in equilibrium?
 
 \subsection{Pair Correlation from the Partition Functional}
 
@@ -228,11 +209,31 @@ Just like with the $phi^4$ model we want to expand our free energy functional ar
 The first term we can neglect as it adds an overall scale to the partition function that will not affect any of moments. Second moment only shifts the average so we can ignore it as well and so we're left with a simple quadratic free energy once again.
 
 \begin{equation}
-	\F[\rho] = \f{1}{2}\int dr \int dr^\prime \Delta \rho(r) H(r, r^\prime) \Delta \rho(r^\prime)
+	\F[\rho] = \f{1}{2}\int dr \int dr^\prime \Delta \rho(r) \Gamma^{-1}(r, r^\prime) \Delta \rho(r^\prime)
 \end{equation}
 
-Where, $H(r, r^\prime)$ is the second functional derivative of the free energy functional in equilibrium. Computing the pair correlation function from the partition function yields, as might be expected,
+Where, $\Gamma^{-1}(r, r^\prime)$ is the second functional derivative of the free energy functional in equilibrium. Computing the pair correlation function from the partition function yields, as might be expected,
 
 \begin{equation}
-	\l\langle \Delta\rho(r) \Delta\rho(r^\prime) \r\rangle = H(r, r^\prime)
+	\l\langle \Delta\rho(r) \Delta\rho(r^\prime) \r\rangle = \Gamma(r, r^\prime)
+\end{equation}
+
+\subsection{Linearing the equation of motion}
+
+Linearizing the equation of motion about an equilibrium solution we find the following form,
+
+\begin{equation}
+	\f{\partial \Delta \rho (r, t)}{\partial t} = D_0\nabla \cdot \l[\rho_{eq}(r)\nabla \l(\Gamma^{-1}(r, r^\prime)\ast \Delta\rho(r^\prime, t)\r)\r] + \xi(r, t)
+\end{equation}
+
+Once again we can read of the kernel $M(r, r^\prime)$ from the linearized equation.
+
+\begin{equation}
+	M(r, r\prime) = D_0\nabla \cdot \l[\rho_{eq}(r)\nabla \l(\Gamma^{-1}(r, r^\prime)\r)\r]
+\end{equation}
+
+Plugging into the generalized Einstein relation, we find a the factors of the pair correlation cancel giving a simple form for the kernel $L(r, r^\prime)$.
+
+\begin{equation}
+	L(r, r^\prime) = -2D_0\nabla\cdot\l(\rho_{eq}(r)\nabla\r)\delta(r - r^\prime)
 \end{equation}

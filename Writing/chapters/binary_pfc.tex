@@ -1,0 +1,49 @@
+\section{Derivation of the General Binary XPFC Free Energy}
+
+Now that we've seen the recipe for building a phase-field crystal theory for a single component system the process for building a multicomponent theory proceeds analogously with a few minor changes in perspective.
+We start again by looking at the ideal and excess contributions to the free energy.
+
+\subsubsection{Ideal Free Energy to Two Components}
+The kinetic energy terms of each species in the Hamiltonian give rise to seperate contributions to the free energy as you might expect.
+We'll label the two species A and B.
+
+\begin{equation}
+    \beta\F^{tot}_{id}[\rho_A, \rho_B] = \beta\F_{id}[\rho_A] + \beta\F_{id}[\rho_B]
+\end{equation}
+Where,
+\begin{description}[labelindent=10pt, labelsep=10pt]
+    \item[$\beta\F_{id}$] is the same ideal free energy functional as previously
+\end{description}
+
+\subsubsection{Excess Free Energy of a Two Component System}
+Our expansion of the excess free energy works just as before but we must sum over the contributions from each species.
+
+\begin{equation}
+    \beta\F_{ex} = \beta\F_{ex}^0 - \int \,dr C^{(1)}_{i}(r) \Delta\rho_i(r)
+    - \f{1}{2} \int dr \int dr^\prime \Delta\rho_i(r) C^{(2)}_{ij}(r, r^\prime) \Delta\rho_j(r^\prime)
+\end{equation}
+
+Where indices denote species (A or B) and repeated indices are summed over.
+
+\subsubsection{Total free energy of a Two Component System}
+
+Putting together the excess and ideal terms together and dropping the constant and linear terms as we did previously we find the following total free energy,
+
+\begin{equation}
+    \beta\F[\rho_A, \rho_B] = \int dr \l\lbrace \Delta\rho_i \ln\l(\f{\Delta\rho_i}{\rho_{i0}}\r) - \Delta\rho_i\r\rbrace
+        - \f{1}{2} \int dr \int dr^\prime \Delta\rho_i(r) C^{(2)}_{ij}(r, r^\prime) \Delta \rho_j(r^\prime)
+\end{equation}
+
+\subsubsection{Changing variables}
+Typically, the concentration is the variable we care about in binary systems so instead of preceeding with the usual phase field crystal approximations at this point we make a change of variables to concentration, $c$, and total density, $\rho$.
+
+\begin{align}
+    \rho &= \rho_A + \rho_B             & \rho_0 &= \rho_{0A} + \rho_{0B} \nonumber \\
+    c &= \f{\rho_A}{\rho_A + \rho_B}    &  c_0 &= \f{\rho_{0A}}{\rho_{0A} + \rho_{0B}} \nonumber
+\end{align}
+
+Making this change of variables and seperating total density and concentration contribution we find a free energy functional of the form,
+
+\begin{equation}
+    \beta\F[c, \rho] =
+\end{equation}
