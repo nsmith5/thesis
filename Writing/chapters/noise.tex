@@ -1,4 +1,4 @@
-When using Langevin equations to study non-equilibrium statistical mechanics the noise strength can be linked to the transport coefficients through a generalization of the Einstein relation, $D = \mu k_bT$. The typical strategy for deriving such a relationship is to evaluate the equilibrium pair correlation function by two separate methods: the equilibrium partition functional and the equation of motion.
+When using Langevin equations to study non-equilibrium statistical mechanics the noise strength can be linked to the transport coefficients through a generalization of the Einstein relation. The generalization was first developed by Onsager and Machlup \cite{OnsagerMachlup}. The typical strategy for deriving such a relationship is to evaluate the equilibrium pair correlation function by two separate methods: the equilibrium partition functional and the equation of motion\footnote{For considerations far from equilibrium see \cite{Lax, Ronis, Fox_and_Uhlenbeck}}.
 
 While the equilibrium partition functional gives pair correlation through the typical statistical mechanical calculation, the equation of motion can be used to derive a dynamic pair correlation function that must be equal to the equilibrium pair correlation function in the long time limit.
 
@@ -107,36 +107,6 @@ In general the partition function cannot be computed directly, but in the specia
 
 Here the partition function is written in a suggestive form. As stated previously, functional integrals are difficult to compute in general, but Gaussian functional integrals do have a solution.
 
-\subsubsection{Gaussian Functional Integrals}
-
-Consider a functional integral of the following form.
-
-\begin{equation}
-\Z[h(x)] = \int \D[\phi] \exp\left\lbrace - \int dx \int dx^\prime \left[ \f{1}{2}\phi(x) \mathbf{K}(x, x^\prime) \phi(x^\prime)\right] +  \int dx \left[h(x) \phi(x)\right]\right\rbrace
-\end{equation}
-
-This integral is simply the continuum limit of a multivariable Gaussian integral,
-
-\begin{equation}
-\Z[\mathbf{h}] = \int \prod_i dx_i \exp \left\lbrace - \f{1}{2}\sum_i \sum_j x_i\, \mathbf{K}_{ij}\, x_j  + \sum_i h_i x_i\right\rbrace,
-\end{equation}
-For which the solution is,
-
-\begin{equation}
-\Z[\mathbf{h}] = \sqrt{\f{2\pi}{\det(\mathbf{K})}} \exp\left\lbrace \f{1}{2} \sum_i \sum_j h_i \mathbf{K}_{ij}^{-1} h_j\right\rbrace.
-\end{equation}
-In the continuum limit, the solution has an analogous form.
-
-\begin{equation}\label{part}
-\Z[h(x)] \propto \exp\left\lbrace \int dx \int dx^\prime \left[ \f{1}{2}h(x) \mathbf{K}^{-1}(x, x^\prime) h(x^\prime)\right] \right\rbrace
-\end{equation}
-Where $\mathbf{K}^{-1}$ is defined by,
-
-\begin{equation}
-\int dx^\prime \mathbf{K}(x, x^\prime)\mathbf{K}^{-1}(x^\prime, x^{\prime\prime}) = \delta(x - x^{\prime\prime}).
-\end{equation}
-Ultimately, we don't need to worry about the constant of proportionality in equation \ref{part} because we'll be dividing this contribution when calculating correlation functions.
-
 \subsubsection{Computing the Pair correlation function in the Gaussian approximation}
 
 To compute the pair correlation function we use the Fourier space variant of the partition function,
@@ -237,3 +207,5 @@ Plugging into the generalized Einstein relation, we find a the factors of the pa
 \begin{equation}
 	L(r, r^\prime) = -2D_0\nabla\cdot\l(\rho_{eq}(r)\nabla\r)\delta(r - r^\prime)
 \end{equation}
+
+\nocite{Ronis, Fox_and_Uhlenbeck, Lax}

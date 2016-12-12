@@ -1,12 +1,14 @@
-main.pdf: chapters/noise.tex chapters/binary_pfc.tex
+main.pdf: main.tex chapters/*
+	pdflatex main.tex
+	bibtex main1-blx
+	bibtex main2-blx
 	pdflatex main.tex
 	pdflatex main.tex
-	rm main.bcf
-	rm main.log
-	rm main.out
-	rm main.aux
-	rm main.run.xml
-	rm main.toc
+	mv main.pdf crap.pdf
+	mv main.tex crap.tex
+	rm main*
+	mv crap.tex main.tex
+	mv crap.pdf main.pdf
 
 .PHONY: clean
 

@@ -4,7 +4,7 @@
 \usepackage{graphicx}
 \graphicspath{ {figures/} }
 \usepackage[margin=1in]{geometry}
-\usepackage{biblatex}
+\usepackage[backend=bibtex]{biblatex}
 \addbibresource{references.bib}
 
 \usepackage[hidelinks]{hyperref}
@@ -70,8 +70,17 @@ I want to thank...
 
 % -- Back Matter --
 \appendix
-\chapter{Noise in Nonlinear Langevin Equations}
 
+\chapter{Noise in Nonlinear Langevin Equations}
+\begin{refsection}
 \input{chapters/noise}
+\printbibliography
+\end{refsection}
+
+\chapter{Gaussian Functional Integrals}
+\begin{refsection}
+\input{chapters/gaussian}
+\printbibliography
+\end{refsection}
 
 \end{document}
