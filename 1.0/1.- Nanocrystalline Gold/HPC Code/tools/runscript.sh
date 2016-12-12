@@ -11,15 +11,15 @@ module load HDF5
 module load FFTW
 module load GSL
 
-cd "$PBS_O_WORKDIR" 
+cd "$PBS_O_WORKDIR"
 
 cd lib
 make clean
 make
 cd ../examples
 make clean
-make 
+make
 mv restart ..
 cd ..
 
-timeout -s SIGUSR1 3.98h mpiexec -np 24 ./restart output.h5 00057000
+timeout -s SIGUSR1 235m mpiexec -np 24 ./restart output.h5 00057000
