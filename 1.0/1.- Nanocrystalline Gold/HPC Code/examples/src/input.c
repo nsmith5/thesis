@@ -2,7 +2,7 @@
  *      Simulation from Input file
  *
  * Usage:
- *  >> timeout -s SIGUSR1 <walltime> mpiexec -np <procs> input <inputfile> <outputfile>
+ *  >> timeout -s SIGUSR1 <walltime> mpiexec -np <procs> ./input <inputfile> <outputfile>
  *
  * Will start a new simulation that will run for <walltime> using <procs>
  * processes. Parameters will be loaded from an input file <inputfile> and output
