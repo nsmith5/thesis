@@ -1,4 +1,5 @@
 # Yaml Initialization file for simulation
+# !!!ATTN!!!: always put a space between parameters and values!
 
 # Numerical parameters
 N  : 1024

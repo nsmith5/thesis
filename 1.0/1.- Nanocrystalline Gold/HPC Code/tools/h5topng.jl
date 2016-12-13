@@ -11,7 +11,12 @@ using PyPlot
 
 function make_pictures(filename)
 	println("Loading hdf5 datafile...")
-	fid = h5open(filename)
+	try
+		fid = h5open(filename)
+	catch 
+		println("Couldn't open $filename, exiting now")
+		return 1
+	end
 
 	println("Writing figures...")
 	for time in names(fid)
