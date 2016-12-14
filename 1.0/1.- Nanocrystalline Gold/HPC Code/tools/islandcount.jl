@@ -1,3 +1,14 @@
+# islandcount.jl
+#
+# Usage:
+#   julia islandcount.jl <simulationfile> <outputfile>
+#
+# Either write or append to HDF5 <outputfile> the coarsening data from
+# the HDF5 simulation record <simulationfile>. If appending, the assumption
+# is that the simulations belong to the same ensemble statistics
+
+using HDF5
+
 function island(label, islands)
     island = 0
     for key ∈ keys(islands)
@@ -130,4 +141,11 @@ function find_droplets(n, c, thresholdc = 0.8, thresholdn = 1.0)
 
 
     return liquid_islands, solid_islands
+end
+
+function islandcount(simfile, outfile)
+    # main program TODO: Finish this
+    s = h5open(simfile, "r")
+    s = h5open(outfile, "r+")
+
 end

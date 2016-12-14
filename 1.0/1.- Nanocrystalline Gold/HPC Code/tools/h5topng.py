@@ -6,6 +6,9 @@
 # Convert an HDF5 Simulation record <filename> to a mountain of png images
 #
 
+import matplotlib
+matplotlib.use('agg')
+
 import sys
 import numpy as np
 import h5py as h5
