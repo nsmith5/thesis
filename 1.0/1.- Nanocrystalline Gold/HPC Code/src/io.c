@@ -6,15 +6,15 @@
  */
 
 
-#include <mpi.h>
-#include <hdf5.h>
-#include <stdlib.h>
+#include <mpi.h>        // MPI runtime
+#include <hdf5.h>       // HDF5 header
+#include <stdlib.h>     // malloc etc
 #include <unistd.h>     // access() to check if file exists
-#include <stdbool.h>
-#include <assert.h>
-#include <string.h>
+#include <stdbool.h>    // Booleans
+#include <assert.h>     // Assertions
+#include <string.h>     // String manipulation sprintf etc...
 
-#include "binary.h"
+#include "binary.h"     // local libbinary header
 
 #define FAIL -1
 #define LEN 8
