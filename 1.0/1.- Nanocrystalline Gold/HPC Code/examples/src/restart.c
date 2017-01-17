@@ -2,10 +2,10 @@
  *      Restart Simulation
  *
  * Usage:
- *  $ timeout -s SIGUSR1 <walltime> mpiexec -np <procs> newsim <datafile> <groupname>
+ *  $ mpiexec -np <procs> restart <datafile> <groupname> <walltime>
  *
  * Restart a simulation from hdf5 datafile <datafile> from state in group <groupname>
- * with <procs> processes and run for <walltime>
+ * with <procs> processes and run for <walltime> minutes
  */
 
 /* Library headers */
@@ -13,6 +13,7 @@
 #include <hdf5.h>
 #include <math.h>
 #include <assert.h>
+#include <stdlib.h>
 
 /* Local Headers */
 #include "binary.h"
@@ -22,7 +23,8 @@
 int main (int    argc,
           char **argv)
 {
-    int rank, size;
+    int runtime;
+    double now;
 	hid_t file_id;
 	state* s;
 
@@ -30,32 +32,23 @@ int main (int    argc,
     init (argc, argv);
     file_id = io_init_from_file (argv[1]);
 	s = load_state (file_id, argv[2]);
+    runtime = atoi (argv[3]);
     assert (s != NULL);
-
-	MPI_Comm_rank (MPI_COMM_WORLD, &rank);
-    MPI_Comm_size (MPI_COMM_WORLD, &size);
-
-	MPI_Barrier (MPI_COMM_WORLD);
-    for (int i = 0; i < size; i++)
-    {
-        if (rank == i)
-        {
-            printf("Hi!, Im process %d and I've got %d row of data\n", rank, (int)s->local_n0);
-        }
-    }
-	MPI_Barrier (MPI_COMM_WORLD);
+    now = MPI_Wtime();
 
     mpi_print("\nTime Stepping...\n");
     /* Do stuff */
-    while (!time_to_leave)
+    while ((now - start_time)/60.0 < (double)runtime)
 	{
         step (s);
 		if (s->step % 1000 == 0)
 		{
 			mpi_print("\tSaving state");
 			save_state (s, file_id);
+            now = MPI_Wtime();
 		}
     }
+
 	MPI_Barrier (MPI_COMM_WORLD);
 
 	/* Shut 'er down */

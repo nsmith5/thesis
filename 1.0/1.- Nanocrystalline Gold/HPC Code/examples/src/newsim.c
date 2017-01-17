@@ -2,9 +2,9 @@
  *      New Simulation
  *
  * Usage:
- *  >> timeout -s SIGUSR1 <walltime> mpiexec -np <procs> newsim <outputfile>
+ *  >> mpiexec -np <procs> newsim <outputfile> <walltime>
  *
- * Will start a new simulation that will run for <walltime> using <procs>
+ * Will start a new simulation that will run for <walltime> minutes using <procs>
  * processes and dump output into <outputfile> in hdf5 format
  */
 
@@ -36,6 +36,7 @@ int main (int    argc,
 
 	mpi_print("Initializing I/O..\n");
 	file_id = io_init_new_file (argv[1]);
+    double runtime = atoi(argv[2]);
 
 	MPI_Comm_rank (MPI_COMM_WORLD, &rank);
     MPI_Comm_size (MPI_COMM_WORLD, &size);
@@ -81,16 +82,17 @@ int main (int    argc,
         }
     }
 
-
+    double now = MPI_Wtime();
     mpi_print("\nTime Stepping...\n");
     /* Do stuff */
-    while (!time_to_leave)
+    while ((now-start_time)/60.0 < (double)runtime)
 	{
         step (s);
 		if (s->step % 1000 == 0)
 		{
 			mpi_print("\tSaving state");
 			save_state (s, file_id);
+            now = MPI_Wtime();
 		}
     }
 	MPI_Barrier (MPI_COMM_WORLD);

@@ -14,16 +14,7 @@
 
 #define WISDOM_FILE "fft_wisdom"
 
-volatile sig_atomic_t time_to_leave = 0;
-
-static void sig_handler(int signo)
-{
-	/* If we receive SIGUSR1 its time to get the hell out */
-    if (signo == SIGUSR1)
-    {
-		time_to_leave = 1;
-	}
-}
+double start_time = 0.0;
 
 void init (int    argc,
            char **argv)
@@ -33,8 +24,8 @@ void init (int    argc,
     /* Initialize MPI Runtime */
     MPI_Init(&argc, &argv);
 
-    /* Register signal handler for SIGUSR1 */
-    signal(SIGUSR1, sig_handler);
+    /* Initialize the clock */
+    start_time = MPI_Wtime();
 
     /* Initialize fftw */
     fftw_mpi_init ();
