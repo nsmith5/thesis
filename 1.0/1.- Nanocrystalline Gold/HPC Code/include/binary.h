@@ -55,6 +55,14 @@ typedef struct
 	double *nnl;
 	double *cnl;
 
+	/* Propagator fields */
+	double *Pn;
+	double *Qn;
+	double *Ln;
+	double *Pc;
+	double *Qc;
+	double *Lc;
+
 	/* Operators */
 	double *k2;
 	double *C;
@@ -70,7 +78,8 @@ state;
 
 state* create_state (int N, double dx,double dt);
 void destroy_state (state* s);
-void set_C (state * s);
+void set_C (state *s);
+void set_propagators (state *s);
 void make_square (state *s, double h);
 void make_const (state *s, double h);
 double calc_k (int i, int j, int N, double dx);
@@ -96,6 +105,6 @@ void normalize (state *s, fftw_complex *field);
 
 /* Simulation Setup Functions */
 
-extern volatile sig_atomic_t time_to_leave;
+extern double start_time;
 void init (int argc, char **argv);
 void finalize (void);

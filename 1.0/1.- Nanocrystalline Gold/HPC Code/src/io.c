@@ -322,8 +322,6 @@ herr_t save_state (state *s,
      status = write_array_dataset ("Concentration", group_id, s->c, s);
      status = write_array_dataset ("Density",   group_id, s->n, s);
 
-     set_C (s);
-
      status = H5Gclose (group_id);
 
      return status;
@@ -375,7 +373,8 @@ state* load_state (hid_t       file_id,
     status = read_array_dataset ("Concentration", group_id, s->c, s);
     status = read_array_dataset ("Density",   group_id, s->n, s);
 
-    set_C(s);
+    set_C (s);
+    set_propagators (s);
 
     status = H5Gclose (group_id);
 
@@ -441,6 +440,7 @@ state* new_state_from_file (const char *filename)
     s->step = 0;
     s->t = 0.0;
     set_C (s);
+    set_propagators (s);
 
     return s;
 }

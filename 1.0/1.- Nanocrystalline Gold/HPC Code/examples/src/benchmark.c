@@ -49,6 +49,7 @@ int main(int argc,
     s->alphac = 0.5;
 
     set_C(s);
+    set_propagators (s);
 
     for (int i = 0; i < s->local_n0; i++)
     {

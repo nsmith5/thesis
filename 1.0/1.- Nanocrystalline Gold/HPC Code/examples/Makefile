@@ -8,13 +8,10 @@ CFLAGS = -I$(IDIR) -L$(LDIR) -Wall -O3 -std=c11
 DYLIBS = -lfftw3_mpi -lfftw3 -lm -lgsl -lgslcblas
 STLIBS = -lbinary
 
-all: benchmark newsim restart input
+all: benchmark restart input
 
 benchmark: $(ODIR)/benchmark.o
 	$(CC) $< -Bstatic $(STLIBS) $(CFLAGS) -Bdynamic $(DYLIBS) -o $@ 
-
-newsim: $(ODIR)/newsim.o
-	$(CC) $< -Bstatic $(STLIBS) $(CFLAGS) -Bdynamic $(DYLIBS) -o $@
 
 restart: $(ODIR)/restart.o
 	$(CC) $< -Bstatic $(STLIBS) $(CFLAGS) -Bdynamic $(DYLIBS) -o $@

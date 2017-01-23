@@ -96,22 +96,34 @@ state* create_state (int N, double dx, double dt)
     s->cnl  = fftw_alloc_real (2 * local_alloc);
     s->k2   = fftw_alloc_real (local_alloc);
     s->C    = fftw_alloc_real (local_alloc);
+	s->Pn 	= fftw_alloc_real (local_alloc);
+	s->Qn 	= fftw_alloc_real (local_alloc);
+	s->Ln 	= fftw_alloc_real (local_alloc);
+	s->Pc 	= fftw_alloc_real (local_alloc);
+	s->Qc 	= fftw_alloc_real (local_alloc);
+	s->Lc 	= fftw_alloc_real (local_alloc);
 
     /* Check that our mountain of memory was obtained */
-    if ( s->c     == NULL  ||
-         s->n     == NULL  ||
-         s->fnnl  == NULL  ||
-         s->fcnl  == NULL  ||
-         s->fc    == NULL  ||
-         s->fn    == NULL  ||
-         s->fCn   == NULL  ||
-         s->fxin  == NULL  ||
-         s->fxic  == NULL  ||
-         s->Cn    == NULL  ||
-         s->nnl   == NULL  ||
-         s->cnl   == NULL  ||
-         s->k2    == NULL  ||
-         s->C     == NULL)
+    if ( s->c     == NULL ||
+         s->n     == NULL ||
+         s->fnnl  == NULL ||
+         s->fcnl  == NULL ||
+         s->fc    == NULL ||
+         s->fn    == NULL ||
+         s->fCn   == NULL ||
+         s->fxin  == NULL ||
+         s->fxic  == NULL ||
+         s->Cn    == NULL ||
+         s->nnl   == NULL ||
+         s->cnl   == NULL ||
+         s->k2    == NULL ||
+         s->C     == NULL ||
+		 s->Pn	  == NULL ||
+         s->Qn    == NULL ||
+         s->Ln    == NULL ||
+         s->Pc    == NULL ||
+         s->Qc    == NULL ||
+         s->Lc    == NULL)
     {
         fftw_free (s->c);
         fftw_free (s->n);
@@ -127,6 +139,12 @@ state* create_state (int N, double dx, double dt)
         fftw_free (s->cnl);
         fftw_free (s->k2);
         fftw_free (s->C);
+        fftw_free (s->Pn);
+        fftw_free (s->Qn);
+        fftw_free (s->Ln);
+        fftw_free (s->Pc);
+        fftw_free (s->Qc);
+        fftw_free (s->Lc);
         return NULL;
     }
 
@@ -175,6 +193,12 @@ void destroy_state (state* s)
         fftw_free (s->cnl);
         fftw_free (s->k2);
         fftw_free (s->C);
+        fftw_free (s->Pn);
+        fftw_free (s->Qn);
+        fftw_free (s->Ln);
+        fftw_free (s->Pc);
+        fftw_free (s->Qc);
+        fftw_free (s->Lc);
         gsl_rng_free (s->rng);
   	    free (s);
     }
@@ -195,10 +219,37 @@ void set_C (state* s)
         {
             k = calc_k(i + s->local_1_start, j, s->N, s->dx);
             ij = i * s->N + j;
-            s->C[ij]  = exp(-ipow (s->sigma * s->k0, 2.0) / (2.0 * s->rho * s->beta));
+            s->C[ij]  = exp(-ipow (s->sigma * s->k0, 2.0) / 
+                        (2.0 * s->rho * s->beta));
             s->C[ij] *= exp(-ipow (k - s->k0, 2.0) / (2.0 * ipow(s->alphac, 2)));
         }
     }
+}
 
-    return;
+void set_propagators (state* s)
+{
+    /* 
+     * Set propagators for dynamics:
+     * P propagates the field, Q propagates the nonlinear term
+     * L propagates the noise
+     */
+    int ij;
+    double epsilon = -4.0 + s->epsilon0 * (s->sigma - s->sigma0);
+
+	for (int i = 0; i < s->local_n1; i++)
+	{
+		for (int j = 0; j < s->N; j++)
+		{
+            ij = i * s->N + j;
+            
+            s->Pn[ij] = 1.0 / (1.0 + s->dt * s->Mn * s->k2[ij]);
+            s->Ln[ij] = s->dt * s->Pn[ij];
+            s->Qn[ij] = -s->k2[ij] * s->Ln[ij];
+
+            s->Pc[ij] = 1.0 / (1.0 + s->dt * s->Mc * s->k2[ij] * 
+                        (s->omega * epsilon + s->Wc * s->k2[ij]));
+            s->Lc[ij] = s->dt * s->Pc[ij];
+            s->Qc[ij] = -s->k2[ij] * s->Lc[ij];
+		}
+	}
 }

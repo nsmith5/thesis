@@ -129,7 +129,6 @@ static void calccorr (state *s)
 static void propagate (state *s)
 {
     /* Propagate the fields forward in fourier space */
-    double epsilon = -4.0 + s->epsilon0 * (s->sigma - s->sigma0);
     double norm = 1.0 / (s->N * s->N);
     int ij;
 
@@ -146,11 +145,11 @@ static void propagate (state *s)
             s->fxin[ij] *= norm;
             s->fxic[ij] *= norm;
 
-            s->fn[ij]  = 1.0 / (1.0 + s->dt * s->k2[ij]) *
-                        (s->fn[ij] - s->dt * s->k2[ij] * s->fnnl[ij] + s->dt * s->fxin[ij]);
+            s->fn[ij]  = s->Pn[ij] * s->fn[ij] + s->Qn[ij] * s->fnnl[ij] +  
+                         s->Ln[ij] * s->fxin[ij];
 
-            s->fc[ij]  = 1.0 / (1.0 + s->dt * s->k2[ij] * (s->omega * epsilon + s->Wc * s->k2[ij])) *
-                        (s->fc[ij] - s->dt * s->k2[ij] * s->fcnl[ij] + s->dt * s->fxic[ij]);
+            s->fc[ij]  = s->Pc[ij] * s->fc[ij] + s->Qc[ij] * s->fcnl[ij] + 
+                         s->Lc[ij] * s->fxic[ij];
         }
     }
 
