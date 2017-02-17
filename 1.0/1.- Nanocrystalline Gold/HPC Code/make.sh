@@ -5,4 +5,4 @@ make
 cd ../examples
 make
 cd ..
-cp -v examples/input examples/benchmark init.yaml workspace
+cp -v examples/input examples/benchmark init.yaml tools/h5topng.py workspace
