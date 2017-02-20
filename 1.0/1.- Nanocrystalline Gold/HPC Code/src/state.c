@@ -3,10 +3,10 @@
 #include <fftw3-mpi.h>
 #include <fftw3.h>
 #include <gsl/gsl_rng.h>
+#include <time.h>
 
 #include "binary.h"
 
-#define RNG_SEED 123
 #define PI 2*acos(0)
 
 static double ipow (double x, int p)
@@ -70,7 +70,7 @@ state* create_state (int N, double dx, double dt)
         return NULL;
     }
     MPI_Comm_rank (MPI_COMM_WORLD, &rank);
-    gsl_rng_set (s->rng, RNG_SEED * (rank + 1));
+    gsl_rng_set (s->rng, ((unsigned long)time(NULL)) * (rank + 1));
 
     local_alloc =
         fftw_mpi_local_size_2d_transposed (N,
