@@ -87,13 +87,14 @@ end
 
 function main(h5_filename, output_filename)
     h5file = h5open(h5_filename)
-    for group in names(h5file)
+    for groupname in names(h5file)
+        group = h5file[groupname]
         n = read(group["Density"])
         c = read(group["Concentration"])
         clusters = find_clusters(n, c)
         for cluster in clusters
             open(output_filename, "a+") do f
-                write(f, "$group $cluster.size $Int(cluster.solid)")
+                write(f, "$groupname\t$(cluster.size)\t$(Int(cluster.solid))\n")
             end
         end
     end
