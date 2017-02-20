@@ -8,115 +8,96 @@
 
 using HDF5
 
-function seedstatus(i, j, s)
-    # Check if this index is in a seed
-    # return 0 if no or 'id' of seed otherwise
+## Proprocessing
 
-    N, M = size(s)
-
-    # Check all neighbour for seeds, the hashed positions below
-    # show the places we need to check relative to our current co-ordinates
-    #     j-1  j  j+1
-    # i-1  # | # | O
-    #     ----------
-    #  i   # | x | O
-    #     ----------
-    # i+1  # | O | O
-
-    seedid = s[i,j] | s[mod1(i-1, N), mod1(j-1, M)] |
-                      s[i, mod1(j-1, M)] |
-                      s[mod1(i+1, N), mod1(j-1, M)] |
-                      s[mod1(i-1, N), j]
-    return seedid
-
-end
-
-function firstseed(c, threshold)
-    # Find the indices of the first seed we can find
-    i = 1
-    while c[i] < threshold
-        i += 1
+type Cluster
+    size::Int
+    solid::Bool
+    function Cluster()
+        new(0, false)
     end
-    return ind2sub(c, i)
 end
 
-function findseeds(n, c, thresholdc=0.8, thresholdn=1.0)
-    phases = String[]
-    areas = Int64[]
-    seedarr = zeros(Int64, size(c))
-    N, M = size(c)
+function grow!(cluster::Cluster)
+    cluster.size += 1
+end
 
-    i, j = firstseed(c, thresholdc)
-    println("First seed at ($i, $j)")
-    seedarr[i,j] = 1
-    push!(areas, 1)
-    n[i,j] > thresholdn ? push!(phases, "Solid") : push!(phases, "Liquid")
+function solid!(cluster::Cluster)
+    cluster.solid = true
+end
 
-    for jj in j:M
-        for ii in 1:N
-            seedid = seedstatus(ii, jj, seedarr)
-            inseed = seedid > 0
-            if c[ii,jj] > thresholdc && inseed
-                seedarr[ii,jj] = seedid
-                try
-                    areas[seedid] += 1
-                catch
-                    println("(ii, jj) = ($ii, $jj)")
-                    println("areas = $areas")
-                    println("phases = $phases")
-                    return seedarr
-                end
-                if (phases[seedid] == "Liquid" && n[ii,jj] > thresholdn)
-                    phases[seedid] = "Solid"
-                end
-            elseif c[ii,jj] > thresholdc && !inseed
-                seedarr[ii,jj] = length(phases) + 1
-                push!(areas, 1)
-                n[ii,jj] > thresholdn ? push!(phases, "Solid") : push!(phases, "Liquid")
+function make_islands(n, c; threshold_n = 0.50, threshold_c = 0.60)
+    return (n .> threshold_n, c .> threshold_c)
+end
+
+function neighbours(site, shape)
+    i, j = site
+    N, M = shape
+    return [
+        (mod1(i-1, N), mod1(j-1, M)), 
+        (mod1(i-1, N), j),
+        (mod1(i-1, N), mod1(j+1, M)), 
+        (i, mod1(j-1, M)),
+        (i, mod1(j+1, M)),
+        (mod1(i+1, N), mod1(j-1, M)), 
+        (mod1(i+1, N), j),
+        (mod1(i+1, N), mod1(j+1, M))
+    ]
+end
+
+function depth_first_search(isgold::AbstractArray{Bool, 2}, 
+                            issolid::AbstractArray{Bool, 2}, 
+                            isvisited::AbstractArray{Bool, 2}, 
+                            cluster::Cluster,
+                            i::Int, 
+                            j::Int)
+    stack = Tuple{Int, Int}[]
+    push!(stack, (i, j))
+    while !isempty(stack)
+        site = pop!(stack)
+        if !isvisited[site...] && isgold[site...]
+            isvisited[site...] = true
+            grow!(cluster)
+            if issolid[site...]
+                solid!(cluster)
+            end
+            for neighbour in neighbours(site, size(isvisited))
+                push!(stack, neighbour)
             end
         end
     end
-
-    return seedarr, areas, phases
 end
 
-function get_pool_sizes(filename)
-    fid = h5open(filename)
-    t = Float64[]
-    R = Float64[]
-    for time in names(fid)
-        group = fid[time]
-        push!(t, read(attrs(group)["Time"])[1])
-        Δx = read(attrs(group)["dx"])[1]
-        c = read(group["Concentration"])
-        push!(R, pool_size(c, Δx))
-    end
-    return t, R
-end
-
-function pool_size(c, Δx)
-    # Read PHYSICAL REVIEW B 69, 081201(R) (2004)
-    # for an explanation of this algorithm
-    ising  = c |> φ -> φ - mean(c) |> sign
-    counter = 0
-    N, N = size(c)
-    for i in 1:N
-        for j in 1:N
-            ising[i,j] ≠ ising[mod1(i+1,N), j] ?
-                counter += 1 : nothing
-            ising[i,j] ≠ ising[i, mod1(j+1,N)] ?
-                counter += 1 : nothing
+function find_clusters(n, c)
+    clusters = Cluster[]
+    N, M = size(n)
+    isvisited = zeros(Bool, N, M)
+    issolid, isgold = make_islands(n, c)
+    for j in 1:M
+        for i in 1:N
+            if !isvisited[i,j] && isgold[i,j]
+                cluster = Cluster()
+                depth_first_search(isgold, issolid, isvisited, cluster, i, j)
+                push!(clusters, cluster)
+            end
         end
     end
-    L = counter*Δx
-    A = (N*Δx)^2
-    return A/L
+    return clusters
 end
 
-function main(infile, outfile)
-    t, R = get_pool_sizes(infile)
-    writedlm(outfile, [t R])
-    return
+function main(h5_filename, output_filename)
+    h5file = h5open(h5_filename)
+    for group in names(h5file)
+        n = read(group["Density"])
+        c = read(group["Concentration"])
+        clusters = find_clusters(n, c)
+        for cluster in clusters
+            open(output_filename, "a+") do f
+                write(f, "$group $cluster.size $Int(cluster.solid)")
+            end
+        end
+    end
+    close(h5file)
 end
 
-#main(ARGS[1], ARGS[2])
+main(ARGS[1], ARGS[2])

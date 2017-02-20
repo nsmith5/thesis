@@ -1,0 +1,168 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{setspace}
+\usepackage{array}
+
+\title{Multiscale Phase Field Crystal Theory}
+\author{Nathan Smith\\
+\texttt{smithn@physics.mcgill.ca}\\
+Department of Physics - McGill University}
+
+\newenvironment{conditions}
+  {\par\vspace{\abovedisplayskip}\noindent\begin{tabular}{>{$}l<{$} @{${}={}$} l}}
+  {\end{tabular}\par\vspace{\belowdisplayskip}}
+
+\begin{document}
+
+\maketitle
+\doublespacing
+
+In the following we present a new multiscale approach to modelling microstructure and pattern formation in materials. The approach is an extension to the phase field crystal method to account for the, at times large, density changes that we see under phase transitions and especially solidification. 
+
+As a starting point we'll derive a two scale free energy functional and then move on to find equations of motion.
+
+\section{Free Energy}
+
+The free energy for the PFC formalism is derived by expanding the excess intrinsic free energy around a reference uniform fluid $\rho_0$.
+
+\begin{equation}
+\mathcal{F}^{ex}[\Delta \rho] = \mathcal{F}^{ex}_0 
++ \int dr \left.\left(\frac{\delta \mathcal{F}^{ex}}{\delta \rho} \right)\right\rvert_{\rho=\rho_0}\Delta \rho(r) 
++ \frac{1}{2}\int dr dr^\prime  \left.\left(\frac{\delta^2 \mathcal{F}^{ex}}{\delta\rho(r)\delta\rho(r^\prime)}\right)\right\rvert_{\rho = \rho_0} \Delta \rho(r^\prime) \Delta \rho(r) + .....
+\end{equation}
+
+In the multi-scale phase field theory we will loosen the condition that $\rho_0$ must be a uniform liquid in impose only that it is long wavelength in structure. In other words, we are promoting the reference fluid to a long wavelength field. At this point our expansion looks the same with the understanding that $\mathcal{F}^{ex}_0 = \mathcal{F}^{ex}_0[\rho_0]$ and $\mathcal{F}^{ex}[\Delta \rho] = \mathcal{F}^{ex}[\Delta \rho, \rho_0]$. Now we procede with the usual derivation of the free energy functional keeping in mind this $\rho_0(r)$ dependence.
+
+First, we note that we can replace the functional derivatives of the excess free energy with direct correlation functions. 
+
+\begin{equation}
+\mathcal{F}^{ex}[\Delta \rho, \rho_0] = \mathcal{F}^{ex}_0[\rho_0] 
+- k_bT \int dr C^{(1)}_0(r)\Delta \rho(r) 
+- \frac{k_bT}{2}\int dr dr^\prime C^{(2)}_0(r, r^\prime) \Delta \rho(r^\prime) \Delta \rho(r) + .....
+\end{equation}
+
+In the absence of an external field we have that $-k_bTC^{(1)}_0(r) = \mu(r) - k_bT \ln(\Lambda^3\rho_0(r))$ where $\mu(r)$ is the local chemical potential of the reference fluid and $\Lambda$ is the thermal deBroglie wavelength. If we add the ideal free energy to the excess we find the total free energy can be written as
+
+\begin{align}
+\mathcal{F}[\Delta \rho, \rho_0] = \mathcal{F}_0[\rho_0] + &k_bT \int dr\left( \Delta\rho \ln\left(\frac{\Delta \rho}{\rho_0}\right) - (1-\mu(r))\Delta \rho\right) \nonumber \\
+- &\frac{k_bT}{2} \int dr \int dr^\prime \Delta \rho(r) C^{(2)}_0(r, r^\prime) \Delta \rho(r^\prime)
+\end{align} 
+
+At this point we can make the typical phase field crystal approximation by expanding the logarithm term about the point $\Delta \rho = 0$ finding a final form of,
+
+\begin{align}
+\mathcal{F}[\Delta \rho, \rho_0] = \mathcal{F}_0[\rho_0] + &k_bT \int dr\left(\mu(r)\Delta\rho(r) + \frac{\rho_0}{2}\left(\frac{\Delta \rho}{\rho_0}\right)^2 - \frac{\rho_0}{6}\left(\frac{\Delta \rho}{\rho_0}\right)^3 + \frac{\rho_0}{12}\left(\frac{\Delta \rho}{\rho_0}\right)^4	\right)   \nonumber \\
+- &\frac{k_bT}{2} \int dr \int dr^\prime \Delta \rho(r) C^{(2)}_0(r, r^\prime) \Delta \rho(r^\prime).
+\end{align} 
+
+
+\section{Equations of Motion}
+
+With a formal structure laid our for the intrinsic free energy functional $\mathcal{F}[\rho_o, \Delta\rho]$, we'd like to derive an equation of motion for $\rho_0$ and $\Delta\rho$. First of all we know from dynamic density functional theory that if the density profile is the only slow thermodynamic quantity we can derive the following transport equation
+
+\begin{equation}
+\frac{\partial \rho(x, t)}{\partial t} = \nabla \cdot \left(D_0 \rho(x, t) \nabla \left(\frac{\delta \mathcal{F}}{\delta \rho}\right)\right) +\nabla \cdot \boldsymbol{\zeta}(x, t),
+\end{equation}
+
+Where, $D_0$ is the diffusion constant at equilibrium and $\boldsymbol{\zeta}(x, t)$ is a stochastic driving force such that, 
+
+\begin{align}
+\langle \boldsymbol{\zeta}(x, t) \rangle &= 0 \\
+\langle \zeta_i(x, t)\zeta_j(x^\prime, t^\prime) \rangle &= 2k_bT D_0 \rho(x, t)\delta(x-x^\prime)\delta(t-t^\prime)\delta_{ij} .
+\end{align}
+
+A slightly more simple model-B like dynamics is also often used in the PFC literature in which, 
+
+\begin{equation}
+\frac{\partial \rho}{\partial t} = D_0 \nabla^2 \left(\frac{\delta \mathcal{F}}{\delta \rho}\right) + \nabla \cdot \boldsymbol{\zeta}
+\end{equation}
+
+Where the random driving force now follows, 
+
+\begin{align}
+\langle \boldsymbol{\zeta}(x, t) \rangle &= 0 \\
+\langle \zeta_i(x, t)\zeta_j(x^\prime, t^\prime)\rangle &= 2k_bT D_0\delta(x-x^\prime)\delta(t-t^\prime)\delta_{ij}.
+\end{align}
+
+In what follows, we will assume the simpler Model-B dynamics, but method holds for deriving equation of motion from DDFT as well. Recall that $\rho_0$ and $\Delta \rho$ are the long wavelength and short wavelength components of the density profile respectively. This means that can define them in terms of a projection operator on the total density. 
+
+\begin{align}
+\rho_0(x, t) &= \hat{P}\rho(x, t) \\
+\Delta \rho(x,t) &= \left(1-\hat{P}\right)\rho(x, t)
+\end{align}
+
+The operator $\hat{P}$ simply projects out the long wavelength part of the density like a low pass filter. For concreteness, we can write this projection operation as convolution of some low pass kernel $\chi(x)$.
+
+\begin{equation}
+\hat{P} \left(\rho(x, t)\right) = \int dx^\prime \chi(x^\prime-x)\rho(x^\prime, t)
+\end{equation}
+
+The utility of these projection operators is two fold. The first is that these projection operators can be used to split our equation of motion for $\rho(x,t)$ into equations of motion for $\rho_0$ and $\Delta \rho$. 
+
+\begin{align}
+\hat{P}\left(\frac{\partial \rho}{\partial t}\right) &= \frac{\partial \rho_o(x,t)}{\partial t} \nonumber\\
+ &= \hat{P} \left(D_0 \nabla^2 \left( \frac{\delta \mathcal{F}}{\delta \rho}\right) + \nabla\cdot\boldsymbol{\zeta}\right) \nonumber\\ 
+ &= D_0 \nabla^2 \hat{P} \left(\frac{\delta \mathcal{F}}{\delta \rho} \right) + \nabla \cdot \boldsymbol{\zeta}_0
+\end{align}
+
+Where $\boldsymbol{\zeta}_0$ is simply the long wavelength component of the noise. Similarly, the equation of motion for $\Delta \rho$ is, 
+
+\begin{equation}
+\frac{\partial \Delta \rho(x,t)}{\partial t} = D_0 \nabla^2 \left(1-\hat{P}\right)\left(\frac{\delta \mathcal{F}}{\delta \rho}\right) + \nabla \cdot \Delta \boldsymbol \zeta.
+\end{equation}
+
+Where $\Delta \boldsymbol \zeta$ is the short wavelength component of the noise. The second thing that the projection operators can help facilitate is the computation of $\delta \mathcal{F}/\delta \rho$. We start by expanding the functional derivative using the chain rule for functional derivatives:
+
+\begin{equation}
+\frac{\delta \mathcal{F}[\rho_0, \Delta \rho]}{\delta \rho(r)} = \int dr^\prime \left(\frac{\delta \mathcal{F}}{\delta \rho_0(r^\prime)}\frac{\delta \rho_o(r^\prime)}{\delta \rho(r)} + \frac{\delta \mathcal{F}}{\delta \Delta\rho(r^\prime)}\frac{\delta \Delta \rho(r^\prime)}{\delta \rho(r)}\right)
+\end{equation}
+
+Note that the projection operator definition of $\rho_0$ and $\Delta \rho$ can be used here: 
+
+\begin{align}
+\rho_o(r) &= \int dr^\prime \chi (r^\prime - r) \rho(r^\prime) \\
+\Delta \rho(r) &= \int dr^\prime \xi(r^\prime - r) \rho(r^\prime) 
+\end{align}
+
+Where $\xi(r)$ is just the high-pass kernel $\delta (r) - \chi(r)$. This implies that that function derivatives are simply, 
+
+\begin{align}
+\frac{\delta \rho_0(r^\prime)}{\delta\rho(r)} &= \chi(r-r^\prime), \\
+\frac{\delta \Delta \rho(r^\prime)}{\delta \rho(r)} &= \xi(r-r^\prime).
+\end{align}
+
+Substituting back into the equation for the total functional derivative we find a rather simple form: 
+
+\begin{equation}
+\left(\frac{\delta \mathcal{F}}{\delta \rho(r)}\right) = \hat{P}\left(\frac{\delta\mathcal{F}}{\delta \rho_0(r)}\right) + (1-\hat{P})\left(\frac{\delta \mathcal{F}}{\delta \Delta \rho(r)}\right)
+\end{equation}
+
+Plugging back into the equation of motion and using $\hat{P}^2 = \hat{P}$ we find the following equations of motion:
+
+\begin{align}
+\frac{\partial \rho_0(x,t)}{\partial t} &= D_0 \nabla^2 \hat{P} \left(\frac{\delta \mathcal{F}}{\delta \rho_0}\right) + \nabla \cdot \boldsymbol{\zeta}_0 \\
+\frac{\partial \Delta \rho(x,t)}{\partial t} &= D_0 \nabla^2 \left(1-\hat{P}\right) \left(\frac{\delta \mathcal{F}}{\delta \Delta \rho}\right) + \nabla \cdot \Delta \boldsymbol{\zeta}.
+\end{align}
+
+Recalling the form of the free energy from before, we can evaluate these functional derivatives to get a more concrete form for the equations of motion. 
+
+\begin{align}
+\hat{P}\left(\frac{\delta \mathcal{F}}{\delta \rho_0}\right) &= \hat{P}\left(\frac{\delta \mathcal{F}_0}{\delta \rho_0} + (\mbox{microscopic terms...})\right) \nonumber \\
+&= \frac{\delta \mathcal{F}_0}{\delta \rho_0} \\
+\left(1 - \hat{P}\right) \left(\frac{\delta \mathcal{F}}{\delta \Delta \rho}\right) &= \left(1 + \hat{P}\right)k_bT\left(\rho_0\left(\frac{\Delta\rho}{\rho_0}\right) - \frac{\rho_0}{2}\left(\frac{\Delta\rho}{\rho_0}\right)^2+\frac{\rho_0}{3}\left(\frac{\Delta\rho}{\rho_0}\right)^3 - C^{(2)}_0 \ast \Delta\rho  + \mbox{macro terms...}\right) \nonumber \\
+&= k_bT\left(\rho_0\left(\frac{\Delta\rho}{\rho_0}\right) - \frac{\rho_0}{2}\left(\frac{\Delta\rho}{\rho_0}\right)^2+\frac{\rho_0}{3}\left(\frac{\Delta\rho}{\rho_0}\right)^3 - C^{(2)}_0 \ast \Delta\rho \right)
+\end{align}
+
+Finally we find a formal set of equations of motion for $\rho_0$ and $\Delta \rho$:
+
+\begin{align}
+\frac{\partial \rho_o(x,t)}{\partial t} &= D_0 \nabla^2 \left(\frac{\delta \mathcal{F}_0}{\delta \rho_0}\right) + \nabla \cdot \boldsymbol \zeta_0 \\
+\frac{\partial \Delta \rho (x, t)}{\partial t} &= D_0 \nabla^2 \left(\Delta \rho - \frac{\Delta \rho^2}{2\rho_0}  + \frac{\Delta \rho^3}{3\rho_0^2} - C^{(2)}_0\ast\Delta\rho\right) + \nabla \cdot \boldsymbol{\Delta\zeta}
+\end{align}
+
+
+
+
+
+\end{document}

@@ -1,4 +1,4 @@
-.vscode
+.vscode/*
 obj/*.o
 data/*.png
 data/Data.h5

@@ -1,0 +1,25 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath}
+\usepackage{array}
+
+\newenvironment{conditions}
+  {\par\vspace{\abovedisplayskip}\noindent\begin{tabular}{>{$}l<{$} @{${}={}$} l}}
+  {\end{tabular}\par\vspace{\belowdisplayskip}}
+
+\begin{document}
+
+Note that we can right the free energy for this system as:
+
+\begin{align}
+\mathcal{F}[\delta \rho, \rho_0] &= \mathcal{F}_0[\rho_0] + k_bT \int dr \,\,\left\lbrace \delta \rho \ln\left(\frac{\delta\rho}{\rho}\right) - (1 - \beta \mu)\delta\rho\right\rbrace \\ 
+&- \frac{k_bT}{2}\int dr \delta \rho(r) \int dr^\prime C(r, r^\prime) \delta \rho(r^\prime)
+\end{align}
+
+expanding as in the PFC formalism and changing variables to $n = \delta \rho/\rho_0$ we get, 
+
+\begin{align}
+\mathcal{F}[\rho_0, n] &= \mathcal{F}_0[\rho_0] + kbT\int dr \rho_0 \left(\beta \mu n + \frac{n^2}{2} - \eta\frac{n^3}{6} + \chi \frac{n^4}{12}\right)\\
+ &-\frac{kbT}{2}\int dr \rho_0 n \int dr^\prime C(r, r^\prime) \rho_o n
+\end{align}
+
+\end{document}
