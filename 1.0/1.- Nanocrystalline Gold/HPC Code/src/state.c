@@ -4,6 +4,8 @@
 #include <fftw3.h>
 #include <gsl/gsl_rng.h>
 #include <time.h>
+#include <sys/types.h>
+#include <unistd.h>
 
 #include "binary.h"
 
@@ -71,7 +73,10 @@ state* create_state (int N, double dx, double dt)
     }
     MPI_Comm_rank (MPI_COMM_WORLD, &rank);
     gsl_rng_set (s->rng, (
-        (unsigned long)time(NULL) + (unsigned long)clock()) * (rank + 1));
+          (unsigned long)time(NULL) 
+        + (unsigned long)clock()
+        + (unsigned long)getpid()
+        + (unsigned long)getppid()) * (rank + 1));   // Super entropy!!!!!!!!
 
     local_alloc =
         fftw_mpi_local_size_2d_transposed (N,
