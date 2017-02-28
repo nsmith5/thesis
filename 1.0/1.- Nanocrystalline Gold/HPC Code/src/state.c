@@ -70,7 +70,8 @@ state* create_state (int N, double dx, double dt)
         return NULL;
     }
     MPI_Comm_rank (MPI_COMM_WORLD, &rank);
-    gsl_rng_set (s->rng, ((unsigned long)time(NULL)) * (rank + 1));
+    gsl_rng_set (s->rng, (
+        (unsigned long)time(NULL) + (unsigned long)clock()) * (rank + 1));
 
     local_alloc =
         fftw_mpi_local_size_2d_transposed (N,
