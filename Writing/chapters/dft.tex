@@ -1,79 +1,50 @@
-In a many body system in which particles interactions are independent of their velocities, we may split contributions to the free energy into two parts: the ideal and the excess.
+\subsection{Introduction}
+% Why are we using classical DFT?
+% what do we care about?
+% blah blah blah
 
-\subsubsection{The ideal component of the free energy}
-The ideal component comes from the kinetic energy term in the Hamiltonian and is known exactly.
+\subsection{Deriving the Intrinsic Free Energy Functional}
 
-\begin{equation}
-    \beta\F_{id}[\rho] = \int dr \rho(r) \l\lbrace\ln\right(\Lambda^3\rho(r)\left) - 1\r\rbrace
-\end{equation}
-Where,
-\begin{description}[labelindent=10pt, labelsep=10pt]
-\item[$\Lambda^3$] is the thermal DeBroglie volume
-\item[$\rho(r)$] is the number density
-\item[$\beta$] is the inverse temperature ($1/k_bT$)
-\end{description}
-
-\subsubsection{Expansion of the excess free energy}
-The excess component comes from the interaction term in the Hamiltonian and is often not known exactly and must be modelled.
-A common technique for modelling the excess free energy is to expand it around uniform fluid reference state.
-This reference state is characterized by a number density, $\rho_0$, and chemical potential $\mu_0$.
+To derive the intrinsic free energy functional we start with the grand partition function for a single component system in the semi-classical limit.
 
 \begin{equation}
-    \beta\F_{ex}[\rho] = \beta\F_{ex}^0 +
-    \beta\int dr \left.\frac{\d\F_{ex}}{\d\rho}\right\vert_{\rho = \rho_0} \Delta\rho
-    + \beta\f{1}{2}\int dr \int dr^\prime \Delta\rho(r^\prime)\l.\f{\d^2\F_{ex}}{\d\rho(r)\d\rho(r^\prime)}\r\vert_{\rho=\rho_0}\Delta\rho(r^\prime) + ...
+    \Xi = \sum_{N=0}^\infty \f{e^{N\beta\mu}}{h^{3N} N!} 
+                   \int d\mathbf{r}^Nd\mathbf{p}^N e^{ -\beta \mathcal{H}}  
 \end{equation}
 
-Where,
-\begin{description}[labelindent=10pt, labelsep=10pt]
-    \item[$\Delta\rho$] is difference from reference density ($\rho(r) - \rho_0$)
-    \item[$\F_{ex}^0$] is the free energy of the reference state
-\end{description}
-
-The excess free energy is the generating function of direct correlation functions $C^(n)(r_1, ..., r_n)$.
-In particular this means that direct correlation functions can be written as,
+Where the Hamiltonian, $\mathcal{H}$, has contributions from kinetic energy, interaction potential and an external potential.
 
 \begin{equation}
-    C^{(n)}(r_1, ..., r_n) = -\beta \f{\d^{(n)}\F_{ex}[\rho]}{\d\rho(r_1)...\d\rho(r_n)},
+    \mathcal{H} = \sum_{i=1}^N \f{p_i^2}{2m} + V(r_1, r_2, ..., r_N) + \sum_{i=1}^N \phi(r_i)
 \end{equation}
-and our previous expansion can be rewritten in terms of these direct correlation functions.
+
+Note that we explicitly assume that the interactions only depend on the particle positions and not their momenta, this allows us to complete the momentum integral in the partition function. 
 
 \begin{equation}
-    \beta\F_{ex}[\rho] = \beta\F_{ex}^0 - \int dr C^{(1)}_0(r) \Delta\rho
-    + \beta\f{1}{2}\int dr \int dr^\prime \Delta\rho(r^\prime)C^{(2)}_0(r, r^\prime)\Delta\rho(r^\prime) + ...
+    \Xi = \sum_{N=0}^\infty \f{1}{\Lambda^{3N}N!} 
+                   \int d\mathbf{r}^N e^{ -\beta \left(V(r_1, r_2, ...,r_N) - \sum_{i=1}^N(\mu - \phi(r_i))\right)} 
 \end{equation}
 
-In the absence of an external field the single particle direct correlation function of the reference system is simply $\beta\mu^{ex}_0$.
-
-\subsubsection{Total Free Energy}
-If we now add in the ideal contribution to the free energy and take advantage of the fact that the excess chemical potential of the reference fluid can be written as the total chemical potential minus the ideal contribution,
+Note now, that we're trying to construct a theory for the density field of our material, $\rho(r)$. The density field is defined as a sum of Dirac delta functions at the positions of the particles. That is, we would like to write the grand partition function in terms the density field and use the grand partition function as a generating functional for the mean, fluctuations and other moments of the density field.
 
 \begin{equation}
-    \mu^{ex}_0 = \mu_0 - \mu^{id}_0 = \mu_0 - k_bT\ln(\Lambda^3\rho_0).
+    \rho(r) \equiv \sum_{i=1}^N \delta^{(3)}(r_i - r)
 \end{equation}
-to find an expression for the total free energy:
+
+We start along this path by noting that the external potential term can be rewritten in terms of the density field as follows, 
 
 \begin{equation}
-    \beta\F[\rho] = \beta\F_0 + \int\,dr \l\lbrace \Delta\rho \ln\l(\f{\Delta\rho}{\rho_0}\r) - (1 - \mu_0)\Delta\rho \r\rbrace
-    - \f{1}{2}\int\,dr\int\,dr^\prime \Delta\rho(r) C^{(2)}_0(r, r^\prime) \Delta\rho(r^\prime)
+    \sum_{i=1}^N (\mu - \phi(r_i)) = \int dr (\mu - \phi(r))\rho(r)
 \end{equation}
 
-\subsubsection{Smooth atom approximation and the PFC Free Energy}
-
-To construct the phase-field crystal free energy we assume that the density fluctations, $\Delta\rho(r)$, are small and expand the logarithm term to quartic order in the fluctuations.
-Furthermore, we nondimensionalize the free energy by scaling out the reference density, $\rho_0$, and changing variables to $n(r) = \Delta\rho(r)/\rho_0$.
+In this form, we see that the combination $\mu - \phi(r)$ forms a field that is conjugate to the density field that we will call the \textit{intrinsic chemical potential}, $\psi(r)$. What we mean by conjugate is that repeated functional derivative of the grand partition function will generate correlation functions of the density field. 
 
 \begin{equation}
-    \f{\beta\F[n]}{\rho_0} = \f{\beta\F_0}{\rho_0} +
-    \int dr \mu_0 \rho_0 n(r) + \f{n^2(r)}{2} - \f{n^3(r)}{6} + \f{n^4(r)}{12}
-    -\f{\rho_0}{2} \int dr \int dr^\prime n(r) C^{(2)}_0(r, r^\prime) n(r^\prime)
+\f{1}{\beta^N \Xi[\psi(r)]}\f{\d^n \Xi[\psi(r)]}{\d \psi(r_1) ... \d \psi(r_n)} = \left\langle \rho(r_1) ...\rho(r_n) \right\rangle
 \end{equation}
 
-At this point we note that the constant and linear terms in the free energy can be removed without changing the properties of the functional and we are left with the following minimal free energy functional:
+It is important to note that the partition function has two distinct contibutions: one from the ideal contibutions to the free energy and one from the interaction term which is called the \textit{excess term}. 
 
 \begin{equation}
-    \f{\beta\F}{\rho_0} = \int dr \f{n^2(r)}{2} - \f{n^3(r)}{6} + \f{n^4(r)}{12}
-    -\f{1}{2} \int dr \int dr^\prime n(r) C^{(2)}(r, r^\prime) n(r^\prime).
+    \Xi[\psi(r)] = 
 \end{equation}
-
-Note, that by convention a factor of the reference density is absorbed into the pair correlation function in the PFC free energy functional.
