@@ -1,50 +1,86 @@
-\subsection{Introduction}
-% Why are we using classical DFT?
-% what do we care about?
-% blah blah blah
+\section{Introduction}
+To describe the process of solidification we will be using the phase field crystal theory. Phase field crystal theory is a type of classical density functional theory. Work by Youssof and Ramakrishnan [cite] and Evans[cite] extended the classical density functional theory of inhomogeneous fluids to the phenomena of solidification in pure materials. While the phase field crystal theory was first produced through purely phenomenological means as a variation on the Swift-Hohenburg model[cite], later work showed that the model can be seen as simplification of the Youssof and Ramakrishnan work on the density functional theory of freezing [cite]. 
+
+The connection between phase field crystal theory and density functional theory is important in that it supplies a microscopic motivation of the parameters in the phase field crystal. CDFT is an important ground for motivating any modifications to the PFC theory. To establish both the language of the phase field crystal model as well as its underlying microscopic origins we'll proceed by deriving the classical density functional theory for a pure material. Later we'll see that this generalizes readily to the case of a binary material and how we can construct equations of motion for the density using the so-called Dynamic Density Functional Theory (DDFT). 
+
+The following derivation will follow the work of Hansan [cite theory of simple liquids / or pep espanol].
 
 \subsection{Deriving the Intrinsic Free Energy Functional}
 
-To derive the intrinsic free energy functional we start with the grand partition function for a single component system in the semi-classical limit.
+The central object of classical density functional theory is the density field of the system, $\rho(x)$, defined as, 
 
 \begin{equation}
-    \Xi = \sum_{N=0}^\infty \f{e^{N\beta\mu}}{h^{3N} N!} 
-                   \int d\mathbf{r}^Nd\mathbf{p}^N e^{ -\beta \mathcal{H}}  
+    \rho(x) = \sum_{i=1}^N \delta^{(3)}(x - x_i).
 \end{equation}
 
-Where the Hamiltonian, $\mathcal{H}$, has contributions from kinetic energy, interaction potential and an external potential.
+To construct a statistical theory for the density field we begin by finding the equilibrium probability by maximizing the entropy subject to the macroscopically available information. Should we take the macroscopically available information to be the existance of an average energy, average particle number and average density field, we arrive at a modification of the grand canonical ensemble, 
 
 \begin{equation}
-    \mathcal{H} = \sum_{i=1}^N \f{p_i^2}{2m} + V(r_1, r_2, ..., r_N) + \sum_{i=1}^N \phi(r_i)
+    f(\mathbf{r}^N, \mathbf{p}^N, N) = \frac{1}{\Xi[\psi(r)]}\frac{\exp\left\lbrace -\beta \mathcal{H}(\mathbf{r}^N, \mathbf{p}^N) + \beta \int dr \psi(r) \rho(r)\right\rbrace}{h^{3N} N! }.
 \end{equation}
 
-Note that we explicitly assume that the interactions only depend on the particle positions and not their momenta, this allows us to complete the momentum integral in the partition function. 
+$\beta$, the Lagrange multiplier associated with the constraint of average energy, we immediately associate with the temperature via $\beta = (k_b T)^{-1}$. Interesting, the contraints of average particle number and density are not independent and their seperate Lagrange multipliers, traditionally associated with the chemical potential $\mu$ and external potential $\phi(x)$, can be combined into a single multiplier, $\psi(r)$, called the \textit{intrinsic chemical potential}. 
+
+The partition function, $\Xi$, is a normalization constant and can be seen as a modification to the grand partition function, 
 
 \begin{equation}
-    \Xi = \sum_{N=0}^\infty \f{1}{\Lambda^{3N}N!} 
-                   \int d\mathbf{r}^N e^{ -\beta \left(V(r_1, r_2, ...,r_N) - \sum_{i=1}^N(\mu - \phi(r_i))\right)} 
+    \Xi[\psi(r)] = \sum_{N=0}^\infty \frac{1}{h^{3N}N!}\int d\mathbf{r}^N d\mathbf{p}^N \exp\left\lbrace -\beta \mathcal{H}(\mathbf{r}^N, \mathbf{p}^N) + \beta \int dr \psi(r) \rho(r)\right\rbrace.
 \end{equation}
 
-Note now, that we're trying to construct a theory for the density field of our material, $\rho(r)$. The density field is defined as a sum of Dirac delta functions at the positions of the particles. That is, we would like to write the grand partition function in terms the density field and use the grand partition function as a generating functional for the mean, fluctuations and other moments of the density field.
+We can also establish an associated thermodynamic potential in the traditional manner which we will call the grand potential for convenience. 
 
 \begin{equation}
-    \rho(r) \equiv \sum_{i=1}^N \delta^{(3)}(r_i - r)
+    \Omega[\psi(r)] = -k_b T \ln \Xi[\psi(r)]
 \end{equation}
 
-We start along this path by noting that the external potential term can be rewritten in terms of the density field as follows, 
+The grand potential produces cumulants of the density field under functional differentiation as we might expect. Specifically, the average density field is, 
 
 \begin{equation}
-    \sum_{i=1}^N (\mu - \phi(r_i)) = \int dr (\mu - \phi(r))\rho(r)
+    \f{\d \Omega[\psi]}{\d \psi(r)} = -\langle \rho(r) \rangle \equiv \rho_1(r),
 \end{equation}
-
-In this form, we see that the combination $\mu - \phi(r)$ forms a field that is conjugate to the density field that we will call the \textit{intrinsic chemical potential}, $\psi(r)$. What we mean by conjugate is that repeated functional derivative of the grand partition function will generate correlation functions of the density field. 
+And the pair correlation function can be expressed as, 
+\begin{equation}
+    \f{\d^2 \Omega[\psi]}{\d \psi(r) \d \psi(r^\prime)} = - \beta \langle (\rho(r) - \rho_1(r))(\rho(r^\prime) - \rho_1(r^\prime)) \rangle.
+\end{equation}
+As noted by Espanol et al [cite], the real underpinning of classical density functional theory is in the combination of these two equations. The first, implies that the average density field is a function of only its conjugate field, the intrinsic chemical potential, and the second implies that that relationship is invertible. To see this note that the Jacobian, 
 
 \begin{equation}
-\f{1}{\beta^N \Xi[\psi(r)]}\f{\d^n \Xi[\psi(r)]}{\d \psi(r_1) ... \d \psi(r_n)} = \left\langle \rho(r_1) ...\rho(r_n) \right\rangle
+    \f{\d \rho_1(r)}{\d \psi(r^\prime)} = \beta \langle (\rho(r) - \rho_1(r))(\rho(r^\prime) - \rho_1(r^\prime)) \rangle, 
 \end{equation}
-
-It is important to note that the partition function has two distinct contibutions: one from the ideal contibutions to the free energy and one from the interaction term which is called the \textit{excess term}. 
+must be positive semi-definite because of the correlation function on the right hand side. Furthermore, we can make a new thermodynamic potential called the \textit{intrinsic free energy functional} by appling a Legendre transform to the grand potential,
 
 \begin{equation}
-    \Xi[\psi(r)] = 
+    \F[\rho_1(x)] = \Omega[\psi[\rho]] + \int dr \rho_1(r) \psi(r).
 \end{equation}
+
+It can be shown [cite Hansen appendix] that $\rho_1(x)$ must be the global minimum of the grand potential, which sets the stage for the methodology of classical density functional theory: if we have a defined intrinsic free energy functional, $\F$, we can find the equilibrium density field by solving the asssociated Euler-Lagrange equation, 
+
+\begin{equation}
+    \f{\d \Omega[\rho]}{\d \rho(r)} = 0.
+\end{equation}
+
+\subsection{Approximating $\F[\rho]$}
+
+To build a theory a freezing using the classical density functional theory we must first construct an appropriate intrinsic free energy functional. We can split the contribution to the free energy functional into two terms: the ideal and excess. 
+
+\begin{equation}
+    \F[\rho] = \F_{id}[\rho] + \F_{ex}[\rho]
+\end{equation}
+
+The ideal term is generated from the kinetic energy term in the Hamiltonian. Assuming that there are not momentum dependent interactions in the Hamiltonian this contribution can be computed exactly as, 
+
+\begin{equation}
+\F_{id}[\rho] = k_bT \int dr \rho(r) \ln\left(\Lambda^3\rho(r)\right) - \rho(r).
+\end{equation}
+Where, $\Lambda$, is the thermal deBroglie wavelength, 
+
+\begin{equation}
+    \Lambda = \sqrt{\f{h^2}{2\pi m k_b T}}.
+\end{equation}
+The excess term, on the other hand, typically needs to be approximated in some way because it is generated from the interaction potential term in the Hamiltonian which, for most systems, leads to a completely intractible integral. The approximation method introduced by Youssof and Ramakrishnan is to expand the excess free energy functional about a uniform reference fluid of density $\rho_0$, 
+
+\begin{equation}
+    \F_{ex}[\rho] = \F_{ex}[\rho_0] + \int dr \left.\f{\d \F_{ex}}{\d \rho(r)}\right\vert_{\rho_0} \Delta \rho(r) + \f{1}{2} \int dr dr^\prime 
+    \Delta \rho(r)\left.\f{\d^2 \F_{ex}}{\d \rho(r) \d \rho(r^\prime)}\right\vert_{\rho_0} \Delta \rho(r^\prime) + ... \,\,\,.
+\end{equation}
+
