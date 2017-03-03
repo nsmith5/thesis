@@ -77,10 +77,32 @@ Where, $\Lambda$, is the thermal deBroglie wavelength,
 \begin{equation}
     \Lambda = \sqrt{\f{h^2}{2\pi m k_b T}}.
 \end{equation}
-The excess term, on the other hand, typically needs to be approximated in some way because it is generated from the interaction potential term in the Hamiltonian which, for most systems, leads to a completely intractible integral. The approximation method introduced by Youssof and Ramakrishnan is to expand the excess free energy functional about a uniform reference fluid of density $\rho_0$, 
+The excess term, on the other hand, typically needs to be approximated in some way because it is generated from the interaction potential term in the Hamiltonian which, for most systems, leads to a completely intractible integral. While some pertubation theories exist to approach this problem, including the cluster expansion [Mayer \& Montrell 1941], it is typically more successful to resort to a judicious choice of closure for the Ornstein-Zernike equation. It can be shown that closures of the Ornstein-Zernike equation are equivalent to summing a subset of terms in the cluster expansion to all orders in the perturbation theory. 
+
+Youssof and Ramakrishnan argued that the HNC or hyper-netted chain approximation was just such a choice of closure for the problem of solidification. The HNC closure is known to give accurate solutions in the case of weak long range potentials such as those seen in plasmas. Though the pair potential of a solidifying system may be short-range, in a solid the short-ranged potentials combine to make an effectively long-ranged periodic potential of the lattice and thus the HNC closure is a good choice.
+
+The HNC closure can be seen as a simple Taylor expansion of the excess free energy functional about a uniform reference fluid of density $\rho_0$,
 
 \begin{equation}
-    \F_{ex}[\rho] = \F_{ex}[\rho_0] + \int dr \left.\f{\d \F_{ex}}{\d \rho(r)}\right\vert_{\rho_0} \Delta \rho(r) + \f{1}{2} \int dr dr^\prime 
+    \F_{ex}[\rho] \approx \F_{ex}[\rho_0] + \int dr \left.\f{\d \F_{ex}}{\d \rho(r)}\right\vert_{\rho_0} \Delta \rho(r) + \f{1}{2} \int dr dr^\prime 
     \Delta \rho(r)\left.\f{\d^2 \F_{ex}}{\d \rho(r) \d \rho(r^\prime)}\right\vert_{\rho_0} \Delta \rho(r^\prime) + ... \,\,\,.
+\end{equation}
+
+The excess free energy is the generating functional of direct correlation functions, 
+
+\begin{equation}
+    \f{\d^n \F_{ex}[\rho]}{\d \rho(r_1) ... \d \rho(r_n)} = -\beta C^{n}(r_1, ..., r_n).
+\end{equation}
+
+The first of which, for a uniform fluid, is the excess contribution to the chemical potential which we may express as the total chemical potential less the ideal contribution, 
+
+\begin{equation}
+    \left.\f{\d F_{ex}}{\d \rho}\right\vert_{\rho_0} = \mu_0^{ex} = \mu_0 - k_bT\ln\left(\Lambda^3 \rho_0\right).
+\end{equation}
+
+Combining ideal and excess contributions and substracting off the constant reference free energy we arrive at an approximation for the deviation in free energy from the reference. 
+
+\begin{equation}
+    \Delta \F [\rho] = k_b T \int dr \rho(r) \ln\left(\f{\rho(r)}{\rho_0}\right) -(1-\beta\mu_0) \Delta \rho(r) - \f{1}{2}\Delta \rho(r) \int dr^\prime C^{(2)}(r, r^\prime) \Delta \rho(r^\prime)
 \end{equation}
 
