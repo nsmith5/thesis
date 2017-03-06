@@ -5,7 +5,7 @@ The connection between phase field crystal theory and density functional theory 
 
 The following derivation will follow the work of Hansan [cite theory of simple liquids / or pep espanol].
 
-\subsection{Deriving the Intrinsic Free Energy Functional}
+\section{Deriving the Intrinsic Free Energy Functional}
 
 The central object of classical density functional theory is the density field of the system, $\rho(x)$, defined as, 
 
@@ -59,7 +59,7 @@ It can be shown [cite Hansen appendix] that $\rho_1(x)$ must be the global minim
     \f{\d \Omega[\rho]}{\d \rho(r)} = 0.
 \end{equation}
 
-\subsection{Approximating $\F[\rho]$}
+\section{Approximating $\F[\rho]$}
 
 To build a theory a freezing using the classical density functional theory we must first construct an appropriate intrinsic free energy functional. We can split the contribution to the free energy functional into two terms: the ideal and excess. 
 
@@ -106,3 +106,10 @@ Combining ideal and excess contributions and substracting off the constant refer
     \Delta \F [\rho] = k_b T \int dr \rho(r) \ln\left(\f{\rho(r)}{\rho_0}\right) -(1-\beta\mu_0) \Delta \rho(r) - \f{1}{2}\Delta \rho(r) \int dr^\prime C^{(2)}(r, r^\prime) \Delta \rho(r^\prime)
 \end{equation}
 
+At this stage we carry out the methodology of classical density functional theory as previously mentioned by Legendre transforming to the grand potential and minimizing with respect to the density. Doing so reveals a self-consistent form for the equilibrium density field, 
+
+\begin{equation}
+    \rho_1(x) = \rho_0 \exp\left\lbrace-\beta\phi(r) + \int dr^\prime \Delta\rho_1(r^\prime) C^{(2)}(r, r^\prime)\right\rbrace
+\end{equation}
+
+Further manipulations of this solutions would show that it is equivalent to the HNC closure, but the important result due to Youssof and Ramakrishnan is to note that, in the absense of an external field there are two solutions: the trivial reference solutions $\rho_0$ and a period \textit{solid} solution at higher densities. The take home story as it contributes to the phase field crystal theory is that the free energy functional in equation [free energy reference] contains a enough information to describe solidification. The free energy functional used in phase field crystal theories is a further simplification of HNC version involving a variety of models and simplifications of the pair correlation function and modification or expansions of the logarithm term.

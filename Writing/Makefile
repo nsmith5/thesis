@@ -1,4 +1,4 @@
-main.pdf: main.tex chapters/dft.tex 
+main.pdf: main.tex chapters/dft.tex chapters/ddft.tex references.bib
 	pdflatex main.tex
 	bibtex main1-blx
 	bibtex main2-blx
