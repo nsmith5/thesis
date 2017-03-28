@@ -1,4 +1,4 @@
-\documentclass[showkeys, prb, reprint]{revtex4-1}
+\documentclass[showkeys, reprint]{revtex4-1}
 \usepackage{amsmath}
 \usepackage{graphicx}
 \graphicspath{{figures/}}
@@ -16,7 +16,7 @@
 
 %% Front (Top really...) Matter
 
-\title{Working Title}
+\title{Regular Binary Phase Field Crystal Model}
 \author{Nathan Smith}
 \affiliation{McGill Department of Physics}
 \author{Nikolas Provatas}
@@ -128,29 +128,42 @@ Here, we'll explore the flexibility of our simplified regular model to describe 
 
 While previous PFC models have shown that elastic energy is a sufficient driving force for eutectic solidification our simplified regular model allows for the examination of the role enthalpy of mixing can play in eutectic solification. As noted by [cite murdoch], the interplay between enthalpy of mixing and enthaply of solute segregation can play a crucial role in stabilizing nanocrystalline alloys.
 
-\begin{figure}
-	\includegraphics{eutectic.eps}
-	\caption{\label{eutectic} Eutectic phase diagram}
-\end{figure}
+% Phase Diagram here
+%\begin{figure}
+%	\includegraphics{eutectic.eps}
+%	\caption{\label{eutectic} Eutectic phase diagram}
+%\end{figure}
 
 \subsection{Syntectic and Monotectic Phase Diagram}
 
+Our regular model also allows for a variety of new invariant reactions to be modelled including syntectic and monotectic reactions.
+
+The syntectic reaction, $l_1 + l_2 \rightarrow \alpha $, consists of solidification at the interface of two liquids. We can achieve this with our model by setting the spinodal temperature sufficiently high and producing a density-density correlation function that is peaked at a concentration below the spinodal.
+
+\begin{equation}
+	\tilde{C}^n_{eff}(k; c) = X(c) \tilde{C}_{\alpha}(k)
+\end{equation}
+
 \begin{figure}
-	\includegraphics[scale=0.4]{syntectic.eps}
+	\includegraphics[scale=0.3]{syntectic.eps}
 	\caption{\label{syntectic} Phase Diagram of Syntectic Alloy}
 \end{figure}
 
+The monotectic reaction, $l_1 \rightarrow \alpha + l_2$, consists of decomposing liquid into a solute poor solid and solute rich liquid. We can achieve this by increasing the spinodal temperature in the eutectic system and removing the B-B correlation function.
+
 \begin{figure}
-	\includegraphics[scale=0.4]{monotectic.eps}
+	\includegraphics[scale=0.3]{monotectic.eps}
 	\caption{\label{monotectic} Phase Diagram of Monotectic Alloy}
 \end{figure}
 
 \subsection{Precipitation from Solution}
 
-%\begin{figure}
-%	\includegraphics[scale=0.4]{solution.eps}
-%	\caption{\label{precip} Phase Diagram of Solution}
-%\end{figure}
+We can also model precipitation of nanoparticles from solution. Precipitation from solution is a typical synthesis technique for gold and silver nanoparticles [cite]. Recent work by [cite nature chem paper] shows that a metastable spinodal may be playing an important role in the growth and nucleation of gold nanoparticles under certain diffusive circumstances.
+
+\begin{figure}
+	\includegraphics[scale=0.3]{solution.eps}
+	\caption{\label{precip} Phase Diagram of Solution}
+\end{figure}
 
 \section{Application}
 
