@@ -1,0 +1,161 @@
+\documentclass[showkeys, prb, reprint]{revtex4-1}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+
+%% New commands
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\A}{\rho_A}
+\newcommand{\B}{\rho_B}
+\renewcommand{\d}{\mathrm{d}}
+\renewcommand{\l}{\left}
+\renewcommand{\r}{\right}
+\newcommand{\f}{\frac}
+
+\begin{document}
+
+%% Front (Top really...) Matter
+
+\title{Working Title}
+\author{Nathan Smith}
+\affiliation{McGill Department of Physics}
+\author{Nikolas Provatas}
+\affiliation{McGill Department of Physics}
+\date{\today}
+
+\begin{abstract}
+
+Modelling the liquid in a binary PFC model as regular solution instead of an ideal one leads to lots of interesting features. Look at all those features. We'll even discuss how it can be a contributor to non-classical nucleation pathways. Very sexy.
+
+\end{abstract}
+
+\keywords{nucleation, growth, phase field crystal}
+
+\maketitle
+
+%% Body
+
+\section{Introduction}
+
+\section{Free Energy Functional for Binary Alloys}
+
+To construct a free energy functional for a binary alloy we begin by splitting the free energy into ideal and excess components.
+
+\begin{equation}
+	\mathcal{F}[\A, \B] = \F_{id}[\A, \B] + \F_{ex}[\A, \B]
+\end{equation}
+The ideal component of the free energy is derived from the non-interacting, kinetic part of the Hamiltonian while the excess component is derived from the interaction potential of the Hamiltonian. The ideal component can be computed exactly as, 
+
+\begin{equation}
+	\beta\F[\A, \B] = \sum_{i}\int \d r \rho_i(r) \l(\ln\l(\Lambda_i^3\rho_i(r)\r) -1 \r)
+\end{equation}
+
+Where the sum runs over components, $A$ and $B$, and $\Lambda_i^3$ is the thermal de Broglie volume. The excess free energy cannot, in general, be computed exactly and thus approximate it by expanding the excess free energy about a uniform reference mixture with densities $\A^0$ and $\B^0$.
+
+\begin{align}
+	\beta\F_{ex}[\A, \B]  &= \beta \F_{ex}^0 + \int \d r C_i^{(1)}(r) \delta \rho_i(r) \\
+		&+ \f{1}{2}\int \d r \int d r^\prime \delta \rho_i(r) C_{ij}^{(2)}(r, r^\prime) \delta \rho_j(r^\prime) \nonumber
+\end{align}
+Where, summation over repeated indices is implied. We now perform a change a variable to solute concentration, $c$, and dimensionless total density, $n$.
+
+\begin{gather}
+	n = \f{\delta \rho}{\rho^0} = \f{\delta \A + \delta \B}{\A^0 + \B^0} \\
+	c = \f{\B}{\A + \B}
+\end{gather}
+Under this change of variables, the ideal free energy separates cleanly into total density and ideal free energy of mixing term as we might expect.
+
+\begin{align}
+	\f{\beta\F_{id}[n, c]}{\rho^0} = &\int \d r \l(n + 1\r) \ln\l(n + 1\r) - n  \\
+	&\int \d r \l(n + 1 \r) \l[c\ln\l(\f{c}{c_0}\r) + (1 - c)\ln\l(\f{1 - c}{1 - c_0}\r)\r] \nonumber
+\end{align}
+
+Following Greenwood \textit{et al.} [cite!] if we assume that the concentration field varies over a much longer length scale than the total density, the change in excess free energy from the reference can be written as, 
+
+\begin{align}
+	\f{\beta \F_{ex}[n, c]}{\rho^0} = -\f{1}{2} \int \d r n(r) &\l( \int \d r^\prime C^n_{eff} n^\prime + C^c_{eff} c^\prime\r) \nonumber \\
+	- \f{1}{2} \int \d r (c - c^0) &\l( \int \d r^\prime C^{c_0 n}_{eff} n^\prime + C^{c c_0}_{eff} c^\prime\r) 
+\end{align}
+where the effective pair correlation functions $C_{eff}$ are,
+
+\begin{align}
+	C_{eff}^n &= c^2 C_{BB}^{(2)} + (1 - c)^2 C_{AA}^{(2)} + 2c\l(1 - c\r) C_{AB}^{(2)} \\
+	C_{eff}^n &= c C_{BB}^{(2)} - (1-c)C_{AA}^{(2)} + (1 - 2c) C_{AB}^{(2)} \\
+	C_{eff}^{c_0 n} &= C_{eff}^c \\
+	C_{eff}^{c_0 c} &= C_{BB}^{(2)} + C_{AA}^{(2)} - 2C_{AB}^{(2)}
+\end{align}
+
+\subsection{Simplified Regular Free Energy Functional}
+
+Following Greenwood \textit{et al.} [cite!] we can now expand the ideal free energy about reference density in a Taylor expansion and coarse grain the excess contributions to the free energy. In contrast to Greenwood \textit{et al.}, we will not assume that the $k = 0$ mode of the effective concentration-concentration correlation is zero. The effect of eliminating this assumption is that two terms are now produced by performing a gradient expansion of $C^{c_0c}_{eff}$.
+
+\begin{equation}
+	C^{c_0 c}_{eff}(r, r^\prime) = \delta(r - r^\prime)\l(\epsilon  - W_c \nabla^2 + ... \r)
+\end{equation}
+
+The first term serves to produce a free energy of mixing with a regular solution model instead of an ideal solution. That is to say, there is both an entropy \textit{and} enthalpy of mixing in the theory. Ultimately, the rest of the free energy looks the same as that of Greenwood,
+
+\begin{align}
+	\f{\beta \Delta \F[n, c]}{\rho_0} &= \int \d r \f{n^2}{2} - \eta \f{f^3}{6} + \chi \f{n^4}{12} -\f{1}{2} n C^{n}_{eff} \ast n \\
+	&+ \int \d r \f{W_c}{2} \l\vert\nabla c\r\vert^2 + (n + 1) f_{mix}(c) + \f{1}{2} \epsilon (c- c_0)^2, \nonumber
+\end{align}
+
+Where, $\eta$, $\chi$ and $\omega$ are fitting parameters. Hypothesizing a spinodal point in the liquid free energy at temperature $T_c$ we can model the temperature dependence of $\epsilon$ with a linear expansion about this point. 
+
+\begin{equation}
+	\epsilon(T) = \omega \l( -4 + \epsilon_0 \l(T - T_c\r)\r) 
+\end{equation}
+
+While the proposed adjustment seems minimal at face values, we'll that it allows for the modelling a broad spectrum of binary phenomena.
+
+\subsection{Correlation Functions}
+
+\subsection{Model Dynamics}
+
+We can model the dynamics of the total density and concentration using diffusive, conservative dynamics for each. We'll further assume that the mobility of both concentration and total density are constant. 
+
+\begin{gather}
+	\f{\partial n}{\partial t} = M_{n} \nabla^2 \l[n - \eta \f{n^2}{2} + \chi \f{n^3}{3} + f_{mix}(c) - C^n_{eff} \ast n \r] + \nabla \cdot\xi_c, \\
+	\f{\partial c}{\partial t} = M_{c} \nabla^2 \l[\l(\epsilon - \nabla^2\r)c + \l(n + 1\r)\f{\partial f_{mix}}{\partial c} - \f{1}{2} n \f{\partial C^n_{eff}}{\partial c} \ast n\r] + \nabla \cdot \xi_n.
+\end{gather}
+
+Where $\xi_c$ and $\xi_n$ are noise terms respecting a generalized Einstein relation. It is important to note that $c$ is in fact not a conserved variable but rather a ratio of conserved variables $\B$ and $\rho$. Therefore, these dynamics can only be considered valid in the limit where total density is constant (eg. these is no density segregation between phases) in addition to the constraints discussed by Fang [cite!]. 
+
+\section{Equilibrium Properties}
+
+Here, we'll explore the flexibility of our simplified regular model to describe previous and new classes of invariant reactions for the binary alloy.
+
+\subsection{Eutectic Phase Diagram}
+
+While previous PFC models have shown that elastic energy is a sufficient driving force for eutectic solidification our simplified regular model allows for the examination of the role enthalpy of mixing can play in eutectic solification. As noted by [cite murdoch], the interplay between enthalpy of mixing and enthaply of solute segregation can play a crucial role in stabilizing nanocrystalline alloys.
+
+\begin{figure}
+	\includegraphics{eutectic.eps}
+	\caption{\label{eutectic} Eutectic phase diagram}
+\end{figure}
+
+\subsection{Syntectic and Monotectic Phase Diagram}
+
+\begin{figure}
+	\includegraphics[scale=0.4]{syntectic.eps}
+	\caption{\label{syntectic} Phase Diagram of Syntectic Alloy}
+\end{figure}
+
+\begin{figure}
+	\includegraphics[scale=0.4]{monotectic.eps}
+	\caption{\label{monotectic} Phase Diagram of Monotectic Alloy}
+\end{figure}
+
+\subsection{Precipitation from Solution}
+
+%\begin{figure}
+%	\includegraphics[scale=0.4]{solution.eps}
+%	\caption{\label{precip} Phase Diagram of Solution}
+%\end{figure}
+
+\section{Application}
+
+\subsection{Non-classical nucleation pathways of precipation from solution}
+
+\subsection{Anomolous growth of nanoparticles}
+
+\end{document}

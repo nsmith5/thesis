@@ -2,7 +2,7 @@ import sys
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.stats import linregress
-from scipy.ndimage.filters import gaussian_filter1d
+from scipy.ndimage.filters import uniform_filter1d
 from matplotlib.style import use
 
 def load_and_split(filename):
@@ -24,7 +24,7 @@ def means_and_std(droplets):
     return output
 
 def smooth(stats):
-    gaussian_filter1d(stats[:, 1], 15, output=stats[:, 1])    
+    uniform_filter1d(stats[:, 1], 15, output=stats[:, 1])    
 
 def make_errorbars(liquids, solids):
     plt.errorbar(solids[:, 0], 
