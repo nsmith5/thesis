@@ -1,0 +1,65 @@
+When developing the binary PFC model there is a change of variables that must occur from $\A$ and $\B$ to $n$ and $c$. Computing the bulk terms is a matter of substitution and simplifying as much as possible but the pair correlation terms can be more subtle. When computing the pair correlation terms, careful application of our assumption that $c$ varies over a much longer length scale than $n$ must be applied to get the correct solution. The goal, ultimately, is to find $C_{n n}$, $C_{n c}$, $C_{c n}$ and $C_{c c}$ in the following expression, 
+
+\begin{gather}\label{1}
+  \d \A \,C_{AA} \ast \d \A + \d \A \,C_{AB} \ast \d \B + \d \B \,C_{BA} \ast \d \A + \d \B \,C_{BB} \ast \d \B = \\ \nonumber
+  \rho_0 \l(n \,C_{nn} \ast n + n \,C_{nc} \ast \d c + \d c \,C_{cn}\ast n + \d c \,C_{cc} \ast \d c\r).
+\end{gather}
+We begin by rewriting $\d \B$,
+
+\begin{align*}
+  \d \B &= \rho c - \rho_0 c_0 \\
+        &= \rho c - \rho c_0 + \rho c_0 - \rho_0 c_0 \\
+        &= \d \rho c + \rho_0 \d c,
+\end{align*}
+Followed by rewriting $\d \A$,
+
+\begin{align*}
+  \d \A &= \rho (1 - c) - \rho_0 (1 - c_0) \\
+        &= \d \rho (1 - c) - \rho_0 \d c.
+\end{align*}
+With those forms established, we can expand $\d \B \,C_{BB} \ast \d \B$:
+
+\begin{align}\label{this}
+  \d \B C_{BB} \ast \d \B &= \l(\d \rho c + \rho_0 \d c \r) C_{BB} \ast \l(\d \rho c + \rho_0 \d c\r) \nonumber\\
+                          &= \d \rho c \,C_{BB} \ast \l( \d \rho c\r) \nonumber\\
+                          &+ \rho_0 \d c \,C_{BB} \ast \l( \d \rho c \r) \\
+                          &+ \rho_0 \l(\d \rho c\r) \,C_{BB} \ast \d c \nonumber\\
+                          &+ \rho_0^2 \d c \,C_{BB} \ast \d c. \nonumber
+\end{align}
+
+If we examine one term in this expansion in detail, we note that we can simplify by using the long wavelength approximation for the concentration field,
+
+\begin{align}
+  \d \rho c \, C_{BB} \ast \d \rho c &= \d \rho(r) c(r) \int dr^\prime C_{BB}(r - r^\prime) \d \rho(r^\prime) c(r^\prime) \nonumber \\
+                                     &\approx \d \rho(r) c^2(r) \int dr^\prime C_{BB}(r - r^\prime) \d \rho(r^\prime).
+\end{align}
+
+This is because the concentration field can be considered ostensibly constant over the length scale in which $C_{BB}(r)$ varies. Recall that the pair correlation function typically decays to zero on the order of several particle radii. Using this approximation we can rewrite equation \ref{this} as,
+
+\begin{align}
+  \d \B \, C_{BB} \ast \d \B &= \d \rho \l(c^2 \,C_{BB}\r) \ast \d \rho \nonumber\\
+                             &+ \rho_0 \d c \l(c \,C_{BB}\r) \ast \d \rho c \\
+                             &+ \rho_0 \d \rho \l(c \,C_{BB}\r) \ast \d c \nonumber\\
+                             &+ \rho_0^2 \d c \,C_{BB} \ast \d c. \nonumber
+\end{align}
+
+Repeating this procedure with the remaining three terms and then regrouping we can easily identify the required pair correlations.\footnote{Note that we may also take advantage of the fact that $C_{AB} = C_{BA}$.}
+
+\begin{gather}
+  C_{nn} = \rho_0 \l( c^2 \, C_{BB} + (1 - c)^2 \, C_{AA} + 2c(1-c)\,C_{AB}\r) \\
+  C_{nc} = C_{cn} = \rho_0 \l( c\,C_{BB} - (1-c)\,C_{AA} + (1 - 2c) \, C_{AB} \r) \\
+  C_{cc} = \rho_0 \l( C_{BB} + C_{AA} - 2 C_{AB} \r)
+\end{gather}
+
+
+
+
+
+
+
+
+
+
+
+
+
