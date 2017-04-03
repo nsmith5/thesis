@@ -1,4 +1,4 @@
-\documentclass[showkeys, reprint]{revtex4-1}
+\documentclass[showkeys, prb, reprint]{revtex4-1}
 \usepackage{amsmath}
 \usepackage{graphicx}
 \graphicspath{{figures/}}
@@ -7,7 +7,8 @@
 \newcommand{\F}{\mathcal{F}}
 \newcommand{\A}{\rho_A}
 \newcommand{\B}{\rho_B}
-\renewcommand{\d}{\mathrm{d}}
+\newcommand{\dd}{\mathrm{d}}
+\renewcommand{\d}{\delta}
 \renewcommand{\l}{\left}
 \renewcommand{\r}{\right}
 \newcommand{\f}{\frac}
@@ -47,42 +48,48 @@ To construct a free energy functional for a binary alloy we begin by splitting t
 The ideal component of the free energy is derived from the non-interacting, kinetic part of the Hamiltonian while the excess component is derived from the interaction potential of the Hamiltonian. The ideal component can be computed exactly as, 
 
 \begin{equation}
-	\beta\F[\A, \B] = \sum_{i}\int \d r \rho_i(r) \l(\ln\l(\Lambda_i^3\rho_i(r)\r) -1 \r)
+	\beta\F[\A, \B] = \sum_{i} \int \dd r\, \rho_i(r) \l(\ln\l(\Lambda_i^3\rho_i(r)\r) -1 \r)
 \end{equation}
-
 Where the sum runs over components, $A$ and $B$, and $\Lambda_i^3$ is the thermal de Broglie volume. The excess free energy cannot, in general, be computed exactly and thus approximate it by expanding the excess free energy about a uniform reference mixture with densities $\A^0$ and $\B^0$.
 
 \begin{align}
-	\beta\F_{ex}[\A, \B]  &= \beta \F_{ex}^0 + \int \d r C_i^{(1)}(r) \delta \rho_i(r) \\
-		&+ \f{1}{2}\int \d r \int d r^\prime \delta \rho_i(r) C_{ij}^{(2)}(r, r^\prime) \delta \rho_j(r^\prime) \nonumber
+	\beta\F_{ex}[\A, \B]  &= \beta \F_{ex}^0 + \int \dd r \, C_i^{(1)}(r) \d \rho_i(r) \\
+		&+ \f{1}{2}\int \dd r\, \d \rho_i(r) \,C^{(2)}_{ij} \ast \d\rho_j  + ... \nonumber
 \end{align}
-Where, summation over repeated indices is implied. We now perform a change a variable to solute concentration, $c$, and dimensionless total density, $n$.
+Where, summation over repeated indices is implied and $\ast$ denotes a convolution. $C^{(n)}(r_1, r_2, ...r_n)$ denotes the n-point direct correlation function. We now perform a change a variable to solute concentration, $c$, and dimensionless total density, $n$.
 
 \begin{gather}
-	n = \f{\delta \rho}{\rho^0} = \f{\delta \A + \delta \B}{\A^0 + \B^0} \\
+	n = \f{\delta \rho}{\rho^0} = \f{\d \A + \d \B}{\A^0 + \B^0} \\
 	c = \f{\B}{\A + \B}
 \end{gather}
 Under this change of variables, the ideal free energy separates cleanly into total density and ideal free energy of mixing term as we might expect.
 
+\begin{gather}
+	\f{\beta\F_{id}[n, c]}{\rho^0} = \int \dd r\, \l( \l(n + 1\r) \ln\l(n + 1\r) - n  
+	 + \l(n + 1 \r) f_{mix}(c) \r)
+\end{gather}
+Where,
+
+\begin{equation}
+  f_{mix}(c) = c\ln\l(\f{c}{c_0}\r) + (1 - c)\ln\l(\f{1 - c}{1 - c_0}\r).
+\end{equation}
+
+If we assume that the concentration field varies over a much longer length scale than the pair correlation functions (typically several particle radii), we can approximate the excess term as follows,
+
 \begin{align}
-	\f{\beta\F_{id}[n, c]}{\rho^0} = &\int \d r \l(n + 1\r) \ln\l(n + 1\r) - n  \\
-	&\int \d r \l(n + 1 \r) \l[c\ln\l(\f{c}{c_0}\r) + (1 - c)\ln\l(\f{1 - c}{1 - c_0}\r)\r] \nonumber
+	\f{\beta \F_{ex}[n, c]}{\rho^0} = -&\f{1}{2} \int \dd r\, n \l( C_{nn} \ast n + C_{nc} \ast \d c\r) \nonumber \\
+	- &\f{1}{2} \int\dd r\, \d c \l( C_{cn} \ast n + C_{cc} \ast \d c\r).
+\end{align}
+where the $n-c$ pair correlation functions are,
+
+\begin{align}
+	C_{nn} &= \rho_0 \l(c^2 C_{BB}^{(2)} + (1 - c)^2 C_{AA}^{(2)} + 2c\l(1 - c\r) C_{AB}^{(2)} \r) \\
+	C_{nc} &= \rho_0 \l(c C_{BB}^{(2)} - (1-c)C_{AA}^{(2)} + (1 - 2c) C_{AB}^{(2)} \r)\\
+	C_{cn} &= C_{nc} \\
+	C_{cc} &= \rho_0 \l(C_{BB}^{(2)} + C_{AA}^{(2)} - 2C_{AB}^{(2)} \r)
 \end{align}
 
-Following Greenwood \textit{et al.} [cite!] if we assume that the concentration field varies over a much longer length scale than the total density, the change in excess free energy from the reference can be written as, 
 
-\begin{align}
-	\f{\beta \F_{ex}[n, c]}{\rho^0} = -\f{1}{2} \int \d r n(r) &\l( \int \d r^\prime C^n_{eff} n^\prime + C^c_{eff} c^\prime\r) \nonumber \\
-	- \f{1}{2} \int \d r (c - c^0) &\l( \int \d r^\prime C^{c_0 n}_{eff} n^\prime + C^{c c_0}_{eff} c^\prime\r) 
-\end{align}
-where the effective pair correlation functions $C_{eff}$ are,
-
-\begin{align}
-	C_{eff}^n &= c^2 C_{BB}^{(2)} + (1 - c)^2 C_{AA}^{(2)} + 2c\l(1 - c\r) C_{AB}^{(2)} \\
-	C_{eff}^n &= c C_{BB}^{(2)} - (1-c)C_{AA}^{(2)} + (1 - 2c) C_{AB}^{(2)} \\
-	C_{eff}^{c_0 n} &= C_{eff}^c \\
-	C_{eff}^{c_0 c} &= C_{BB}^{(2)} + C_{AA}^{(2)} - 2C_{AB}^{(2)}
-\end{align}
 
 \subsection{Simplified Regular Free Energy Functional}
 
@@ -107,7 +114,21 @@ Where, $\eta$, $\chi$ and $\omega$ are fitting parameters. Hypothesizing a spino
 
 While the proposed adjustment seems minimal at face values, we'll that it allows for the modelling a broad spectrum of binary phenomena.
 
-\subsection{Correlation Functions}
+\subsection{Modelling Correlation Functions}
+
+To model the density-density correlation function $C_{nn}(r)$ or equivalently, $\tilde{C}_{nn}(k)$ we function in the form of a sum of products of window functions, $\chi_i$, in concentration and structure functions, $\tilde{C}_i$, in Fourier space, 
+
+\begin{equation}
+  \tilde{C}_{nn}(k; c) = \sum_i \chi_i (c) \tilde{C}_i (k)
+\end{equation}
+
+This model reflects, qualitatively, the fact that different structures are stabilized at different concentrations. The window function $\chi_i$ decribes the region in concentration space over which a phase $i$ is stable and the structure function, $\tilde{C}_i$ describes the structure of that phase. The structure functions can be modelled by a sum of gaussians in fourier space, 
+
+\begin{equation}
+  \tilde{C}_i(k) = e^{T/T_0}\l(\sum_j e^{-\f{(k - k_j)^2}{2 \alpha_j^2}}\r).
+\end{equation}
+
+
 
 \subsection{Model Dynamics}
 
@@ -126,7 +147,9 @@ Here, we'll explore the flexibility of our simplified regular model to describe 
 
 \subsection{Eutectic Phase Diagram}
 
-While previous PFC models have shown that elastic energy is a sufficient driving force for eutectic solidification our simplified regular model allows for the examination of the role enthalpy of mixing can play in eutectic solification. As noted by [cite murdoch], the interplay between enthalpy of mixing and enthaply of solute segregation can play a crucial role in stabilizing nanocrystalline alloys.
+While previous PFC models have shown that elastic energy is a sufficient driving force for eutectic solidification our simplified regular model allows for the examination of the role enthalpy of mixing can play in eutectic solification. As noted by \cite{murdoch}, the interplay between enthalpy of mixing and enthaply of solute segregation can play a crucial role in stabilizing nanocrystalline alloys.
+
+To specialize our simplified regular model to the case of the binary eutectic we must choose an appropriate model for the correlation function. Choosing an $\alpha$ phase around $c=0$ and $\beta$ phase around $ c = 1 $ 
 
 % Phase Diagram here
 %\begin{figure}
@@ -170,5 +193,7 @@ We can also model precipitation of nanoparticles from solution. Precipitation fr
 \subsection{Non-classical nucleation pathways of precipation from solution}
 
 \subsection{Anomolous growth of nanoparticles}
+
+\bibliography{references/references.bib}
 
 \end{document}
