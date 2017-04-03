@@ -163,15 +163,20 @@ To specialize our simplified regular model to the case of the binary eutectic we
 \end{figure}
 
 
-
 \subsection{Syntectic and Monotectic Phase Diagram}
 
 Our regular model also allows for a variety of new invariant reactions to be modelled including syntectic and monotectic reactions.
 
-The syntectic reaction, $l_1 + l_2 \rightarrow \alpha $, consists of solidification at the interface of two liquids. We can achieve this with our model by setting the spinodal temperature sufficiently high and producing a density-density correlation function that is peaked at a concentration below the spinodal.
+The syntectic reaction, $l_1 + l_2 \rightarrow \alpha $, consists of solidification at the interface of two liquids. We can achieve this with our model by setting the spinodal temperature sufficiently high and producing a density-density correlation function that is peaked at a concentration below the spinodal. This can be done by using a window function that is centered about an intermediate concentration, $c_\alpha$ of the solid phase, $\alpha$. 
 
 \begin{equation}
-	\tilde{C}^n_{eff}(k; c) = X(c) \tilde{C}_{\alpha}(k)
+  \chi(c) = e^{- \f{(c - c_\alpha)^2}{2 \alpha_c}}
+\end{equation}
+
+The resulting correlation function for a hexagonal lattice in two dimensions, for example, would be,
+
+\begin{equation}
+  \tilde{C}_{nn}(k; c) = e^{-\f{(c - c_\alpha)^2}{2 \alpha_c}} e^{-\f{T}{T_0}} e^{-\f{(k - k^\prime)^2}{2\alpha^2}}
 \end{equation}
 
 \begin{figure}
