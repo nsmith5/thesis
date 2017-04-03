@@ -149,13 +149,20 @@ Here, we'll explore the flexibility of our simplified regular model to describe 
 
 While previous PFC models have shown that elastic energy is a sufficient driving force for eutectic solidification our simplified regular model allows for the examination of the role enthalpy of mixing can play in eutectic solification. As noted by \cite{murdoch}, the interplay between enthalpy of mixing and enthaply of solute segregation can play a crucial role in stabilizing nanocrystalline alloys.
 
-To specialize our simplified regular model to the case of the binary eutectic we must choose an appropriate model for the correlation function. Choosing an $\alpha$ phase around $c=0$ and $\beta$ phase around $ c = 1 $ 
+To specialize our simplified regular model to the case of the binary eutectic we must choose an appropriate model for the correlation function. Choosing an $\alpha$ phase around $c = 0$ and $\beta$ phase around $c = 1$, we can recover the pair correlation function used in the original binary XPFC with a particular choice of window functions: 
 
-% Phase Diagram here
-%\begin{figure}
-%	\includegraphics{eutectic.eps}
-%	\caption{\label{eutectic} Eutectic phase diagram}
-%\end{figure}
+\begin{align}
+   \chi_\alpha(c) &= 2c^3 - 3c^2 + 1 \\
+   \chi_\beta(c) &= \chi_\alpha(1 - c).
+\end{align}
+
+%Phase Diagram here
+\begin{figure}
+	\includegraphics[scale=0.4]{eutectic.eps}
+	\caption{\label{eutectic} Eutectic phase diagram triangle $\alpha$ and $\beta$ phases. The free energy parameter are $\eta = 2$, $\chi = 1$, $\omega=0.30$, $\epsilon_0 = 3$ and $T_c = 0.01$. The parameters of the structure functions are $\alpha_{10\alpha} = \alpha_{10\beta} = 0.8$, $k_{10\alpha} = 2\pi$, $k_{10\beta} = 4\pi/\sqrt{3}$ and $T_0 = 1$}
+\end{figure}
+
+
 
 \subsection{Syntectic and Monotectic Phase Diagram}
 
