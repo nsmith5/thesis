@@ -94,7 +94,7 @@ where the $n-c$ pair correlation functions are,
 
 \subsection{Simplified Regular Free Energy Functional}
 
-Following Greenwood \textit{et al.} [cite!] we can now expand the ideal free energy about reference density in a Taylor expansion and coarse grain the excess contributions to the free energy. In contrast to Greenwood \textit{et al.}, we will not assume that the $k = 0$ mode of the effective concentration-concentration correlation is zero. The effect of eliminating this assumption is that two terms are now produced by performing a gradient expansion of $C^{c_0c}_{eff}$.
+Following Greenwood \textit{et al.} [cite!] we can now expand the ideal free energy about reference density in a Taylor expansion and coarse grain the excess contributions to the free energy. In contrast to Greenwood \textit{et al.}, we will not assume that the $k = 0$ mode of the effective concentration-concentration correlation is zero. The effect of eliminating this assumption is that two terms are now produced by performing a gradient expansion of $C_{cc}$.
 
 \begin{equation}
 	C^{c_0 c}_{eff}(r, r^\prime) = \delta(r - r^\prime)\l(\epsilon  - W_c \nabla^2 + ... \r)
@@ -104,7 +104,7 @@ The first term serves to produce a free energy of mixing with a regular solution
 
 \begin{align}
 	\f{\beta \Delta \F[n, c]}{\rho_0} &= \int \d r \f{n^2}{2} - \eta \f{f^3}{6} + \chi \f{n^4}{12} -\f{1}{2} n C^{n}_{eff} \ast n \\
-	&+ \int \d r \f{W_c}{2} \l\vert\nabla c\r\vert^2 + (n + 1) f_{mix}(c) + \f{1}{2} \epsilon (c- c_0)^2, \nonumber
+	&+ \int \d r \f{W_c}{2} \l\vert\nabla c\r\vert^2 + \omega (n + 1) f_{mix}(c) + \f{1}{2} \epsilon (c- c_0)^2, \nonumber
 \end{align}
 
 Where, $\eta$, $\chi$ and $\omega$ are fitting parameters. Hypothesizing a spinodal point in the liquid free energy at temperature $T_c$ we can model the temperature dependence of $\epsilon$ with a linear expansion about this point. 
@@ -148,7 +148,7 @@ Here, we'll explore the flexibility of our simplified regular model to describe 
 
 \subsection{Eutectic Phase Diagram}
 
-While previous PFC models have shown that elastic energy is a sufficient driving force for eutectic solidification our simplified regular model allows for the examination of the role enthalpy of mixing can play in eutectic solification. As noted by \cite{murdoch}, the interplay between enthalpy of mixing and enthaply of solute segregation can play a crucial role in stabilizing nanocrystalline alloys.
+While previous PFC models have shown that elastic energy is a sufficient driving force for eutectic solidification our simplified regular model allows for the examination of the role enthalpy of mixing can play in eutectic solids. For instance, Murdoch and Schuh noted that in nanocrystalline binary alloys, while a positive enthaply of segregation can stabilize against grain growth via solute segregation at the grain boundary, if the enthaply of mixing becomes too large this effect can be negated by second phase formation or even macroscopic phase seperation\cite{murdoch}. 
 
 To specialize our simplified regular model to the case of the binary eutectic we must choose an appropriate model for the correlation function. Choosing an $\alpha$ phase around $c = 0$ and $\beta$ phase around $c = 1$, we can recover the pair correlation function used in the original binary XPFC with a particular choice of window functions: 
 
@@ -157,18 +157,20 @@ To specialize our simplified regular model to the case of the binary eutectic we
    \chi_\beta(c) &= \chi_\alpha(1 - c).
 \end{align}
 
+Should we choose, for example, an $\alpha$ and $\beta$ phase with 2 dimensional hexagonal lattices, differing only by lattice constants, we can produce a phase diagram like that in Fig. \ref{eutectic}.  
+
 %Phase Diagram here
 \begin{figure}
-	\includegraphics[scale=0.4]{eutectic}
+	\includegraphics[scale=0.5]{eutectic}
 	\caption{\label{eutectic} Eutectic phase diagram triangle $\alpha$ and $\beta$ phases. The free energy parameter are $\eta = 2$, $\chi = 1$, $\omega=0.30$, $\epsilon_0 = 3$ and $T_c = 0.01$. The parameters of the structure functions are $\alpha_{10\alpha} = \alpha_{10\beta} = 0.8$, $k_{10\alpha} = 2\pi$, $k_{10\beta} = 4\pi/\sqrt{3}$ and $T_0 = 1$}
 \end{figure}
 
 
 \subsection{Syntectic Phase Diagram}
 
-Our regular model also allows for a variety of new invariant reactions to be modelled including syntectic and monotectic reactions.
+Our regular model also allows for the study of a variety of invariant binary reactions that, to date, have not been studied using phase field crystal models. One such reaction is the syntectic reaction. 
 
-The syntectic reaction, $l_1 + l_2 \rightarrow \alpha $, consists of solidification at the interface of two liquids. We can achieve this with our model by setting the spinodal temperature sufficiently high and producing a density-density correlation function that is peaked at a concentration below the spinodal. This can be done by using a window function that is centered about an intermediate concentration, $c_\alpha$ of the solid phase, $\alpha$. 
+The syntectic reaction, $l_1 + l_2 \rightarrow \alpha $, consists of solidification at the interface of two liquids. We can achieve this with our model by setting the spinodal temperature, $T_c$, sufficiently high and producing a density-density correlation function that is peaked at a concentration below the spinodal. This can be done by choosing a window function that is centered about an intermediate concentration, $c_\alpha$ of the solid phase, $\alpha$. 
 
 \begin{equation}
   \chi(c) = e^{- \f{(c - c_\alpha)^2}{2 \alpha_c}}
@@ -179,23 +181,24 @@ The resulting correlation function for a hexagonal lattice in two dimensions, fo
 \begin{equation}
   \tilde{C}_{nn}(k; c) = e^{-\f{(c - c_\alpha)^2}{2 \alpha_c}} e^{-\f{T}{T_0}} e^{-\f{(k - k^\prime)^2}{2\alpha^2}}
 \end{equation}
+A phase diagram that produces a syntectic reaction with an appropriate choice of parameters can be seen in Fig. \ref{syntectic}.
 
 \begin{figure}
-	\includegraphics[scale=0.3]{syntectic.eps}
+	\includegraphics[scale=0.5]{syntectic.eps}
 	\caption{\label{syntectic} Phase Diagram of Syntectic Alloy with a hexagonal $\alpha$ phase. The free energy parameters are $\eta=2$, $\chi=1$, $\omega=0.3$, $\epsilon_0 = 10$ and $T_c=0.35$. The parameters for the structure function are $\alpha_{10\alpha} = 0.8$, $k_{10\alpha} = 2\pi$ and $T_0 = 1$}
 \end{figure}
 
 \subsection{Monotectic Phase Diagram}
 
-The monotectic reaction, $l_1 \rightarrow \alpha + l_2$, consists of decomposing liquid into a solute poor solid and solute rich liquid. To model a monotectic using our regular model we hypothesize a solid phase at $c=0$ and set the spinondal temperature higher than the solidification temperature. To achieve this we use a window function peaked around $c = 0$,
+The monotectic reaction is another invariant binary reaction that has not previously been studied using PFC models. The monotectic reaction, $l_1 \rightarrow \alpha + l_2$, consists of decomposing liquid into a solute poor solid and solute rich liquid. To model a monotectic using our regular model we hypothesize a solid phase at $c=0$ and set the spinondal temperature higher than the solidification temperature. To achieve this we use a window function peaked around $c = 0$,
 
 \begin{equation}
     \chi_\alpha(c) = e^{-\f{c^2}{2\alpha_c^2}}.
 \end{equation}
-
+Again considering a simple hexagonal lattice for the $\alpha$ phase, we can produce a phase diagram with a monotectic reaction with an appropriate choice of parameters as in Fig. \ref{monotectic}. 
 \begin{figure}
-	\includegraphics[scale=0.3]{monotectic.eps}
-	\caption{\label{monotectic} Phase Diagram of Monotectic Alloy}
+	\includegraphics[scale=0.5]{monotectic.eps}
+	\caption{\label{monotectic} Phase Diagram of Monotectic Alloy with hexagonal $\alpha$ phase. The free energy parameters are $\eta = 2$, $\chi=1$, $\omega=0.3$, $\epsilon_0 = 10$, $T_c = 0.35$ and $c_0 = 0.75$. The parameters for the structure function are $\alpha_{10\alpha} = 0.8$, $k_{10\alpha} = 2\pi$ and $T_0 = 1$ and the parameter for the window function is $\alpha_c = 0.4$}
 \end{figure}
 
 \subsection{Precipitation from Solution}
