@@ -90,8 +90,6 @@ where the $n-c$ pair correlation functions are,
 	C_{cc} &= \rho_0 \l(C_{BB}^{(2)} + C_{AA}^{(2)} - 2C_{AB}^{(2)} \r)
 \end{align}
 
-
-
 \subsection{Simplified Regular Free Energy Functional}
 
 Following Greenwood \textit{et al.} [cite!] we can now expand the ideal free energy about reference density in a Taylor expansion and coarse grain the excess contributions to the free energy. In contrast to Greenwood \textit{et al.}, we will not assume that the $k = 0$ mode of the effective concentration-concentration correlation is zero. The effect of eliminating this assumption is that two terms are now produced by performing a gradient expansion of $C_{cc}$.
@@ -128,7 +126,6 @@ This model reflects, qualitatively, the fact that different structures are stabi
 \begin{equation}
   \tilde{C}_i(k) = e^{T/T_0}\l(\sum_j e^{-\f{(k - k_j)^2}{2 \alpha_j^2}}\r).
 \end{equation}
-
 
 \subsection{Model Dynamics}
 
@@ -202,7 +199,9 @@ Again considering a simple hexagonal lattice for the $\alpha$ phase, we can prod
 
 \subsection{Precipitation from Solution}
 
-We can also model precipitation of nanoparticles from solution. Precipitation from solution is a typical synthesis technique for gold and silver nanoparticles [cite]. Recent work by [cite nature chem paper] shows that a metastable spinodal may be playing an important role in the growth and nucleation of gold nanoparticles under certain diffusive circumstances.
+We can also model precipitation of nanoparticles from solution. While on its surface the equilibrium phase diagram of a solution is that of a simple solid-liquid coexistance, in practice the metastable features of the phase diagram can have profound implications on the nucleation kinetics of precipitate. As an example, precipitation from solution is a typical synthesis technique for gold and silver nanoparticles. Recent work by Loh \textit{et al} shows that a metastable spinodal may be playing an important role in the growth and nucleation of gold nanoparticles under certain diffusive circumstances.
+
+Using the regular XPFC model we can model reproduce the condition of a metastable liquid spinodal underneath the liquid-solid coexistance curve. The approach to produce a phase diagram is the same as that of of a monotectic, with the exception that the spinodal temperature, $T_c$, most now be sufficiently low to be buried underneath the coexistance curve. In keeping with the concentration being that of the solute, we'll also center the gaussian window function about $c = 1$. An example, including metastable spinodal, can be seen in Fig. \ref{precip}.
 
 \begin{figure}
 	\includegraphics[scale=0.3]{solution.eps}
@@ -210,6 +209,8 @@ We can also model precipitation of nanoparticles from solution. Precipitation fr
 \end{figure}
 
 \section{Application}
+
+
 
 \subsection{Non-classical nucleation pathways of precipation from solution}
 
