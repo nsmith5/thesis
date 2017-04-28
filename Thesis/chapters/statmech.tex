@@ -1,0 +1,23 @@
+To accurately describe systems on a macroscopic length and time scale we are faced two competing world views. We know from fundamental physics that all systems are governed by the laws of quantum mechanics
+
+
+\section{Statistical Mechanics in the Semi-classical limit}
+
+Although the quantum statistical mechanics picture gives us a link between the microscopic and macroscopic reality of thermodynamics systems, it still contains too much detail for many systems of interest. For instance, for many systems of interest, the precise bosonic or fermionic nature of the particles in the system has little consequence on the thermodynamic properties. We can ignore some of these quantum mechanical details by looking at statistical mechanics in the \textit{semi-classical limit}. We start with the definition of the partition function for a system of many particles,  
+
+\begin{equation}
+    Z = Tr(e^{\beta \hat{H}}),
+\end{equation} 
+where, 
+
+\begin{equation}
+    \hat{H} = \sum_i^N \f{\hat{p}_i^2}{2 m_i} + V(\hat{q}_1, ... ,\hat{q}_N).
+\end{equation}
+If we expand the exponential using the Zassenhaus formula, we find a product of exponentials,
+
+\begin{equation}
+    e^{\beta\hat{H}} = e^{\beta \sum_i \frac{\hat{p}_i^2}{2m_i}} 
+        e^{\beta V(\hat{q}_1, ..., \hat{q}_N)}
+        e^{-\frac{\beta^2}{2}\sum_i\left[\frac{\hat{p}_i^2}{2m_i}, V\right]} ...
+\end{equation}
+If we're willing to neglect powers of .... continue here..
