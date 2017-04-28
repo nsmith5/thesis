@@ -13,4 +13,8 @@ main.pdf: main.tex chapters/dft.tex chapters/ddft.tex references.bib
 .PHONY: clean
 
 clean:
-	rm main.pdf
+	mv main.pdf crap.pdf
+	mv main.tex crap.tex
+	rm main*
+	mv crap.tex main.tex
+	mv crap.pdf main.pdf	
