@@ -1,23 +1,66 @@
-To accurately describe systems on a macroscopic length and time scale we are faced two competing world views. We know from fundamental physics that all systems are governed by the laws of quantum mechanics
+In this chapter we'll describe the fundamental physics behind the phase field crystal theory.
+Like many physical theories, it is derived using a set of successive approximations.
+Each approximation yield a new theory that is more narrow in scope, but more tractible to either analytic or numerical analysis.
 
+PFC is ultimately a thermodynamic theory and as such it makes connection to fundamental, microscopic physics by way of statistical mechanics.
+Statistical mechanics tied the macroscopic observables to microscopic phenomena with a probabilistic approach.
+The basic assumption at this level is that, if a system is sufficiently complex, there are circumstances under which its statistical behaviour becomes relatively simple.
+Now for systems with macroscopic ($\mathcal{O}(10^{23})$) amount of particles this is almost always the case and so for this large systems we can often compute the macroscopic or thermodynamic observables using a statistical approach instead of solving the microscopic equations of motion.
+
+At the fundamental level, our systems of interest are governed by quantum mechanics and so we might use the theory of quantum statistical mechanics to attempt to compute the thermodynamic observables of our system.
+We will see that for our systems of interest that the quantum statistical theory is quite intractible, but with an approximation we can treat our system in the \textit{semi-classical limit}.
+
+In semi-classical limit, we can talk in a robust way about the structure of the denisty field, using the Classical Density Functional Theory (CDFT) framework.
+While CDFT supplies the correct setting to discuss the density, it is again rarely feasible to perform exact calculations.
+
+Finally, we'll see that an approximation of the exact CFDT free energy functional will yield the PFC theory that is amenable to both analytic and numerical analysis.
 
 \section{Statistical Mechanics in the Semi-classical limit}
 
-Although the quantum statistical mechanics picture gives us a link between the microscopic and macroscopic reality of thermodynamics systems, it still contains too much detail for many systems of interest. For instance, for many systems of interest, the precise bosonic or fermionic nature of the particles in the system has little consequence on the thermodynamic properties. We can ignore some of these quantum mechanical details by looking at statistical mechanics in the \textit{semi-classical limit}. We start with the definition of the partition function for a system of many particles,  
+Although the quantum statistical mechanics picture gives us a link between the microscopic and macroscopic reality of thermodynamics systems, it still contains too much detail for many systems of interest.
+For instance, for many systems of interest, the precise bosonic or fermionic nature of the particles in the system has little consequence on the thermodynamic properties.
+We can ignore some of these quantum mechanical details by looking at statistical mechanics in the \textit{semi-classical limit}.
+
+For the sake of clarity, we'll look at a system of $N$ identical particles in the canonical ensemble but generalization to multi-component systems and other ensembles is straight forward. 
+We start with the definition of the partition function for a system of many particles,  
 
 \begin{equation}
     Z = Tr(e^{\beta \hat{H}}),
 \end{equation} 
-where, 
+where, $\hat{H} = \frac{\vert\mathbf{p}\vert^2}{2m} + V(\mathbf{q})$ and $\mathbf{p} = (p_1, p_2, ...p_N)$ is the vector of particle momenta. 
+$\mathbf{q}$ is similarly defined for the particle positions.
+Wigner and, shortly after, Kirkwood showed that the partition function could be expanded in powers of $\hbar$, facilitating the calculation of both a classical limit and quantum corrections to the partition function.
+Their method, the Wigner-Kirkwood expansion, involves evaluating the trace operation over a basis of plain wave solutions,
 
 \begin{equation}
-    \hat{H} = \sum_i^N \f{\hat{p}_i^2}{2 m_i} + V(\hat{q}_1, ... ,\hat{q}_N).
+	\mathcal{Z}(\beta) = \int 
+		\frac{\mathrm{d}\mathbf{q} \mathrm{d}\mathbf{p}}{(2\pi \hbar)^N}
+		e^{-\frac{i\mathbf{p}\cdot\mathbf{q}}{\hbar}}
+		e^{-\beta \hat{H}}
+		e^{\frac{i\mathbf{p}\cdot\mathbf{q}}{\hbar}} = \int d\Gamma I(p, q),
 \end{equation}
-If we expand the exponential using the Zassenhaus formula, we find a product of exponentials,
+Where, $d\Gamma$ is the phase space measure $d\mathbf{p}d\mathbf{q}/(2\pi\hbar)^N$. To compute the integrand, we follow Bethe and first compute its derivative,
 
 \begin{equation}
-    e^{\beta\hat{H}} = e^{\beta \sum_i \frac{\hat{p}_i^2}{2m_i}} 
-        e^{\beta V(\hat{q}_1, ..., \hat{q}_N)}
-        e^{-\frac{\beta^2}{2}\sum_i\left[\frac{\hat{p}_i^2}{2m_i}, V\right]} ...
+	\frac{\partial I(p, q)}{\partial \beta} = -\pwp\hat{H}\pwm I(p, q).
 \end{equation}
-If we're willing to neglect powers of .... continue here..
+If we then make a change of variables, $I(q, p) = e^{-\beta H}W(q, p)$ use the explicit form of the Hamiltonian we arrive at a partial differential equation for $W$.
+
+\begin{equation}
+	\frac{\partial W}{\partial \beta} = \frac{\hbar^2}{2} \left(
+		\nabla_{\mathbf{q}}^2 - 
+		\beta(\nabla_{\mathbf{q}}^2V) + 
+		\beta^2(\nabla V)^2 -
+		2\beta(\nabla_{\mathbf{q}} V)\cdot\nabla_{\mathbf{q}} + 
+		2 \frac{i}{\hbar}\mathbf{p}\cdot(\nabla_{\mathbf{q}} - \beta\nabla_{\mathbf{q}})
+	\right)W(q, p)
+\end{equation}
+The solution can be written as a power series in $\hbar$, $W = 1 + \hbar W_1 + \hbar W_2 + ...$. This creates a power series expansion for the partition function as well. We'll simply quote the solutions to second order here, but details can be found in [cite Landau and Lifshitz].
+
+\begin{gather}
+	W_1(\mathbf{q}, \mathbf{p}) = .... 
+\end{gather}
+....
+
+\section{Classical Density Functional Theory}
+
