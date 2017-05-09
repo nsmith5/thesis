@@ -29,7 +29,7 @@ We start with the definition of the partition function for a system of many part
 \end{equation} 
 where, $\hat{H} = \frac{\vert\mathbf{p}\vert^2}{2m} + V(\mathbf{q})$ and $\mathbf{p} = (p_1, p_2, ...p_N)$ is the vector of particle momenta. 
 $\mathbf{q}$ is similarly defined for the particle positions.
-Wigner and, shortly after, Kirkwood showed that the partition function could be expanded in powers of $\hbar$, facilitating the calculation of both a classical limit and quantum corrections to the partition function.
+Wigner \cite{PhysRev.40.749},and, shortly after, Kirkwood \cite{PhysRev.44.31} showed that the partition function could be expanded in powers of $\hbar$, facilitating the calculation of both a classical limit and quantum corrections to the partition function.
 Their method, the Wigner-Kirkwood expansion, involves evaluating the trace operation over a basis of plain wave solutions,
 
 \begin{equation}
@@ -39,7 +39,7 @@ Their method, the Wigner-Kirkwood expansion, involves evaluating the trace opera
 		e^{-\beta \hat{H}}
 		e^{\frac{i\mathbf{p}\cdot\mathbf{q}}{\hbar}} = \int d\Gamma I(p, q),
 \end{equation}
-Where, $d\Gamma$ is the phase space measure $d\mathbf{p}d\mathbf{q}/(2\pi\hbar)^N$. To compute the integrand, we follow Bethe and first compute its derivative,
+Where, $d\Gamma$ is the phase space measure $d\mathbf{p}d\mathbf{q}/(2\pi\hbar)^N$. To compute the integrand, we follow Uhlenbeck and Bethe \cite{Uhlenbeck1936729} and first compute its derivative,
 
 \begin{equation}
 	\frac{\partial I(p, q)}{\partial \beta} = -\pwp\hat{H}\pwm I(p, q).
@@ -55,12 +55,39 @@ If we then make a change of variables, $I(q, p) = e^{-\beta H}W(q, p)$ use the e
 		2 \frac{i}{\hbar}\mathbf{p}\cdot(\nabla_{\mathbf{q}} - \beta\nabla_{\mathbf{q}})
 	\right)W(q, p)
 \end{equation}
-The solution can be written as a power series in $\hbar$, $W = 1 + \hbar W_1 + \hbar W_2 + ...$. This creates a power series expansion for the partition function as well. We'll simply quote the solutions to second order here, but details can be found in [cite Landau and Lifshitz].
+The solution can be written as a power series in $\hbar$, $W = 1 + \hbar W_1 + \hbar W_2 + ...$.
+This creates a power series expansion for the partition function as well,
+\begin{equation}
+    \mathcal{Z} = (1 + \hbar \langle W_1 \rangle + \hbar^2 \langle W_2\rangle + ...) 
+    \int d\Gamma e^{\beta\mathcal{H}}.
+\end{equation}
+Where the average, $\langle \cdot \rangle$, denotes the the classical average, 
+
+\begin{equation}
+    \langle A(p, q) \rangle = \frac{1}{\mathcal{Z}} 
+        \int d\Gamma A(p, q) e^{-\beta \mathcal{H}}.
+\end{equation}
+
+For the sake of brevity we'll simply quote solution to second order, but details can be found in Landau and Lifshitz \cite{LANDAU198079}.
+Interestingly, the first order term is exactly zero.
 
 \begin{gather}
-	W_1(\mathbf{q}, \mathbf{p}) =
+    \langle W_1 \rangle = 0 \\
+    \langle W_2 \rangle = - \f{\beta^3}{24 m} \l\langle \left\vert\nabla_{\mathbf{q}}V\right\vert^2 \r\rangle
 \end{gather}
-....
+
+In terms of the free energy, for example, the corrections to second order would be, 
+
+\begin{equation}
+    \mathcal{F} = \mathcal{F}_{classical} + \f{\hbar^2\beta^2}{24m}
+        \l\langle \l\vert \nabla_{\mathbf{q}} V(\mathbf{q}) \r\vert^2 \r\rangle.
+\end{equation}
+
+There are a few things to note about this finding, first of all the correction inversely proportional to both the temperature and the particle mass.
+For copper at room termperature, for instance, the prefactor $\hbar^2\beta^2/(24 m)$ is $\mathcal{O}(10^{-4})$. 
+The correction is also proportional to the mean of the squared force felt by each particle. So high density materials will have a higher quantum correction because they sample the short-range repulsive region of the pair potential more than their low density counter parts.
+
+
 
 \section{Classical Density Functional Theory}
 
