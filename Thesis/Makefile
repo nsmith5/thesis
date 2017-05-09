@@ -1,20 +1,14 @@
 main.pdf: main.tex chapters/dft.tex chapters/ddft.tex chapters/statmech.tex references.bib
+	latex main.tex
+	bibtex main
+	makeindex -s mcgillpage.ist abbr
+	makeindex -s mcgillpage.ist keylist
+	latex main.tex
 	pdflatex main.tex
-	bibtex main1-blx
-	bibtex main2-blx
-	pdflatex main.tex
-	pdflatex main.tex
-	mv main.pdf crap.pdf
-	mv main.tex crap.tex
-	rm main*
-	mv crap.tex main.tex
-	mv crap.pdf main.pdf
-
+	rm *.{idx,ilg,ind,aux,bbl,blg,dvi,lof,lot,log,toc}
+	
 .PHONY: clean
 
 clean:
-	mv main.pdf crap.pdf
-	mv main.tex crap.tex
-	rm main*
-	mv crap.tex main.tex
-	mv crap.pdf main.pdf	
+	rm -f *.{idx,ilg,ind,aux,bbl,blg,dvi,lof,lot,log,toc}
+	rm main.pdf

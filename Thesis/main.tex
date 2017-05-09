@@ -1,19 +1,40 @@
-\documentclass[11pt, letterpaper, twoside, openright]{book}
+\documentclass[12pt,Bold,letterpaper]{mcgilletdclass}
 
+% UTF8 encoding
 \usepackage[utf8]{inputenc}
-\usepackage{graphicx}
-\graphicspath{ {figures/} }
-\usepackage[margin=1in]{geometry}
-\usepackage[backend=bibtex]{biblatex}
-\addbibresource{references.bib}
 
-\usepackage[hidelinks]{hyperref}
+% Graphics and path to graphics
+\usepackage[dvips, final]{graphicx}
+\graphicspath{ {figures/} }
+
+% Margins etc
+\usepackage[dvips]{geometry}
+
+% Math packages
 \usepackage{amsmath}
 \usepackage{array}
 \usepackage{mathtools}
 \usepackage{enumitem}
-\usepackage[utf8]{inputenc}
 
+% Page alignment \addtolength{\hoffset}{0pt}
+\addtolength{\voffset}{0pt}
+
+% Front (really top) matter
+\SetTitle{\huge{Structureal Phase Field Crystal Models as a Lense on Nonequilibrium Kinetic Pathways}}
+\SetAuthor{Nathan Frederick Smith}
+\SetDegreeType{Masters of Science}
+\SetDepartment{Department of Physics}
+\SetUniversity{McGill Univsersity}
+\SetUniversityAddr{Montreal, Quebec}
+\SetThesisDate{2017-??-??}
+\SetRequirements{[requirements statement]}
+\SetCopyright{[copyright statement]}
+
+% Indicies
+\makeindex[keylist]
+\makeindex[abbr]
+
+% Aliases and commands
 \renewcommand{\d}{\delta}
 \newcommand{\F}{\mathcal{F}}
 \renewcommand{\l}{\left}
@@ -30,71 +51,75 @@
 \newcommand{\pwp}{e^{\frac{i\mathbf{p}\cdot\mathbf{q}}{\hbar}}}
 \newcommand{\pwm}{e^{-\frac{i\mathbf{p}\cdot\mathbf{q}}{\hbar}}}
 
-
-\title{
-	{Structural Phase Field Crystal Models as a Lense on Nonequilibrium Kinetic Pathways}\\
-	{\large McGill University}\\
-}
-\author{Nathan Smith}
-\date{\today}
+\listfiles
 
 \begin{document}
 
 %  -- Front Matter --
 \maketitle
+\begin{romanPagenumber}{2}
 
-\chapter*{Abstract}
-Abstract goes here
+\SetDedicationName{\MakeUppercase{Dedication}}
+\SetDedicationText{My dedication....}
+\Dedication
 
-\chapter*{Dedication}
-To mum and dad
+\SetAcknowledgeName{\MakeUppercase{Acknowledgements}}
+\SetAcknowledgeText{Acknowledgments, if included, must be written in complete sentences.  Do not use direct address.  For example, instead of Thanks, Mom and Dad!, you should say I thank my parents. }
+\Acknowledge
 
-\chapter*{Declaration}
-I declare that..
 
-\chapter*{Acknowledgements}
-I want to thank...
+% English Abstract
+\SetAbstractEnName{\MakeUppercase{Abstract}}
+\SetAbstractEnText{ Abstract in English and French are required. The text of the abstract in English begins here.}
+\AbstractEn
 
-\tableofcontents
+% French Abstract  
+\SetAbstractFrName{\MakeUppercase{ABR\'{E}G\'{E}}}
+\SetAbstractFrText{ The text of the abstract in French begins here.  }
+\AbstractFr
+
+\TOCHeading{\MakeUppercase{Table of Contents}}
+\LOTHeading{\MakeUppercase{List of Tables}}
+\LOFHeading{\MakeUppercase{List of Figures}}
+\tableofcontents 
+\listoftables 
+\listoffigures 
+
+\end{romanPagenumber}
 
 % -- Main Matter --
 \chapter{Introduction}
 lalala
 
 \chapter{Fundamentals}
-\begin{refsection}
 \input{chapters/statmech}
-\printbibliography
-\end{refsection}
 
 \chapter{Classical Density Functional Theory}
-\begin{refsection}
 \input{chapters/dft}
-\printbibliography
-\end{refsection}
 
 \chapter{Dynamic Density Functional Theory}
 \input{chapters/ddft}
 
 % -- Back Matter --
-\appendix
+\SetAppendixName{Appendix}
 
 \chapter{Noise in Nonlinear Langevin Equations}
-\begin{refsection}
 \input{chapters/noise}
-\printbibliography
-\end{refsection}
 
 \chapter{Gaussian Functional Integrals}
-\begin{refsection}
 \input{chapters/gaussian}
-\printbibliography
-\end{refsection}
 
 \chapter{Binary Correlation Functions}
-\begin{refsection}
 \input{chapters/binary_correlations}
-\printbibliography
-\end{refsection}
+
+\bibHeading{References}
+\bibliography{references}
+\bibliographystyle{plain}
+
+\index[abbr]{PFC: Phase Field Crystal}
+\index[abbr]{CDFT: Classical Density Functional Theory}
+
+\printindex[keylist]{Index}{Index}{}
+\printindex[abbr]{KEY TO ABBREVIATIONS}{KEY TO ABBREVIATIONS}{}
 
 \end{document}
