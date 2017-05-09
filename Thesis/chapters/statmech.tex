@@ -23,7 +23,6 @@ We can ignore some of these quantum mechanical details by looking at statistical
 
 For the sake of clarity, we'll look at a system of $N$ identical particles in the canonical ensemble but generalization to multi-component systems and other ensembles is straight forward. 
 We start with the definition of the partition function for a system of many particles,  
-
 \begin{equation}
     Z = Tr(e^{\beta \hat{H}}),
 \end{equation} 
@@ -31,7 +30,6 @@ where, $\hat{H} = \frac{\vert\mathbf{p}\vert^2}{2m} + V(\mathbf{q})$ and $\mathb
 $\mathbf{q}$ is similarly defined for the particle positions.
 Wigner \cite{PhysRev.40.749},and, shortly after, Kirkwood \cite{PhysRev.44.31} showed that the partition function could be expanded in powers of $\hbar$, facilitating the calculation of both a classical limit and quantum corrections to the partition function.
 Their method, the Wigner-Kirkwood expansion, involves evaluating the trace operation over a basis of plain wave solutions,
-
 \begin{equation}
 	\mathcal{Z}(\beta) = \int 
 		\frac{\mathrm{d}\mathbf{q} \mathrm{d}\mathbf{p}}{(2\pi \hbar)^N}
@@ -39,13 +37,12 @@ Their method, the Wigner-Kirkwood expansion, involves evaluating the trace opera
 		e^{-\beta \hat{H}}
 		e^{\frac{i\mathbf{p}\cdot\mathbf{q}}{\hbar}} = \int d\Gamma I(p, q),
 \end{equation}
-Where, $d\Gamma$ is the phase space measure $d\mathbf{p}d\mathbf{q}/(2\pi\hbar)^N$. To compute the integrand, we follow Uhlenbeck and Bethe \cite{Uhlenbeck1936729} and first compute its derivative,
-
+Where, $d\Gamma$ is the phase space measure $d\mathbf{p}d\mathbf{q}/(2\pi\hbar)^N$.
+To compute the integrand, $I(p, q)$, we follow Uhlenbeck and Bethe \cite{Uhlenbeck1936729} and first compute its derivative,
 \begin{equation}
 	\frac{\partial I(p, q)}{\partial \beta} = -\pwp\hat{H}\pwm I(p, q).
 \end{equation}
 If we then make a change of variables, $I(q, p) = e^{-\beta H}W(q, p)$ use the explicit form of the Hamiltonian we arrive at a partial differential equation for $W$.
-
 \begin{equation}
 	\frac{\partial W}{\partial \beta} = \frac{\hbar^2}{2} \left(
 		\nabla_{\mathbf{q}}^2 - 
@@ -62,23 +59,18 @@ This creates a power series expansion for the partition function as well,
     \int d\Gamma e^{\beta\mathcal{H}}.
 \end{equation}
 Where the average, $\langle \cdot \rangle$, denotes the the classical average, 
-
 \begin{equation}
     \langle A(p, q) \rangle = \frac{1}{\mathcal{Z}} 
         \int d\Gamma A(p, q) e^{-\beta \mathcal{H}}.
 \end{equation}
-
 For the sake of brevity we'll simply quote solution to second order, but details can be found in Landau and Lifshitz \cite{LANDAU198079}.
 Interestingly, the first order term is exactly zero.
-
 \begin{gather}
     \langle W_1 \rangle = 0 \\
     \langle W_2 \rangle = - \f{\beta^3}{24 m} \l\langle \left\vert\nabla_{\mathbf{q}}V\right\vert^2 \r\rangle
 \end{gather}
-
 In terms of the free energy, for example, the corrections to second order would be, 
-
-\begin{equation}
+\begin{equation}{\label{quantumcorr}}
     \mathcal{F} = \mathcal{F}_{classical} + \f{\hbar^2\beta^2}{24m}
         \l\langle \l\vert \nabla_{\mathbf{q}} V(\mathbf{q}) \r\vert^2 \r\rangle.
 \end{equation}
@@ -87,7 +79,33 @@ There are a few things to note about this finding, first of all the correction i
 For copper at room termperature, for instance, the prefactor $\hbar^2\beta^2/(24 m)$ is $\mathcal{O}(10^{-4})$. 
 The correction is also proportional to the mean of the squared force felt by each particle. So high density materials will have a higher quantum correction because they sample the short-range repulsive region of the pair potential more than their low density counter parts.
 
+\subsection{Indistinguishability}
 
+There is an important distinction to be made between the quantum theory and the theory in the semi-classical limit.
+The integral over phase space of the partition function must only take into account the \textit{physically different} states of the system.  
+In the quantum theory this is acheived by tracing over any orthonormal basis of the Hilbert space, but in the classical theory we need to be careful not to double count states when identical particles are in the theory.
+Exchange of two identical particles does not result in a physically different state and thus this state should only be considered only once in the sum over states in the partition function.
+More precisely, we should write the classical partition function as,
+
+\begin{equation}
+    \mathcal{Z} = \int^\prime d\Gamma e^{-\beta \mathcal{H}},
+\end{equation}
+Where the primed integral denotes integration only over the physically distinct states. In the common case of $N$ identical particles, the phase space integral becomes, 
+\begin{equation}
+    \int^\prime d\Gamma \rightarrow \f{1}{N!}\int d\Gamma
+\end{equation}
+
+Aggregating our results, we can write the partition function in the semi-classical limit as,
+\begin{equation}
+    \mathcal{Z}(\beta) = \frac{1}{N!}\int d\Gamma e^{-\beta \mathcal{H}},
+\end{equation}
+Or, in the grand canonical ensemble,
+\begin{equation}
+    \Xi(\mu, \beta) = \sum_{N = 0}^\infty \f{e^{\beta\mu N}}{N!} \int d\Gamma e^{-\beta \mathcal{H}}
+\end{equation}
+
+Of course, this is exactly the form taught in introductory courses on statistical mechanics and derived by Gibbs\footnote{The $\hbar$ in Gibbs' formula was justified on dimensional grounds and was simply a scaling factor with units of action ($J\cdot s$)}prior to any knowledge of quantum mechanics \cite{Gibbs}.
+The key insight here is to understand in a contolled way when this approximation is accurate and the magnitude of the next quantum correction is as seen in equation \ref{quantumcorr}.
 
 \section{Classical Density Functional Theory}
 
