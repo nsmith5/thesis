@@ -190,17 +190,38 @@ And the pair correlation function can be expressed as,
 As noted by Espanol et al [cite], the real underpinning of classical density functional theory is in the combination of these two equations.
 The first, implies that the average density field is a function of only its conjugate field, the intrinsic chemical potential, and the second implies that that relationship is invertible\footnote{The inverse function theorem only implies local invertibility, there is no guarentee of global invertibility. Indeed phase coexistance is a manifestation of this fact where a single intrinsic chemical potential is shared by two phases}.
 To see this note that the Jacobian, 
-
 \begin{equation}
     \f{\d \rho(x)}{\d \psi(x^\prime)} = \beta \mean{ (\hat{\rho}(x) - \rho(x))(\hat{\rho}(x^\prime) - \rho(x^\prime))}, 
 \end{equation}
 must be positive semi-definite because of the correlation function on the right hand side. Furthermore, we can make a new thermodynamic potential called the \textit{intrinsic free energy functional} by appling a Legendre transform to the grand potential,
-
 \begin{equation}
-    \F[\rho(x)] = \Omega[\psi[\rho]] + \int dr \rho(r) \psi(r).
+    \F[\rho(x)] = \Omega[\psi[\rho]] + \int dx \rho(x) \psi(x).
 \end{equation}
-
 It can be shown \cite{HansenAppendixB} that $\rho(x)$ must be the global minimum of the grand potential, which sets the stage for the methodology of classical density functional theory: if we have a defined intrinsic free energy functional, $\F$, we can find the equilibrium density field by solving the asssociated Euler-Lagrange equation, 
 \begin{equation}
     \f{\d \Omega[\rho]}{\d \rho(r)} = 0.
 \end{equation}
+
+\subsection{Techniques in Density Functional Theory}
+
+The difficulty in formulating a density functional theory is the construction of an appropriate free energy functional.
+While exact calculations are rarely feasible, there are a variety of techniques that help in building approximate functionals.
+Its important to note first what we \textit{can} compute exactly.
+To this end we split the free energy functional into ideal and excess components,
+\begin{equation}
+    \F[\rho(x)] = \F_{id}[\rho(x)] + \F_{ex}[\rho(x)].
+\end{equation}
+The ideal term is generated from the kinetic energy term in the Hamiltonian.
+Assuming that there are not momentum dependent interactions in the Hamiltonian this contribution can be computed exactly as,
+\begin{equation}
+    \F_{id}[\rho(x)] = k_bT\int \mathrm{d}x \rho(x) 
+        \ln\l(\Lambda^3\rho(x)\r) - \rho(x)
+\end{equation}
+Where, $\Lambda$, is the thermal de Broglie wavelength,
+\begin{equation}
+    \Lambda = \sqrt{\f{h^2}{2\pi mk_bT}}.
+\end{equation}
+The excess term, on the other hand, typically needs to be approximated in some way.
+The excess part is generated from the interaction potential term in the Hamiltonian which, for most systems, leads to a completely intractible integral.
+Some pertubation theories exist to approach this problem, the most noteable of which is the cluster expansion [Mayer and Montrell 1941], though it is typically more successful to resort to a judicious choice of closure for the Ornstein-Zernike equation.
+It can be shown that closures of the Ornstein-Zernike equation are equivalent to summing a subset of terms in the cluster expansion to all orders in the perturbation theory.

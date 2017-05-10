@@ -1,5 +1,9 @@
 \documentclass[12pt,Bold,letterpaper]{mcgilletdclass}
 
+%%%%%%%%%%%%
+% Packages %
+%%%%%%%%%%%%
+
 % UTF8 encoding
 \usepackage[utf8]{inputenc}
 
@@ -19,7 +23,10 @@
 % Page alignment \addtolength{\hoffset}{0pt}
 \addtolength{\voffset}{0pt}
 
-% Front (really top) matter
+%%%%%%%%%%%%%%%%
+% Front matter %
+%%%%%%%%%%%%%%%%
+
 \SetTitle{\huge{Structureal Phase Field Crystal Models as a Lense on Nonequilibrium Kinetic Pathways}}
 \SetAuthor{Nathan Frederick Smith}
 \SetDegreeType{Masters of Science}
@@ -30,25 +37,33 @@
 \SetRequirements{[requirements statement]}
 \SetCopyright{[copyright statement]}
 
-% Indicies
+%%%%%%%%%%%%
+% Indicies %
+%%%%%%%%%%%%
+
 \makeindex[keylist]
 \makeindex[abbr]
 
-% Aliases and commands
-\renewcommand{\d}{\delta}
-\newcommand{\F}{\mathcal{F}}
-\renewcommand{\l}{\left}
-\renewcommand{\r}{\right}
-\newcommand{\f}{\frac}
-\newcommand{\Z}{\mathcal{Z}}
-\newcommand{\D}{\mathcal{D}}
-\newcommand{\fphi}{\tilde{\phi}}
-\newcommand{\fh}{\tilde{h}}
-\newcommand{\fxi}{\tilde{\xi}}
-\newcommand{\A}{\rho_A}
-\newcommand{\B}{\rho_B}
-% Hamiltonian
-\newcommand{\ham}{\mathcal{H}}
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Aliases and commands %
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+\renewcommand{\d}{\delta}       % Dirac delta
+\newcommand{\F}{\mathcal{F}}    % Free energy Functional
+\renewcommand{\l}{\left}        % Quick left
+\renewcommand{\r}{\right}       % Quick right
+\newcommand{\f}{\frac}          % Quick fraction
+\newcommand{\Z}{\mathcal{Z}}    % GC partition function
+\newcommand{\D}{\mathcal{D}}    % Swirly D for path integrals
+\newcommand{\fphi}{\tilde{\phi}}% Fourier space phi
+\newcommand{\fh}{\tilde{h}}     % Fourier space h
+\newcommand{\fxi}{\tilde{\xi}}  % Fourier space xi
+\newcommand{\A}{\rho_A}         % Density of species A
+\newcommand{\B}{\rho_B}         % Density of species B
+\newcommand{\ham}{\mathcal{H}}  % Hamiltonian (classical)
+\newcommand{\q}{\mathbf{q}}     % Phase space coordinates
+\newcommand{\p}{\mathbf{p}}     % Phase space momenta
+
 % Plane wave + and -
 \newcommand{\pwp}{e^{\frac{i\mathbf{p}\cdot\mathbf{q}}{\hbar}}}
 \newcommand{\pwm}{e^{-\frac{i\mathbf{p}\cdot\mathbf{q}}{\hbar}}}
@@ -56,15 +71,16 @@
 \newcommand{\trace}[1]{\mathbf{Tr}\left( #1 \right)}
 % Average
 \newcommand{\mean}[1]{\left\langle #1 \right\rangle}
-% Phase space positions and momenta
-\newcommand{\q}{\mathbf{q}}
-\newcommand{\p}{\mathbf{p}}
 
 \listfiles
 
+%%%%%%%%%%%%%%%%%%
+% Document Begin %
+%%%%%%%%%%%%%%%%%%
+
 \begin{document}
 
-%  -- Front Matter --
+%  Front Matter 
 \maketitle
 \begin{romanPagenumber}{2}
 
@@ -77,12 +93,12 @@
 \Acknowledge
 
 
-% English Abstract
+%  English Abstract
 \SetAbstractEnName{\MakeUppercase{Abstract}}
 \SetAbstractEnText{ Abstract in English and French are required. The text of the abstract in English begins here.}
 \AbstractEn
 
-% French Abstract  
+%  French Abstract  
 \SetAbstractFrName{\MakeUppercase{ABR\'{E}G\'{E}}}
 \SetAbstractFrText{ The text of the abstract in French begins here.  }
 \AbstractFr
@@ -98,16 +114,20 @@
 
 % -- Main Matter --
 \chapter{Introduction}
-lalala
 
 \chapter{Fundamentals}
 \input{chapters/statmech}
 
-\chapter{Classical Density Functional Theory}
+\chapter{Classical Density Functional Theory of Freezing}
+\input{chapters/dft_of_freezing}
+
+\chapter{Fake}
 \input{chapters/dft}
 
-\chapter{Dynamic Density Functional Theory}
+\chapter{Dynamics}
 \input{chapters/ddft}
+
+\chapter{Applications}
 
 % -- Back Matter --
 \SetAppendixName{Appendix}

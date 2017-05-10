@@ -1,4 +1,6 @@
-main.pdf: main.tex chapters/dft.tex chapters/ddft.tex chapters/statmech.tex references.bib
+SOURCES=main.tex chapters/dft_of_freezing.tex chapters/ddft.tex chapters/statmech.tex references.bib
+
+main.pdf: $(SOURCES)
 	latex main.tex
 	bibtex main
 	makeindex -s mcgillpage.ist abbr
