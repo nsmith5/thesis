@@ -180,48 +180,112 @@ The grand potential functional is a type of cumulant generating functional in th
 Where, $\langle A^1\dots A^n \rangle_c$, denotes the n-variable joint cumuluant.
 
 If we examine, the first two cumulants we discover something remarkable about average the average density, $\rho(x)$. The mean is,
+%
 \begin{equation}
     \f{\d \Omega[\psi]}{\d \psi(x)} = -\mean{\hat{\rho}(x)} \equiv \rho(x),
 \end{equation}
+%
 And the pair correlation function can be expressed as, 
+%
 \begin{equation}
     \f{\d^2 \Omega[\psi]}{\d \psi(x) \d \psi(x^\prime)} = - \beta \mean{(\hat{\rho}(x) - \rho(x))(\hat{\rho}(x^\prime) - \rho(x^\prime))}.
 \end{equation}
+%
 As noted by Espanol et al [cite], the real underpinning of classical density functional theory is in the combination of these two equations.
 The first, implies that the average density field is a function of only its conjugate field, the intrinsic chemical potential, and the second implies that that relationship is invertible\footnote{The inverse function theorem only implies local invertibility, there is no guarentee of global invertibility. Indeed phase coexistance is a manifestation of this fact where a single intrinsic chemical potential is shared by two phases}.
 To see this note that the Jacobian, 
+%
 \begin{equation}
     \f{\d \rho(x)}{\d \psi(x^\prime)} = \beta \mean{ (\hat{\rho}(x) - \rho(x))(\hat{\rho}(x^\prime) - \rho(x^\prime))}, 
 \end{equation}
-must be positive semi-definite because of the correlation function on the right hand side. Furthermore, we can make a new thermodynamic potential called the \textit{intrinsic free energy functional} by appling a Legendre transform to the grand potential,
+%
+must be positive semi-definite because of the correlation function on the right 
+hand side. Furthermore, we can make a new thermodynamic potential called the \textit{intrinsic free energy functional} by appling a Legendre transform to the grand potential,
+%
 \begin{equation}
     \F[\rho(x)] = \Omega[\psi[\rho]] + \int dx \rho(x) \psi(x).
 \end{equation}
+%
 It can be shown \cite{HansenAppendixB} that $\rho(x)$ must be the global minimum of the grand potential, which sets the stage for the methodology of classical density functional theory: if we have a defined intrinsic free energy functional, $\F$, we can find the equilibrium density field by solving the asssociated Euler-Lagrange equation, 
+%
 \begin{equation}
     \f{\d \Omega[\rho]}{\d \rho(r)} = 0.
 \end{equation}
 
-\subsection{Techniques in Density Functional Theory}
+\subsection{Techniques in Density Functional Theory} %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 The difficulty in formulating a density functional theory is the construction of an appropriate free energy functional.
 While exact calculations are rarely feasible, there are a variety of techniques that help in building approximate functionals.
 Its important to note first what we \textit{can} compute exactly.
-To this end we split the free energy functional into ideal and excess components,
-\begin{equation}
-    \F[\rho(x)] = \F_{id}[\rho(x)] + \F_{ex}[\rho(x)].
-\end{equation}
-The ideal term is generated from the kinetic energy term in the Hamiltonian.
-Assuming that there are not momentum dependent interactions in the Hamiltonian this contribution can be computed exactly as,
-\begin{equation}
-    \F_{id}[\rho(x)] = k_bT\int \mathrm{d}x \rho(x) 
-        \ln\l(\Lambda^3\rho(x)\r) - \rho(x)
-\end{equation}
-Where, $\Lambda$, is the thermal de Broglie wavelength,
+In the case of the ideal gas, we can compute the grand potential and free energy functional exactly,
+%
+\begin{gather}
+    \Omega_{id}[\psi] = -\f{k_bT}{\Lambda^{3}}
+        \int\mathrm{d}x\, e^{\beta\psi(x)} \\
+    \F_{id}[\rho] = k_bT\int \mathrm{d}x\l\lbrace
+        \rho(x) \ln\l(\Lambda^3\rho(x)\r) - \rho(x)
+    \r\rbrace,
+\end{gather}
+% 
+Where $\Lambda$ is the thermal de Broglie wavelength,
+%
 \begin{equation}
     \Lambda = \sqrt{\f{h^2}{2\pi mk_bT}}.
 \end{equation}
-The excess term, on the other hand, typically needs to be approximated in some way.
-The excess part is generated from the interaction potential term in the Hamiltonian which, for most systems, leads to a completely intractible integral.
-Some pertubation theories exist to approach this problem, the most noteable of which is the cluster expansion [Mayer and Montrell 1941], though it is typically more successful to resort to a judicious choice of closure for the Ornstein-Zernike equation.
-It can be shown that closures of the Ornstein-Zernike equation are equivalent to summing a subset of terms in the cluster expansion to all orders in the perturbation theory.
+%
+We may then express a deviations from ideality by factoring the ideal contribution out of the partition function,
+%
+\begin{equation}
+    \Xi[\psi] = \Xi_{id}[\psi]\Xi_{ex}[\psi],
+\end{equation}
+%
+leading to grand potential and free energy functionals split into ideal and \textit{excess} components,
+%
+\begin{gather}
+    \Omega = \Omega_{id} + \Omega_{ex} \\
+    \F = \F_{id} + \F_{ex}.
+\end{gather}
+
+The interaction potential, $V(\q)$, in the excess partition function typically makes a direct approach to calculating the excess free energy intractible.
+Though perturbative methods, including the cluster expansion technique (cite Mayer and Montrell '41), have been developed to treat the interaction potential systematically, other approximation schemes for the excess free energy are typically more pragmatic.
+In particular, we can approximate the excess free energy by expanding around a reference homogeneos fluid with chemical potential $\mu_0$ and density $\rho_0$,
+%
+\begin{equation}
+    \F_{ex}[\rho] = \F_{ex}[\rho_0] 
+        + \l . \f{\d \F_{ex}}{\d \rho(x)} \r\vert_{\rho_0} \ast \Delta\rho(x) 
+        + \f{1}{2} \Delta\rho(x^\prime) \ast 
+            \l . \f{\d^2 \F_{ex}}{\d\rho(x)\d\rho(x^\prime)} \r\vert_{\rho_0} 
+            \ast \Delta\rho(x) + \dots,
+\end{equation}
+%
+Where $\Delta\rho(x) = \rho(x) - \rho_0$ and we have introduced the notation, $\ast$ to mean integration over repeated co-ordinates,
+%
+\begin{equation}
+    f(x^\prime) \ast g(x^\prime) \equiv \int\mathrm{d}x^\prime f(x^\prime) g(x^\prime).
+\end{equation}
+%
+The excess free energy is the generating functional of family of correlation functions called \textit{direct correlation functions}, 
+%
+\begin{equation}
+    \f{\d^n \F_{ex}[\rho]}{\d \rho(x_1) ... \d \rho(x_n)} = -\beta C^{n}(x_1, \dots, x_n).
+\end{equation}
+%
+The first of which, for a uniform fluid, is the excess contribution to the chemical potential which we may express as the total chemical potential less the ideal contribution, 
+%
+\begin{equation}
+    \left.\f{\d F_{ex}}{\d \rho}\right\vert_{\rho_0} = \mu_0^{ex} = \mu_0 - \mu_{id} = \mu_0 - k_bT\ln\left(\Lambda^3 \rho_0\right).
+\end{equation}
+%
+Combining ideal and excess contributions and substracting off the constant reference free energy we arrive at an approximation for the deviation in free energy from the reference. 
+%
+\begin{equation}
+    \beta \Delta \F [\rho] = 
+        \int \mathrm{d}x \l\lbrace \rho(x) \ln\l(\f{\rho(x)}{\rho_0} \r) -(1-\beta\mu_0) \Delta \rho(x)\r\rbrace
+        - \f{1}{2}\Delta \rho(r) \ast C_0^{(2)}(r, r^\prime) \ast \Delta \rho(r^\prime)
+\end{equation}
+
+Its reasonable to ask at this point whether or not we have really gained anything with this approximation scheme.
+Although we have arrived at a relatively simple form for the free energy functional, we've added a lot of parameters to the functional based on the reference fluid.
+In fact, finding the direct pair correlation function, $C_0^{(2)}(x, x^\prime)$, for the reference fluid involves solving a difficult integral in its own right.
+There are potential resolutions to this problem: the first is that something about HNC blargh
