@@ -1,17 +1,17 @@
-In this chapter we'll describe the fundamental physics behind the phase field crystal theory.
-Like many physical theories, it is derived using a set of successive approximations.
-Each approximation yield a new theory that is more narrow in scope, but more tractible to either analytic or numerical analysis.
+In this chapter we will describe the fundamental physics behind the phase field crystal theory.
+Like many physical theories, it is derived using successive approximations.
+Each approximation yields a new theory that is more narrow in scope, yet more tractible to either analytic or numerical analysis.
 
 PFC is ultimately a thermodynamic theory and as such it makes connection to fundamental, microscopic physics by way of statistical mechanics.
-Statistical mechanics tied the macroscopic observables to microscopic phenomena with a probabilistic approach.
-The basic assumption at this level is that, if a system is sufficiently complex, there are circumstances under which its statistical behaviour becomes relatively simple.
-Now for systems with macroscopic ($\mathcal{O}(10^{23})$) amount of particles this is almost always the case and so for this large systems we can often compute the macroscopic or thermodynamic observables using a statistical approach instead of solving the microscopic equations of motion.
+Statistical mechanics ties macroscopic observables to microscopic phenomena with a probabilistic approach.
+The premise is that, if a system is sufficiently complex, there are circumstances under which its statistical behaviour becomes relatively simple.
+In fact, using statistical inference instead of solving any microscopic equations of motion can lead to highly accurate calculations of many thermodynamic observables in these special cases.\footnote{Further details of statistical mechanics as a form of statistical inference can be seen in a classic paper by E. T. Jaynes \cite{JAYNES57}}
 
-At the fundamental level, our systems of interest are governed by quantum mechanics and so we might use the theory of quantum statistical mechanics to attempt to compute the thermodynamic observables of our system.
-We will see that for our systems of interest that the quantum statistical theory is quite intractible, but with an approximation we can treat our system in the \textit{semi-classical limit}.
+At the level of fundamental physics, our systems of interest are governed by quantum mechanics and so we might use the theory of quantum statistical mechanics to attempt to compute the thermodynamic observables of our system.
+We will see that for our systems of interest that the quantum statistical theory is completely intractible, but with an approximation we can treat our system in the \textit{semi-classical limit}.
 
-In semi-classical limit, we can talk in a robust way about the structure of the denisty field, using the Classical Density Functional Theory (CDFT) framework.
-While CDFT supplies the correct setting to discuss the density, it is again rarely feasible to perform exact calculations.
+In semi-classical limit, we can build a framework to examine the structure of the denisty field, using Classical Density Functional Theory (CDFT)\index[keylist]{Classical Density Functional Theory}.
+While CDFT supplies the correct setting to discuss microstructure, it is again rarely feasible to perform exact calculations.
 
 Finally, we'll see that an approximation of the exact CFDT free energy functional will yield the PFC theory that is amenable to both analytic and numerical analysis.
 
@@ -292,7 +292,7 @@ leading to grand potential and free energy functionals split into ideal and \tex
 \end{gather}
 
 The interaction potential, $V(\q)$, in the excess partition function typically makes a direct approach to calculating the excess free energy intractible.
-Though perturbative methods, including the cluster expansion technique (cite Mayer and Montrell '41), have been developed to treat the interaction potential systematically, other approximation schemes for the excess free energy are typically more pragmatic.
+Though perturbative methods, including the cluster expansion technique \cite{MAYER41}, have been developed to treat the interaction potential systematically, other approximation schemes for the excess free energy are typically more pragmatic.
 In particular, we can approximate the excess free energy by expanding around a reference homogeneos fluid with chemical potential $\mu_0$ and density $\rho_0$,
 %
 \begin{equation}
@@ -331,5 +331,5 @@ Combining ideal and excess contributions and substracting off the constant refer
 
 Its reasonable to ask at this point whether or not we have really gained anything with this approximation scheme.
 Although we have arrived at a relatively simple form for the free energy functional, we've added a lot of parameters to the functional based on the reference fluid.
-In fact, finding the direct pair correlation function, $C_0^{(2)}(x, x^\prime)$, for the reference fluid involves solving a difficult integral in its own right.
-There are potential resolutions to this problem: the first is that something about HNC blargh
+Thankfully, the theory of homogeneous liquids, such as our reference liquid, is very well established.
+This means we may relay on a broad choice of analytical, numerical or experimental techniques to derive these parameters.
