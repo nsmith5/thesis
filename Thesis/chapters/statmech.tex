@@ -25,13 +25,16 @@ We can ignore some of these quantum mechanical details by looking at statistical
 
 For the sake of clarity, we'll look at a system of $N$ identical particles in the canonical ensemble but generalization to multi-component systems and other ensembles is straight forward. 
 We start with the definition of the partition function for a system of many particles,  
+%
 \begin{equation}
     Z = \trace{e^{-\beta\hat{H}}},
 \end{equation} 
+%
 where, $\hat{H} = \f{\vert\p\vert^2}{2m} + V(\q)$ and $\p = (p_1, p_2, ...p_N)$ is the vector of particle momenta. 
 $\q$ is similarly defined for the particle positions.
 Wigner \cite{PhysRev.40.749},and, shortly after, Kirkwood \cite{PhysRev.44.31} showed that the partition function could be expanded in powers of $\hbar$, facilitating the calculation of both a classical limit and quantum corrections to the partition function.
 Their method, the Wigner-Kirkwood expansion, involves evaluating the trace operation over a basis of plain wave solutions,
+%
 \begin{equation}
 	\Z(\beta) = \int 
 		\f{\mathrm{d}\q \mathrm{d}\p}{(2\pi \hbar)^N}
@@ -39,12 +42,16 @@ Their method, the Wigner-Kirkwood expansion, involves evaluating the trace opera
 		e^{-\beta \hat{H}}
 		e^{\frac{i\p\cdot\q}{\hbar}} = \int d\Gamma I(p, q),
 \end{equation}
+%
 Where, $d\Gamma$ is the phase space measure $\mathrm{d}\p\mathrm{d}\q/(2\pi\hbar)^N$.
 To compute the integrand, $I(p, q)$, we follow Uhlenbeck and Bethe \cite{Uhlenbeck1936729} and first compute its derivative,
+%
 \begin{equation}
 	\frac{\partial I(p, q)}{\partial \beta} = -\pwp\hat{H}\pwm I(p, q).
 \end{equation}
+%
 If we then make a change of variables, $I(q, p) = e^{-\beta\ham}W(q, p)$, where $\ham$ is the classical Hamiltonian, and use the explicit form of the quantum Hamiltonian we arrive at a partial differential equation for $W$.
+%
 \begin{equation}
 	\f{\partial W}{\partial \beta} = \f{\hbar^2}{2} \l(
 		\nabla_{\mathbf{q}}^2 - 
@@ -54,24 +61,32 @@ If we then make a change of variables, $I(q, p) = e^{-\beta\ham}W(q, p)$, where 
 		2 \frac{i}{\hbar}\p\cdot(\nabla_\q - \beta\nabla_\q)
 	\r)W(q, p)
 \end{equation}
+%
 The solution can be written as a power series in $\hbar$, $W = 1 + \hbar W_1 + \hbar W_2 + ...$.
 This creates a power series expansion for the partition function as well,
+%
 \begin{equation}
     \mathcal{Z} = (1 + \hbar \mean{W_1} + \hbar^2 \mean{W_2}+ ...) 
     \int d\Gamma e^{\beta\ham}.
 \end{equation}
+%
 Where the average, $\mean{\cdot}$, denotes the the classical average, 
+%
 \begin{equation}
     \langle A(p, q) \rangle = \frac{1}{\Z} 
         \int d\Gamma A(p, q) e^{-\beta \ham}.
 \end{equation}
+%
 For the sake of brevity we'll simply quote solution to second order, but details can be found in Landau and Lifshitz \cite{LANDAU198079}.
 Interestingly, the first order term is exactly zero.
+%
 \begin{gather}
     \mean{W_1}= 0 \\
     \mean{W_2} = - \f{\beta^3}{24 m} \mean{\l\vert \nabla_\q V \r\vert^2} 
 \end{gather}
+%
 In terms of the free energy, for example, the corrections to second order would be, 
+%
 \begin{equation}{\label{quantumcorr}}
     \mathcal{F} = \mathcal{F}_{classical} + \f{\hbar^2\beta^2}{24m}
         \mean{ \l\vert \nabla_\q V(\q) \r\vert^2 }.
@@ -90,20 +105,25 @@ The integral over phase space of the partition function must only take into acco
 In the quantum theory this is acheived by tracing over any orthonormal basis of the Hilbert space, but in the classical theory we need to be careful not to double count states when identical particles are in the theory.
 Exchange of two identical particles does not result in a physically different state and thus this state should only be considered only once in the sum over states in the partition function.
 More precisely, we should write the classical partition function as,
-
+%
 \begin{equation}
     \Z = \int^\prime d\Gamma e^{-\beta \ham},
 \end{equation}
+%
 Where the primed integral denotes integration only over the physically distinct states. In the common case of $N$ identical particles, the phase space integral becomes, 
+%
 \begin{equation}
     \int^\prime d\Gamma \rightarrow \f{1}{N!}\int d\Gamma
 \end{equation}
-
+%
 Aggregating our results, we can write the partition function in the semi-classical limit as,
+%
 \begin{equation}
     \Z(\beta) = \frac{1}{N!}\int d\Gamma e^{-\beta \ham},
 \end{equation}
+%
 Or, in the grand canonical ensemble,
+%
 \begin{equation}
     \Xi(\mu, \beta) = \sum_{N = 0}^\infty \f{e^{\beta\mu N}}{N!} \int d\Gamma e^{-\beta \ham}
 \end{equation}
@@ -120,18 +140,25 @@ As per usual in theories of statistical thermodynamics we must distinguish betwe
 In classical statistical mechanics, operators are simply functions over the phase space, $\Gamma$.
 We use the term operator to make connection with the quantum mechanical theory.
 In the case of the density field, the microscopic operator is sum of Dirac delta functions at the position of each particle,
+%
 \begin{equation}
     \hat{\rho}(x; \q) = \sum_{i = 0}^N \d^{(3)}\l(x - q_i\r)
 \end{equation}
+%
 Whence the thermodynamic observable is, 
+%
 \begin{equation}
     \rho(x) = \mean{\hat{\rho}(x; \q)} = \trace{\hat{\rho}(x; \q) f(\q, \p)}
 \end{equation}
+%
 Where, $\trace{\cdot}$ denotes the classical trace\footnote{The classical trace in the grand canonical example in this particular case},
+%
 \begin{equation}
     \trace{A(\q, \p)} = \sum_{N = 0}^\infty\f{1}{N!}\int\mathrm{d}\Gamma A(\q, \p),
 \end{equation}
+%
 And, $f(\q, \p)$ is the probability density function,
+%
 \begin{equation}
     f(\q, \p) = \f{e^{-\beta (\ham - \mu N)}}{\Xi(\mu, \beta)}.
 \end{equation}
@@ -140,43 +167,60 @@ To construct a theory of the density field we review the usual methodology for s
 \begin{equation}
     S[f(\q, \p)] = -k_b \trace{f(\q, \p)\ln\l(f(\q, \p)\r)},
 \end{equation}
+%
 With a probability density function of the form,
+%
 \begin{equation}
     f(\q, \p) \propto \exp\l(-\beta(\ham -\mu N + \int \mathrm{d}x \phi(x)\hat{\rho}(x)\r).
 \end{equation}
+%
 Where, $\beta$, $\mu$ and $\phi(x)$ are the Lagrange multiplies associated with constraints of average energy, number of particles and density respectively. As you might imagine the constraints of average particle number and density are not independent and we with the insight that,
+%
 \begin{equation}
     N = \int dx \hat{\rho}(x),
 \end{equation}
+%
 We can combine their Lagrange multipliers into one,
+%
 \begin{equation}
     f(\q, \p) \propto \exp\l(- \beta(\ham - \int \mathrm{d}x \psi(x) \hat{\rho}(x))\r),
 \end{equation}
+%
 Where, $\psi(x) = \mu - \phi(x)$, is the combined Langrange multiplier named the \textit{intrinsic chemical potential}. Recalling that chemical potential is the change Helmholtz free energy made by virtue of adding particles to the system,
+%
 \begin{equation}
     \f{\partial F}{\partial N} = \mu,
 \end{equation}
+%
 The interpretation of the intrinsic chemical potential follows as the Helmholtz free energy change due to particles being added to a specific location.
 We'll see this in more detail briefly.
 Now, as with all statistical mechanics theories, the challenge to is to compute the moment generating function (partition function) or equivalently the cumulant generating function (free energy) so as to compute the statistics of our observable of choice.
 In case of observables of the density field, this is made somewhat more technical by the fact that the density is an entire function instead of a scalar variable.
 As such the partition function is more precisely called the partition \textit{functional} and the free energy function is more precisely called the free energy \textit{functional}.
 Specifically, the grand canonical partition functional is,
+%
 \begin{equation}
     \Xi[\psi(x)] = \trace{\exp\l(-\beta\ham +\beta\int\mathrm{d}x \psi(x) \hat{\rho}(x)\r)}.
 \end{equation}
+%
 As eluded to above, the partition function is a type of moment generating functional in that repeated functional differentiation yields moments of the density field:
+%
 \begin{equation}
    \f{\beta^{-n}}{\Xi} \f{\d^n \Xi[\psi]}{\d \psi(x_1) \dots \d\psi(x_n)} = \mean{\hat{\rho}(x_1)\dots\hat{\rho}(x_n)}.
 \end{equation}
+%
 Similarly, we can construct a free enery functional by taking the logarithm of the partition function. This free energy functional in particular is called the \textit{grand potential functional}.
+%
 \begin{equation}
     \Omega[\psi(x)] = -k_bT\ln\l(\Xi[\psi(r)]\r)
 \end{equation}
+%
 The grand potential functional is a type of cumulant generating functional in the sense that repeated functional differentiation yields cumulants of the density field:
+%
 \begin{equation}
     -\beta^{-n}\f{\d^n \beta\Omega[\psi]}{\d\psi(x_1)\dots\d\psi(x_n)} = \mean{\hat{\rho}(x_1)\dots\hat{\rho}(x_n)}_c
 \end{equation}
+%
 Where, $\langle A^1\dots A^n \rangle_c$, denotes the n-variable joint cumuluant.
 
 If we examine, the first two cumulants we discover something remarkable about average the average density, $\rho(x)$. The mean is,
