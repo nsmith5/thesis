@@ -82,7 +82,10 @@
 
 \begin{document}
 
-%  Front Matter 
+%%%%%%%%%%%%%%%%%
+%  Front Matter %
+%%%%%%%%%%%%%%%%%
+
 \maketitle
 \begin{romanPagenumber}{2}
 
@@ -114,45 +117,43 @@
 
 \end{romanPagenumber}
 
-% -- Main Matter --
+%%%%%%%%%%%%%%%%%%%%%
+% -- Main Matter -- %
+%%%%%%%%%%%%%%%%%%%%%
+
 \chapter{Introduction}
 
 \chapter{Fundamentals}
-\input{chapters/statmech}
+\label{fundamentals}
+\input{chapters/fundamentals}
 
 \chapter{Classical Density Functional Theory of Freezing}
 \input{chapters/dft_of_freezing}
 
-\chapter{Fake}
-\input{chapters/dft}
-
-\chapter{Dynamics}
-\input{chapters/ddft}
+\chapter{Simplified Binary Phase Field Crystal Models}
+%\input{chapters/rpfc}
 
 \chapter{Applications}
-asdfasdf
+%\input{chapters/apps}
 
-% -- Back Matter --
-\SetAppendixName{Appendix}
-\SetAppendixText{Text!}
-\ETDAppendix{Noise in Nonlinear Langevin Equations}{
-    \input{chapters/noise}
-}
+%%%%%%%%%%%%%%%%%%%%%
+% -- Back Matter -- %
+%%%%%%%%%%%%%%%%%%%%%
 
-\ETDAppendix{Gaussian Functional Integrals}{
-    \input{chapters/gaussian}
-}
+\appendix
 
-\ETDAppendix{Binary Correlation Functions}{
-    \input{chapters/binary_correlations}
-}
+\chapter{Noise in Nonlinear Langevin Equations}
+\input{chapters/noise}
+
+\chapter{Gaussian Functional Integrals}
+\input{chapters/gaussian}
+
+\chapter{Binary Correlation Functions}
+\input{chapters/binary_correlations}
 
 \bibHeading{References}
 \bibliography{references}
 \bibliographystyle{plain}
-
-\index[abbr]{PFC: Phase Field Crystal}
-\index[abbr]{CDFT: Classical Density Functional Theory}
 
 \printindex[keylist]{Index}{Index}{}
 \printindex[abbr]{KEY TO ABBREVIATIONS}{KEY TO ABBREVIATIONS}{}
