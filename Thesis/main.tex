@@ -1,4 +1,4 @@
-\documentclass[12pt,Bold,letterpaper]{mcgilletdclass}
+\documentclass[12pt, letterpaper]{report}
 
 %%%%%%%%%%%%
 % Packages %
@@ -8,11 +8,19 @@
 \usepackage[utf8]{inputenc}
 
 % Graphics and path to graphics
-\usepackage[dvips, final]{graphicx}
+\usepackage{graphicx}
 \graphicspath{ {figures/} }
 
-% Margins etc
-\usepackage[dvips]{geometry}
+% Margins, links etc..
+\usepackage[letterpaper, margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true,  %Colours links instead of ugly boxes
+  urlcolor     = blue,  %Colour for external hyperlinks
+  linkcolor    = black, %Colour of internal links
+  citecolor    = black   %Colour of citations
+}
+\usepackage{setspace}
 
 % Math packages
 \usepackage{amsmath}
@@ -23,26 +31,9 @@
 % Page alignment \addtolength{\hoffset}{0pt}
 \addtolength{\voffset}{0pt}
 
-%%%%%%%%%%%%%%%%
-% Front matter %
-%%%%%%%%%%%%%%%%
-
-\SetTitle{\huge{Structureal Phase Field Crystal Models as a Lense on Nonequilibrium Kinetic Pathways}}
-\SetAuthor{Nathan Frederick Smith}
-\SetDegreeType{Masters of Science}
-\SetDepartment{Department of Physics}
-\SetUniversity{McGill Univsersity}
-\SetUniversityAddr{Montreal, Quebec}
-\SetThesisDate{2017-??-??}
-\SetRequirements{[requirements statement]}
-\SetCopyright{[copyright statement]}
-
 %%%%%%%%%%%%
 % Indicies %
 %%%%%%%%%%%%
-
-\makeindex[keylist]
-\makeindex[abbr]
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 % Aliases and commands %
@@ -74,8 +65,6 @@
 % Average
 \newcommand{\mean}[1]{\left\langle #1 \right\rangle}
 
-\listfiles
-
 %%%%%%%%%%%%%%%%%%
 % Document Begin %
 %%%%%%%%%%%%%%%%%%
@@ -85,37 +74,52 @@
 %%%%%%%%%%%%%%%%%
 %  Front Matter %
 %%%%%%%%%%%%%%%%%
+\begin{titlepage}
+    \begin{center}
+        \vspace*{1cm}
+        
+        \Huge
+        \textbf{Structural Phase Field Crystal Models as a Lense on Nonequilibrium Kinetic Pathways}
+        
+        \vspace{0.5cm}
+        \LARGE
+        Thesis Subtitle
+        
+        \vspace{1.5cm}
+        
+        \textbf{Nathan Frederick Smith}
+        
+        \vfill
+        
+        A thesis presented for the degree of\\
+        Master's of Science
+        
+        \vspace{0.8cm}
+        
+        \includegraphics[width=0.2\textwidth]{crest.eps}
+        
+        \Large
+        Department of Physics\\
+        McGill University, Montreal\\
+        Canada\\
+        ??-??-2017
+        
+    \end{center}
+\end{titlepage}
 
-\maketitle
-\begin{romanPagenumber}{2}
+\doublespacing
 
-\SetDedicationName{\MakeUppercase{Dedication}}
-\SetDedicationText{My dedication....}
-\Dedication
+\chapter*{DEDICATION}
 
-\SetAcknowledgeName{\MakeUppercase{Acknowledgements}}
-\SetAcknowledgeText{Acknowledgments, if included, must be written in complete sentences.  Do not use direct address.  For example, instead of Thanks, Mom and Dad!, you should say I thank my parents. }
-\Acknowledge
+\chapter*{ACKNOWLEDGEMENTS}
 
+\chapter*{ABSTRACT}
 
-%  English Abstract
-\SetAbstractEnName{\MakeUppercase{Abstract}}
-\SetAbstractEnText{ Abstract in English and French are required. The text of the abstract in English begins here.}
-\AbstractEn
+\chapter*{ABRÉGÉ} 
 
-%  French Abstract  
-\SetAbstractFrName{\MakeUppercase{ABR\'{E}G\'{E}}}
-\SetAbstractFrText{ The text of the abstract in French begins here.  }
-\AbstractFr
-
-\TOCHeading{\MakeUppercase{Table of Contents}}
-\LOTHeading{\MakeUppercase{List of Tables}}
-\LOFHeading{\MakeUppercase{List of Figures}}
 \tableofcontents 
-\listoftables 
-\listoffigures 
-
-\end{romanPagenumber}
+\listoffigures
+\listoftables
 
 %%%%%%%%%%%%%%%%%%%%%
 % -- Main Matter -- %
@@ -151,11 +155,7 @@
 \chapter{Binary Correlation Functions}
 \input{chapters/binary_correlations}
 
-\bibHeading{References}
 \bibliography{references}
 \bibliographystyle{plain}
-
-\printindex[keylist]{Index}{Index}{}
-\printindex[abbr]{KEY TO ABBREVIATIONS}{KEY TO ABBREVIATIONS}{}
 
 \end{document}
