@@ -69,6 +69,8 @@
 % Document Begin %
 %%%%%%%%%%%%%%%%%%
 
+\pagenumbering{roman}
+
 \begin{document}
 
 %%%%%%%%%%%%%%%%%
@@ -109,13 +111,37 @@
 
 \doublespacing
 
-\chapter*{DEDICATION}
+\section*{Dedication}
+\label{sec:dedication}
+\addcontentsline{toc}{chapter}{\nameref{sec:dedication}}
 
-\chapter*{ACKNOWLEDGEMENTS}
+Dedication here...
 
-\chapter*{ABSTRACT}
+\clearpage
 
-\chapter*{ABRÉGÉ} 
+\section*{Acknowledgements}
+\label{sec:acknowledgements}
+\addcontentsline{toc}{chapter}{\nameref{sec:acknowledgements}}
+
+Acknowledgements here...
+
+\clearpage
+
+\section*{Abstract}
+\label{sec:abstract}
+\addcontentsline{toc}{chapter}{\nameref{sec:abstract}}
+
+English abstract...
+
+\clearpage
+
+\section*{Abrégé}
+\label{sec:abrege}
+\addcontentsline{toc}{chapter}{\nameref{sec:abrege}}
+
+French abstract...
+
+\clearpage
 
 \tableofcontents 
 \listoffigures
@@ -126,6 +152,7 @@
 %%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Introduction}
+\pagenumbering{arabic}
 
 \chapter{Fundamentals}
 \label{fundamentals}
