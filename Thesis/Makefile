@@ -5,7 +5,7 @@ main.pdf: $(SOURCES)
 	bibtex main
 	latex main.tex
 	pdflatex main.tex
-	rm *.{idx,ilg,ind,aux,bbl,blg,dvi,lof,lot,log,toc,out}
+	rm -f *.{idx,ilg,ind,aux,bbl,blg,dvi,lof,lot,log,toc,out}
 	
 .PHONY: clean
 
