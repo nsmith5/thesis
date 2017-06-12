@@ -1,337 +1,388 @@
-In this chapter we will describe the fundamental physics behind the phase field crystal theory.
-Like many physical theories, it is derived using successive approximations.
-Each approximation yields a new theory that is more narrow in scope, yet more tractible to either analytic or numerical analysis.
+In this chapter we will describe the fundamental physics behind the phase field
+crystal theory.  Like many physical theories, it is derived using successive
+approximations.  Each approximation yields a new theory that is more narrow in
+scope, yet more tractible to either analytic or numerical analysis.
 
-PFC is ultimately a thermodynamic theory and as such it makes connection to fundamental, microscopic physics by way of statistical mechanics.
-Statistical mechanics ties macroscopic observables to microscopic phenomena with a probabilistic approach.
-The premise is that, if a system is sufficiently complex, there are circumstances under which its statistical behaviour becomes relatively simple.
-In fact, using statistical inference instead of solving any microscopic equations of motion can lead to highly accurate calculations of many thermodynamic observables in these special cases.\footnote{Further details of statistical mechanics as a form of statistical inference can be seen in a classic paper by E. T. Jaynes \cite{JAYNES57}}
+PFC is ultimately a thermodynamic theory and as such it makes connection to
+fundamental, microscopic physics by way of statistical mechanics.  Statistical
+mechanics ties macroscopic observables to microscopic phenomena with a
+probabilistic approach.  The premise is that, if a system is sufficiently
+complex, there are circumstances under which its statistical behaviour becomes
+relatively simple.  In fact, using statistical inference instead of solving any
+microscopic equations of motion can lead to highly accurate calculations of
+many thermodynamic observables in these special cases.\footnote{Further details
+of statistical mechanics as a form of statistical inference can be seen in a
+classic paper by E. T. Jaynes \cite{JAYNES57}}
 
-At the level of fundamental physics, our systems of interest are governed by quantum mechanics and so we might use the theory of quantum statistical mechanics to attempt to compute the thermodynamic observables of our system.
-We will see that for our systems of interest that the quantum statistical theory is completely intractible, but with an approximation we can treat our system in the \textit{semi-classical limit}.
+At the level of fundamental physics, our systems of interest are governed by
+quantum mechanics and so we might use the theory of quantum statistical
+mechanics to attempt to compute the thermodynamic observables of our system.
+We will see that for our systems of interest that the quantum statistical
+theory is completely intractible, but with an approximation we can treat our
+system in the \textit{semi-classical limit}.
 
-In semi-classical limit, we can build a framework to examine the structure of the denisty field, using Classical Density Functional Theory (CDFT)\index[keylist]{Classical Density Functional Theory}.
-\index[abbr]{CDFT@CDFT: Classical Density Functional Theory}
-While CDFT supplies the correct setting to discuss microstructure, it is again rarely feasible to perform exact calculations.
+In semi-classical limit, we can build a framework to examine the structure of
+the denisty field, using Classical Density Functional Theory
+(CDFT)\index[keylist]{Classical Density Functional Theory}.
+\index[abbr]{CDFT@CDFT: Classical Density Functional Theory} While CDFT
+supplies the correct setting to discuss microstructure, it is again rarely
+feasible to perform exact calculations.
 
-Finally, we'll see that an approximation of the exact CFDT free energy functional will yield the PFC theory that is amenable to both analytic and numerical analysis.
+Finally, we'll see that an approximation of the exact CFDT free energy
+functional will yield the PFC theory that is amenable to both analytic and
+numerical analysis.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Statistical Mechanics in the Semi-classical limit} %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Although the quantum statistical mechanics picture gives us a link between the microscopic and macroscopic reality of thermodynamics systems, it still contains too much detail for many systems of interest.
-For instance, for many systems of interest, the precise bosonic or fermionic nature of the particles in the system has little consequence on the thermodynamic properties.
-We can ignore some of these quantum mechanical details by looking at statistical mechanics in the \textit{semi-classical limit}.
+Although the quantum statistical mechanics picture gives us a link between the
+microscopic and macroscopic reality of thermodynamics systems, it still
+contains too much detail for many systems of interest.  For instance, for many
+systems of interest, the precise bosonic or fermionic nature of the particles
+in the system has little consequence on the thermodynamic properties.  We can
+ignore some of these quantum mechanical details by looking at statistical
+mechanics in the \textit{semi-classical limit}.
 
-For the sake of clarity, we'll look at a system of $N$ identical particles in the canonical ensemble but generalization to multi-component systems and other ensembles is straight forward. 
-We start with the definition of the partition function for a system of many particles,  
+For the sake of clarity, we'll look at a system of $N$ identical particles in
+the canonical ensemble but generalization to multi-component systems and other
+ensembles is straight forward.  We start with the definition of the partition
+function for a system of many particles,  
 %
-\begin{equation}
-    Z = \trace{e^{-\beta\hat{H}}},
-\end{equation} 
+\begin{equation} Z = \trace{e^{-\beta\hat{H}}}, \end{equation} 
 %
-where, $\hat{H} = \f{\vert\p\vert^2}{2m} + V(\q)$ and $\p = (p_1, p_2, ...p_N)$ is the vector of particle momenta. 
-$\q$ is similarly defined for the particle positions.
-Wigner \cite{PhysRev.40.749},and, shortly after, Kirkwood \cite{PhysRev.44.31} showed that the partition function could be expanded in powers of $\hbar$, facilitating the calculation of both a classical limit and quantum corrections to the partition function.
-Their method, the Wigner-Kirkwood expansion, involves evaluating the trace operation over a basis of plain wave solutions,
+where, $\hat{H} = \f{\vert\p\vert^2}{2m} + V(\q)$ and $\p = (p_1, p_2, ...p_N)$
+is the vector of particle momenta.  $\q$ is similarly defined for the particle
+positions.  Wigner \cite{PhysRev.40.749},and, shortly after, Kirkwood
+\cite{PhysRev.44.31} showed that the partition function could be expanded in
+powers of $\hbar$, facilitating the calculation of both a classical limit and
+quantum corrections to the partition function.  Their method, the
+Wigner-Kirkwood expansion, involves evaluating the trace operation over a basis
+of plain wave solutions,
 %
-\begin{equation}
-	\Z(\beta) = \int 
-		\f{\mathrm{d}\q \mathrm{d}\p}{(2\pi \hbar)^N}
-		e^{-\frac{i\p\cdot\q}{\hbar}}
-		e^{-\beta \hat{H}}
-		e^{\frac{i\p\cdot\q}{\hbar}} = \int d\Gamma I(p, q),
-\end{equation}
+\begin{equation} \Z(\beta) = \int \f{\mathrm{d}\q \mathrm{d}\p}{(2\pi \hbar)^N}
+e^{-\frac{i\p\cdot\q}{\hbar}} e^{-\beta \hat{H}} e^{\frac{i\p\cdot\q}{\hbar}} =
+\int d\Gamma I(p, q), \end{equation}
 %
-Where, $d\Gamma$ is the phase space measure $\mathrm{d}\p\mathrm{d}\q/(2\pi\hbar)^N$.
-To compute the integrand, $I(p, q)$, we follow Uhlenbeck and Bethe \cite{Uhlenbeck1936729} and first compute its derivative,
+Where, $d\Gamma$ is the phase space measure
+$\mathrm{d}\p\mathrm{d}\q/(2\pi\hbar)^N$.  To compute the integrand, $I(p, q)$,
+we follow Uhlenbeck and Bethe \cite{Uhlenbeck1936729} and first compute its
+derivative,
 %
-\begin{equation}
-	\frac{\partial I(p, q)}{\partial \beta} = -\pwp\hat{H}\pwm I(p, q).
-\end{equation}
+\begin{equation} \frac{\partial I(p, q)}{\partial \beta} = -\pwp\hat{H}\pwm
+I(p, q).  \end{equation}
 %
-If we then make a change of variables, $I(q, p) = e^{-\beta\ham}W(q, p)$, where $\ham$ is the classical Hamiltonian, and use the explicit form of the quantum Hamiltonian we arrive at a partial differential equation for $W$.
+If we then make a change of variables, $I(q, p) = e^{-\beta\ham}W(q, p)$, where
+$\ham$ is the classical Hamiltonian, and use the explicit form of the quantum
+Hamiltonian we arrive at a partial differential equation for $W$.
 %
-\begin{equation}
-	\f{\partial W}{\partial \beta} = \f{\hbar^2}{2} \l(
-		\nabla_{\mathbf{q}}^2 - 
-		\beta(\nabla_\q^2V) + 
-		\beta^2(\nabla V)^2 -
-		2\beta(\nabla_\q V)\cdot\nabla_\q + 
-		2 \frac{i}{\hbar}\p\cdot(\nabla_\q - \beta\nabla_\q)
-	\r)W(q, p)
-\end{equation}
+\begin{equation} \f{\partial W}{\partial \beta} = \f{\hbar^2}{2} \l(
+\nabla_{\mathbf{q}}^2 - \beta(\nabla_\q^2V) + \beta^2(\nabla V)^2 -
+2\beta(\nabla_\q V)\cdot\nabla_\q + 2 \frac{i}{\hbar}\p\cdot(\nabla_\q -
+\beta\nabla_\q) \r)W(q, p) \end{equation}
 %
-The solution can be written as a power series in $\hbar$, $W = 1 + \hbar W_1 + \hbar W_2 + ...$.
-This creates a power series expansion for the partition function as well,
+The solution can be written as a power series in $\hbar$, $W = 1 + \hbar W_1 +
+\hbar W_2 + ...$.  This creates a power series expansion for the partition
+function as well,
 %
-\begin{equation}
-    \mathcal{Z} = (1 + \hbar \mean{W_1} + \hbar^2 \mean{W_2}+ ...) 
-    \int d\Gamma e^{\beta\ham}.
-\end{equation}
+\begin{equation} \mathcal{Z} = (1 + \hbar \mean{W_1} + \hbar^2 \mean{W_2}+ ...)
+\int d\Gamma e^{\beta\ham}.  \end{equation}
 %
 Where the average, $\mean{\cdot}$, denotes the the classical average, 
 %
-\begin{equation}
-    \langle A(p, q) \rangle = \frac{1}{\Z} 
-        \int d\Gamma A(p, q) e^{-\beta \ham}.
-\end{equation}
+\begin{equation} \langle A(p, q) \rangle = \frac{1}{\Z} \int d\Gamma A(p, q)
+e^{-\beta \ham}.  \end{equation}
 %
-For the sake of brevity we'll simply quote solution to second order, but details can be found in Landau and Lifshitz \cite{LANDAU198079}.
+For the sake of brevity we'll simply quote solution to second order, but
+details can be found in Landau and Lifshitz \cite{LANDAU198079}.
 Interestingly, the first order term is exactly zero.
 %
-\begin{gather}
-    \mean{W_1}= 0 \\
-    \mean{W_2} = - \f{\beta^3}{24 m} \mean{\l\vert \nabla_\q V \r\vert^2} 
-\end{gather}
+\begin{gather} \mean{W_1}= 0 \\ \mean{W_2} = - \f{\beta^3}{24 m} \mean{\l\vert
+\nabla_\q V \r\vert^2} \end{gather}
 %
-In terms of the free energy, for example, the corrections to second order would be, 
+In terms of the free energy, for example, the corrections to second order would
+be, 
 %
-\begin{equation}{\label{quantumcorr}}
-    \mathcal{F} = \mathcal{F}_{classical} + \f{\hbar^2\beta^2}{24m}
-        \mean{ \l\vert \nabla_\q V(\q) \r\vert^2 }.
+\begin{equation}{\label{quantumcorr}} \mathcal{F} = \mathcal{F}_{classical} +
+\f{\hbar^2\beta^2}{24m} \mean{ \l\vert \nabla_\q V(\q) \r\vert^2 }.
 \end{equation}
 
-There are a few things to note about this finding, first of all the correction inversely proportional to both the temperature and the particle mass.
-For copper at room termperature, for instance, the prefactor $\hbar^2\beta^2/(24 m)$ is $\mathcal{O}(10^{-4})$. 
-The correction is also proportional to the mean of the squared force felt by each particle. So high density materials will have a higher quantum correction because they sample the short-range repulsive region of the pair potential more than their low density counter parts.
+There are a few things to note about this finding, first of all the correction
+inversely proportional to both the temperature and the particle mass.  For
+copper at room termperature, for instance, the prefactor $\hbar^2\beta^2/(24
+m)$ is $\mathcal{O}(10^{-4})$.  The correction is also proportional to the mean
+of the squared force felt by each particle. So high density materials will have
+a higher quantum correction because they sample the short-range repulsive
+region of the pair potential more than their low density counter parts.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Indistinguishability} %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-There is an important distinction to be made between the quantum theory and the theory in the semi-classical limit.
-The integral over phase space of the partition function must only take into account the \textit{physically different} states of the system.  
-In the quantum theory this is acheived by tracing over any orthonormal basis of the Hilbert space, but in the classical theory we need to be careful not to double count states when identical particles are in the theory.
-Exchange of two identical particles does not result in a physically different state and thus this state should only be considered only once in the sum over states in the partition function.
-More precisely, we should write the classical partition function as,
+There is an important distinction to be made between the quantum theory and the
+theory in the semi-classical limit.  The integral over phase space of the
+partition function must only take into account the \textit{physically
+different} states of the system.  In the quantum theory this is acheived by
+tracing over any orthonormal basis of the Hilbert space, but in the classical
+theory we need to be careful not to double count states when identical
+particles are in the theory.  Exchange of two identical particles does not
+result in a physically different state and thus this state should only be
+considered only once in the sum over states in the partition function.  More
+precisely, we should write the classical partition function as,
 %
-\begin{equation}
-    \Z = \int^\prime d\Gamma e^{-\beta \ham},
+\begin{equation} \Z = \int^\prime d\Gamma e^{-\beta \ham}, \end{equation}
+%
+Where the primed integral denotes integration only over the physically distinct
+states. In the common case of $N$ identical particles, the phase space integral
+becomes, 
+%
+\begin{equation} \int^\prime d\Gamma \rightarrow \f{1}{N!}\int d\Gamma
 \end{equation}
 %
-Where the primed integral denotes integration only over the physically distinct states. In the common case of $N$ identical particles, the phase space integral becomes, 
+Aggregating our results, we can write the partition function in the
+semi-classical limit as,
 %
-\begin{equation}
-    \int^\prime d\Gamma \rightarrow \f{1}{N!}\int d\Gamma
-\end{equation}
-%
-Aggregating our results, we can write the partition function in the semi-classical limit as,
-%
-\begin{equation}
-    \Z(\beta) = \frac{1}{N!}\int d\Gamma e^{-\beta \ham},
+\begin{equation} \Z(\beta) = \frac{1}{N!}\int d\Gamma e^{-\beta \ham},
 \end{equation}
 %
 Or, in the grand canonical ensemble,
 %
-\begin{equation}
-    \Xi(\mu, \beta) = \sum_{N = 0}^\infty \f{e^{\beta\mu N}}{N!} \int d\Gamma e^{-\beta \ham}
-\end{equation}
+\begin{equation} \Xi(\mu, \beta) = \sum_{N = 0}^\infty \f{e^{\beta\mu N}}{N!}
+\int d\Gamma e^{-\beta \ham} \end{equation}
 
-Of course, this is exactly the form taught in introductory courses on statistical mechanics and derived by Gibbs\footnote{The $\hbar$ in Gibbs' formula was justified on dimensional grounds and was simply a scaling factor with units of action ($J\cdot s$)}prior to any knowledge of quantum mechanics \cite{Gibbs}.
-The key insight here is to understand in a contolled way when this approximation is accurate and the magnitude of the next quantum correction is as seen in equation \ref{quantumcorr}.
+Of course, this is exactly the form taught in introductory courses on
+statistical mechanics and derived by Gibbs\footnote{The $\hbar$ in Gibbs'
+formula was justified on dimensional grounds and was simply a scaling factor
+with units of action ($J\cdot s$)}prior to any knowledge of quantum mechanics
+\cite{Gibbs}.  The key insight here is to understand in a contolled way when
+this approximation is accurate and the magnitude of the next quantum correction
+is as seen in equation \ref{quantumcorr}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Classical Density Functional Theory}  %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Ostensibly, when we study formation and evolution of microstructure in solids, our observable of interest is the density field.
-As per usual in theories of statistical thermodynamics we must distinguish between microscopic operators and macroscopic observables (the later being the ensemble average of the former).
-In classical statistical mechanics, operators are simply functions over the phase space, $\Gamma$.
-We use the term operator to make connection with the quantum mechanical theory.
-In the case of the density field, the microscopic operator is sum of Dirac delta functions at the position of each particle,
+Ostensibly, when we study formation and evolution of microstructure in solids,
+our observable of interest is the density field.  As per usual in theories of
+statistical thermodynamics we must distinguish between microscopic operators
+and macroscopic observables (the later being the ensemble average of the
+former).  In classical statistical mechanics, operators are simply functions
+over the phase space, $\Gamma$.  We use the term operator to make connection
+with the quantum mechanical theory.  In the case of the density field, the
+microscopic operator is sum of Dirac delta functions at the position of each
+particle,
 %
-\begin{equation}
-    \hat{\rho}(x; \q) = \sum_{i = 0}^N \d^{(3)}\l(x - q_i\r)
+\begin{equation} \hat{\rho}(x; \q) = \sum_{i = 0}^N \d^{(3)}\l(x - q_i\r)
 \end{equation}
 %
 Whence the thermodynamic observable is, 
 %
-\begin{equation}
-    \rho(x) = \mean{\hat{\rho}(x; \q)} = \trace{\hat{\rho}(x; \q) f(\q, \p)}
-\end{equation}
+\begin{equation} \rho(x) = \mean{\hat{\rho}(x; \q)} = \trace{\hat{\rho}(x; \q)
+f(\q, \p)} \end{equation}
 %
-Where, $\trace{\cdot}$ denotes the classical trace\footnote{The classical trace in the grand canonical example in this particular case},
+Where, $\trace{\cdot}$ denotes the classical trace\footnote{The classical trace
+in the grand canonical example in this particular case},
 %
-\begin{equation}
-    \trace{A(\q, \p)} = \sum_{N = 0}^\infty\f{1}{N!}\int\mathrm{d}\Gamma A(\q, \p),
-\end{equation}
+\begin{equation} \trace{A(\q, \p)} = \sum_{N =
+0}^\infty\f{1}{N!}\int\mathrm{d}\Gamma A(\q, \p), \end{equation}
 %
 And, $f(\q, \p)$ is the probability density function,
 %
-\begin{equation}
-    f(\q, \p) = \f{e^{-\beta (\ham - \mu N)}}{\Xi(\mu, \beta)}.
+\begin{equation} f(\q, \p) = \f{e^{-\beta (\ham - \mu N)}}{\Xi(\mu, \beta)}.
 \end{equation}
 
-To construct a theory of the density field we review the usual methodology for statistical thermodynamics. We will do so in the frame of entropy maximization in which the entropy is maximized subject to the macroscopically available information. Taking the existance of a average of the density field, particle number and energy as the macroscopically available information, we can maximize the entropy functional, 
-\begin{equation}
-    S[f(\q, \p)] = -k_b \trace{f(\q, \p)\ln\l(f(\q, \p)\r)},
-\end{equation}
+To construct a theory of the density field we review the usual methodology for
+statistical thermodynamics. We will do so in the frame of entropy maximization
+in which the entropy is maximized subject to the macroscopically available
+information. Taking the existance of a average of the density field, particle
+number and energy as the macroscopically available information, we can maximize
+the entropy functional, \begin{equation} S[f(\q, \p)] = -k_b \trace{f(\q,
+\p)\ln\l(f(\q, \p)\r)}, \end{equation}
 %
-subject to the aforementioned contraints to find a probability density function of the form,
+subject to the aforementioned contraints to find a probability density function
+of the form,
 %
-\begin{equation}
-    f(\q, \p) \propto \exp\l(-\beta(\ham -\mu N + \int \mathrm{d}x \phi(x)\hat{\rho}(x)\r).
-\end{equation}
+\begin{equation} f(\q, \p) \propto \exp\l(-\beta(\ham -\mu N + \int \mathrm{d}x
+\phi(x)\hat{\rho}(x)\r).  \end{equation}
 %
-Where, $\beta$, $\mu$ and $\phi(x)$ are the Lagrange multiplies associated with constraints of average energy, number of particles and density respectively. As you might imagine the constraints of average particle number and density are not independent and with the insight that,
+Where, $\beta$, $\mu$ and $\phi(x)$ are the Lagrange multiplies associated with
+constraints of average energy, number of particles and density respectively. As
+you might imagine the constraints of average particle number and density are
+not independent and with the insight that,
 %
-\begin{equation}
-    N = \int dx \hat{\rho}(x),
-\end{equation}
+\begin{equation} N = \int dx \hat{\rho}(x), \end{equation}
 %
 We can combine their Lagrange multipliers into one,
 %
-\begin{equation}
-    f(\q, \p) \propto \exp\l(- \beta(\ham - \int \mathrm{d}x \psi(x) \hat{\rho}(x))\r),
-\end{equation}
+\begin{equation} f(\q, \p) \propto \exp\l(- \beta(\ham - \int \mathrm{d}x
+\psi(x) \hat{\rho}(x))\r), \end{equation}
 %
-Where, $\psi(x) = \mu - \phi(x)$, is the combined Langrange multiplier named the \textit{intrinsic chemical potential}. Recalling that chemical potential is the change Helmholtz free energy made by virtue of adding particles to the system,
+Where, $\psi(x) = \mu - \phi(x)$, is the combined Langrange multiplier named
+the \textit{intrinsic chemical potential}. Recalling that chemical potential is
+the change Helmholtz free energy made by virtue of adding particles to the
+system,
 %
-\begin{equation}
-    \f{\partial F}{\partial N} = \mu,
-\end{equation}
+\begin{equation} \f{\partial F}{\partial N} = \mu, \end{equation}
 %
-The interpretation of the intrinsic chemical potential follows as the Helmholtz free energy change due to particles being added to a specific location.
-We'll see this in more detail briefly.
-Now, as with all statistical mechanics theories, the challenge to is to compute the moment generating function (partition function) or equivalently the cumulant generating function (free energy) so as to compute the statistics of our observable of choice.
-In case of observables of the density field, this is made somewhat more technical by the fact that the density is an entire function instead of a scalar variable.
-As such the partition function is more precisely called the partition \textit{functional} and the free energy function is more precisely called the free energy \textit{functional}.
-Specifically, the grand canonical partition functional is,
+The interpretation of the intrinsic chemical potential follows as the Helmholtz
+free energy change due to particles being added to a specific location.  We'll
+see this in more detail briefly.  Now, as with all statistical mechanics
+theories, the challenge to is to compute the moment generating function
+(partition function) or equivalently the cumulant generating function (free
+energy) so as to compute the statistics of our observable of choice.  In case
+of observables of the density field, this is made somewhat more technical by
+the fact that the density is an entire function instead of a scalar variable.
+As such the partition function is more precisely called the partition
+\textit{functional} and the free energy function is more precisely called the
+free energy \textit{functional}.  Specifically, the grand canonical partition
+functional is,
 %
-\begin{equation}
-    \Xi[\psi(x)] = \trace{\exp\l(-\beta\ham +\beta\int\mathrm{d}x \psi(x) \hat{\rho}(x)\r)}.
-\end{equation}
+\begin{equation} \Xi[\psi(x)] = \trace{\exp\l(-\beta\ham +\beta\int\mathrm{d}x
+\psi(x) \hat{\rho}(x)\r)}.  \end{equation}
 %
-As eluded to above, the partition function is a type of moment generating functional in that repeated functional differentiation yields moments of the density field:
+As eluded to above, the partition function is a type of moment generating
+functional in that repeated functional differentiation yields moments of the
+density field:
 %
-\begin{equation}
-   \f{\beta^{-n}}{\Xi} \f{\d^n \Xi[\psi]}{\d \psi(x_1) \dots \d\psi(x_n)} = \mean{\hat{\rho}(x_1)\dots\hat{\rho}(x_n)}.
-\end{equation}
+\begin{equation} \f{\beta^{-n}}{\Xi} \f{\d^n \Xi[\psi]}{\d \psi(x_1) \dots
+\d\psi(x_n)} = \mean{\hat{\rho}(x_1)\dots\hat{\rho}(x_n)}.  \end{equation}
 %
-Similarly, we can construct a free enery functional by taking the logarithm of the partition function. This free energy functional in particular is called the \textit{grand potential functional}.
+Similarly, we can construct a free enery functional by taking the logarithm of
+the partition function. This free energy functional in particular is called the
+\textit{grand potential functional}.
 %
-\begin{equation}
-    \Omega[\psi(x)] = -k_bT\log\l(\Xi[\psi(r)]\r)
-\end{equation}
+\begin{equation} \Omega[\psi(x)] = -k_bT\log\l(\Xi[\psi(r)]\r) \end{equation}
 %
-The grand potential functional is a type of cumulant generating functional in the sense that repeated functional differentiation yields cumulants of the density field:
+The grand potential functional is a type of cumulant generating functional in
+the sense that repeated functional differentiation yields cumulants of the
+density field:
 %
-\begin{equation}
-    -\beta^{-n}\f{\d^n \beta\Omega[\psi]}{\d\psi(x_1)\dots\d\psi(x_n)} = \mean{\hat{\rho}(x_1)\dots\hat{\rho}(x_n)}_c
-\end{equation}
+\begin{equation} -\beta^{-n}\f{\d^n
+\beta\Omega[\psi]}{\d\psi(x_1)\dots\d\psi(x_n)} =
+\mean{\hat{\rho}(x_1)\dots\hat{\rho}(x_n)}_c \end{equation}
 %
-Where, $\langle A^1\dots A^n \rangle_c$, denotes the n-variable joint cumuluant.
+Where, $\langle A^1\dots A^n \rangle_c$, denotes the n-variable joint
+cumuluant.
 
-If we examine, the first two cumulants we discover something remarkable about average the average density, $\rho(x)$. The mean is,
+If we examine, the first two cumulants we discover something remarkable about
+average the average density, $\rho(x)$. The mean is,
 %
-\begin{equation}
-    \f{\d \Omega[\psi]}{\d \psi(x)} = -\mean{\hat{\rho}(x)} \equiv \rho(x),
-\end{equation}
+\begin{equation} \f{\d \Omega[\psi]}{\d \psi(x)} = -\mean{\hat{\rho}(x)} \equiv
+\rho(x), \end{equation}
 %
 And the pair correlation function can be expressed as, 
 %
-\begin{equation}
-    \f{\d^2 \Omega[\psi]}{\d \psi(x) \d \psi(x^\prime)} = - \beta \mean{(\hat{\rho}(x) - \rho(x))(\hat{\rho}(x^\prime) - \rho(x^\prime))}.
+\begin{equation} \f{\d^2 \Omega[\psi]}{\d \psi(x) \d \psi(x^\prime)} = - \beta
+\mean{(\hat{\rho}(x) - \rho(x))(\hat{\rho}(x^\prime) - \rho(x^\prime))}.
 \end{equation}
 %
-As noted by Espanol et al [cite], the real underpinning of classical density functional theory is in the combination of these two equations.
-The first, implies that the average density field is a function of only its conjugate field, the intrinsic chemical potential, and the second implies that that relationship is invertible\footnote{The inverse function theorem only implies local invertibility, there is no guarentee of global invertibility. Indeed phase coexistance is a manifestation of this fact where a single intrinsic chemical potential is shared by two phases}.
-To see this note that the Jacobian, 
+As noted by Espanol et al [cite], the real underpinning of classical density
+functional theory is in the combination of these two equations.  The first,
+implies that the average density field is a function of only its conjugate
+field, the intrinsic chemical potential, and the second implies that that
+relationship is invertible\footnote{The inverse function theorem only implies
+local invertibility, there is no guarentee of global invertibility. Indeed
+phase coexistance is a manifestation of this fact where a single intrinsic
+chemical potential is shared by two phases}.  To see this note that the
+Jacobian, 
 %
-\begin{equation}
-    \f{\d \rho(x)}{\d \psi(x^\prime)} = \beta \mean{ (\hat{\rho}(x) - \rho(x))(\hat{\rho}(x^\prime) - \rho(x^\prime))}, 
+\begin{equation} \f{\d \rho(x)}{\d \psi(x^\prime)} = \beta \mean{
+(\hat{\rho}(x) - \rho(x))(\hat{\rho}(x^\prime) - \rho(x^\prime))},
 \end{equation}
 %
-must be positive semi-definite because of the correlation function on the right 
-hand side [mention Weiner-Khinchin here?]. Furthermore, we can make a new thermodynamic potential called the \textit{intrinsic free energy functional} by appling a Legendre transform to the grand potential,
+must be positive semi-definite because of the correlation function on the right
+hand side [mention Weiner-Khinchin here?]. Furthermore, we can make a new
+thermodynamic potential called the \textit{intrinsic free energy functional} by
+appling a Legendre transform to the grand potential,
 %
-\begin{equation}
-    \F[\rho(x)] = \Omega[\psi[\rho]] + \int dx \rho(x) \psi(x).
+\begin{equation} \F[\rho(x)] = \Omega[\psi[\rho]] + \int dx \rho(x) \psi(x).
 \end{equation}
 %
-It can be shown \cite{HansenAppendixB} that $\rho(x)$ must be the global minimum of the grand potential, which sets the stage for the methodology of classical density functional theory: if we have a defined intrinsic free energy functional, $\F$, we can find the equilibrium density field by solving the asssociated Euler-Lagrange equation, 
+It can be shown \cite{HansenAppendixB} that $\rho(x)$ must be the global
+minimum of the grand potential, which sets the stage for the methodology of
+classical density functional theory: if we have a defined intrinsic free energy
+functional, $\F$, we can find the equilibrium density field by solving the
+asssociated Euler-Lagrange equation, 
 %
-\begin{equation}
-    \f{\d \Omega[\rho]}{\d \rho(r)} = 0.
-\end{equation}
+\begin{equation} \f{\d \Omega[\rho]}{\d \rho(r)} = 0.  \end{equation}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Techniques in Density Functional Theory} %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The difficulty in formulating a density functional theory is the construction of an appropriate free energy functional.
-While exact calculations are rarely feasible, there are a variety of techniques that help in building approximate functionals.
-Its important to note first what we \textit{can} compute exactly.
-In the case of the ideal gas, we can compute the grand potential and free energy functional exactly,
+The difficulty in formulating a density functional theory is the construction
+of an appropriate free energy functional.  While exact calculations are rarely
+feasible, there are a variety of techniques that help in building approximate
+functionals.  Its important to note first what we \textit{can} compute exactly.
+In the case of the ideal gas, we can compute the grand potential and free
+energy functional exactly,
 %
-\begin{gather}
-    \Omega_{id}[\psi] = -\f{k_bT}{\Lambda^{3}}
-        \int\mathrm{d}x\, e^{\beta\psi(x)} \\
-    \F_{id}[\rho] = k_bT\int \mathrm{d}x\l\lbrace
-        \rho(x) \ln\l(\Lambda^3\rho(x)\r) - \rho(x)
-    \r\rbrace,
-\end{gather}
+\begin{gather} \Omega_{id}[\psi] = -\f{k_bT}{\Lambda^{3}} \int\mathrm{d}x\,
+e^{\beta\psi(x)} \\ \F_{id}[\rho] = k_bT\int \mathrm{d}x\l\lbrace \rho(x)
+\ln\l(\Lambda^3\rho(x)\r) - \rho(x) \r\rbrace, \end{gather}
 % 
 Where $\Lambda$ is the thermal de Broglie wavelength,
 %
-\begin{equation}
-    \Lambda = \sqrt{\f{h^2}{2\pi mk_bT}}.
-\end{equation}
+\begin{equation} \Lambda = \sqrt{\f{h^2}{2\pi mk_bT}}.  \end{equation}
 %
-We may then express a deviations from ideality by factoring the ideal contribution out of the partition function,
+We may then express a deviations from ideality by factoring the ideal
+contribution out of the partition function,
 %
-\begin{equation}
-    \Xi[\psi] = \Xi_{id}[\psi]\Xi_{ex}[\psi],
-\end{equation}
+\begin{equation} \Xi[\psi] = \Xi_{id}[\psi]\Xi_{ex}[\psi], \end{equation}
 %
-leading to grand potential and free energy functionals split into ideal and \textit{excess} components,
+leading to grand potential and free energy functionals split into ideal and
+\textit{excess} components,
 %
-\begin{gather}
-    \Omega = \Omega_{id} + \Omega_{ex} \\
-    \F = \F_{id} + \F_{ex}.
+\begin{gather} \Omega = \Omega_{id} + \Omega_{ex} \\ \F = \F_{id} + \F_{ex}.
 \end{gather}
 
-The interaction potential, $V(\q)$, in the excess partition function typically makes a direct approach to calculating the excess free energy intractible.
-Though perturbative methods, including the cluster expansion technique \cite{MAYER41}, have been developed to treat the interaction potential systematically, other approximation schemes for the excess free energy are typically more pragmatic.
-In particular, we can approximate the excess free energy by expanding around a reference homogeneos fluid with chemical potential $\mu_0$ and density $\rho_0$,
+The interaction potential, $V(\q)$, in the excess partition function typically
+makes a direct approach to calculating the excess free energy intractible.
+Though perturbative methods, including the cluster expansion technique
+\cite{MAYER41}, have been developed to treat the interaction potential
+systematically, other approximation schemes for the excess free energy are
+typically more pragmatic.  In particular, we can approximate the excess free
+energy by expanding around a reference homogeneos fluid with chemical potential
+$\mu_0$ and density $\rho_0$,
 %
-\begin{equation}
-    \F_{ex}[\rho] = \F_{ex}[\rho_0] 
-        + \l . \f{\d \F_{ex}}{\d \rho(x)} \r\vert_{\rho_0} \ast \Delta\rho(x) 
-        + \f{1}{2} \Delta\rho(x^\prime) \ast 
-            \l . \f{\d^2 \F_{ex}}{\d\rho(x)\d\rho(x^\prime)} \r\vert_{\rho_0} 
-            \ast \Delta\rho(x) + \dots,
+\begin{equation} \F_{ex}[\rho] = \F_{ex}[\rho_0] + \l . \f{\d \F_{ex}}{\d
+    \rho(x)} \r\vert_{\rho_0} \ast \Delta\rho(x) + \f{1}{2}
+    \Delta\rho(x^\prime) \ast \l . \f{\d^2 \F_{ex}}{\d\rho(x)\d\rho(x^\prime)}
+    \r\vert_{\rho_0} \ast \Delta\rho(x) + \dots, \end{equation}
+%
+Where $\Delta\rho(x) = \rho(x) - \rho_0$ and we have introduced the notation,
+$\ast$ to mean integration over repeated co-ordinates,
+%
+\begin{equation} f(x^\prime) \ast g(x^\prime) \equiv \int\mathrm{d}x^\prime
+f(x^\prime) g(x^\prime).  \end{equation}
+%
+The excess free energy is the generating functional of family of correlation
+functions called \textit{direct correlation functions}, 
+%
+\begin{equation} \f{\d^n \F_{ex}[\rho]}{\d \rho(x_1) ... \d \rho(x_n)} = -\beta
+C^{n}(x_1, \dots, x_n).  \end{equation}
+%
+The first of which, for a uniform fluid, is the excess contribution to the
+chemical potential which we may express as the total chemical potential less
+the ideal contribution, 
+%
+\begin{equation} \left.\f{\d F_{ex}}{\d \rho}\right\vert_{\rho_0} = \mu_0^{ex}
+= \mu_0 - \mu_{id} = \mu_0 - k_bT\ln\left(\Lambda^3 \rho_0\right).
 \end{equation}
 %
-Where $\Delta\rho(x) = \rho(x) - \rho_0$ and we have introduced the notation, $\ast$ to mean integration over repeated co-ordinates,
+Combining ideal and excess contributions and substracting off the constant
+reference free energy we arrive at an approximation for the deviation in free
+energy from the reference. 
 %
-\begin{equation}
-    f(x^\prime) \ast g(x^\prime) \equiv \int\mathrm{d}x^\prime f(x^\prime) g(x^\prime).
-\end{equation}
-%
-The excess free energy is the generating functional of family of correlation functions called \textit{direct correlation functions}, 
-%
-\begin{equation}
-    \f{\d^n \F_{ex}[\rho]}{\d \rho(x_1) ... \d \rho(x_n)} = -\beta C^{n}(x_1, \dots, x_n).
-\end{equation}
-%
-The first of which, for a uniform fluid, is the excess contribution to the chemical potential which we may express as the total chemical potential less the ideal contribution, 
-%
-\begin{equation}
-    \left.\f{\d F_{ex}}{\d \rho}\right\vert_{\rho_0} = \mu_0^{ex} = \mu_0 - \mu_{id} = \mu_0 - k_bT\ln\left(\Lambda^3 \rho_0\right).
-\end{equation}
-%
-Combining ideal and excess contributions and substracting off the constant reference free energy we arrive at an approximation for the deviation in free energy from the reference. 
-%
-\begin{equation}
-    \beta \Delta \F [\rho] = 
-        \int \mathrm{d}x \l\lbrace \rho(x) \ln\l(\f{\rho(x)}{\rho_0} \r) -(1-\beta\mu_0) \Delta \rho(x)\r\rbrace
-        - \f{1}{2}\Delta \rho(r) \ast C_0^{(2)}(r, r^\prime) \ast \Delta \rho(r^\prime)
-\end{equation}
+\begin{equation} \label{cdft_free_energy} \beta \Delta \F [\rho] = \int
+    \mathrm{d}x \l\lbrace \rho(x) \ln\l(\f{\rho(x)}{\rho_0} \r) -(1-\beta\mu_0)
+    \Delta \rho(x)\r\rbrace - \f{1}{2}\Delta \rho(r) \ast C_0^{(2)}(r,
+    r^\prime) \ast \Delta \rho(r^\prime) \end{equation}
 
-Its reasonable to ask at this point whether or not we have really gained anything with this approximation scheme.
-Although we have arrived at a relatively simple form for the free energy functional, we've added a lot of parameters to the functional based on the reference fluid.
-Thankfully, the theory of homogeneous liquids, such as our reference liquid, is very well established.
-This means we may relay on a broad choice of analytical, numerical or experimental techniques to derive these parameters.
+Its reasonable to ask at this point whether or not we have really gained
+anything with this approximation scheme.  Although we have arrived at a
+relatively simple form for the free energy functional, we've added a lot of
+parameters to the functional based on the reference fluid.  Thankfully, the
+theory of homogeneous liquids, such as our reference liquid, is very well
+established.  This means we may relay on a broad choice of analytical,
+numerical or experimental techniques to derive these parameters.
