@@ -1,50 +1,67 @@
-The classical density functional theories derived in chapter \ref{fundamentals}
-was first established to study inhomogenous fluids.  Interestingly, one can
-think of the solid state as an especially extreme case of an inhomogeneous
-fluid \cite{HANSEN-CH6}.  In this case, we can use CDFT to study the
-circumstances under which the density field develops long range periodic
-solutions (ie., solidification).  While not expressed in precisely this
-language, this idea dates back as far as 1941 with the early work of Kirkwood
-and Monroe \cite{KIRKWOOD_MONROE41} and was later significantly refined by
-Youssof and Ramakrishnan \cite{RAMAKRISHNAN79}.
+\label{dft_of_freezing}
+
+The classical density functional theories derived in chapter
+\ref{fundamentals} was first established to study inhomogenous fluids.
+Interestingly, one can think of the solid state as an especially extreme
+case of an inhomogeneous fluid \cite{HANSEN-CH6}.  In this case, we can
+use CDFT to study the circumstances under which the density field develops
+long range periodic solutions (ie., solidification).  While not expressed
+in precisely this language, this idea dates back as far as 1941 with the
+early work of Kirkwood and Monroe \cite{KIRKWOOD_MONROE41} and was later
+significantly refined by Youssof and Ramakrishnan \cite{RAMAKRISHNAN79}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Amplitude Expansions} %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-More precisely, if we would like to study the liquid-solid transitions we can
-expand the density field in a set of plane-waves that span the unit cell of the
-solid phase,
+More precisely, if we would like to study the liquid-solid transitions we
+can expand the density field in a set of plane-waves that span the unit
+cell of the solid phase,
 %
 \begin{equation} \rho(\mathbf{x}) = \f{1}{V_{cell}} \sum_i \xi_i e^{i
 \mathbf{k}_i \cdot \mathbf{x}}.  \end{equation}
 %
-In the solid phase, the amplitudes $\xi_i$ become nonzero for $\mathbf{k}_i \ne
-0$ and describe the periodic structure of the solid density field.  In the
-liquid, only the $\mathbf{k}_i = 0$ value remains (ie., the density becomes
-constant).  Since the density profile can be reconstructed with knowledge of
-all the of amplitudes we can rewrite the grand potential as a function of the
-amplitudes only, 
+In the solid phase, the amplitudes $\xi_i$ become nonzero for
+$\mathbf{k}_i \ne 0$ and describe the periodic structure of the solid
+density field.  In the liquid, only the $\mathbf{k}_i = 0$ value remains
+(ie., the density becomes constant).  Since the density profile can be
+reconstructed with knowledge of all the of amplitudes we can rewrite the
+grand potential as a function of the amplitudes only, 
 %
-\begin{equation} \Omega[\rho(x)] = \Omega(\lbrace\xi_i\rbrace), \end{equation}
+\begin{equation} \Omega[\rho(x)] = \Omega(\lbrace\xi_i\rbrace),
+\end{equation}
 %
 From which the equilibrium condition becomes,
 %
-\begin{equation} \f{\partial \Omega(\lbrace\xi_i\rbrace)}{\partial \xi_k} = 0,
-\,\,\forall \,k.  \end{equation}
+\begin{equation} \f{\partial \Omega(\lbrace\xi_i\rbrace)}{\partial \xi_k}
+= 0, \,\,\forall \,k.  \end{equation}
 %
 
-Equation \ref{cdft_free_energy}
-{\color{ForestGreen} { \bfseries
+Using this technique and the approximate free energy of Equation
+\ref{cdft_free_energy} results in good agreement with experiment can be found
+for equilibrium properties such as the density change of solidification.
+{\color{ForestGreen} table of results from Ramakrishnan? } The implication of
+these results and their success in predicting equilibrium thermodynamic
+properties points a the amplitudes, $\xi_i$, as natural and appropriate order
+parameters from the problem of solidification. 
+
+In spite of these successes, CDFT has a major short coming in that it is an
+equilibrium theory. This short coming cannot be understated in any attempt to
+be a theory of the mechanical and thermodynamic properties of metal systems.
+While some mechanical properties are well understood with an understanding of
+the perfect crystalline state, such as the Young's modulus, the vast majority
+of mechanical properties of solids is due to their microstructural defects.
+
+Equation \ref{cdft_free_energy} {\color{ForestGreen} { \bfseries
     
     Add tables from the Youssof and Ramamkrishnan papers to show how successful
     the theory really was for these static equilibrium thermodynamics. Talk
     about these amplitudes as the nature order parameters for solidification.
     
-    Transition into the short comings of only perfect crystalline descriptions
-    of the solid phase and talk about the factures that influence the
-    mechanical properties of solids (dislocations and grain boundaries etc).}
-}
+    Transition into the short comings of only perfect crystalline
+    descriptions of the solid phase and talk about the factures that
+    influence the mechanical properties of solids (dislocations and grain
+    boundaries etc).} }
 
 %%%%%%%%%%%%%%%%%%%%
 \section{Dynamics} %
@@ -55,20 +72,22 @@ Equation \ref{cdft_free_energy}
     % Basic idea of this section:
     
     Here we need to make the point that, while equilibrium results are
-    important, a huge amount of mechanical properties depend on nonequilibrium
-    features such as dislocations, grain boundaries etc. Additionally, these
-    things really depend on the pathway we take to equilibrium. 
+    important, a huge amount of mechanical properties depend on
+    nonequilibrium features such as dislocations, grain boundaries etc.
+    Additionally, these things really depend on the pathway we take to
+    equilibrium. 
 
     This is where the free energy functional used by Ramakrishnan as
-    significant set backs. Deriving equations of motion is fine so we can talk
-    about over damped hydrodynamics here and the projection operator stuff. We
-    can also discuss Archer's work and the distinction between the Langevin
-    equations for the operator versus the mean transport equation.
+    significant set backs. Deriving equations of motion is fine so we can
+    talk about over damped hydrodynamics here and the projection operator
+    stuff. We can also discuss Archer's work and the distinction between
+    the Langevin equations for the operator versus the mean transport
+    equation.
 
-    The problem is that the density profile in equilibrium is essentially a sum
-    of sharply peaked gaussians that are hard to resolve numerically. Want to
-    probe the dislocation dynamics? Best to find a better behaved theory.}
-}
+    The problem is that the density profile in equilibrium is essentially
+    a sum of sharply peaked gaussians that are hard to resolve
+    numerically. Want to probe the dislocation dynamics? Best to find a
+    better behaved theory.} }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Phase Field Crystal Theory} %
@@ -78,8 +97,7 @@ Equation \ref{cdft_free_energy}
 
     % Basic idea of this chapter
 
-    Introduce PFC. The essential physics of solidifications is retained, and
-    much larger length and timescales can be explored. The assumption here is
-    that we haven't lost the qualitative mechanisms we're interested even if we
-    lost some quantitative agreement with theory.}
-}
+    Introduce PFC. The essential physics of solidifications is retained,
+    and much larger length and timescales can be explored. The assumption
+    here is that we haven't lost the qualitative mechanisms we're
+    interested even if we lost some quantitative agreement with theory.} }
