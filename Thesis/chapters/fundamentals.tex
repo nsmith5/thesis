@@ -172,24 +172,31 @@ with the quantum mechanical theory.  In the case of the density field, the
 microscopic operator is sum of Dirac delta functions at the position of each
 particle,
 %
-\begin{equation} \hat{\rho}(x; \q) = \sum_{i = 0}^N \d^{(3)}\l(x - q_i\r)
+\begin{equation} 
+    \hat{\rho}(x; \q) = \sum_{i = 0}^N \d^{(3)}\l(x - q_i\r)
 \end{equation}
 %
 Whence the thermodynamic observable is, 
 %
-\begin{equation} \rho(x) = \mean{\hat{\rho}(x; \q)} = \trace{\hat{\rho}(x; \q)
-f(\q, \p)} \end{equation}
+\begin{equation} 
+    \rho(x) = \mean{\hat{\rho}(x; \q)} = 
+        \trace{\hat{\rho}(x; \q) f(\q, \p)}
+\end{equation}
 %
 Where, $\trace{\cdot}$ denotes the classical trace\footnote{The classical trace
 in the grand canonical example in this particular case},
 %
-\begin{equation} \trace{A(\q, \p)} = \sum_{N =
-0}^\infty\f{1}{N!}\int\mathrm{d}\Gamma A(\q, \p), \end{equation}
+\begin{equation}
+    \trace{A(\q, \p) f(\q, \p)} = \sum_{N =0}^\infty
+        \f{1}{N!}\int\mathrm{d}\Gamma A(\q, \p) f(\q, \p), 
+\end{equation}
 %
 And, $f(\q, \p)$ is the probability density function,
 %
-\begin{equation} f(\q, \p) = \f{e^{-\beta (\ham - \mu N)}}{\Xi(\mu, \beta)}.
+\begin{equation} 
+    f(\q, \p) = \f{e^{-\beta (\ham - \mu N)}}{\Xi(\mu, \beta)}.
 \end{equation}
+%
 
 To construct a theory of the density field we review the usual methodology for
 statistical thermodynamics. We will do so in the frame of entropy maximization
@@ -202,8 +209,10 @@ the entropy functional, \begin{equation} S[f(\q, \p)] = -k_b \trace{f(\q,
 subject to the aforementioned contraints to find a probability density function
 of the form,
 %
-\begin{equation} f(\q, \p) \propto \exp\l(-\beta(\ham -\mu N + \int \mathrm{d}x
-\phi(x)\hat{\rho}(x)\r).  \end{equation}
+\begin{equation} 
+    f(\q, \p) \propto \exp\l(-\beta(\ham -\mu N + \int \mathrm{d}x
+        \phi(x)\hat{\rho}(x)\r).
+\end{equation}
 %
 Where, $\beta$, $\mu$ and $\phi(x)$ are the Lagrange multiplies associated with
 constraints of average energy, number of particles and density respectively. As
