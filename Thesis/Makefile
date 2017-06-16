@@ -1,4 +1,6 @@
-SOURCES = main.tex chapters/dft_of_freezing.tex chapters/noise.tex chapters/fundamentals.tex chapters/binary_pfc.tex references.bib 
+SOURCES = main.tex chapters/dft_of_freezing.tex chapters/noise.tex\
+		  chapters/fundamentals.tex chapters/binary_pfc.tex chapters/introduction.tex\
+		  references.bib 
 
 main.pdf: $(SOURCES)
 	latex main.tex
