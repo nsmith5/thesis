@@ -27,7 +27,10 @@
 
 \begin{abstract}
 
-Modelling the liquid in a binary PFC model as regular solution instead of an ideal one leads to lots of interesting features. Look at all those features. We'll even discuss how it can be a contributor to non-classical nucleation pathways. Very sexy.
+Modelling the liquid in a binary PFC model as regular solution instead of an
+ideal one leads to lots of interesting features. Look at all those features.
+We'll even discuss how it can be a contributor to non-classical nucleation
+pathways. Very sexy.
 
 \end{abstract}
 
@@ -41,22 +44,33 @@ Modelling the liquid in a binary PFC model as regular solution instead of an ide
 
 \section{Free Energy Functional for Binary Alloys}
 
-To construct a free energy functional for a binary alloy we begin by splitting the free energy into ideal and excess components.
-
+To construct a free energy functional for a binary alloy we begin by splitting
+the free energy into ideal and excess components.
+%
 \begin{equation}
 	\mathcal{F}[\A, \B] = \F_{id}[\A, \B] + \F_{ex}[\A, \B]
 \end{equation}
-The ideal component of the free energy is derived from the non-interacting, kinetic part of the Hamiltonian while the excess component is derived from the interaction potential of the Hamiltonian. The ideal component can be computed exactly as, 
-
+%
+The ideal component of the free energy is derived from the non-interacting,
+kinetic part of the Hamiltonian while the excess component is derived from the
+interaction potential of the Hamiltonian. The ideal component can be computed
+exactly as, 
+%
 \begin{equation}
-	\beta\F[\A, \B] = \sum_{i} \int \dd r\, \rho_i(r) \l(\ln\l(\Lambda_i^3\rho_i(r)\r) -1 \r)
+    \beta\F[\A, \B] = \sum_{i} \int \dd r\, \rho_i(r)
+        \l(\ln\l(\Lambda_i^3\rho_i(r)\r) -1 \r)
 \end{equation}
-Where the sum runs over components, $A$ and $B$, and $\Lambda_i^3$ is the thermal de Broglie volume. The excess free energy cannot, in general, be computed exactly and thus approximate it by expanding the excess free energy about a uniform reference mixture with densities $\A^0$ and $\B^0$.
-
+%
+Where the sum runs over components, $A$ and $B$, and $\Lambda_i^3$ is the
+thermal de Broglie volume. The excess free energy cannot, in general, be
+computed exactly and thus approximate it by expanding the excess free energy
+about a uniform reference mixture with densities $\A^0$ and $\B^0$.
+%
 \begin{align}
 	\beta\F_{ex}[\A, \B]  &= \beta \F_{ex}^0 + \int \dd r \, C_i^{(1)}(r) \d \rho_i(r) \\
-		&+ \f{1}{2}\int \dd r\, \d \rho_i(r) \,C^{(2)}_{ij} \ast \d\rho_j  + ... \nonumber
+		&+ \f{1}{2}\int \dd r\, \d \rho_i(r) \,C^{(2)}_{ij} \ast \d\rho_j  + \dots \nonumber
 \end{align}
+%
 Where, summation over repeated indices is implied and $\ast$ denotes a convolution. $C^{(n)}(r_1, r_2, ...r_n)$ denotes the n-point direct correlation function. We now perform a change a variable to solute concentration, $c$, and dimensionless total density, $n$.
 
 \begin{gather}
