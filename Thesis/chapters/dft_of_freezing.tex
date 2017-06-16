@@ -100,29 +100,45 @@ Using the non-equilibrium probability distribution, we can also discuss non-equi
 Where, $\mean{\cdot}_{ne}$, denotes the non-equilibrium average. Thusly, just
 as the non-equilibrium probability distribution is driven to equilibrium by the
 Liouville Equation, so too will the denisty profile by its own equation of
-motion.
+motion. Under the approximation that direct correlation function decays to
+equilibrium more quickly more quickly than the density profile we can write the
+equation of motion as[{\color{ForestGreen} Cite Evans and Tarazona here and
+Archer for the distinction between these two equations? Perhaps Espanol as well
+for the projection operator derivation}],
+%
+\begin{equation}
+    \f{\partial \rho(x, t)}{\partial t} = 
+        \nabla \cdot \l[
+            D_0 \rho(x, t) \nabla \l(\f{\d \F[\rho]}{\d \rho(x, t)}\r)
+        \r]
+\end{equation}
+%
+Or, equivalently, we may write and equation of motion for the operator itself,
+$\hat{\rho}$, as,
+%
+\begin{equation}
+    \label{dens_langevin}
+    \f{\partial \hat{\rho}(x, t)}{\partial t} =
+        \nabla \cdot \l[
+            D_0 \hat{\rho}(x, t) \nabla \l(\f{\d \F[\hat{\rho}]}{\d \hat{\rho}}\r)
+        \r] + \xi(x, t).
+\end{equation}
+%
+Where, $\mathbf{\xi}(x, t)$ is a Gaussian random driving force with zero average and variance is,
+%
+\begin{equation}
+    \mean{\xi(x, t)\xi(x^\prime, t^\prime)} = -2 \nabla \cdot \l[ D_0 \rho(x,t) 
+        \nabla \d(x - x^\prime) \d(t - t^\prime)
+    \r],
+\end{equation}
+%
+Due to a generalized Einstein relation\footnote{See Appendix \ref{noise} for
+details on generalized Einstein relations for nonlinear Langevin equations} for
+the Langevin equation in equation \ref{dens_langevin}.
 
-{\color{ForestGreen} { \bfseries
-    
-    % Basic idea of this section:
-    
-    Here we need to make the point that, while equilibrium results are
-    important, a huge amount of mechanical properties depend on
-    nonequilibrium features such as dislocations, grain boundaries etc.
-    Additionally, these things really depend on the pathway we take to
-    equilibrium. 
+Equations similar to those seen here and extensions there of fall under the
+category of \textit{Dynamic Density Functional Theory}(DDFT). 
 
-    This is where the free energy functional used by Ramakrishnan as
-    significant set backs. Deriving equations of motion is fine so we can
-    talk about over damped hydrodynamics here and the projection operator
-    stuff. We can also discuss Archer's work and the distinction between
-    the Langevin equations for the operator versus the mean transport
-    equation.
-
-    The problem is that the density profile in equilibrium is essentially
-    a sum of sharply peaked gaussians that are hard to resolve
-    numerically. Want to probe the dislocation dynamics? Best to find a
-    better behaved theory.} }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Phase Field Crystal Theory} %
