@@ -162,15 +162,15 @@ Or, in the grand canonical ensemble,
 %
 \begin{equation} 
     \Xi(\mu, \beta) = \sum_{N = 0}^\infty \f{e^{\beta\mu N}}{N!}
-        \int d\Gamma e^{-\beta \ham} + \mathcal{O}(\hbar^2) 
+        \int d\Gamma \l( e^{-\beta \ham} + \mathcal{O}(\hbar^2)\r)
 \end{equation}
 
 Of course, to first order in $\hbar$, this is exactly the form taught in
 introductory courses on statistical mechanics and derived by Gibbs\footnote{The
 $\hbar$ in Gibbs' formula was justified on dimensional grounds and was simply a
-scaling factor with units of action ($J\cdot s$)}prior to any knowledge of
-quantum mechanics \cite{Gibbs}.  The key insight here is to understand in a
-contolled way when this approximation is accurate and the magnitude of the next
+scaling factor with units of action ($J\cdot s$)} prior to any knowledge of
+quantum mechanics \cite{Gibbs}.  The key insight here is to understand, in a
+contolled way, when this approximation is accurate and the magnitude of the next
 quantum correction is as seen in equation \ref{quantumcorr}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -298,51 +298,59 @@ the sense that repeated functional differentiation yields cumulants of the
 density field:
 %
 \begin{equation}
-    -\beta^{-n}\f{\d^n\beta\Omega[\psi]}{\d\psi(x_1)\dots\d\psi(x_n)}
+    -\f{\beta^{-n + 1}\d^n\Omega[\psi]}{\d\psi(x_1)\dots\d\psi(x_n)}
         = \mean{\hat{\rho}(x_1)\dots\hat{\rho}(x_n)}_c
 \end{equation}
 %
 Where, $\langle A^1\dots A^n \rangle_c$, denotes the n-variable joint
 cumuluant.
 
-If we examine, the first two cumulants we discover something remarkable about
-average the average density, $\rho(x)$. The mean is,
+If we examine the first two cumulants,
 %
-\begin{equation}
-    \f{\d \Omega[\psi]}{\d \psi(x)} = -\mean{\hat{\rho}(x)} \equiv \rho(x),
-\end{equation}
+\begin{gather}
+    \label{mean_rho}
+    - \f{\d \Omega[\psi]}{\d \psi(x)}
+        = \mean{\hat{\rho}(x)} \equiv \rho(x), \\
+    \label{var_rho} 
+    -k_b T\f{\d^2 \Omega[\psi]}{\d \psi(x) \d \psi(x^\prime)}
+        = \mean{(\hat{\rho}(x) - \rho(x))
+          (\hat{\rho}(x^\prime) - \rho(x^\prime))},
+\end{gather}
 %
-And the pair correlation function can be expressed as, 
-%
-\begin{equation}
-    \f{\d^2 \Omega[\psi]}{\d \psi(x) \d \psi(x^\prime)}
-        = - \beta\mean{(\hat{\rho}(x) - \rho(x))(\hat{\rho}(x^\prime) - \rho(x^\prime))}.
-\end{equation}
-%
-As noted by Espanol et al [cite], the real underpinning of classical density
-functional theory is in the combination of these two equations.  The first,
-implies that the average density field is a function of only its conjugate
+We notice something remarkable: The first, implies that the average density field is a function of only its conjugate
 field, the intrinsic chemical potential, and the second implies that that
 relationship is invertible\footnote{The inverse function theorem only implies
 local invertibility, there is no guarentee of global invertibility. Indeed
 phase coexistance is a manifestation of this fact where a single intrinsic
-chemical potential is shared by two phases}.  To see this note that the
-Jacobian, 
+chemical potential is shared by two phases}.  To see this, we compute the 
+Jacobian by combining equation \ref{mean_rho} and \ref{var_rho},
 %
 \begin{equation}
+    \label{jacobian}
     \f{\d \rho(x)}{\d \psi(x^\prime)} 
-        = \beta \mean{(\hat{\rho}(x) - \rho(x))(\hat{\rho}(x^\prime) - \rho(x^\prime))},
+        = \beta \mean{(\hat{\rho}(x) - \rho(x))
+        (\hat{\rho}(x^\prime) - \rho(x^\prime))}.
 \end{equation}
 %
-must be positive semi-definite because of the correlation function on the right
-hand side [mention Weiner-Khinchin here?]. Furthermore, we can make a new
-thermodynamic potential called the \textit{intrinsic free energy functional} by
-appling a Legendre transform to the grand potential,
+The right hand side of equation \ref{jacobian} is an autocorrelation function
+and therefore positive semi-definite by Weiner-Khinchin theorem. This implies that, 
+at least locally, the intrinsic chemical potential can always be written as a functional
+of the average density, $\psi[\rho(x)]$, and vice versa. Furthermore, because
+all of the higher order cumulants of the density depend on the intrinsic chemical
+potential, they too depend only on the average density.
+
+Given the importance of the average density, $\rho(x)$, if follows that we would
+like to use a thermodynamic potential with a natural dependence on the density. We can
+construct a generalization of the Helmholtz free energy that has precisely this 
+characteristic by Legendre transforming the Grand potential,
 %
 \begin{equation}
     \F[\rho(x)] = \Omega[\psi[\rho]] + \int dx \rho(x) \psi(x).
 \end{equation}
 %
+
+$\F[\rho(x)]$ is called the \textit{intrinsic free energy functional}.
+
 It can be shown \cite{HansenAppendixB} that $\rho(x)$ must be the global
 minimum of the grand potential, which sets the stage for the methodology of
 classical density functional theory: if we have a defined intrinsic free energy
