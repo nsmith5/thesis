@@ -58,7 +58,8 @@ of plane wave solutions,
 %
 \begin{equation}
     \Z(\beta) = \int \f{\mathrm{d}\q \mathrm{d}\p}{(2\pi \hbar)^N}
-        e^{-\frac{i\p\cdot\q}{\hbar}} e^{-\beta \hat{H}} e^{\frac{i\p\cdot\q}{\hbar}} 
+        e^{-\frac{i\p\cdot\q}{\hbar}} 
+        e^{-\beta \hat{H}} e^{\frac{i\p\cdot\q}{\hbar}} 
         = \int d\Gamma I(\q, \p), 
 \end{equation}
 %
@@ -364,8 +365,11 @@ In the case of the ideal gas, we can compute the grand potential and free
 energy functional exactly,
 %
 \begin{gather}
-    \Omega_{id}[\psi] = -\f{k_bT}{\Lambda^{3}} \int\mathrm{d}x\,e^{\beta\psi(x)} \\ 
-    \F_{id}[\rho] = k_bT\int \mathrm{d}x\l\lbrace \rho(x) \ln\l(\Lambda^3\rho(x)\r) - \rho(x) \r\rbrace,
+    \Omega_{id}[\psi] = -\f{k_bT}{\Lambda^{3}} 
+        \int\mathrm{d}x\,e^{\beta\psi(x)} \\ 
+    \F_{id}[\rho] = k_bT\int \mathrm{d}x
+        \l\lbrace \rho(x) \ln\l(\Lambda^3\rho(x)\r) - \rho(x) \r\rbrace,
+    \label{F_ideal}
 \end{gather}
 % 
 Where $\Lambda$ is the thermal de Broglie wavelength,
@@ -399,9 +403,11 @@ energy by expanding around a reference homogeneos fluid with chemical potential
 $\mu_0$ and density $\rho_0$,
 %
 \begin{equation}
+    \label{fex_expansion}
     \F_{ex}[\rho] = \F_{ex}[\rho_0]
         + \l . \f{\d \F_{ex}}{\d\rho(x)} \r\vert_{\rho_0} \ast \Delta\rho(x) 
-        + \f{1}{2} \Delta\rho(x^\prime) \ast \l . \f{\d^2 \F_{ex}}{\d\rho(x)\d\rho(x^\prime)}
+        + \f{1}{2} \Delta\rho(x^\prime) \ast
+            \l . \f{\d^2 \F_{ex}}{\d\rho(x)\d\rho(x^\prime)}
             \r\vert_{\rho_0} \ast \Delta\rho(x) 
         + \dots,
 \end{equation}
@@ -410,33 +416,59 @@ Where $\Delta\rho(x) = \rho(x) - \rho_0$ and we have introduced the notation,
 $\ast$ to mean integration over repeated co-ordinates,
 %
 \begin{equation}
-    f(x^\prime) \ast g(x^\prime) \equiv \int\mathrm{d}x^\prime f(x^\prime) g(x^\prime).
+    f(x^\prime) \ast g(x^\prime)
+        \equiv \int\mathrm{d}x^\prime f(x^\prime) g(x^\prime).
 \end{equation}
 %
 The excess free energy is the generating functional of family of correlation
 functions called \textit{direct correlation functions}, 
 %
 \begin{equation}
-    \f{\d^n \F_{ex}[\rho]}{\d \rho(x_1) ... \d \rho(x_n)} = -\beta C^{n}(x_1, \dots, x_n).
+    \label{direct_correlation}
+    \f{\d^n \F_{ex}[\rho]}{\d \rho(x_1) ... \d \rho(x_n)}
+        = -\beta C^{n}(x_1, \dots, x_n).
 \end{equation}
 %
 The first of which, for a uniform fluid, is the excess contribution to the
 chemical potential which we may express as the total chemical potential less
 the ideal contribution, 
 %
-\begin{equation} \left.\f{\d F_{ex}}{\d \rho}\right\vert_{\rho_0} = \mu_0^{ex}
-= \mu_0 - \mu_{id} = \mu_0 - k_bT\ln\left(\Lambda^3 \rho_0\right).
+\begin{equation}
+    \label{mu_ex}
+    \left.\f{\d F_{ex}}{\d \rho}\right\vert_{\rho_0}
+        = \mu_0^{ex}
+        = \mu_0 - \mu_{id} 
+        = \mu_0 - k_bT\ln\left(\Lambda^3 \rho_0\right).
 \end{equation}
 %
-Combining ideal and excess contributions and substracting off the constant
-reference free energy we arrive at an approximation for the deviation in free
-energy from the reference. 
-% QS: reference equations or elaborate here. Got lost
+Should we truncate the expansion in equation \ref{fex_expansion} to second
+order in $\Delta\rho(x)$ and substitute the linear and quadratic terms with
+equation \ref{mu_ex} and \ref{direct_correlation} we can simplify the excess
+free energy to,
 %
-\begin{equation} \label{cdft_free_energy} \beta \Delta \F [\rho] = \int
-    \mathrm{d}x \l\lbrace \rho(x) \ln\l(\f{\rho(x)}{\rho_0} \r) -(1-\beta\mu_0)
-    \Delta \rho(x)\r\rbrace - \f{1}{2}\Delta \rho(r) \ast C_0^{(2)}(r,
-    r^\prime) \ast \Delta \rho(r^\prime) \end{equation}
+\begin{equation}
+    \label{F_ex}
+    \F_{ex}[\rho(r)] = \F_{ex}[\rho_0] 
+        + \int dr 
+            \l\lbrace\mu - k_bT \ln\l(\Lambda^3 \rho_0 \r)
+            \r\rbrace \Delta\rho(r)
+        - \f{k_b T}{2} \Delta\rho(r) \ast C^{(2)}_0(r, r^\prime) 
+            \ast \Delta\rho(r^\prime)
+\end{equation}
+%
+Combining equation \ref{F_ideal} with the simplified excess free energy in
+equation \ref{F_ex}, we can express total change in free energy, $\Delta \F =
+\F - \F[\rho_0]$, as,
+%
+\begin{equation}
+    \label{cdft_free_energy}
+    \Delta \F [\rho(r)] 
+        = k_b T\int \mathrm{d}r 
+            \l\lbrace \rho(r) \ln\l(\f{\rho(r)}{\rho_0} \r) 
+            - (1-\beta\mu_0) \Delta \rho(r)\r\rbrace 
+        - \f{k_b T}{2}\Delta \rho(r) \ast C_0^{(2)}(r, r^\prime) 
+            \ast \Delta \rho(r^\prime)
+\end{equation}
 
 Its reasonable to ask at this point whether or not we have really gained
 anything with this approximation scheme.  Although we have arrived at a
@@ -446,4 +478,9 @@ theory of homogeneous liquids, such as our reference liquid, is very well
 established.  This means we may relay on a broad choice of analytical,
 numerical or experimental techniques to derive these parameters.
 
-% QS: Needs something to conclude the chapter and put it all together.
+Equation \ref{cdft_free_energy} establishes an approximate density functional
+theory for inhomogenous fluids and, as we will see in the following chapter,
+for the seemingly disparate phenonmena of solidification. We see that it can
+derived through a series of approximations from a fundamental basis in quantum
+statistical mechanics and requires no more parameters than the thermodynamic
+details of a homogeneous reference fluid.
