@@ -8,70 +8,71 @@ diagrams. Finally, we'll see a new contribution to which we will call the
 regular phase field crystal model which is successful in modeling a broad
 spectrum of invariant binary reactions and crystalline structures. 
 
-\section{Original Binary Phase Field Crystal Model}
+All binary PFC models begin with a multicomponent variant of the approximate
+free energy functional established in Chapter \ref{fundamentals},
+%
+\begin{align}
+    \label{binary_cdft_free_energy}
+    \beta\F[\A, \B] &= \sum_{i=A, B} \int \mathrm{d}r 
+        \,\rho_i(r) \ln\l(\f{\rho_i(r)}{\rho_i^0}\r) - (1 - \beta\mu_i^0)\Delta\rho_i(r)\\
+    &- \f{1}{2} \sum_{i,j=A, B} \Delta\rho_i(r) \ast C^{(2)}_{ij}(r, r^\prime) 
+        \ast \Delta\rho_j(r^\prime). \nonumber
+\end{align}
+%
+It is convenient to change variables to a dimensionless total density, $n(r)$ and local
+concentration, $c(r)$,
+%
+\begin{gather}
+    n(r) = \f{\Delta \rho}{\rho_0} = \f{\Delta\A + \Delta\B}{\A^0 + \B^0} \\
+    c(r) = \f{\B}{\rho} = \f{\B}{\A + \B}.
+\end{gather}
+%
+Scaling out a factor of the total reference density, $\rho_0$ we can break the free energy
+functional in these new variables into two parts,
+%
+\begin{equation}
+    \f{\beta\F[n, c]}{\rho_0} = \f{\beta\F_{id}[n, c]}{\rho_0} + \f{\beta\F_{ex}[n, c]}{\rho_0},
+\end{equation}
+%
+Where,
+%
+\begin{align}
+    \label{binary_ideal}
+    \f{\beta\F_{id}[n, c]}{\rho_0} 
+        &= \int \mathrm{d}r \,\l\lbrace (n(r) + 1)\ln(n(r) + 1) - (1 - \beta\mu^0)n(r) \r\rbrace \\
+        &+ \int \mathrm{d}r \,\l\lbrace (n(r) + 1)\l(c\ln\l(\f{c}{c_0}\r) + (1-c)\ln\l(\f{1-c}{1-c_0}\r) \r)\r\rbrace, 
+\end{align}
+%
+And, if we assume the local concentration $c(r)$ varies over much longer length
+scales than the local density $n(r)$,
+%
+\begin{align}
+    \label{binary_excess}
+    \f{\beta\F_{ex}[n, c]}{\rho_0}
+        = &-\f{1}{2} n(r) \ast \l[ 
+            C_{nn}(r, r^\prime) \ast n(r^\prime) + C_{nc}(r, r^\prime) \ast \Delta c(r^\prime)\r] \\
+        &-\f{1}{2} \Delta c(r) \ast \l[
+            C_{cn}(r, r^\prime) \ast n(r^\prime) + C_{cc}(r, r^\prime) \ast \Delta c(r^\prime)\r]. \nonumber
+\end{align}
+%
+We have introduced $\mu_0$ as the total chemical potential of the reference mixture, $c_0 = \B^0 / \rho_0$ as the
+reference concentration and $\Delta c(r) = c(r) - c_0$ as the deviation of the concentration from the reference.
+The $n-c$ pair correlation introduced in the excess free energy are,
+%
+\begin{align}
+    C_{nn} &= \rho_0\l(c^2 C_{BB} + (1 - c)^2C_{AA} + 2c(1-c)C_{AB}\r) \\
+    C_{nc} &= \rho_0\l(c C_{BB} - (1 - c) C_{AA} + (1 - 2c)C_{AB}\r) \\
+    C_{cn} &= C_{nc} \\
+    C_{cc} &= \rho_0\l(C_{BB} + C_{AA} - 2 C_{AB}\r)
+\end{align}
+%
+Explicit calculations can be found in Appendix \ref{binary_correlations}. Differences in the various
+binary PFC theories stem from different approximations of ideal free energy in equation \ref{binary_ideal} and
+excess free energy in equation \ref{binary_excess}.
 
-To derive the original binary PFC model, we begin with a multicomponent variant
-of equation \ref{cdft_free_energy}, 
-%
-\begin{align} \beta\F[\A, \B] &= \sum_{i=A, B} \int \mathrm{d}r \rho_i
-    \ln\l(\f{\rho_i}{\rho_i^0}\r) - (1 - \mu_i^0) \Delta\rho_i \\ &- \f{1}{2}
-    \sum_{i,j=A, B} \int \mathrm{d}r \mathrm{d}r^\prime \Delta\rho_i(r)
-    C^{(2)}_{ij}(r, r^\prime) \Delta\rho_j(r^\prime).  \end{align}
-%
-As noted in chapter \ref{dft_of_freezing}, we can produce a PFC model by
-approximating the ideal component of the free energy. 
+\section{Original Binary Phase Field Crystal Model}
 
 \section{Binary Structural Phase Field Crystal Model}
 
 \section{Regular Phase Field Crystal Model}
-
-\section*{Derivation of the General Binary XPFC Free Energy}
-
-Now that we've seen the recipe for building a phase-field crystal theory for a
-single component system the process for building a multicomponent theory
-proceeds analogously with a few minor changes in perspective.  We start again
-by looking at the ideal and excess contributions to the free energy.
-
-\subsubsection{Ideal Free Energy to Two Components} The kinetic energy terms of
-each species in the Hamiltonian give rise to seperate contributions to the free
-energy as you might expect.  We'll label the two species A and B.
-
-\begin{equation} \beta\F^{tot}_{id}[\rho_A, \rho_B] = \beta\F_{id}[\rho_A] +
-\beta\F_{id}[\rho_B] \end{equation} Where,
-\begin{description}[labelindent=10pt, labelsep=10pt] \item[$\beta\F_{id}$] is
-            the same ideal free energy functional as previously
-\end{description}
-
-\subsubsection{Excess Free Energy of a Two Component System} Our expansion of
-the excess free energy works just as before but we must sum over the
-contributions from each species.
-
-\begin{equation} \beta\F_{ex} = \beta\F_{ex}^0 - \int \,dr C^{(1)}_{i}(r)
-\Delta\rho_i(r) - \f{1}{2} \int dr \int dr^\prime \Delta\rho_i(r)
-C^{(2)}_{ij}(r, r^\prime) \Delta\rho_j(r^\prime) \end{equation}
-
-Where indices denote species (A or B) and repeated indices are summed over.
-
-\subsubsection{Total free energy of a Two Component System}
-
-Putting together the excess and ideal terms together and dropping the constant
-and linear terms as we did previously we find the following total free energy,
-
-\begin{equation} \beta\F[\rho_A, \rho_B] = \int dr \l\lbrace \Delta\rho_i
-\ln\l(\f{\Delta\rho_i}{\rho_{i0}}\r) - \Delta\rho_i\r\rbrace - \f{1}{2} \int dr
-\int dr^\prime \Delta\rho_i(r) C^{(2)}_{ij}(r, r^\prime) \Delta
-\rho_j(r^\prime) \end{equation}
-
-\subsubsection{Changing variables} Typically, the concentration is the variable
-we care about in binary systems so instead of preceeding with the usual phase
-field crystal approximations at this point we make a change of variables to
-concentration, $c$, and total density, $\rho$.
-
-\begin{align} \rho &= \rho_A + \rho_B             & \rho_0 &= \rho_{0A} +
-\rho_{0B} \nonumber \\ c &= \f{\rho_A}{\rho_A + \rho_B}    &  c_0 &=
-\f{\rho_{0A}}{\rho_{0A} + \rho_{0B}} \nonumber \end{align}
-
-Making this change of variables and seperating total density and concentration
-contribution we find a free energy functional of the form,
-
-\begin{equation} \beta\F[c, \rho] = \end{equation}
+\subsection{Equilibrium Properties}
