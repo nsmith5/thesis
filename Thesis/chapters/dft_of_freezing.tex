@@ -231,10 +231,39 @@ of motions. The non-equilibrium density is written in analogy with equation
         \trace{\hat{\rho}(x; \q) f(\q, \p, t)}.
 \end{equation}
 %
-Where, $\mean{\cdot}_{ne}$, denotes the non-equilibrium average. Thusly, just
-as the non-equilibrium probability distribution is driven to equilibrium by the
-Liouville Equation, so too will the denisty profile by its own equation of
-motion. A variety of equations of motion for the density field are known. If
+Where, $\mean{\cdot}_{ne}$, denotes the non-equilibrium average. Just as the
+non-equilibrium probability distribution is driven to equilibrium by the
+Liouville Equation, so too is the density profile by its own equation of
+motion.
+
+A variety of equations of motion for the density field are known.
+For instance, we can consider the Navier-Stokes equations of hydrodynamics to
+one such equation of motion. If we restrict ourselves to the case where
+transport is diffusion limited and we assume that the dynamic pair correlation
+function is the same as the equilibrium pair correlation we can express the
+density equation of motion as,
+%
+\begin{equation}
+    \f{\partial \rho(x, t)}{\partial t} = 
+        \nabla \cdot \l[
+            D_0 \rho(x, t) \nabla \l(\f{\d \F[\rho]}{\d \rho(x, t)}\r)
+        \r].
+\end{equation}
+%
+Where, $D_0$ is the diffusion constant. We can also express the dynamics of
+the density field in the form of a Langevin equation for the density operator,
+%
+\begin{equation}
+    \label{dens_langevin}
+    \f{\partial \hat{\rho}(x, t)}{\partial t} =
+        \nabla \cdot \l[
+            D_0 \hat{\rho}(x, t) \nabla \l(\f{\d \F[\hat{\rho}]}{\d \hat{\rho}}\r)
+        \r] + \xi(x, t).
+\end{equation}
+%
+{\color{ForestGreen} Old crap below!}
+
+
 the fluid is considered underdamped the resulting equations of motion are
 hydrodynamic Under the approximation that direct correlation function decays to
 equilibrium more quickly more quickly than the density profile we can write the
