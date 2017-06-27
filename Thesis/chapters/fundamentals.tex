@@ -475,8 +475,22 @@ equation \ref{F_ex}, we can express total change in free energy, $\Delta \F =
             \l\lbrace \rho(r) \ln\l(\f{\rho(r)}{\rho_0} \r) 
             - (1-\beta\mu_0) \Delta \rho(r)\r\rbrace 
         - \f{k_b T}{2}\Delta \rho(r) \ast C_0^{(2)}(r, r^\prime) 
-            \ast \Delta \rho(r^\prime)
+            \ast \Delta \rho(r^\prime).
 \end{equation}
+%
+We find an equivalent expression for the grand potential after a Legendre
+transform,
+%
+\begin{equation}
+    \label{cdft_grand_potential}
+    \Delta \Omega [\rho(r)]
+        = k_b T\int \mathrm{d}r 
+            \l\lbrace \rho(r) \l[\ln\l(\f{\rho(r)}{\rho_0} \r) 
+            + \beta\phi(r) \r] -  \Delta \rho(r)\r\rbrace 
+        - \f{k_b T}{2}\Delta \rho(r) \ast C_0^{(2)}(r, r^\prime) 
+            \ast \Delta \rho(r^\prime).
+\end{equation}
+
 
 Its reasonable to ask at this point whether or not we have really gained
 anything with this approximation scheme.  Although we have arrived at a

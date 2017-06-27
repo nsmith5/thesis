@@ -10,74 +10,185 @@ in precisely this language, this idea dates back as far as 1941 with the
 early work of Kirkwood and Monroe \cite{KIRKWOOD_MONROE41} and was later
 significantly refined by Youssof and Ramakrishnan \cite{RAMAKRISHNAN79}.
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Amplitude Expansions} %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-More precisely, if we would like to study the liquid-solid transitions we
-can expand the density field in a set of plane-waves that span the unit
-cell of the solid phase,
+To explore the problem of solidification, we begin with the approximate grand
+potential established in equation \ref{cdft_grand_potential} with the external
+potential, $\phi(r)$, set to zero,
 %
 \begin{equation}
-    \rho(\mathbf{x}) = \f{1}{V_{cell}} 
-        \sum_i \xi_i e^{i\mathbf{k}_i \cdot \mathbf{x}}.
+    \beta \Delta \Omega[\rho(r)] =
+        \int dr \l\lbrace 
+            \rho(r)\ln\l(\f{\rho(r)}{\rho_0}\r) - \Delta\rho(r)\r\rbrace
+        - \f{1}{2} \Delta\rho(r) \ast C^{(2)}_0(r, r^\prime)
+            \ast \Delta\rho(r^\prime).
 \end{equation}
 %
-In the solid phase, the amplitudes $\xi_i$ become nonzero for
-$\mathbf{k}_i \ne 0$ and describe the periodic structure of the solid
-density field.  In the liquid, only the $\mathbf{k}_i = 0$ value remains
-(ie., the density becomes constant).  Since the density profile can be
-reconstructed with knowledge of all the of amplitudes we can rewrite the
-grand potential as a function of the amplitudes only, 
+Scaling out a factor of $\rho_0$ we can rewrite the grand potential in terms of
+a dimensionless reduced density, $n(r) \equiv (\rho(x) - \rho_0)/\rho_0$,
 %
 \begin{equation}
-    \Omega[\rho(x)] = \Omega(\lbrace\xi_i\rbrace),
+    \label{gp}
+    \f{\beta \Delta \Omega[n(r)]}{\rho_0} =
+        \int dr \l\lbrace 
+            (1 + n(r))\ln\l(1 + n(r)\r) - n(r)\r\rbrace
+        - \f{1}{2} n(r) \ast \rho_0 C^{(2)}_0(r, r^\prime) \ast n(r^\prime).
 \end{equation}
 %
-From which the equilibrium condition becomes,
+To describe the density profile in the solid state we can expand the density
+in a plane waves,
 %
 \begin{equation}
-    \f{\partial \Omega(\lbrace\xi_i\rbrace)}{\partial \xi_k}
-        = 0, \,\,\forall \,k.  
+    \label{expansion}
+    n(r) = \bar{n} + \sum_{\mathbf{G}} \xi_{\mathbf{G}} e^{i \mathbf{G} r}.
 \end{equation}
 %
+Where, $\l\lbrace \mathbf{G} \r\rbrace$, is the set of reciprocal lattice
+vectors in the crystal lattice and the amplitudes, $\xi_\mathbf{G}$, serve as
+order parameters for freezing. In the liquid phase all amplitudes are zero and
+the average density is uniform, while in the solid phase there are finite
+amplitudes that describe the periodic profile of the crystal lattice. Setting
+the liquid at the melting point as our reference fluid we find that, at the 
+melting point, $\bar{n}$ is zero for the liquid and is the fractional density
+change of solidification, $(\rho_s - \rho_l)/\rho_l$, in the solid phase.
 
-Using this technique and the approximate free energy of Equation
-\ref{cdft_free_energy} results in good agreement with experiment can be found
-for equilibrium properties such as the density change of solidification.
-{\color{ForestGreen} table of results from Ramakrishnan? } The implication of
-these results and their success in predicting equilibrium thermodynamic
-properties points a the amplitudes, $\xi_i$, as natural and appropriate order
-parameters from the problem of solidification. 
+The amplitudes are constrained by the point group symmetry of the lattice.
+Grouping the amplitudes of symmetry-equivalent reciprocal lattice vectors
+together we can write the density profile as,
+%
+\begin{equation}
+    \label{amplitudes}
+    n(r) = \bar{n}
+         + \sum_\alpha \l\lbrace
+            \xi_\alpha \sum_{\lbrace\mathbf{G}\rbrace_\alpha}
+                e^{i\mathbf{G} \cdot \mathbf{x}}\r\rbrace,
+\end{equation}
+%
+Where $\alpha$ is a label running over sets of symmetry-equivalent reciprocal
+lattice vectors.
 
-In spite of these successes, CDFT has a major short coming in that it is an
-equilibrium theory. This short coming cannot be understated in any attempt to
-be a theory of the mechanical and thermodynamic properties of metal systems.
-While some mechanical properties are well understood with an understanding of
-the perfect crystalline state, such as the Young's modulus, the vast majority
-of mechanical properties of solids is due to their microstructural defects.
+If we insert equation \ref{amplitudes} into equation \ref{gp} and integrate
+over the unit cell we find,
+%
+\begin{align}
+    \label{amplitude_gp} 
+    \f{\beta \Delta\Omega_{cell}}{\rho_0} &=  \int_{cell} 
+        dr \l\lbrace (n(r) + 1)\ln\l(n(r) + 1\r) - n(r) \r\rbrace \nonumber \\
+    &- \f{1}{2} \l[\bar{n} ^ 2 \rho_0\tilde{C}^{(2)}_0(0) + \sum_\alpha\rho_0\tilde{C}^{(2)}_0
+            (\mathbf{G}_\alpha) \lambda_\alpha\vert\xi_\alpha\vert^2\r],
+\end{align}
+%
+Where $\lambda_\alpha$ is the number of reciprocal lattice vectors in the set
+$\alpha$ and $\tilde{C}^{(2)}_0(k)$ is the Fourier transform of the direct
+correlation function of the reference fluid. The first term in equation
+\ref{amplitude_gp} is convex in all of the amplitudes with a minimum at zero.
+It follows that solidification must occur when the direct correlation function
+at the reciprocal lattice vectors, $\tilde{C}^{(2)}_0(\mathbf{G}_\alpha)$, is
+large enough to stabilize a finite amplitude by creating a new minimum away
+from zero.
 
-Artifacts such as grains boundaries, dislocations and vacancies play key roles
-not only in the mechanical properties but also the kinetic pathways of certain
-phase transformations. For instance, dislocations can act to catalyze
-precipication in binary alloys [cite Vahid].
+Furthermore, equation \ref{amplitude_gp} suggests that this transition depends
+only on a set of parameters, $\rho_0 \tilde{C}^{(2)}_0(\mathbf{G}_\alpha)$,
+that are material independent.  That is to say, once we specify the symmetry of
+the lattice a liquid will solidify into (eg.  face-centred-cubic), all
+materials that undergo this transition should share these parameters at the
+melting point. This seems to be the case for a variety of materials. For
+instance, for many liquids solidifying into face-centred-cubic (fcc) lattices,
+these parameters for the [111] and [311] reciprocal lattice vectors are 0.65
+and 0.23 respectively. Similarly, for a spectrum of liquids solidifying into
+body-centred-cubic (bcc) lattices these parameters  for the [110] and [211]
+reciprocal lattice vectors are approximately 0.66 and 0.12 respectively.
+
+As seen in table \ref{table:ramakrishnan_argon} and table
+\ref{table:ramakrishnan_sodium} theoretical results from this approach match
+very closely to experimental values. In spite of the successes of density
+functional approach pioneered by Youssof and Ramakrishnan there are limits
+to this framework.
+
+\begin{table}[]
+    \center
+    \begin{tabular}{l c c c}
+        \hline 
+        Theory & $\tilde{C}(\mathbf{G}_{[111]})$ & $\tilde{C}(\mathbf{G}_{[311]})$ & $\bar{n}$ \\ 
+        \hline
+        I & 0.95 & 0.0 & 0.074 \\
+        II & 0.65 & 0.23 & 0.270 \\
+        III & 0.65 & 0.23 & 0.166 \\
+        Experiment & 0.65 & 0.23 & 0.148\\
+        \hline
+    \end{tabular}
+    \caption[Freezing parameters for Argon]{Freezing parameters for Argon (fcc)
+    taken from \cite{RAMAKRISHNAN79}.  Theory I uses one order paramter, theory
+    II uses two order parameters and theory III uses two order parameters and
+    expands to third order in the free energy. $\eta$ is the fractional density
+    change of solidification 
+    $(\rho_s - \rho_l) / \rho_l)$.}
+    \label{table:ramakrishnan_argon}
+\end{table}
+
+\begin{table}[]
+    \center
+    \begin{tabular}{l c c c}
+        \hline 
+        Theory & $\tilde{C}(\mathbf{G}_{[110]})$ & $\tilde{C}(\mathbf{G}_{[211]})$ & $\bar{n}$ \\ 
+        \hline
+        I           & 0.69 & 0.00 & 0.048 \\
+        II          & 0.63 & 0.07 & 0.052 \\
+        III         & 0.67 & 0.13 & 0.029 \\
+        Experiment  & 0.65 & 0.23 & 0.148\\
+        \hline
+    \end{tabular}
+    \caption[Freezing parameters for Sodium]{Freezing parameters for Sodium
+    (bcc) taken from \cite{RAMAKRISHNAN79}.  Theory I uses one order paramter,
+    theory II uses two order parameters and theory III uses two order
+    parameters and expands to third order in the free energy. $\eta$ is the
+    fractional density change of solidification 
+    $(\rho_s - \rho_l) / \rho_l)$.}
+    \label{table:ramakrishnan_sodium}
+\end{table}
+
+Many of the mechanical properties of solids are due to the way in which they
+deviate from the perfect crystalline lattice: the microstructure. Grain
+boundaries, vacancies, dislocations and second phase particles all play
+critical roles in determining the mechanical properties of solids. A simple
+example of this is the Hall-Petch effect which states that the yield stress of
+a material increases with decreasing grain size,
+%
+\begin{equation}
+    \sigma = \sigma_0 + k_y d^{-1/2},
+\end{equation}
+%
+where, $d$, is the average grain diameter, $\sigma$ is the yield stress,
+$\sigma_0$ is yield stress of a single crystal sample and $k_y$ is the
+strengthening coefficient.
+
+Microstructure plays key roles not only in the mechanical properties but also
+the kinetic pathways of certain phase transformations. For instance,
+dislocations can act to catalyze precipication in binary alloys [cite Vahid].
 
 The problem that we face is then, how do we examine these defects and
-microstructural elements but retain some of the positive aspects of CDFT? More
-specifically, what path does density profile take to equilibrium?
+microstructural elements but retain some of the successful aspects of density
+functional approach? One way to think about to consider the microstructure in
+the solid state is that it is an artifact of not having fulling reached
+equilibrium. Real materials are solidified over a finite time and therefore
+haven't fully reached equilibrium. As a result, we should study the pathway to 
+equilibrium to gain insight into the origin of microstructure. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Dynamic Density Functional Theory} %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-We can extend our density functional theory to a dynamical model using
-techniques from non-equilibrium statistical mechanics. We begin by considering
-some non-equilibrium probability distribution over phase space, $f(\q, \p, t)$,
-and its equation of motion,
+Using techniques from non-equilibrium statistical mechanics we can extend
+the density functional approach to a dynamic model. To start we illustrate the 
+non-equilibrium method schematically. Consider a non-equilibrium probability 
+distribution over phase space, $f(\q, \p; t)$. As a function over phase space,
+its equation of motion is a simple result of classical mechanics,
 %
 \begin{equation}
-    \label{liouville}
-    \f{\partial f(\q, \p, t)}{\partial t} = -\l\lbrace f, \mathcal{H} \r\rbrace.
+    \f{d f}{dt} = \l\lbrace f, \mathcal{H} \r\rbrace + \f{\partial f}{\partial t}.
 \end{equation}
 %
 Where, $\l\lbrace \cdot, \cdot \r\rbrace$, denotes the Poisson bracket,
@@ -85,15 +196,28 @@ Where, $\l\lbrace \cdot, \cdot \r\rbrace$, denotes the Poisson bracket,
 \begin{equation}
     \l\lbrace f, g \r\rbrace = \sum_{i = 0}^N \f{\partial f}{\partial q_i}
         \f{\partial g}{\partial p_i} - \f{\partial g}{\partial q_i}
-        \f{\partial g}{\partial p_i}.
+        \f{\partial f}{\partial p_i}.
 \end{equation}
 %
-Equation \ref{liouville} is called the \textit{Liouville Equation}. Under
-appropriate conditions the probability distribution will decay to the
+Of course, the distribution must remain normalized in time and therefore the 
+total time derivative must be zero,
+%
+\begin{equation}
+    \int d\q d\p\, f(\q, \p; t) = 1 \rightarrow \f{d f}{dt} = 0.
+\end{equation}
+%
+The resulting equation of motion is called the \textit{Liouville Equation},
+%
+\begin{equation}
+    \label{liouville} 
+    \f{\partial f}{\partial t} = - \l\lbrace f , \mathcal{H} \r\rbrace
+\end{equation}
+%
+Under appropriate conditions the probability distribution will decay to the
 equilibrium fixed point,
 %
 \begin{equation}
-    \lim_{t \rightarrow \infty} f(\q, \p, t) = f_{eq}(\q, \p)
+    \lim_{t \rightarrow \infty} f(\q, \p; t) = f_{eq}(\q, \p)
 \end{equation}
 %
 
@@ -110,7 +234,9 @@ of motions. The non-equilibrium density is written in analogy with equation
 Where, $\mean{\cdot}_{ne}$, denotes the non-equilibrium average. Thusly, just
 as the non-equilibrium probability distribution is driven to equilibrium by the
 Liouville Equation, so too will the denisty profile by its own equation of
-motion. Under the approximation that direct correlation function decays to
+motion. A variety of equations of motion for the density field are known. If
+the fluid is considered underdamped the resulting equations of motion are
+hydrodynamic Under the approximation that direct correlation function decays to
 equilibrium more quickly more quickly than the density profile we can write the
 equation of motion as[{\color{ForestGreen} Cite Evans and Tarazona here and
 Archer for the distinction between these two equations? Perhaps Espanol as well
