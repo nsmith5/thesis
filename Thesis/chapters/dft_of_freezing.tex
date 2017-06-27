@@ -188,6 +188,7 @@ distribution over phase space, $f(\q, \p; t)$. As a function over phase space,
 its equation of motion is a simple result of classical mechanics,
 %
 \begin{equation}
+    \label{cm} 
     \f{d f}{dt} = \l\lbrace f, \mathcal{H} \r\rbrace + \f{\partial f}{\partial t}.
 \end{equation}
 %
@@ -206,15 +207,17 @@ total time derivative must be zero,
     \int d\q d\p\, f(\q, \p; t) = 1 \rightarrow \f{d f}{dt} = 0.
 \end{equation}
 %
-The resulting equation of motion is called the \textit{Liouville Equation},
+Accounting for this conservation law in equation \ref{cm}, the resulting
+equation of motion is called the \textit{Liouville Equation},
 %
 \begin{equation}
     \label{liouville} 
     \f{\partial f}{\partial t} = - \l\lbrace f , \mathcal{H} \r\rbrace
 \end{equation}
 %
-Under appropriate conditions the probability distribution will decay to the
-equilibrium fixed point,
+Under appropriate conditions the probability distribution, under the action of
+the Liouville Equation, will decay to a stable fixed point $f_{eq}(\q, \p)$ we
+call equilibrium,
 %
 \begin{equation}
     \lim_{t \rightarrow \infty} f(\q, \p; t) = f_{eq}(\q, \p)
@@ -224,7 +227,8 @@ equilibrium fixed point,
 Using the non-equilibrium probability distribution, we can also discuss
 non-equilibrium averages of the density profile and their associated equations
 of motions. The non-equilibrium density is written in analogy with equation
-\ref{mean_density},
+\ref{mean_density} by taking of the classical trace of the density operator
+over with the non-equilibrium distribution,
 %
 \begin{equation}
     \rho(x, t) = \mean{\hat{\rho}(x; \q)}_{ne} =
@@ -244,6 +248,7 @@ function is the same as the equilibrium pair correlation we can express the
 density equation of motion as,
 %
 \begin{equation}
+    \label{mean_eom}
     \f{\partial \rho(x, t)}{\partial t} = 
         \nabla \cdot \l[
             D_0 \rho(x, t) \nabla \l(\f{\d \F[\rho]}{\d \rho(x, t)}\r)
@@ -254,43 +259,15 @@ Where, $D_0$ is the diffusion constant. We can also express the dynamics of
 the density field in the form of a Langevin equation for the density operator,
 %
 \begin{equation}
-    \label{dens_langevin}
+    \label{langevin_eom}
     \f{\partial \hat{\rho}(x, t)}{\partial t} =
         \nabla \cdot \l[
             D_0 \hat{\rho}(x, t) \nabla \l(\f{\d \F[\hat{\rho}]}{\d \hat{\rho}}\r)
         \r] + \xi(x, t).
 \end{equation}
 %
-{\color{ForestGreen} Old crap below!}
-
-
-the fluid is considered underdamped the resulting equations of motion are
-hydrodynamic Under the approximation that direct correlation function decays to
-equilibrium more quickly more quickly than the density profile we can write the
-equation of motion as[{\color{ForestGreen} Cite Evans and Tarazona here and
-Archer for the distinction between these two equations? Perhaps Espanol as well
-for the projection operator derivation}],
-%
-\begin{equation}
-    \f{\partial \rho(x, t)}{\partial t} = 
-        \nabla \cdot \l[
-            D_0 \rho(x, t) \nabla \l(\f{\d \F[\rho]}{\d \rho(x, t)}\r)
-        \r]
-\end{equation}
-%
-Or, equivalently, we may write and equation of motion for the operator itself,
-$\hat{\rho}$, as,
-%
-\begin{equation}
-    \label{dens_langevin}
-    \f{\partial \hat{\rho}(x, t)}{\partial t} =
-        \nabla \cdot \l[
-            D_0 \hat{\rho}(x, t) \nabla \l(\f{\d \F[\hat{\rho}]}{\d \hat{\rho}}\r)
-        \r] + \xi(x, t).
-\end{equation}
-%
-Where, $\mathbf{\xi}(x, t)$ is a Gaussian random driving force with zero
-average and variance is,
+Where, $\mathbf{\xi}(x, t)$ is a Gaussian random driving force with zero mean
+and variance of,
 %
 \begin{equation}
     \mean{\xi(x, t)\xi(x^\prime, t^\prime)} = -2 \nabla \cdot \l[ D_0 \rho(x,t) 
@@ -300,22 +277,60 @@ average and variance is,
 %
 Due to a generalized Einstein relation\footnote{See Appendix \ref{noise} for
 details on generalized Einstein relations for nonlinear Langevin equations} for
-the Langevin equation in equation \ref{dens_langevin}.
+the Langevin equation in equation \ref{langevin_eom}.
 
-Equations similar to those seen here and extensions there of fall under the
-category of \textit{Dynamic Density Functional Theory}(DDFT).  
+Equation \ref{mean_eom} and \ref{langevin_eom} were first derived by Marconi
+and Tarazona by considering an ensemble of interacting Brownian particles, but
+other derivations are possible including the projection operator method [cite
+Espanol].  Equations \ref{mean_eom} and \ref{langevin_eom} fall under the
+heading of \textit{Dynamic Density Functional Theory} (DDFT) or sometimes
+\textit{Time dependent density functional theory} (TD-DFT) though we'll use the
+former throughout this text.
+
+Unfortunately, if we were to use the approximate free energy functional
+established in equation \ref{cdft_free_energy} in the dynamic density
+functional theory of equation \ref{mean_eom} or \ref{langevin_eom} we would
+face a major impedement: the solid state solutions of the density functional
+theory approach yield sharply peaked solutions at the position of the atoms in
+the lattice. While this is realistic, they are a major challenge for numerical
+algorithms. The challenges are two fold: first, these sharp peaks require a fine mesh 
+to be resolved resulting in large memory requirement to simulate domains 
+of any non-trivial scale and second, lineary stability analysis of most algorithms 
+slave the scale of the time step to the scale of the grid spacing so only small
+time steps can be taken on a fine mesh.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Phase Field Crystal Theory} %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-{\color{ForestGreen} {\bfseries
-
-% Basic idea of this chapter
-
-    Introduce PFC. The essential physics of solidifications is retained,
-    and much larger length and timescales can be explored. The assumption
-    here is that we haven't lost the qualitative mechanisms we're
-    interested even if we lost some quantitative agreement with theory.
-            
-} }
+The phase field crystal theory (PFC) presents a solution to the numerical difficulties
+faced by DDFT methods by approximating the free energy in such a say as to retain the
+basic features of the theory with a smoother solid state solution. Starting the 
+approximate free energy functional of equation \ref{cdft_free_energy} we proceed as
+previously by scaling out a factor of the reference density and changing variables
+to a dimensionless density $n(r) = (\rho(r) - \rho_0) / \rho_0$,
+%
+\begin{equation}
+    \f{\beta \F[n(r)]}{\rho_0} = 
+        \int dr \l\lbrace (n(r) + 1) \ln( n(r) + 1) - (1 - \beta\mu)n(r) \r\rbrace
+        - \f{1}{2} n(r) \ast \rho_0 C^{(2)}_0(r, r^\prime) \ast n(r^\prime).
+\end{equation}
+%
+We then Taylor expand the logarithm about the reference density or equivalently $n(r) = 0$, 
+to fourth order,
+%
+\begin{equation}
+    \label{pfc_free_energy} 
+    \f{\beta \F[n(r)]}{\rho_0} =
+        \int dr \l\lbrace \f{n(r)^2}{2} - \f{n(r)^3}{6} + \f{n(r)^4}{12} \r\rbrace
+        -\f{1}{2} n(r) \ast \rho_0 C^{(2)}_0(r, r^\prime) \ast n(r^\prime).
+\end{equation}
+%
+Where the linear term has been dropped because it leaves the equations of motion invariant.
+Most phase field crystal theories also use a simplified equation of motion as well,
+%
+\begin{equation}
+    \label{pfc_eom}
+    \f{\partial n(r, t)}{\partial t} = M \nabla^2 \l(\f{\d \F[n(r)]}{\d n(r)}\r).
+\end{equation}
+%
