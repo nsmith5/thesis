@@ -19,16 +19,16 @@ free energy functional established in Chapter \ref{fundamentals},
         \ast \Delta\rho_j(r^\prime). \nonumber
 \end{align}
 %
-It is convenient to change variables to a dimensionless total density, $n(r)$ and local
-concentration, $c(r)$,
+It is convenient to change variables to a dimensionless total density, $n(r)$
+and local concentration, $c(r)$,
 %
 \begin{gather}
     n(r) = \f{\Delta \rho}{\rho_0} = \f{\Delta\A + \Delta\B}{\A^0 + \B^0} \\
     c(r) = \f{\B}{\rho} = \f{\B}{\A + \B}.
 \end{gather}
 %
-Scaling out a factor of the total reference density, $\rho_0$ we can break the free energy
-functional in these new variables into two parts,
+Scaling out a factor of the total reference density, $\rho_0$ we can break the
+free energy functional in these new variables into two parts,
 %
 \begin{equation}
     \f{\beta\F[n, c]}{\rho_0} = \f{\beta\F_{id}[n, c]}{\rho_0} + \f{\beta\F_{ex}[n, c]}{\rho_0},
@@ -40,7 +40,8 @@ Where,
     \label{binary_ideal}
     \f{\beta\F_{id}[n, c]}{\rho_0} 
         &= \int \mathrm{d}r \,\l\lbrace (n(r) + 1)\ln(n(r) + 1) - (1 - \beta\mu^0)n(r) \r\rbrace \\
-        &+ \int \mathrm{d}r \,\l\lbrace (n(r) + 1)\l(c\ln\l(\f{c}{c_0}\r) + (1-c)\ln\l(\f{1-c}{1-c_0}\r) \r)\r\rbrace, 
+        &+ \int \mathrm{d}r \,\l\lbrace (n(r) + 1)\l( 
+            c\ln\l(\f{c}{c_0}\r) + (1-c)\ln\l(\f{1-c}{1-c_0}\r) \r)\r\rbrace, 
 \end{align}
 %
 And, if we assume the local concentration $c(r)$ varies over much longer length
@@ -55,9 +56,10 @@ scales than the local density $n(r)$,
             C_{cn}(r, r^\prime) \ast n(r^\prime) + C_{cc}(r, r^\prime) \ast \Delta c(r^\prime)\r]. \nonumber
 \end{align}
 %
-We have introduced $\mu_0$ as the total chemical potential of the reference mixture, $c_0 = \B^0 / \rho_0$ as the
-reference concentration and $\Delta c(r) = c(r) - c_0$ as the deviation of the concentration from the reference.
-The $n-c$ pair correlation introduced in the excess free energy are,
+We have introduced $\mu_0$ as the total chemical potential of the reference
+mixture, $c_0 = \B^0 / \rho_0$ as the reference concentration and $\Delta c(r)
+= c(r) - c_0$ as the deviation of the concentration from the reference.  The
+$n-c$ pair correlation introduced in the excess free energy are,
 %
 \begin{align}
     C_{nn} &= \rho_0\l(c^2 C_{BB} + (1 - c)^2C_{AA} + 2c(1-c)C_{AB}\r) \\
@@ -66,13 +68,27 @@ The $n-c$ pair correlation introduced in the excess free energy are,
     C_{cc} &= \rho_0\l(C_{BB} + C_{AA} - 2 C_{AB}\r)
 \end{align}
 %
-Explicit calculations can be found in Appendix \ref{binary_correlations}. Differences in the various
-binary PFC theories stem from different approximations of ideal free energy in equation \ref{binary_ideal} and
-excess free energy in equation \ref{binary_excess}.
+Explicit calculations can be found in Appendix \ref{binary_correlations}.
+Differences in the various binary PFC theories stem from different
+approximations of ideal free energy in equation \ref{binary_ideal} and excess
+free energy in equation \ref{binary_excess}.
 
-\section{Original Binary Phase Field Crystal Model}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Original Binary Phase Field Crystal Model} %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Binary Structural Phase Field Crystal Model}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Binary Structural Phase Field Crystal Model} %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Regular Phase Field Crystal Model}
-\subsection{Equilibrium Properties}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Regular Phase Field Crystal Model} %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The Regular Phase Field Crystal Model is a combination of the original simple binary model
+and the XPFC model. It starts by 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Equilibrium Properties} %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
