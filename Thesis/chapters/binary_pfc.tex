@@ -14,7 +14,8 @@ free energy functional established in Chapter \ref{fundamentals},
 \begin{align}
     \label{binary_cdft_free_energy}
     \beta\F[\A, \B] &= \sum_{i=A, B} \int \mathrm{d}r 
-        \,\rho_i(r) \ln\l(\f{\rho_i(r)}{\rho_i^0}\r) - (1 - \beta\mu_i^0)\Delta\rho_i(r)\\
+        \,\rho_i(r) \ln\l(\f{\rho_i(r)}{\rho_i^0}\r) 
+        - (1 - \beta\mu_i^0)\Delta\rho_i(r)\\
     &- \f{1}{2} \sum_{i,j=A, B} \Delta\rho_i(r) \ast C^{(2)}_{ij}(r, r^\prime) 
         \ast \Delta\rho_j(r^\prime). \nonumber
 \end{align}
@@ -31,7 +32,8 @@ Scaling out a factor of the total reference density, $\rho_0$ we can break the
 free energy functional in these new variables into two parts,
 %
 \begin{equation}
-    \f{\beta\F[n, c]}{\rho_0} = \f{\beta\F_{id}[n, c]}{\rho_0} + \f{\beta\F_{ex}[n, c]}{\rho_0},
+    \f{\beta\F[n, c]}{\rho_0} = \f{\beta\F_{id}[n, c]}{\rho_0} 
+        + \f{\beta\F_{ex}[n, c]}{\rho_0},
 \end{equation}
 %
 Where,
@@ -39,7 +41,8 @@ Where,
 \begin{align}
     \label{binary_ideal}
     \f{\beta\F_{id}[n, c]}{\rho_0} 
-        &= \int \mathrm{d}r \,\l\lbrace (n(r) + 1)\ln(n(r) + 1) - (1 - \beta\mu^0)n(r) \r\rbrace \\
+        &= \int \mathrm{d}r \,\l\lbrace (n(r) + 1)\ln(n(r) + 1) 
+            - (1 - \beta\mu^0)n(r) \r\rbrace \\
         &+ \int \mathrm{d}r \,\l\lbrace (n(r) + 1)\l( 
             c\ln\l(\f{c}{c_0}\r) + (1-c)\ln\l(\f{1-c}{1-c_0}\r) \r)\r\rbrace, 
 \end{align}
@@ -51,9 +54,11 @@ scales than the local density $n(r)$,
     \label{binary_excess}
     \f{\beta\F_{ex}[n, c]}{\rho_0}
         = &-\f{1}{2} n(r) \ast \l[ 
-            C_{nn}(r, r^\prime) \ast n(r^\prime) + C_{nc}(r, r^\prime) \ast \Delta c(r^\prime)\r] \\
+            C_{nn}(r, r^\prime) \ast n(r^\prime) 
+          + C_{nc}(r, r^\prime) \ast \Delta c(r^\prime)\r] \\
         &-\f{1}{2} \Delta c(r) \ast \l[
-            C_{cn}(r, r^\prime) \ast n(r^\prime) + C_{cc}(r, r^\prime) \ast \Delta c(r^\prime)\r]. \nonumber
+            C_{cn}(r, r^\prime) \ast n(r^\prime) 
+          + C_{cc}(r, r^\prime) \ast \Delta c(r^\prime)\r]. \nonumber
 \end{align}
 %
 We have introduced $\mu_0$ as the total chemical potential of the reference
@@ -85,8 +90,8 @@ free energy in equation \ref{binary_excess}.
 \section{Regular Phase Field Crystal Model} %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The Regular Phase Field Crystal Model is a combination of the original simple binary model
-and the XPFC model. It starts by 
+The Regular Phase Field Crystal Model is a combination of the original simple
+binary model and the XPFC model. It starts by 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
