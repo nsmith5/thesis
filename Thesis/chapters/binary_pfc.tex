@@ -29,23 +29,27 @@ and local concentration, $c(r)$,
 \end{gather}
 %
 Scaling out a factor of the total reference density, $\rho_0$ we can break the
-free energy functional in these new variables into two parts,
+free energy functional in these new variables into three parts,
 %
 \begin{equation}
-    \f{\beta\F[n, c]}{\rho_0} = \f{\beta\F_{id}[n, c]}{\rho_0} 
+    \label{binary_total_free_energy}
+    \f{\beta\F[n, c]}{\rho_0} = \f{\beta\F_{id}[n]}{\rho_0} 
+        + \f{\beta\F_{mix}[n, c]}{\rho_0}
         + \f{\beta\F_{ex}[n, c]}{\rho_0},
 \end{equation}
 %
 Where,
 %
-\begin{align}
+\begin{gather}
     \label{binary_ideal}
-    \f{\beta\F_{id}[n, c]}{\rho_0} 
-        &= \int \mathrm{d}r \,\l\lbrace (n(r) + 1)\ln(n(r) + 1) 
-            - (1 - \beta\mu^0)n(r) \r\rbrace \\
-        &+ \int \mathrm{d}r \,\l\lbrace (n(r) + 1)\l( 
+    \f{\beta\F_{id}[n]}{\rho_0} =
+        \int \mathrm{d}r \,\l\lbrace (n(r) + 1)\ln(n(r) + 1) 
+        - (1 - \beta\mu^0)n(r) \r\rbrace \\
+    \label{binary_mixing}
+    \f{\beta\F_{mix}[n, c]}{\rho_0} =
+        \int \mathrm{d}r \,\l\lbrace (n(r) + 1)\l( 
             c\ln\l(\f{c}{c_0}\r) + (1-c)\ln\l(\f{1-c}{1-c_0}\r) \r)\r\rbrace, 
-\end{align}
+\end{gather}
 %
 And, if we assume the local concentration $c(r)$ varies over much longer length
 scales than the local density $n(r)$,
@@ -74,13 +78,52 @@ $n-c$ pair correlation introduced in the excess free energy are,
 \end{align}
 %
 Explicit calculations can be found in Appendix \ref{binary_correlations}.
-Differences in the various binary PFC theories stem from different
-approximations of ideal free energy in equation \ref{binary_ideal} and excess
-free energy in equation \ref{binary_excess}.
+Differences in the various simplified binary PFC theories stem from differing
+approximations of the terms in the free energy stated in equation
+\ref{binary_total_free_energy}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Original Binary Phase Field Crystal Model} %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In the original simplified binary PFC theory, all terms in the free energy are
+expanded about $n(r) = 0$ and $c(r) = c_0$ (ie., about their reference states).
+For the ideal free energy this results in a polynomial truncated to fourth
+order,
+%
+\begin{equation}
+    \f{\beta\F_{id}[n]}{\rho_0} = \integrate{r}
+    \l\lbrace \f{n(r)^2}{2} - \f{n(r)^3}{6} + \f{n(r)^4}{12} \r\rbrace.
+\end{equation}
+%
+The linear term is dropped due to invariance in the equations of motion. If we
+assume for simplicity of demonstration $c0 = 1/2$, the free energy of mixing
+becomes a simple fourth order polynomial as well,
+%
+\begin{equation}
+    \f{\beta\F_{mix}[n, c]}{\rho_0} = \integrate{r} \l\lbrace
+       2\Delta c(r)^2 + \f{4\Delta c(r)^4}{3}
+    \r\rbrace.
+\end{equation}
+%
+Linear couplings to $n(r)$ are dropped by assuming, as we already have, that
+the concentration field varies on a much longer length scale than the total
+density and noting that the total density is defined about its average. This
+argument can also be applied the linear couplings to $n(r)$ in the excess free
+energy term which leaves only the $C_{nn}$ and $C_{cc}$ terms. Finally, these
+two terms are approximated with a gradient expansions of the correlation
+functions,
+%
+\begin{gather}
+    C_{nn}(r, r^\prime) = \d(r - r^\prime)\l(
+        \alpha + \beta \nabla^2 + \eta \nabla^4 + \dots\r), \\
+    C_{cc}(r, r^\prime) = \d(r - r^\prime)\l(
+        \epsilon + \xi \nabla^2 + \dots\r).
+\end{gather}
+%
+The density-density correlation function is responsible for driving
+solidification 
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Binary Structural Phase Field Crystal Model} %
