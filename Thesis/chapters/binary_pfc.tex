@@ -116,26 +116,81 @@ functions,
 %
 \begin{gather}
     C_{nn}(r, r^\prime) = \d(r - r^\prime)\l(
-        \alpha + \beta \nabla^2 + \eta \nabla^4 + \dots\r), \\
+        \alpha + \beta \nabla^2 + \gamma \nabla^4 + \dots\r), \\
     C_{cc}(r, r^\prime) = \d(r - r^\prime)\l(
         \epsilon + \xi \nabla^2 + \dots\r).
 \end{gather}
 %
-The density-density correlation function is responsible for driving
-solidification 
+The expansion parameters, $\alpha, \beta,$ and $\gamma$ are all dependent on
+temperature and concentration. We are required to expand $C_{nn}$ to fourth
+order because, as noted in chapter \ref{dft_of_freezing} the peak of the direct
+correlation function in Fourier space is the driving force for solidification.
+The concentration field is correlated over a longer length scale implying that
+only the short wavevectors are important in $C_{cc}$ so we can expand just to
+quadratic order.
+
+Gathering terms the resulting free energy functional for the original simplified
+binary PFC model\footnote{The orignal simplified binary PFC model was
+expressed using slightly different variables. We expand in $\Delta c(r)$ here to 
+facilitate comparison with other theories} is,
+%
+\begin{align}
+    \f{\beta\F[n, c]}{\rho_0} &= \integrate{r} \l\lbrace 
+        \f{1}{2} n(r) \l( 1 - \alpha - \beta\nabla^2 - \eta\nabla^4 \r) n(r)
+      - \f{n(r)^3}{6} + \f{n(r)^4}{12} \r\rbrace \\
+    &+ \integrate{r} \l\lbrace
+        \f{1}{2} \Delta c(r) \l( 4 - \epsilon - \xi\nabla^2 \r) \Delta c(r) 
+      + \f{4 \Delta c(r)^4}{3} \r\rbrace. \nonumber
+\end{align}
+%
+
+The strength of the original simplified binary PFC model is that is retains
+most of the important physics of binary alloys in a very reduced theory. For
+instance, the simplified model is capable of describing the equilibrium phase
+diagrams of both eutectic alloys alloys and materials with a solid state
+spinodal / liquid minimum.  Supplied with a diffusive equation of motion the
+simplified model can model an impressive diversity of dynamic phenomena
+including eutectic growth, phase segregation, dendritic growth, dislocation
+motion in solid state spinodal coarsening and epitaxial growth.
+
+The major limitation of the original simplified model is that the gradient
+expansion of the 
+
+{   
+    \color{ForestGreen} List all of the applications which the original model,
+    in its various forms, was successfully applied to. List failures if
+    possible (here I'm specifically thinking about the Karma fitting problem
+    for iron) and conceptual problems about modelling differect structures. 
+
+    Additionally note the limitations of expansions in the 'concentration' when
+    attempting to reproduce realistic phase diagram. Essentially, the divergent
+    behaviour at the concentration boundaries makes this behaviour work.
+}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Binary Structural Phase Field Crystal Model} %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+{
+    \color{ForestGreen} Derive the Binary XPFC free energy and note differences
+    from the derivation used for the original simplified model. List all of the
+    novel applications that where approached using this model. List the theoretical
+    advantages (better phase diagrams, precise control of structure etc)
+
+    List disadvantages (liquid is ideal, narrow spectrum of phase diagrams can
+    be reproduces). List theoretic disadvantages (ideal mixing instead of more
+    realistic regular mixing basically).
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Regular Phase Field Crystal Model} %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The Regular Phase Field Crystal Model is a combination of the original simple
-binary model and the XPFC model. It starts by 
+{
 
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Equilibrium Properties} %
