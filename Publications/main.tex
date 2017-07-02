@@ -135,7 +135,11 @@ To model the density-density correlation function $C_{nn}(r)$ or equivalently, $
   \tilde{C}_{nn}(k; c) = \sum_i \chi_i (c) \tilde{C}_i (k)
 \end{equation}
 
-This model reflects, qualitatively, the fact that different structures are stabilized at different concentrations. The window function $\chi_i$ decribes the region in concentration space over which a phase $i$ is stable and the structure function, $\tilde{C}_i$ describes the structure of that phase. The structure functions can be modelled by a sum of gaussians in fourier space, 
+This model reflects, qualitatively, the fact that different structures are
+stabilized at different concentrations. The window function $\chi_i$ decribes
+the region in concentration space over which a phase $i$ is stable and the
+structure function, $\tilde{C}_i$ describes the structure of that phase. The
+structure functions can be modelled by a sum of gaussians in fourier space, 
 
 \begin{equation}
   \tilde{C}_i(k) = e^{T/T_0}\l(\sum_j e^{-\f{(k - k_j)^2}{2 \alpha_j^2}}\r).
@@ -143,31 +147,52 @@ This model reflects, qualitatively, the fact that different structures are stabi
 
 \subsection{Model Dynamics}
 
-We can model the dynamics of the total density and concentration using diffusive, conservative dynamics for each. We'll further assume that the mobility of both concentration and total density are constant. 
+We can model the dynamics of the total density and concentration using
+diffusive, conservative dynamics for each. We'll further assume that the
+mobility of both concentration and total density are constant. 
 
 \begin{gather}
 	\f{\partial n}{\partial t} = M_{n} \nabla^2 \l[n - \eta \f{n^2}{2} + \chi \f{n^3}{3} + f_{mix}(c) - C^n_{eff} \ast n \r] + \nabla \cdot\xi_c, \\
 	\f{\partial c}{\partial t} = M_{c} \nabla^2 \l[\l(\epsilon - \nabla^2\r)c + \l(n + 1\r)\f{\partial f_{mix}}{\partial c} - \f{1}{2} n \f{\partial C^n_{eff}}{\partial c} \ast n\r] + \nabla \cdot \xi_n.
 \end{gather}
 
-Where $\xi_c$ and $\xi_n$ are noise terms respecting a generalized Einstein relation. It is important to note that $c$ is in fact not a conserved variable but rather a ratio of conserved variables $\B$ and $\rho$. Therefore, these dynamics can only be considered valid in the limit where total density is constant (eg. these is no density segregation between phases) in addition to the constraints discussed by Fang [cite!]. 
+Where $\xi_c$ and $\xi_n$ are noise terms respecting a generalized Einstein
+relation. It is important to note that $c$ is in fact not a conserved variable
+but rather a ratio of conserved variables $\B$ and $\rho$. Therefore, these
+dynamics can only be considered valid in the limit where total density is
+constant (eg. these is no density segregation between phases) in addition to
+the constraints discussed by Fang [cite!]. 
 
 \section{Equilibrium Properties}
 
-Here, we'll explore the flexibility of our simplified regular model to describe previous and new classes of invariant reactions for the binary alloy.
+Here, we'll explore the flexibility of our simplified regular model to describe
+previous and new classes of invariant reactions for the binary alloy.
 
 \subsection{Eutectic Phase Diagram}
 
-While previous PFC models have shown that elastic energy is a sufficient driving force for eutectic solidification our simplified regular model allows for the examination of the role enthalpy of mixing can play in eutectic solids. For instance, Murdoch and Schuh noted that in nanocrystalline binary alloys, while a positive enthaply of segregation can stabilize against grain growth via solute segregation at the grain boundary, if the enthaply of mixing becomes too large this effect can be negated by second phase formation or even macroscopic phase seperation\cite{murdoch}. 
+While previous PFC models have shown that elastic energy is a sufficient
+driving force for eutectic solidification our simplified regular model allows
+for the examination of the role enthalpy of mixing can play in eutectic solids.
+For instance, Murdoch and Schuh noted that in nanocrystalline binary alloys,
+while a positive enthaply of segregation can stabilize against grain growth via
+solute segregation at the grain boundary, if the enthaply of mixing becomes too
+large this effect can be negated by second phase formation or even macroscopic
+phase seperation\cite{murdoch}. 
 
-To specialize our simplified regular model to the case of the binary eutectic we must choose an appropriate model for the correlation function. Choosing an $\alpha$ phase around $c = 0$ and $\beta$ phase around $c = 1$, we can recover the pair correlation function used in the original binary XPFC with a particular choice of window functions: 
+To specialize our simplified regular model to the case of the binary eutectic
+we must choose an appropriate model for the correlation function. Choosing an
+$\alpha$ phase around $c = 0$ and $\beta$ phase around $c = 1$, we can recover
+the pair correlation function used in the original binary XPFC with a
+particular choice of window functions: 
 
 \begin{align}
    \chi_\alpha(c) &= 2c^3 - 3c^2 + 1 \\
    \chi_\beta(c) &= \chi_\alpha(1 - c).
 \end{align}
 
-Should we choose, for example, an $\alpha$ and $\beta$ phase with 2 dimensional hexagonal lattices, differing only by lattice constants, we can produce a phase diagram like that in Fig. \ref{eutectic}.  
+Should we choose, for example, an $\alpha$ and $\beta$ phase with 2 dimensional
+hexagonal lattices, differing only by lattice constants, we can produce a phase
+diagram like that in Fig. \ref{eutectic}.  
 
 %Phase Diagram here
 \begin{figure}
@@ -175,23 +200,32 @@ Should we choose, for example, an $\alpha$ and $\beta$ phase with 2 dimensional 
 	\caption{\label{eutectic} Eutectic phase diagram triangle $\alpha$ and $\beta$ phases. The free energy parameter are $\eta = 2$, $\chi = 1$, $\omega=0.30$, $\epsilon_0 = 3$ and $T_c = 0.01$. The parameters of the structure functions are $\alpha_{10\alpha} = \alpha_{10\beta} = 0.8$, $k_{10\alpha} = 2\pi$, $k_{10\beta} = 4\pi/\sqrt{3}$ and $T_0 = 1$}
 \end{figure}
 
-
 \subsection{Syntectic Phase Diagram}
 
-Our regular model also allows for the study of a variety of invariant binary reactions that, to date, have not been studied using phase field crystal models. One such reaction is the syntectic reaction. 
+Our regular model also allows for the study of a variety of invariant binary
+reactions that, to date, have not been studied using phase field crystal
+models. One such reaction is the syntectic reaction. 
 
-The syntectic reaction, $l_1 + l_2 \rightarrow \alpha $, consists of solidification at the interface of two liquids. We can achieve this with our model by setting the spinodal temperature, $T_c$, sufficiently high and producing a density-density correlation function that is peaked at a concentration below the spinodal. This can be done by choosing a window function that is centered about an intermediate concentration, $c_\alpha$ of the solid phase, $\alpha$. 
+The syntectic reaction, $l_1 + l_2 \rightarrow \alpha $, consists of
+solidification at the interface of two liquids. We can achieve this with our
+model by setting the spinodal temperature, $T_c$, sufficiently high and
+producing a density-density correlation function that is peaked at a
+concentration below the spinodal. This can be done by choosing a window
+function that is centered about an intermediate concentration, $c_\alpha$ of
+the solid phase, $\alpha$. 
 
 \begin{equation}
   \chi(c) = e^{- \f{(c - c_\alpha)^2}{2 \alpha_c}}
 \end{equation}
 
-The resulting correlation function for a hexagonal lattice in two dimensions, for example, would be,
+The resulting correlation function for a hexagonal lattice in two dimensions,
+for example, would be,
 
 \begin{equation}
   \tilde{C}_{nn}(k; c) = e^{-\f{(c - c_\alpha)^2}{2 \alpha_c}} e^{-\f{T}{T_0}} e^{-\f{(k - k^\prime)^2}{2\alpha^2}}
 \end{equation}
-A phase diagram that produces a syntectic reaction with an appropriate choice of parameters can be seen in Fig. \ref{syntectic}.
+A phase diagram that produces a syntectic reaction with an appropriate choice
+of parameters can be seen in Fig. \ref{syntectic}.
 
 \begin{figure}
 	\includegraphics[scale=0.5]{syntectic.eps}
@@ -200,12 +234,21 @@ A phase diagram that produces a syntectic reaction with an appropriate choice of
 
 \subsection{Monotectic Phase Diagram}
 
-The monotectic reaction is another invariant binary reaction that has not previously been studied using PFC models. The monotectic reaction, $l_1 \rightarrow \alpha + l_2$, consists of decomposing liquid into a solute poor solid and solute rich liquid. To model a monotectic using our regular model we hypothesize a solid phase at $c=0$ and set the spinondal temperature higher than the solidification temperature. To achieve this we use a window function peaked around $c = 0$,
+The monotectic reaction is another invariant binary reaction that has not
+previously been studied using PFC models. The monotectic reaction, $l_1
+\rightarrow \alpha + l_2$, consists of decomposing liquid into a solute poor
+solid and solute rich liquid. To model a monotectic using our regular model we
+hypothesize a solid phase at $c=0$ and set the spinondal temperature higher
+than the solidification temperature. To achieve this we use a window function
+peaked around $c = 0$,
 
 \begin{equation}
     \chi_\alpha(c) = e^{-\f{c^2}{2\alpha_c^2}}.
 \end{equation}
-Again considering a simple hexagonal lattice for the $\alpha$ phase, we can produce a phase diagram with a monotectic reaction with an appropriate choice of parameters as in Fig. \ref{monotectic}. 
+Again considering a simple hexagonal lattice for the $\alpha$ phase, we can
+produce a phase diagram with a monotectic reaction with an appropriate choice
+of parameters as in Fig. \ref{monotectic}.
+
 \begin{figure}
 	\includegraphics[scale=0.5]{monotectic.eps}
 	\caption{\label{monotectic} Phase Diagram of Monotectic Alloy with hexagonal $\alpha$ phase. The free energy parameters are $\eta = 2$, $\chi=1$, $\omega=0.3$, $\epsilon_0 = 10$, $T_c = 0.35$ and $c_0 = 0.75$. The parameters for the structure function are $\alpha_{10\alpha} = 0.8$, $k_{10\alpha} = 2\pi$ and $T_0 = 1$ and the parameter for the window function is $\alpha_c = 0.4$}
@@ -213,9 +256,23 @@ Again considering a simple hexagonal lattice for the $\alpha$ phase, we can prod
 
 \subsection{Precipitation from Solution}
 
-We can also model precipitation of nanoparticles from solution. While on its surface the equilibrium phase diagram of a solution is that of a simple solid-liquid coexistance, in practice the metastable features of the phase diagram can have profound implications on the nucleation kinetics of precipitate. As an example, precipitation from solution is a typical synthesis technique for gold and silver nanoparticles. Recent work by Loh \textit{et al} shows that a metastable spinodal may be playing an important role in the growth and nucleation of gold nanoparticles under certain diffusive circumstances.
+We can also model precipitation of nanoparticles from solution. While on its
+surface the equilibrium phase diagram of a solution is that of a simple
+solid-liquid coexistance, in practice the metastable features of the phase
+diagram can have profound implications on the nucleation kinetics of
+precipitate. As an example, precipitation from solution is a typical synthesis
+technique for gold and silver nanoparticles. Recent work by Loh \textit{et al}
+shows that a metastable spinodal may be playing an important role in the growth
+and nucleation of gold nanoparticles under certain diffusive circumstances.
 
-Using the regular XPFC model we can reproduce the condition of a metastable liquid spinodal underneath the liquid-solid coexistance curve. The approach to produce a phase diagram is the same as that of of a monotectic, with the exception that the spinodal temperature, $T_c$, most now be sufficiently low to be buried underneath the coexistance curve. In keeping with the concentration being that of the solute, we'll also center the gaussian window function about $c = 1$. An example, including metastable spinodal, can be seen in Fig. \ref{precip}.
+Using the regular XPFC model we can reproduce the condition of a metastable
+liquid spinodal underneath the liquid-solid coexistance curve. The approach to
+produce a phase diagram is the same as that of of a monotectic, with the
+exception that the spinodal temperature, $T_c$, most now be sufficiently low to
+be buried underneath the coexistance curve. In keeping with the concentration
+being that of the solute, we'll also center the gaussian window function about
+$c = 1$. An example, including metastable spinodal, can be seen in Fig.
+\ref{precip}.
 
 \begin{figure}
 	\includegraphics[scale=0.3]{solution.eps}
@@ -224,7 +281,8 @@ Using the regular XPFC model we can reproduce the condition of a metastable liqu
 
 \section{Application}
 
-The flexibility of the regular XPFC model to produce a variety of equilibrium features
+The flexibility of the regular XPFC model to produce a variety of equilibrium
+features
 
 \subsection{Non-classical nucleation pathways of precipation from solution}
 
