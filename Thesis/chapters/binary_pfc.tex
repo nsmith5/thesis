@@ -229,6 +229,10 @@ Where $f_{mix}(r)$ is the local free energy density of mixing,
 \end{equation}
 %
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Modelling Correlation Functions} %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 The key insight made by the XPFC model the that, the density-density correlation 
 function can be modelled in such a way as to control the crystall lattice structure
 targetted under cooling and to target different structures at different concentrations.
@@ -249,25 +253,52 @@ In the exact theory, for example, we have,
 \end{gather}
 %
 Each interpolating function, $\zeta_i(c)$, defines a domain of validity for its
-associated correlation function $C_i(r, r^\prime)$. This suggests that we might model
-any density-density correlation function using this general structure: the set of 
-correlation function $C_i(r, r^\prime)$ enumerate the various structures that may
-manifest themselves and the associated interpolation functions $\zeta_i(c)$ define
-the concentrations over which these correlations are valid.
+associated correlation function $C_i(r, r^\prime)$. This suggests that we might
+model any density-density correlation function using this general structure:
+the set of correlation function $C_i(r, r^\prime)$ enumerate the various
+structures that may manifest themselves and the associated interpolation
+functions $\zeta_i(c)$ define the concentrations over which these correlations
+are valid.
 
-As a simple example we 
+As a simple example we wanted to construct a simple model of the silver-cupper
+eutectic alloy system, we might start with some model correlation function for
+pure silver, $C_\alpha(r, r^\prime)$, and for pure copper, $C_\beta(r,
+r^\prime)$. These two structures, the silver rich $\alpha$ phase and the copper
+rich $\beta$ phase, are the only two relevent crystalline structures in the
+system so to build the full density-density correlation function we just need
+to choose interpolating functions for each. Following Greenwood \textit{et al}
+for example, we might choose,
+%
+\begin{gather}
+    \zeta_\alpha(c) = 1 - 3c^2 + 2c^3, \\
+    \zeta_\beta(c) = 1 - 3 (1 - c)^2 + 2(1 - c)^3.
+\end{gather}
+%
+
+This leaves the question of how to develop model correlation functions for any
+particular crystalline lattice of interest. This problem is also anwsered by
+the XPFC framework. Originally delineated for pure systems, the XPFC method for
+constructing correlation functions is strongly influenced by the methods
+developed by Ramakrishnan. In particular this means that, given that the
+driving force for solidification is the of value direct correlation function at
+the reciprocal lattice vectors, we need a model correlation function that
+controls these parameters specifically. We can acheive this with Gaussian peaks
+centred at the reciprocal lattice vector positions,
+%
+\begin{equation}
+    C_i(r, r^\prime) = \sum_{\alpha} e^{\f{T}{T_i^0}}
+        e^{ - \f{(k - k_i)^2}{2\sigma_i^2}}
+\end{equation}
+%
+Where, as in chapter \ref{dft_of_freezing}, the index $\alpha$ runs over
+families of point group equivalent reciprocal lattice vectors. The temperature
+dependent prefactors $e^{T / T_i^0}$ give the correct temperature scaling of
+the amplitudes close to the melting point\footnote{The original XPFC works used
+a phenomonological prefacter with $e^{T^2 / C_i}$ for a constant $C_i$. This
+choice is inspired by harmonic analysis in the solid phase and the Debye-Waller
+factor} as discussed by \cite{ALSTER17}.
 
 
-{
-    \color{ForestGreen} Derive the Binary XPFC free energy and note differences
-    from the derivation used for the original simplified model. List all of the
-    novel applications that where approached using this model. List the theoretical
-    advantages (better phase diagrams, precise control of structure etc)
-
-    List disadvantages (liquid is ideal, narrow spectrum of phase diagrams can
-    be reproduces). List theoretic disadvantages (ideal mixing instead of more
-    realistic regular mixing basically).
-}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Regular Phase Field Crystal Model} %
