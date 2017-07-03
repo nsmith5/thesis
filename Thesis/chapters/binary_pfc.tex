@@ -304,19 +304,57 @@ former is relatively cosmetic the latter allows for the examination of
 guininely novel systems in comparison with the original simplified model. For
 example the binary XPFC model as been used to study, peritectic systems, 
 ordered crystals, [{\color{ForestGreen} find refs and list of applications}]
-\cite{GREENWOOD11, ALSTER17}.
+\cite{GREENWOOD11, ALSTER17}. 
+
+Unfortunately, by assuming that the $k=0$ mode of the concentration-concentration
+correlation function is zero the XPFC model restricts the its free energy of
+mixing to an ideal model of mixing. This model of mixing includes only entropic
+contributions to the free energy. This means that the sole driving force for 
+phase seperation is elastic energy as the heat of mixing is always positive (
+{\color{ForestGreen} right? I always mess up this convention}). This can be a
+limitation on modelling a variety of binary alloy systems, for instance both
+monotectic and syntectic systems cannot be modelled without a negative heat
+of mixing. More subtly, even eutectic systems have a negative heat of mixing deep
+below the eutectic point as the metastable liquid has a spinodal point. Problems 
+such as the stability of nanocrystalline binary alloys require an examination of
+the balance of elastic energies and bulk mixing free energy \cite{murdoch}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Regular Phase Field Crystal Model} %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-{
-    \color{ForestGreen} Derive the regular model and show how it is a combination of
-    the XPFC and original model. Discuss the way in which this has the advantages
-    of each in one theory. Lead into discussion of various equilibrium properties
-    of example systems.
-
-}
+The regular phase field crystal model is a simplified model that aims to combine 
+the positive aspects of the XPFC and original simplified models together. The 
+original PFC model uses an regular model of mixing so both enthalpic and entropic 
+contribution to the free energy of mixing are considered. This is acheived by
+assuming there is a $k=0$ contribution in the gradient expansion of the 
+concentration-concentration correlation function. If we add this simple component
+to the development of the XPFC free energy functional we find one additional term
+that gives an enthaly of mixing,
+%
+\begin{align}
+    \f{\beta\Delta\F[n, c]}{\rho_0} &= \integrate{r} \l\lbrace
+        \f{1}{2} n(r) \l(1 - C_{nn}(r, r^\prime)\r) \ast n(r^\prime)
+        - \eta \f{n^3}{6} + \chi \f{n^4}{12} \r\rbrace \\
+        &+ \integrate{r}\l\lbrace
+            \f{1}{2}\l\vert \nabla c(r) \r\vert^2 + \omega f_{mix}(r)
+            \r\rbrace. \nonumber
+\end{align}
+%
+Where the local free energy density of mixing, $f_{mix}$ is now,
+%
+\begin{equation}
+    f_{mix}(r) = \l(n(r) + 1\r)\l( 
+            c(r)\ln\l(\f{c(r)}{c_0}\r) + (1-c(r))\ln\l(\f{1-c(r)}{1-c_0}\r) \r) + 
+            \f{1}{2} \epsilon (c - c_0)^2.
+\end{equation}
+%
+The simplicity the temperature dependence if the parameter $\epsilon$ is taken to be
+linear about the spinodal temperature $T_c$,
+%
+\begin{equation}
+    \epsilon(T) = -4 + \epsilon_0(T - T_c).
+\end{equation}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Equilibrium Properties} %
