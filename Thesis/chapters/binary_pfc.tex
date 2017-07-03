@@ -92,6 +92,7 @@ For the ideal free energy this results in a polynomial truncated to fourth
 order,
 %
 \begin{equation}
+    \label{ideal_expansion}
     \f{\beta\F_{id}[n]}{\rho_0} = \integrate{r}
     \l\lbrace \f{n(r)^2}{2} - \f{n(r)^3}{6} + \f{n(r)^4}{12} \r\rbrace.
 \end{equation}
@@ -154,24 +155,108 @@ including eutectic growth, phase segregation, dendritic growth, dislocation
 motion in solid state spinodal coarsening and epitaxial growth.
 
 The major limitation of the original simplified model is that the gradient
-expansion of the 
+expansion of the density-density correlation function gives only a crude
+control over the structures that will be formed. In fact, as this theory only
+controls a single peak in Fourier space it can only solidify into the fcc phase
+[{\color{ForestGreen} check this is the case for the original theory}]. As
+noted in chapter \ref{dft_of_freezing}. The ability to solidify into an
+arbitrary structure demands control of value of the density-density correlation
+function at all reciprocal lattice vectors.
 
-{   
-    \color{ForestGreen} List all of the applications which the original model,
-    in its various forms, was successfully applied to. List failures if
-    possible (here I'm specifically thinking about the Karma fitting problem
-    for iron) and conceptual problems about modelling differect structures. 
-
-    Additionally note the limitations of expansions in the 'concentration' when
-    attempting to reproduce realistic phase diagram. Essentially, the divergent
-    behaviour at the concentration boundaries makes this behaviour work.
-}
-
-
+A second limitation of the original simplified model is that it is local in
+concentration. This means that realistic phase diagrams from 0 to 100\%
+concentration cannot be produced, only local phase diagrams around the
+reference concentration that was expanded about. To construct these global
+phase diagrams we require the entire free energy of mixing term in equation
+\ref{binary_mixing}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Binary Structural Phase Field Crystal Model} %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The binary structural phase field crystal theory (XPFC) seeks to remedy the two
+short comings of the original simplified model. That is, it seeks to construct
+realistic phase diagrams for binary systems and seeks to reproduce a variety 
+of crystal lattice structure. We'll begin with a derivation of the theory and
+compare with the original model.
+
+First, the ideal free energy is expanded in precisely the same manner resulting
+in the same fourth order polynomial,
+%
+\begin{equation}
+    \f{\beta\Delta\F_{id}[n]}{\rho_0} = \integrate{r}
+        \l\lbrace \f{n(r)^2}{2} - \eta \f{n(r)^3}{6} + \chi\f{n(r)^4}{12}
+        \r\rbrace. \tag{\ref{ideal_expansion} revisited}
+\end{equation}
+%
+The free energy of mixing is left unexpanded but an overall scale $\omega$ is
+added to fit the mixing term away from the reference concentration,
+%
+\begin{equation}
+    \f{\beta\F_{mix}[n, c]}{\rho_0} =
+        \integrate{r} \l\lbrace \omega (n(r) + 1)\l( 
+            c\ln\l(\f{c}{c_0}\r) + (1-c)\ln\l(\f{1-c}{1-c_0}\r) \r)\r\rbrace. 
+\end{equation}
+%
+This unexpanded free energy of mixing will lead to more accurate global phase
+diagrams. The excess free energy is approximated using the similar assumptions
+as in the original model (linear couplings are dropped), but the density-density
+correlation function is not expanded. Greenwood \textit{et al} all assumed that
+the $k=0$ mode of the concentration-concentration correlation function was zero
+leaving only the quadratic term in the expansion,
+%
+\begin{equation}
+    C_{cc}(r, r^\prime) = \d(r - r^\prime)\alpha \nabla^2.
+\end{equation}
+%
+Grouping terms together, the complete free energy functional for the binary XPFC
+model is,
+%
+\begin{align}
+    \f{\beta\Delta\F[n, c]}{\rho_0} &= \integrate{r} \l\lbrace
+        \f{1}{2} n(r) \l(1 - C_{nn}(r, r^\prime)\r) \ast n(r^\prime)
+        - \eta \f{n^3}{6} + \chi \f{n^4}{12} \r\rbrace \\
+        &+ \integrate{r}\l\lbrace
+            \f{1}{2}\l\vert \nabla c(r) \r\vert^2 + \omega f_{mix}(r)
+            \r\rbrace. \nonumber
+\end{align}
+%
+Where $f_{mix}(r)$ is the local free energy density of mixing,
+%
+\begin{equation}
+    f_{mix}(r) = \l(n(r) + 1\r)\l( 
+            c(r)\ln\l(\f{c(r)}{c_0}\r) + (1-c(r))\ln\l(\f{1-c(r)}{1-c_0}\r) \r).
+\end{equation}
+%
+
+The key insight made by the XPFC model the that, the density-density correlation 
+function can be modelled in such a way as to control the crystall lattice structure
+targetted under cooling and to target different structures at different concentrations.
+Note that the density-density correlation function as the form of a linear combination
+of interpolating functions in concentration, $\zeta(c)$, multiplied by bare correlation
+functions $C(r, r^\prime)$,
+%
+\begin{equation}
+    C_{nn}(r, r^\prime; c) = \sum_i \zeta_i(c) C_i(r, r^\prime)
+\end{equation}
+%
+In the exact theory, for example, we have,
+%
+\begin{gather}
+    \zeta_{AA}(c) = \rho_0 (1 - c^2), \\
+    \zeta_{AB}(c) = \rho_0 c (1 - c ), \\
+    \zeta_{BB}(c) = \rho_0 c^2.
+\end{gather}
+%
+Each interpolating function, $\zeta_i(c)$, defines a domain of validity for its
+associated correlation function $C_i(r, r^\prime)$. This suggests that we might model
+any density-density correlation function using this general structure: the set of 
+correlation function $C_i(r, r^\prime)$ enumerate the various structures that may
+manifest themselves and the associated interpolation functions $\zeta_i(c)$ define
+the concentrations over which these correlations are valid.
+
+As a simple example we 
+
 
 {
     \color{ForestGreen} Derive the Binary XPFC free energy and note differences
