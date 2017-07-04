@@ -240,9 +240,42 @@ non-equilibrium probability distribution is driven to equilibrium by the
 Liouville Equation, so too is the density profile by its own equation of
 motion.
 
-A variety of equations of motion for the density field are known.
-For instance, we can consider the Navier-Stokes equations of hydrodynamics to
-one such equation of motion. If we restrict ourselves to the case where
+A variety of equations of motion for the density field are known.  For
+instance, we can consider the Navier-Stokes equations of hydrodynamics to one
+such equation of motion. If we restrict ourselves to diffusion limited
+circumstances, we may derive a much simplier equation of motion. To acheive
+this result we use the projection operator method, and assume that the 
+density operator is the only relevant variable. Quoting the result from
+\cite{ESPANOL09} we find,
+%
+\begin{equation}
+    \label{eq:mean_eom}
+    \f{\partial \rho(x, t)}{\partial t} = 
+        \nabla \cdot \integrate{r^\prime} \mathbf{D}(r, r^\prime, t) 
+        \cdot \nabla^\prime \f{\d \F[\rho]}{\d \rho(x^\prime, t)},
+\end{equation}
+%
+Where, $\mathbf{D}(r, r^\prime, t)$, is the diffusion tensor,
+%
+\begin{equation}
+    \mathbf{D}(r, r^\prime, t) = \int_0^\infty \mathrm{d}\tau^\prime\,
+        \trace{f(\q, \p, t)\hat{\mathbf{J}}(r, 0)
+        \hat{\mathbf{J}}(r^\prime, \tau^\prime)},
+\end{equation}
+%
+in which $\mathbf{J}(r, t)$ is the density flux is,
+%
+\begin{equation}
+    \hat{\mathbf{J}}(r, t) \equiv 
+        \sum_i^N \frac{p_i}{m_i} \d(q_i - r).
+\end{equation}
+
+Should we use assume 
+
+{
+    \color{ForestGreen}
+
+If we restrict ourselves to the case where
 transport is diffusion limited and we assume that the dynamic pair correlation
 function is the same as the equilibrium pair correlation we can express the
 density equation of motion as,
@@ -286,6 +319,7 @@ Espanol].  Equations \ref{mean_eom} and \ref{langevin_eom} fall under the
 heading of \textit{Dynamic Density Functional Theory} (DDFT) or sometimes
 \textit{Time dependent density functional theory} (TD-DFT) though we'll use the
 former throughout this text.
+}
 
 Unfortunately, if we were to use the approximate free energy functional
 established in equation \ref{cdft_free_energy} in the dynamic density
