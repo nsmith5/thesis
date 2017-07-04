@@ -98,7 +98,7 @@ order,
 \end{equation}
 %
 The linear term is dropped due to invariance in the equations of motion. If we
-assume for simplicity of demonstration $c0 = 1/2$, the free energy of mixing
+assume for simplicity of demonstration $c_0 = 1/2$, the free energy of mixing
 becomes a simple fourth order polynomial as well,
 %
 \begin{equation}
@@ -306,18 +306,32 @@ example the binary XPFC model as been used to study, peritectic systems,
 ordered crystals, [{\color{ForestGreen} find refs and list of applications}]
 \cite{GREENWOOD11, ALSTER17}. 
 
-Unfortunately, by assuming that the $k=0$ mode of the concentration-concentration
-correlation function is zero the XPFC model restricts the its free energy of
-mixing to an ideal model of mixing. This model of mixing includes only entropic
-contributions to the free energy. This means that the sole driving force for 
-phase seperation is elastic energy as the heat of mixing is always positive (
-{\color{ForestGreen} right? I always mess up this convention}). This can be a
-limitation on modelling a variety of binary alloy systems, for instance both
-monotectic and syntectic systems cannot be modelled without a negative heat
-of mixing. More subtly, even eutectic systems have a negative heat of mixing deep
-below the eutectic point as the metastable liquid has a spinodal point. Problems 
-such as the stability of nanocrystalline binary alloys require an examination of
-the balance of elastic energies and bulk mixing free energy \cite{murdoch}.
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.7]{eutectic-drawing}
+    \caption[Eutectic Phase Diagram with Metastable Projections]{
+        \label{fig:eutectic_drawing} Eutectic phase diagram with metastable
+        projects. Stable coexistance lines are rendered solid where as 
+        metastable projections are dashed.
+    }
+\end{figure}
+
+Unfortunately, by assuming that the $k=0$ mode of the
+concentration-concentration correlation function is zero the XPFC model
+restricts the its free energy of mixing to an ideal model of mixing. This model
+of mixing includes only entropic contributions to the free energy. This means
+that the sole driving force for phase seperation is elastic energy as the heat
+of mixing is always positive ( {\color{ForestGreen} right? I always mess up
+this convention}). This can be a limitation on modelling a variety of binary
+alloy systems, for instance both monotectic and syntectic systems cannot be
+modelled without a negative heat of mixing. More subtly, even eutectic systems
+have a negative heat of mixing deep below the eutectic point as the metastable
+liquid has a spinodal. This phenomena is shown shown schematically in figure
+\ref{fig:eutectic_drawing} where the metastable projections, including solid
+and liquid spinodals, are drawn on a hypothetical eutectic phase diagram.
+Problems such as the stability of nanocrystalline binary alloys require an
+examination of the balance of elastic energies and bulk mixing free energy
+\cite{MURDOCH13}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Regular Phase Field Crystal Model} %
@@ -394,7 +408,7 @@ diagram like that in Fig. \ref{eutectic}.
 \begin{figure}[h]
     \centering	
     \includegraphics[scale=0.7]{eutectic}
-    \caption{
+    \caption[Eutectic Phase Diagram]{
         \label{eutectic} Eutectic phase diagram triangle $\alpha$ and $\beta$
         phases. The free energy parameter are $\eta = 2$, $\chi = 1$,
         $\omega=0.30$, $\epsilon_0 = 3$ and $T_c = 0.01$. The parameters of the
@@ -439,7 +453,7 @@ of parameters can be seen in Fig. \ref{syntectic}.
 \begin{figure}
     \centering
 	\includegraphics[scale=0.7]{syntectic.eps}
-	\caption{
+    \caption[Syntectic Phase Diagram]{
         \label{syntectic} Phase Diagram of Syntectic Alloy with a hexagonal
         $\alpha$ phase. The free energy parameters are $\eta=2$, $\chi=1$,
         $\omega=0.3$, $\epsilon_0 = 10$ and $T_c=0.35$. The parameters for the
@@ -471,7 +485,7 @@ of parameters as in Fig. \ref{monotectic}.
 \begin{figure}
     \centering
 	\includegraphics[scale=0.7]{monotectic.eps}
-	\caption{
+    \caption[Monotectic Phase Diagram]{
         \label{monotectic} Phase Diagram of Monotectic Alloy with hexagonal
         $\alpha$ phase. The free energy parameters are $\eta = 2$, $\chi=1$,
         $\omega=0.3$, $\epsilon_0 = 10$, $T_c = 0.35$ and $c_0 = 0.75$. The
@@ -506,7 +520,7 @@ $c = 1$. An example, including metastable spinodal, can be seen in Fig.
 \begin{figure}
     \centering	
     \includegraphics[scale=0.6]{solution.eps}
-	\caption{
+    \caption[Coexistance Phase Diagram with Metastable Spinodal]{
         \label{precip} Phase Diagram of Solution \color{ForestGreen} fill
         me in please!!
     }
