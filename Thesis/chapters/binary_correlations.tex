@@ -1,39 +1,53 @@
-When developing the binary PFC model there is a change of variables that must
-occur from $\A$ and $\B$ to $n$ and $c$. Computing the bulk terms is a matter
-of substitution and simplifying as much as possible but the pair correlation
-terms can be more subtle. When computing the pair correlation terms, careful
-application of our assumption that $c$ varies over a much longer length scale
-than $n$ must be applied to get the correct solution. The goal, ultimately, is
-to find $C_{n n}$, $C_{n c}$, $C_{c n}$ and $C_{c c}$ in the following
-expression, 
+When developing the binary PFC model we often change variables from $\A$ and
+$\B$ to $n$ and $c$.  This change of variable is helpful in identifying the
+results of the PFC theory with established results in the field as
+concentration and total density are more commonly used in the field of material
+science. Computing the bulk terms (ie., $\Delta\F_{mix}[n, c]$ and
+$\Delta\F_{id}[n]$ from equation \ref{binary_mixing} and \ref{binary_ideal}) is
+a matter of substitution and simplification but computing the change of variables for excess free
+energy can be more subtle. When computing the pair correlation
+terms, careful application of our assumption that $c$ varies over a much longer
+length scale than $n$ must be applied to get the correct solution. The goal,
+ultimately, is to find $C_{n n}$, $C_{n c}$, $C_{c n}$ and $C_{c c}$ in the
+following expression, 
 
+[{\color{ForestGreen} Stopped reviewing here! continue hhere in future}]
+
+%
 \begin{gather}\label{1}
-  \d \A \,C_{AA} \ast \d \A + \d \A \,C_{AB} \ast \d \B + \d \B \,C_{BA} \ast \d \A + \d \B \,C_{BB} \ast \d \B = \\ \nonumber
-  \rho_0 \l(n \,C_{nn} \ast n + n \,C_{nc} \ast \d c + \d c \,C_{cn}\ast n + \d c \,C_{cc} \ast \d c\r).
+      \Delta \A \,\rho_0 C_{AA} \ast \Delta \A 
+    + \Delta \A \,\rho_0 C_{AB} \ast \Delta \B 
+    + \Delta \B \,\rho_0 C_{BA} \ast \Delta \A 
+    + \Delta \B \,\rho_0 C_{BB} \ast \Delta \B = \\ \nonumber
+       \l(n \,C_{nn} \ast n 
+        + n \,C_{nc} \ast \Delta c 
+        + \Delta c \,C_{cn}\ast n 
+        + \Delta c \,C_{cc} \ast \Delta c\r).
 \end{gather}
-We begin by rewriting $\d \B$,
+%
+We begin by rewriting $\Delta \B$,
 %
 \begin{align*}
-  \d \B &= \rho c - \rho_0 c_0 \\
+  \Delta \B &= \rho c - \rho_0 c_0 \\
         &= \rho c - \rho c_0 + \rho c_0 - \rho_0 c_0 \\
-        &= \d \rho c + \rho_0 \d c,
+        &= \Delta \rho c + \rho_0 \Delta c,
 \end{align*}
 %
-Followed by rewriting $\d \A$,
+Followed by rewriting $\Delta \A$,
 %
 \begin{align*}
-  \d \A &= \rho (1 - c) - \rho_0 (1 - c_0) \\
-        &= \d \rho (1 - c) - \rho_0 \d c.
+  \Delta \A &= \rho (1 - c) - \rho_0 (1 - c_0) \\
+        &= \Delta \rho (1 - c) - \rho_0 \Delta c.
 \end{align*}
 %
-With those forms established, we can expand $\d \B \,C_{BB} \ast \d \B$:
+With those forms established, we can expand $\Delta \B \,C_{BB} \ast \Delta \B$:
 %
 \begin{align}\label{this}
-  \d \B C_{BB} \ast \d \B &= \l(\d \rho c + \rho_0 \d c \r) C_{BB} \ast \l(\d \rho c + \rho_0 \d c\r) \nonumber\\
-                          &= \d \rho c \,C_{BB} \ast \l( \d \rho c\r) \nonumber\\
-                          &+ \rho_0 \d c \,C_{BB} \ast \l( \d \rho c \r) \\
-                          &+ \rho_0 \l(\d \rho c\r) \,C_{BB} \ast \d c \nonumber\\
-                          &+ \rho_0^2 \d c \,C_{BB} \ast \d c. \nonumber
+  \Delta \B C_{BB} \ast \Delta \B &= \l(\Delta \rho c + \rho_0 \Delta c \r) C_{BB} \ast \l(\Delta \rho c + \rho_0 \Delta c\r) \nonumber\\
+                          &= \Delta \rho c \,C_{BB} \ast \l( \Delta \rho c\r) \nonumber\\
+                          &+ \rho_0 \Delta c \,C_{BB} \ast \l( \Delta \rho c \r) \\
+                          &+ \rho_0 \l(\Delta \rho c\r) \,C_{BB} \ast \Delta c \nonumber\\
+                          &+ \rho_0^2 \Delta c \,C_{BB} \ast \Delta c. \nonumber
 \end{align}
 %
 If we examine one term in this expansion in detail, we note that we can
@@ -41,8 +55,8 @@ simplify by using the long wavelength approximation for the concentration
 field,
 %
 \begin{align}
-  \d \rho c \, C_{BB} \ast \d \rho c &= \d \rho(r) c(r) \int dr^\prime C_{BB}(r - r^\prime) \d \rho(r^\prime) c(r^\prime) \nonumber \\
-                                     &\approx \d \rho(r) c^2(r) \int dr^\prime C_{BB}(r - r^\prime) \d \rho(r^\prime).
+  \Delta \rho c \, C_{BB} \ast \Delta \rho c &= \Delta \rho(r) c(r) \int dr^\prime C_{BB}(r - r^\prime) \Delta \rho(r^\prime) c(r^\prime) \nonumber \\
+                                     &\approx \Delta \rho(r) c^2(r) \int dr^\prime C_{BB}(r - r^\prime) \Delta \rho(r^\prime).
 \end{align}
 %
 This is because the concentration field can be considered ostensibly constant
@@ -51,10 +65,10 @@ correlation function typically decays to zero on the order of several particle
 radii. Using this approximation we can rewrite equation \ref{this} as,
 %
 \begin{align}
-  \d \B \, C_{BB} \ast \d \B &= \d \rho \l(c^2 \,C_{BB}\r) \ast \d \rho \nonumber\\
-                             &+ \rho_0 \d c \l(c \,C_{BB}\r) \ast \d \rho c \\
-                             &+ \rho_0 \d \rho \l(c \,C_{BB}\r) \ast \d c \nonumber\\
-                             &+ \rho_0^2 \d c \,C_{BB} \ast \d c. \nonumber
+  \Delta \B \, C_{BB} \ast \Delta \B &= \Delta \rho \l(c^2 \,C_{BB}\r) \ast \Delta \rho \nonumber\\
+                             &+ \rho_0 \Delta c \l(c \,C_{BB}\r) \ast \Delta \rho c \\
+                             &+ \rho_0 \Delta \rho \l(c \,C_{BB}\r) \ast \Delta c \nonumber\\
+                             &+ \rho_0^2 \Delta c \,C_{BB} \ast \Delta c. \nonumber
 \end{align}
 %
 Repeating this procedure with the remaining three terms and then regrouping we
