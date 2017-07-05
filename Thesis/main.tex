@@ -10,11 +10,14 @@
 % Graphics and path to graphics
 \usepackage{graphicx}
 \graphicspath{ {figures/} }
+\usepackage{subcaption}
 
 % Colors, especially for highlighting and editing
 \usepackage[usenames, dvipsnames]{color}
 
 % Margins, links etc..
+\usepackage{float}
+\floatplacement{figure}{H}   % Place Figures at same position defined
 \usepackage[letterpaper, margin=1in]{geometry}
 \usepackage{hyperref}
 \hypersetup{
@@ -129,7 +132,14 @@ Dedication here...
 \label{sec:acknowledgements}
 \addcontentsline{toc}{chapter}{\nameref{sec:acknowledgements}}
 
-Acknowledgements here...
+{
+    \color{ForestGreen}
+    \begin{itemize}
+        \item Nik for a million things
+        \item Quentin Stoyel for helping edit
+        \item Matt Frick for editing help
+    \end{itemize}
+}
 
 \clearpage
 
