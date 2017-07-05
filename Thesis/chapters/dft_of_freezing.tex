@@ -69,6 +69,7 @@ $\bar{n}$ is the fractional density change of solidification, $\eta$ for the
 solid phase at the melting point. Where,
 %
 \begin{equation}
+    \label{eq:eta_def} 
     \eta = \f{\rho_s - \rho_l}{\rho_l},
 \end{equation}
 %
@@ -125,113 +126,100 @@ different values of the reference structure factor.
 \begin{figure}
     \centering
     \includegraphics[scale=0.6]{amplitude_transition.eps}
-    \caption{\label{fig:amplitude_transition} 
+    \caption[Grand Potential through the Solidification transition]{ 
         Schematic view of the grand potential $\beta\Delta\Omega / \rho_l$
         projected on to the $\xi_\alpha$ axis for a three different reference
         structure factors. To minimize the grand potential, finite $\xi_\alpha$
         is stable once $S_0(\mathbf{G}_\alpha) > S^*(\mathbf{G}_\alpha)$
-    }
+    }\label{fig:amplitude_transition}
 \end{figure}
 %
-
 Furthermore, equation \ref{amplitude_gp} suggests that the set of critical
 structure factors, $\lbrace S^*(\mathbf{G}_\alpha)\rbrace_\alpha$ are material
-independent as no material dependent parameters remain in the grand potential.
+independent as free parameters remain in the grand potential.
 As a consequence, once we specify the symmetry of the lattice a liquid will
-solidify into (eg.  face-centred-cubic), all materials that undergo this
+solidify into (eg. face-centred-cubic), all materials that undergo this
 transition should share these parameters at the melting point. 
 
-This seems to be the case for a variety of materials. For instance, for many
-liquids solidifying into face-centred-cubic (fcc) lattices, these parameters
-for the [111] and [311] reciprocal lattice vectors are 0.65 and 0.23
-respectively. Similarly, for a spectrum of liquids solidifying into
-body-centred-cubic (bcc) lattices these parameters  for the [110] and [211]
-reciprocal lattice vectors are approximately 0.66 and 0.12 respectively.
+Early numerical evidence of this result was supplied by the Hansen-Verlet
+criterion \cite{HANSEN69} which states that for Lennard-Jones fluid the peak
+of the structure factor is constant along the melting curve with a value 
+$\approx 2.85$. It has been noted that in aggregating experimental evidence
+many liquids solidifying to fcc structure have a peak value close to 2.8 
+whereas those solidifying into bcc structures have a peak value around 3.0
+\cite{RAMAKRISHNAN79}.
 
-As seen in table \ref{table:ramakrishnan_argon} and table
-\ref{table:ramakrishnan_sodium} theoretical results from this approach match
-very closely to experimental values. In spite of the successes of density
-functional approach pioneered by Youssof and Ramakrishnan there are limits
-to this framework.
+At this level, the CDFT theory of solidification is an infinite order
+parameter theory of solidification. We can simplify the theory by truncating
+the number of amplitudes we keep in our expansion of the density. This is
+justified by noting that only a few reciprocal lattice families contain the
+majority of the grand potential energy of solidification. As seen in table
+\ref{table:ramakrishnan_argon} and table \ref{table:ramakrishnan_sodium}
+theoretical results from a single amplitude theory (theory I in the results)
+are poor but improve significantly with two order parameters (theory II) or
+higher order expansions of the free energy (theory III).
 
-\begin{table}[]
-    \center
-    \begin{tabular}{l c c c}
-        \hline 
-        Theory & $\tilde{C}(\mathbf{G}_{[111]})$ & $\tilde{C}(\mathbf{G}_{[311]})$ & $\bar{n}$ \\ 
-        \hline
-        I & 0.95 & 0.0 & 0.074 \\
-        II & 0.65 & 0.23 & 0.270 \\
-        III & 0.65 & 0.23 & 0.166 \\
-        Experiment & 0.65 & 0.23 & 0.148\\
-        \hline
-    \end{tabular}
-    \caption[Freezing parameters for Argon]{Freezing parameters for Argon (fcc)
-    taken from \cite{RAMAKRISHNAN79}.  Theory I uses one order paramter, theory
-    II uses two order parameters and theory III uses two order parameters and
-    expands to third order in the free energy. $\eta$ is the fractional density
-    change of solidification 
-    $(\rho_s - \rho_l) / \rho_l)$.}
-    \label{table:ramakrishnan_argon}
+\begin{table}[H]
+    \begin{subtable}{0.4\linewidth}
+        \centering
+        \begin{tabular}{l c c c}
+            \hline 
+            Theory & $\tilde{C}(\mathbf{G}_{[111]})$ & $\tilde{C}(\mathbf{G}_{[311]})$ & $\bar{n}$ \\ 
+            \hline
+            I & 0.95 & 0.0 & 0.074 \\
+            II & 0.65 & 0.23 & 0.270 \\
+            III & 0.65 & 0.23 & 0.166 \\
+            Experiment & 0.65 & 0.23 & 0.148\\
+            \hline
+        \end{tabular}
+        \caption[Freezing parameters for Argon]{Freezing parameters for fcc with
+            comparison to Argon experimental results.
+        }\label{table:ramakrishnan_argon}
+    \end{subtable}
+    \hspace{0.10\linewidth}
+    \begin{subtable}{0.4\linewidth}
+        \centering
+        \begin{tabular}{l c c c}
+            \hline 
+            Theory & $\tilde{C}(\mathbf{G}_{[110]})$ & $\tilde{C}(\mathbf{G}_{[211]})$ & $\bar{n}$ \\ 
+            \hline
+            I           & 0.69 & 0.00 & 0.048 \\
+            II          & 0.63 & 0.07 & 0.052 \\
+            III         & 0.67 & 0.13 & 0.029 \\
+            Experiment  & 0.65 & 0.23 & 0.148\\
+            \hline
+        \end{tabular}
+        \caption[Freezing parameters for Sodium]{Freezing parameter for bcc with 
+            comparison to Sodium experimental results.
+        }\label{table:ramakrishnan_sodium}
+    \end{subtable}
+    \caption[Table of Ramakrishnan results]{Freezing parameters for fcc and
+        bcc systems and comparison to experiment from \cite{RAMAKRISHNAN79}.
+        Theory I uses one order parameter, theory II uses two order parameter
+        and theory III uses two order parameters with a higher (third) order
+        expansion in the free energy. $\eta$ is the fraction density change of
+        solidification from equation \ref{eq:eta_def}
+    }
 \end{table}
-
-\begin{table}[]
-    \center
-    \begin{tabular}{l c c c}
-        \hline 
-        Theory & $\tilde{C}(\mathbf{G}_{[110]})$ & $\tilde{C}(\mathbf{G}_{[211]})$ & $\bar{n}$ \\ 
-        \hline
-        I           & 0.69 & 0.00 & 0.048 \\
-        II          & 0.63 & 0.07 & 0.052 \\
-        III         & 0.67 & 0.13 & 0.029 \\
-        Experiment  & 0.65 & 0.23 & 0.148\\
-        \hline
-    \end{tabular}
-    \caption[Freezing parameters for Sodium]{Freezing parameters for Sodium
-    (bcc) taken from \cite{RAMAKRISHNAN79}.  Theory I uses one order paramter,
-    theory II uses two order parameters and theory III uses two order
-    parameters and expands to third order in the free energy. $\eta$ is the
-    fractional density change of solidification 
-    $(\rho_s - \rho_l) / \rho_l)$.}
-    \label{table:ramakrishnan_sodium}
-\end{table}
-
-Many of the mechanical properties of solids are due to the way in which they
-deviate from the perfect crystalline lattice: the microstructure. Grain
-boundaries, vacancies, dislocations and second phase particles all play
-critical roles in determining the mechanical properties of solids. A simple
-example of this is the Hall-Petch effect which states that the yield stress of
-a material increases with decreasing grain size,
-%
-\begin{equation}
-    \sigma = \sigma_0 + k_y d^{-1/2},
-\end{equation}
-%
-where, $d$, is the average grain diameter, $\sigma$ is the yield stress,
-$\sigma_0$ is yield stress of a single crystal sample and $k_y$ is the
-strengthening coefficient.
-
-Microstructure plays key roles not only in the mechanical properties but also
-the kinetic pathways of certain phase transformations. For instance,
-dislocations can act to catalyze precipication in binary alloys [cite Vahid].
-
-The problem that we face is then, how do we examine these defects and
-microstructural elements but retain some of the successful aspects of density
-functional approach? One way to think about to consider the microstructure in
-the solid state is that it is an artifact of not having fulling reached
-equilibrium. Real materials are solidified over a finite time and therefore
-haven't fully reached equilibrium. As a result, we should study the pathway to 
-equilibrium to gain insight into the origin of microstructure. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Dynamic Density Functional Theory} %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Using techniques from non-equilibrium statistical mechanics we can extend
-the density functional approach to a dynamic model. To start we illustrate the 
-non-equilibrium method schematically. Consider a non-equilibrium probability 
-distribution over phase space, $f(\q, \p; t)$. As a function over phase space,
-its equation of motion is a simple result of classical mechanics,
+In spite of its successes the CDFT theory of solidification cannot be a general
+description of solidification as many materials never fully reach equilibrium.
+The resulting microstructure affects the mechanical properties of the solid. In
+order to improve our theory we need to examine the pathway systems take to
+equilibrium so we can understand these microstructural features. We begin with
+a brief overview of non-equilibrium statistical mechanics.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Overview of Non-equilibrium Statistical Mechanics} %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Consider a non-equilibrium probability distribution over phase space, $f(\q,
+\p; t)$. As a function over phase space, its equation of motion is a simple
+result of classical mechanics,
 %
 \begin{equation}
     \label{cm} 
@@ -286,8 +274,12 @@ non-equilibrium probability distribution is driven to equilibrium by the
 Liouville Equation, so too is the density profile by its own equation of
 motion.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Equations of Motion} %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 A variety of equations of motion for the density field are known.  For
-instance, we can consider the Navier-Stokes equations of hydrodynamics to one
+instance, we can consider the Navier-Stokes equations of hydrodynamics as one
 such equation of motion. If we restrict ourselves to diffusion limited
 circumstances, we may derive a much simplier equation of motion. To acheive
 this result we use the projection operator method, and assume that the 
@@ -373,22 +365,30 @@ functional theory of equation \ref{mean_eom} or \ref{langevin_eom} we would
 face a major impedement: the solid state solutions of the density functional
 theory approach yield sharply peaked solutions at the position of the atoms in
 the lattice. While this is realistic, they are a major challenge for numerical
-algorithms. The challenges are two fold: first, these sharp peaks require a fine mesh 
-to be resolved resulting in large memory requirement to simulate domains 
-of any non-trivial scale and second, lineary stability analysis of most algorithms 
-slave the scale of the time step to the scale of the grid spacing so only small
-time steps can be taken on a fine mesh.
+algorithms. The challenges are two-fold. First, these sharp peaks require a
+fine mesh to be resolved resulting in large memory requirement to simulate
+domains of any non-trivial scale. Second, lineary stability analysis of most
+algorithms demonostrates that the time step size is a monotonic increasing
+function of the grid spacing so only small time steps can be taken on a fine
+mesh.
+
+One pragmatic solution to this problem is to further approximate the free
+energy functional of equation \ref{cdft_free_energy} in such a way as to
+produce a theory that retains the essential physics of solidification but
+produces a solid state that is more smoothly peaked. As we will see next,
+the Phase Field Crystal (PFC) theory acheives precisely this balance.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Phase Field Crystal Theory} %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The phase field crystal theory (PFC) presents a solution to the numerical difficulties
-faced by DDFT methods by approximating the free energy in such a say as to retain the
-basic features of the theory with a smoother solid state solution. Starting the 
-approximate free energy functional of equation \ref{cdft_free_energy} we proceed as
-previously by scaling out a factor of the reference density and changing variables
-to a dimensionless density $n(r) = (\rho(r) - \rho_l) / \rho_l$,
+The phase field crystal theory (PFC) presents a solution to the numerical
+difficulties faced by DDFT methods by approximating the free energy in such a
+way as to retain the basic features of the theory with a smoother solid state
+solution. Starting with the approximate free energy functional of equation
+\ref{cdft_free_energy} we proceed as previously by scaling out a factor of the
+reference density and changing variables to a dimensionless density $n(r) =
+(\rho(r) - \rho_l) / \rho_l$,
 %
 \begin{equation}
     \f{\beta \F[n(r)]}{\rho_l} = 
