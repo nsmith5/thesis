@@ -1,15 +1,24 @@
 \label{dft_of_freezing}
 
-The classical density functional theories derived in chapter
-\ref{fundamentals} was first established to study inhomogenous fluids.
-Interestingly, one can think of the solid state as an especially extreme
-case of an inhomogeneous fluid \cite{HANSEN-CH6}.  In this case, we can
-use CDFT to study the circumstances under which the density field develops
-long range periodic solutions (ie., solidification).  While not expressed
-in precisely this language, this idea dates back as far as 1941 with the
-early work of Kirkwood and Monroe \cite{KIRKWOOD_MONROE41} and was later
-significantly refined by Youssof and Ramakrishnan \cite{RAMAKRISHNAN79}.
+The classical density functional theories derived in chapter \ref{fundamentals}
+was first established to study inhomogenous fluids.  By considering the solid
+state as an especially extreme case of an inhomogeneous fluid
+\cite{HANSEN-CH6}, we can use CDFT to study the process of solidification. From
+the perspective of CDFT, solidification occurs once the density field develops
+long range periodic solutions.  While not expressed in precisely this language,
+this approach dates back as far as 1941 with the early work of Kirkwood and Monroe
+\cite{KIRKWOOD_MONROE41} and was later significantly refined by Youssof and
+Ramakrishnan \cite{RAMAKRISHNAN79}.
 
+We'll see that the approach of Youssof and Ramakrishnan was very successful at 
+explaining the solidification in the thermodynamic sense. That is to say, it
+elucidate the parameters responsible for solidification but not the dynamical 
+pathway responsible for the transition. To discuss the pathway to equilibrium
+and the non-equilibrium artifacts it introduces into many solids (grain 
+boundaries, vacancies, dislocations etc) we proceed to extend the CDFT framework
+using the Dynamic Density Functional Theory (DDFT). Noting that the full DDFT
+framework can be cumbersome in practice we conclude by introducing a simplified
+density functional theory called the Phase Field Crystal (PFC) theory.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Amplitude Expansions} %
@@ -27,15 +36,19 @@ potential, $\phi(r)$, set to zero,
             \ast \Delta\rho(r^\prime).
 \end{equation}
 %
-Scaling out a factor of $\rho_0$ we can rewrite the grand potential in terms of
-a dimensionless reduced density, $n(r) \equiv (\rho(x) - \rho_0)/\rho_0$,
+To make our theory concrete we must choose a suitable reference liquid to set
+the parameters $\rho_0$ and $C^{(2)}_0(r, r^\prime)$. We will choose the
+reference liquid to be the liquid at the melting point with density $\rho_l$.
+
+Scaling out a factor of $\rho_l$ we can rewrite the grand potential in terms of
+a dimensionless reduced density, $n(r) \equiv (\rho(x) - \rho_l)/\rho_l$,
 %
 \begin{equation}
     \label{gp}
-    \f{\beta \Delta \Omega[n(r)]}{\rho_0} =
+    \f{\beta \Delta \Omega[n(r)]}{\rho_l} =
         \int dr \l\lbrace 
             (1 + n(r))\ln\l(1 + n(r)\r) - n(r)\r\rbrace
-        - \f{1}{2} n(r) \ast \rho_0 C^{(2)}_0(r, r^\prime) \ast n(r^\prime).
+        - \f{1}{2} n(r) \ast \rho_l C^{(2)}_0(r, r^\prime) \ast n(r^\prime).
 \end{equation}
 %
 To describe the density profile in the solid state we can expand the density
@@ -50,10 +63,16 @@ Where, $\l\lbrace \mathbf{G} \r\rbrace$, is the set of reciprocal lattice
 vectors in the crystal lattice and the amplitudes, $\xi_\mathbf{G}$, serve as
 order parameters for freezing. In the liquid phase all amplitudes are zero and
 the average density is uniform, while in the solid phase there are finite
-amplitudes that describe the periodic profile of the crystal lattice. Setting
-the liquid at the melting point as our reference fluid we find that, at the 
-melting point, $\bar{n}$ is zero for the liquid and is the fractional density
-change of solidification, $(\rho_s - \rho_l)/\rho_l$, in the solid phase.
+amplitudes that describe the periodic profile of the crystal lattice. By
+design, $\bar{n}$ is zero for the liquid phase at the melting point and
+$\bar{n}$ is the fractional density change of solidification, $\eta$ for the
+solid phase at the melting point. Where,
+%
+\begin{equation}
+    \eta = \f{\rho_s - \rho_l}{\rho_l},
+\end{equation}
+%
+In which $\rho_s$ is the macroscopic density of the solid phase.
 
 The amplitudes are constrained by the point group symmetry of the lattice.
 Grouping the amplitudes of symmetry-equivalent reciprocal lattice vectors
@@ -75,9 +94,9 @@ over the unit cell we find,
 %
 \begin{align}
     \label{amplitude_gp} 
-    \f{\beta \Delta\Omega_{cell}}{\rho_0} &=  \int_{cell} 
+    \f{\beta \Delta\Omega_{cell}}{\rho_l} &=  \int_{cell} 
         dr \l\lbrace (n(r) + 1)\ln\l(n(r) + 1\r) - n(r) \r\rbrace \nonumber \\
-    &- \f{1}{2} \l[\bar{n} ^ 2 \rho_0\tilde{C}^{(2)}_0(0) + \sum_\alpha\rho_0\tilde{C}^{(2)}_0
+    &- \f{1}{2} \l[\bar{n} ^ 2 \rho_l\tilde{C}^{(2)}_0(0) + \sum_\alpha\rho_l\tilde{C}^{(2)}_0
             (\mathbf{G}_\alpha) \lambda_\alpha\vert\xi_\alpha\vert^2\r],
 \end{align}
 %
@@ -85,20 +104,47 @@ Where $\lambda_\alpha$ is the number of reciprocal lattice vectors in the set
 $\alpha$ and $\tilde{C}^{(2)}_0(k)$ is the Fourier transform of the direct
 correlation function of the reference fluid. The first term in equation
 \ref{amplitude_gp} is convex in all of the amplitudes with a minimum at zero.
-It follows that solidification must occur when the direct correlation function
-at the reciprocal lattice vectors, $\tilde{C}^{(2)}_0(\mathbf{G}_\alpha)$, is
-large enough to stabilize a finite amplitude by creating a new minimum away
-from zero.
+It is noteworthy, as we will see discuss shortly, that the product 
+$\rho_l \tilde{C}^{(2)}_0(\mathbf{G}_\alpha)$ is a simple function of the 
+structure factor, $S(k)$\footnote{This follows from the definition of the 
+structure factor and the Ornstein-Zernike equation}
+,
+%
+\begin{equation}
+    \rho \tilde{C}(k) = \f{S(k) - 1}{S(k)}\,\,\,\,\forall \,\,k \ne 0.
+\end{equation}
+%
+It follows that solidification must occur when the product $\rho_l
+\tilde{C}^{(2)}_0(\mathbf{G}_\alpha)$ (or equivalently, the reference structure
+factor $S_0(\mathbf{G}_\alpha)$) is large enough to stabilize a finite
+amplitude by creating a new minimum away from zero.  This phenomena is shown
+schematically in figure \ref{fig:amplitude_transition} where the grand
+potential is projected on to a particular $\xi_\alpha$ axis and plotted for
+different values of the reference structure factor.
+%
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.6]{amplitude_transition.eps}
+    \caption{\label{fig:amplitude_transition} 
+        Schematic view of the grand potential $\beta\Delta\Omega / \rho_l$
+        projected on to the $\xi_\alpha$ axis for a three different reference
+        structure factors. To minimize the grand potential, finite $\xi_\alpha$
+        is stable once $S_0(\mathbf{G}_\alpha) > S^*(\mathbf{G}_\alpha)$
+    }
+\end{figure}
+%
 
-Furthermore, equation \ref{amplitude_gp} suggests that this transition depends
-only on a set of parameters, $\rho_0 \tilde{C}^{(2)}_0(\mathbf{G}_\alpha)$,
-that are material independent.  That is to say, once we specify the symmetry of
-the lattice a liquid will solidify into (eg.  face-centred-cubic), all
-materials that undergo this transition should share these parameters at the
-melting point. This seems to be the case for a variety of materials. For
-instance, for many liquids solidifying into face-centred-cubic (fcc) lattices,
-these parameters for the [111] and [311] reciprocal lattice vectors are 0.65
-and 0.23 respectively. Similarly, for a spectrum of liquids solidifying into
+Furthermore, equation \ref{amplitude_gp} suggests that the set of critical
+structure factors, $\lbrace S^*(\mathbf{G}_\alpha)\rbrace_\alpha$ are material
+independent as no material dependent parameters remain in the grand potential.
+As a consequence, once we specify the symmetry of the lattice a liquid will
+solidify into (eg.  face-centred-cubic), all materials that undergo this
+transition should share these parameters at the melting point. 
+
+This seems to be the case for a variety of materials. For instance, for many
+liquids solidifying into face-centred-cubic (fcc) lattices, these parameters
+for the [111] and [311] reciprocal lattice vectors are 0.65 and 0.23
+respectively. Similarly, for a spectrum of liquids solidifying into
 body-centred-cubic (bcc) lattices these parameters  for the [110] and [211]
 reciprocal lattice vectors are approximately 0.66 and 0.12 respectively.
 
@@ -342,12 +388,12 @@ faced by DDFT methods by approximating the free energy in such a say as to retai
 basic features of the theory with a smoother solid state solution. Starting the 
 approximate free energy functional of equation \ref{cdft_free_energy} we proceed as
 previously by scaling out a factor of the reference density and changing variables
-to a dimensionless density $n(r) = (\rho(r) - \rho_0) / \rho_0$,
+to a dimensionless density $n(r) = (\rho(r) - \rho_l) / \rho_l$,
 %
 \begin{equation}
-    \f{\beta \F[n(r)]}{\rho_0} = 
+    \f{\beta \F[n(r)]}{\rho_l} = 
         \int dr \l\lbrace (n(r) + 1) \ln( n(r) + 1) - (1 - \beta\mu)n(r) \r\rbrace
-        - \f{1}{2} n(r) \ast \rho_0 C^{(2)}_0(r, r^\prime) \ast n(r^\prime).
+        - \f{1}{2} n(r) \ast \rho_l C^{(2)}_0(r, r^\prime) \ast n(r^\prime).
 \end{equation}
 %
 We then Taylor expand the logarithm about the reference density or equivalently
@@ -355,9 +401,9 @@ $n(r) = 0$, to fourth order,
 %
 \begin{equation}
     \label{pfc_free_energy} 
-    \f{\beta \F[n(r)]}{\rho_0} =
+    \f{\beta \F[n(r)]}{\rho_l} =
         \int dr \l\lbrace \f{n(r)^2}{2} - \f{n(r)^3}{6} + \f{n(r)^4}{12} \r\rbrace
-        -\f{1}{2} n(r) \ast \rho_0 C^{(2)}_0(r, r^\prime) \ast n(r^\prime).
+        -\f{1}{2} n(r) \ast \rho_l C^{(2)}_0(r, r^\prime) \ast n(r^\prime).
 \end{equation}
 %
 Where the linear term has been dropped because it leaves the equations of
