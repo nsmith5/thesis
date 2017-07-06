@@ -1,5 +1,5 @@
 ===================
-Nathan's PhD Degree
+Nathan's MSc Degree
 ===================
 
 --------
