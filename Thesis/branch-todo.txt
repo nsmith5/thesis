@@ -1,5 +1,0 @@
- - The re-write for DDFT is half complete finish it
- - Talk about approximations of the diffusion tensor in various circumstances
- - Reference Tarazoni and Marconi
- - Talk about Langevin equation version and reference Archer-Raucher about the 
-   distinction
