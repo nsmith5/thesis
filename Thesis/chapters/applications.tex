@@ -1,20 +1,34 @@
 \label{chapter:applications}
 
-In this chapter we discuss applications of our improvements to the binary XPFC model.
-To begin we'll discuss an effective equation of motion in the limit that density 
-change on solidification is small, after which we'll examine the to process of
-multi-step nucleation of nanoparticles from solution. To conclude we'll discuss
-areas of future application.
+In this chapter we discuss applications of our improvements to the binary XPFC
+model.  To begin we'll discuss an effective equation of motion in the limit
+that density change on solidification is small, after which we'll examine the
+to process of multi-step nucleation of nanoparticles from solution. To conclude
+we'll discuss areas of future application.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Dynamics in the small $\Delta n$ limit} %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Dynamics} %
+%%%%%%%%%%%%%%%%%%%%%%%
 
-{
-    \color{ForestGreen} Develop the dynamics from DDFT and show (with references
-    to the relevant papers that these dynamics are valid in the small density
-    change limit specifically
-}
+To examine applications of our improvements to the XPFC model we begin 
+by considering equations of motion. Following \cite{GREENWOOD11_BINARY},
+we use conservative dynamics for both $n(x, t)$ and $c(x, t)$.
+%
+\begin{gather}
+    \f{\partial n(x, t)}{\partial t} = 
+        M_n \nabla^2\l(\f{\d \beta \Delta\F / \rho_0}{\d n(x, t)}\r) 
+        + \xi_n(x, t), \\ 
+    \f{\partial c(x, t)}{\partial t} = 
+        M_c \nabla^2\l(\f{\d \beta \Delta \F / \rho_0}{\d c(x, t)}\r)
+        + \xi_c(x, t).
+\end{gather}
+%
+These equations of motion are largely phenomenological as, strictly speaking,
+there is no reason that the local concentration should be conserved.  This
+conservation can be justified in the limit that the total density at a course
+grained level does not change significantly between phases. When this is the
+case we have $c \equiv \B / \rho \approx \B / \rho_0$ which \textit{is}
+conserved.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Multistep Nucleation of Nanoparticles in Solution} %
