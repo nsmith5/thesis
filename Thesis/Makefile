@@ -1,8 +1,8 @@
 SOURCES = main.tex\
-          chapters/dft_of_freezing.tex chapters/noise.tex\
-		  chapters/fundamentals.tex chapters/binary_pfc.tex\
-		  chapters/introduction.tex chapters/applications.tex\
-		  references.bib 
+		  chapters/* \
+		  appendices/* \
+		  scraps/* \
+		  references.bib
 
 CRAP=idx,ilg,ind,aux,bbl,blg,dvi,lof,lot,log,toc,out
 
