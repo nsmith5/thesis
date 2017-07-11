@@ -289,9 +289,9 @@ density operator is the only relevant variable. Quoting the result from
 %
 \begin{equation}
     \label{eq:mean_eom}
-    \f{\partial \rho(x, t)}{\partial t} = 
-        \nabla \cdot \integrate{r^\prime} \mathbf{D}(r, r^\prime, t) 
-        \cdot \nabla^\prime \f{\d \F[\rho]}{\d \rho(x^\prime, t)},
+    \f{\partial \rho(r, t)}{\partial t} = 
+        \nabla \cdot \l[\integrate{r^\prime} \mathbf{D}(r, r^\prime, t) 
+        \cdot \nabla^\prime \f{\d \F[\rho]}{\d \rho(r^\prime, t)}\r],
 \end{equation}
 %
 Where, $\mathbf{D}(r, r^\prime, t)$, is the diffusion tensor,
@@ -302,76 +302,84 @@ Where, $\mathbf{D}(r, r^\prime, t)$, is the diffusion tensor,
         \hat{\mathbf{J}}(r^\prime, \tau^\prime)},
 \end{equation}
 %
-in which $\mathbf{J}(r, t)$ is the density flux is,
+in which $\hat{\mathbf{J}}(r, t)$ is the density flux is,
 %
 \begin{equation}
     \hat{\mathbf{J}}(r, t) \equiv 
-        \sum_i^N \frac{p_i}{m_i} \d(q_i - r).
-\end{equation}
-
-Should we use assume 
-
-{
-    \color{ForestGreen}
-
-If we restrict ourselves to the case where
-transport is diffusion limited and we assume that the dynamic pair correlation
-function is the same as the equilibrium pair correlation we can express the
-density equation of motion as,
-%
-\begin{equation}
-    \label{mean_eom}
-    \f{\partial \rho(x, t)}{\partial t} = 
-        \nabla \cdot \l[
-            D_0 \rho(x, t) \nabla \l(\f{\d \F[\rho]}{\d \rho(x, t)}\r)
-        \r].
+        \sum_i^N \frac{p_i}{m_i} \d(r - q_i).
 \end{equation}
 %
-Where, $D_0$ is the diffusion constant. We can also express the dynamics of
-the density field in the form of a Langevin equation for the density operator,
+Theories using equation \label{eq:main_eom} and variations there of are
+often called \textit{Dynamic Density Functional Theories} (DDFT) or at times
+\textit{Time Dependent Density Functional Theories} (TDDFT) though we will
+use the former throughout this work.
+
+The non-equilibrium diffusion tensor presents a significant impedement to
+integrating this equation of motion so in practice the diffusion tensor is
+often approximated. Following \cite{ESPANOL09}, if we assume that the positions
+evolve more slowly than the velocities and that the momenta of different
+particles are uncorrelated we can dramatically simplify the diffusion tensor,
 %
 \begin{equation}
-    \label{langevin_eom}
+    D(r, r^\prime) = D_0\mathbb{1}\rho(r, t)\d(r - r^\prime).
+\end{equation}
+%
+Where $D_0$ is diffusion coefficient,
+%
+\begin{equation}
+    D_0 = \f{1}{3 m^2} \int_0^\infty \mathrm{d}t 
+        \trace{f(\q, \p, t) p_i \cdot p_i(t)}.
+\end{equation}
+%
+Substituting into equation \ref{eq:mean_eom} we find a simplified equation of
+motion originally suggested by \cite{MT1999},
+%
+\begin{equation}
+    \label{eq:marconi_eom}
+    \f{\partial \rho(r, t)}{\partial t} = 
+        \nabla \cdot \l[ D_0 \rho(r, t)
+        \nabla \f{\d \F[\rho]}{\d \rho(r, t)}\r].
+\end{equation}
+%
+
+The equation of motion can also be written as a Langevin equation. In this
+variant the equation of motion is for the density \textit{operator},
+$\hat{\rho}$, and the noise is assumed to obey a generalized Einstein relation,
+%
+\begin{gather}
+    \label{eq:langevin_eom}
     \f{\partial \hat{\rho}(x, t)}{\partial t} =
         \nabla \cdot \l[
-            D_0 \hat{\rho}(x, t) \nabla \l(\f{\d \F[\hat{\rho}]}{\d \hat{\rho}}\r)
-        \r] + \xi(x, t).
-\end{equation}
+            D_0 \hat{\rho}(x, t) \nabla \l(
+            \f{\d \F[\hat{\rho}]}{\d \hat{\rho}}\r)
+            \r] + \xi(x, t), \\
+    \mean{\xi(x, t)} = 0, \\
+    \mean{\xi(x, t)\xi(x^\prime, t^\prime)} = 
+        -2 \nabla \cdot \l[ D_0 \rho(x,t) 
+            \nabla \d(x - x^\prime) \d(t - t^\prime)\r].
+\end{gather}
 %
-Where, $\mathbf{\xi}(x, t)$ is a Gaussian random driving force with zero mean
-and variance of,
-%
-\begin{equation}
-    \mean{\xi(x, t)\xi(x^\prime, t^\prime)} = -2 \nabla \cdot \l[ D_0 \rho(x,t) 
-        \nabla \d(x - x^\prime) \d(t - t^\prime)
-    \r],
-\end{equation}
-%
-Due to a generalized Einstein relation\footnote{See Appendix \ref{noise} for
-details on generalized Einstein relations for nonlinear Langevin equations} for
-the Langevin equation in equation \ref{langevin_eom}.
+See Appendix \ref{noise} for more details on generalized Einstein relations and
+\cite{AR2004} for a detailed discussion about equations \ref{eq:marconi_eom}
+and \ref{eq:langevin_eom}.
 
-Equation \ref{mean_eom} and \ref{langevin_eom} were first derived by Marconi
-and Tarazona by considering an ensemble of interacting Brownian particles, but
-other derivations are possible including the projection operator method [cite
-Espanol].  Equations \ref{mean_eom} and \ref{langevin_eom} fall under the
-heading of \textit{Dynamic Density Functional Theory} (DDFT) or sometimes
-\textit{Time dependent density functional theory} (TD-DFT) though we'll use the
-former throughout this text.
-}
+At times the diffusion tensor is assumed to be constant. This is common place
+in many Phase Field Crystal theories. In light of equation
+\ref{eq:marconi_eom}, this is akin to assuming the density variations are
+small.
 
 Unfortunately, if we were to use the approximate free energy functional
 established in equation \ref{cdft_free_energy} in the dynamic density
-functional theory of equation \ref{mean_eom} or \ref{langevin_eom} we would
-face a major impedement: the solid state solutions of the density functional
-theory approach yield sharply peaked solutions at the position of the atoms in
-the lattice. While this is realistic, they are a major challenge for numerical
-algorithms. The challenges are two-fold. First, these sharp peaks require a
-fine mesh to be resolved resulting in large memory requirement to simulate
-domains of any non-trivial scale. Second, lineary stability analysis of most
-algorithms demonostrates that the time step size is a monotonic increasing
-function of the grid spacing so only small time steps can be taken on a fine
-mesh.
+functional theory of equation \ref{eq:marconi_eom} or \ref{eq:langevin_eom} we
+would face a major impedement: the solid state solutions of the density
+functional theory approach yield sharply peaked solutions at the position of
+the atoms in the lattice. While this is realistic, they are a major challenge
+for numerical algorithms. The challenges are two-fold. First, these sharp peaks
+require a fine mesh to be resolved resulting in large memory requirement to
+simulate domains of any non-trivial scale. Second, lineary stability analysis
+of most algorithms demonostrates that the time step size is a monotonic
+increasing function of the grid spacing so only small time steps can be taken
+on a fine mesh.
 
 One pragmatic solution to this problem is to further approximate the free
 energy functional of equation \ref{cdft_free_energy} in such a way as to
