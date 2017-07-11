@@ -1,9 +1,116 @@
-{
-    \color{ForestGreen}
-    \begin{itemize}
-        \item Foundation of material science is that microstructure influences properties
-        \item We're not good at predicting microstructure
-        \item We're getting better at it
-        \item Look at these improvements
-    \end{itemize}
-}
+\label{chapter:introduction}
+
+% Thesis introduction outline: https://student.unsw.edu.au/introductions
+
+% 1) State the general topic and give some background
+
+The study of two binary alloys in materials physics is a pursuit of incredibly
+broad impact. Industries as distant as the large commerial materials such as
+steel and aluminium producers and burgeoning markets of nano-fabrication and
+optoelectronics are affected by research in binary alloys.
+
+One suprising aspect of binary alloys is the rich diversity of properties and
+behaviours they display. Because material properties depend on the
+microstructural details of the material they have a strong path dependence.
+Grain boundaries, vacancies, dislocations and other microstructural are all
+intimitly tied to the manufactoring process of the alloy. This means that the
+study of solids can never be completely seperated from the study of
+solidification. As such the diversity of material properties and behaviours we
+see in binay alloys can be directly attributed to the diversity of processes
+for their construction.
+
+Given the importance of these systems it is important to construct models that
+can explain diversity of behavior we see in them. At the moment models of
+solidification can be categorized by the length and time scales they accurately
+discribe. The the macroscopic length and time scales we have continuum methods
+of heat and mass transport and associated finite element methods of analysis.
+These methods are appropriate for studying large castings for example. On
+length scales $\mathcal{O}(10^{-3})m$ to $\mathcal{O}(10^{-6})$ we use
+\textit{Phase Field} methods to study phenomena such as dendritic growth and
+chemical segregation. On still finer length scales from $\mathcal{O}(10^{-9})$
+to $\mathcal{O}(10^{-6})$ and on relatively long timescales we have the methods
+of \textit{Phase Field Crystal} theory and dislocation dynamics. These methods
+are appropriate for studying nanoscopic changes that occur on diffusive
+timescales such as dislocation motion, creep, grain boundary motion and micro
+segregation. At a still finer scale and on very short time scales
+($\mathcal{O}(10^{-12}s)$) we have the methods of molecular dynamics and
+density functional theory. This methods are appropriate for the study of
+transport coefficients and interaction potentials.
+
+% 2) Outline the current situation
+
+In this thesis we'll focus on the binary Phase Field Crystal (PFC) theory. The 
+binary phase field crystal theory has been successful in describing a broad
+selection of phenomena in binary alloys. These successes include the Kirkendall
+effect \cite{ELDER11_KIRKENDALL, LU15}, solute drag \cite{GREENWOOD12}, 
+clustering and precipitation \cite{FALLAH12, FALLAH13, FALLAH13_AlCu_experiment},
+colloidal ordering in drying suspensions \cite{GANAI13}, epitaxial growth
+and island formation \cite{ELDER10_NANOISLAND, LU16}, and ordered crystals
+\cite{ALSTER17} to name a few. 
+
+The PFC theory is derived from Classical Density Functional Theory (CDFT) and as
+such it is a sort of simplified density functional theory. In practice,
+two different variants of the PFC theory are used in practice: The original
+model developed by Elder \textit{et al} \cite{ELDER07} and the Structural
+Phase Field Crystal (XPFC) model developed by Greenwood \textit{et al.}
+\cite{GREENWOOD11_BINARY}. The original model is a very reduced form of
+CDFT and so it lacks completeness in its ability to describe binary alloys.
+Specifically, the original model uses an expansion in concentration that limits 
+its ability to describe a realistic phase diagram. The original model also
+uses a very simplified correlation kernel which limits its ability to describe
+a variety of crystal lattice structures. The XPFC model is an improvement 
+in that is ameliorates both of these problems. The concentration is left 
+unexpanded allowing for construction of realistic global phase diagrams instead
+of local expansions. The XPFC model provided a phenomenology for modelling
+correlation functions that succeeded in describing solidification of a
+variety of lattice structures ({\color{ForestGreen} Find that paper about
+solidification of all 2d lattices}). 
+
+% 3) Evaluate the current situation and identify a gap
+
+In introducing its phenomenology for modelling correlation function, the 
+XFPC theory tacitly assumes that there is some preferred structure at high
+concentration and some other structure preferred at low concentration. This
+can be limited in situation that have a specific structure specifically at intermediate
+concentrations such a syntectic material. The XPFC model also assumes no
+long wavelength correlations in the concentration field which in practice means
+the model has an ideal free energy of mixing. This is another limitation of 
+the XPFC model because in general the enthalpy of mixing is not zero for 
+binary alloys.
+
+% 5) State the research goals and aims
+
+This goal of the current research is to present two improvements to the
+binary XPFC theory. The first improvement is a more general phenomenology
+for modelling pair correlation functions of a material. The second 
+improvement is two extend the free energy of mixing beyond ideality to 
+account for circumstances when the heat of mixing is not negligible.
+
+% 6) Outline the order of information
+
+This thesis is divided into 6 chapters:
+%
+\begin{description}
+    \item [Chapter \ref{chapter:cdft_intro}] { Classical Density Functional
+        Theory (CDFT) is introduced and derived from fundamental principles of
+        quantum statistical mechanics.
+    }
+    \item [Chapter \ref{chapter:cdft_of_freezing}] { CDFT theory of
+        solidification is described and discussed. The density functional
+        theory is extended to a dynamic, non-equilibrium theory and the Phase
+        Field Crystal (PFC) Theory is introduced as a simplified density
+        functional theory.
+    }
+    \item [Chapter \ref{chapter:binary}] { Binary PFC theory is established and
+        previous simplified models are summarized and discussed.
+    }
+    \item [Chapter \ref{chapter:improvements}] { Improvements to the XPFC model
+        are discussed and contains novel contribution to the field.
+    }
+    \item [Chapter \ref{chapter:applications}] { Concludes the thesis by
+        applying the improved XPFC model to the problem of multistep nucleation
+        of nanoparticles and discusses potential future applications.
+    } 
+\end{description}
+%
+
