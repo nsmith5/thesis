@@ -71,6 +71,14 @@
 % Integral
 \newcommand{\integrate}[1]{\int \mathrm{d}#1\,}
 
+\newcommand{\til}{\tilde}
+\newcommand*{\tn}[1]{\overline{\overline{#1}}}
+\renewcommand*{\vec}[1]{\overline{#1}}
+
+\newenvironment{conditions}
+  {\par\vspace{\abovedisplayskip}\noindent\begin{tabular}{>{$}l<{$} @{${}={}$} l}}
+  {\end{tabular}\par\vspace{\belowdisplayskip}}
+
 %%%%%%%%%%%%%%%%%%
 % Document Begin %
 %%%%%%%%%%%%%%%%%%
@@ -203,6 +211,10 @@ French abstract...
 \chapter{Binary Correlation Functions}
 \label{binary_correlations}
 \input{chapters/binary_correlations}
+
+\chapter{Algorithms}
+\label{appendix:algorithms}
+\input{chapters/algorithm}
 
 \bibliography{references}
 \bibliographystyle{plain}
