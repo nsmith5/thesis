@@ -1,15 +1,69 @@
 \label{chapter:improvements}
 
+In this chapter we look at two improvements to the binary XPFC theory. Both of
+these improvements are novel contributions to the field and significantly
+extend the scope of the XPFC framework. The improvements, as previously eluded
+to, are to first, extend the the free energy to mixing in the XPFC model to one
+with an enthalpy of mixing and to second, generalize the phenomenological form
+used to model correlation functions.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Regular Mixing Model} %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Extending the free energy of mixing beyond ideal mixing is achieved by removing
+the assumption made by Greenwood \textit{et al.} in deriving the binary XPFC
+model that the concentration-concentration correlation function has no $k=0$ mode.
+This is the same approach taken in the original model, though we keep the ideal
+mixing term unexpanded as in the XPFC model. The correlation function is expanded
+as,
+%
+\begin{equation}
+    C_{cc}(r, r^\prime) = \d(r - r^\prime)
+        \l(\omega\epsilon + W_c\nabla^2 + \cdots\r).
+\end{equation}
+%
+This form results in a free energy functional of the form,
+%
+\begin{align}
+    \f{\beta\Delta\F[n, c]}{\rho_0} &= \integrate{r} \l\lbrace
+        \f{1}{2} n(r) \l(1 - C_{nn}(r, r^\prime)\r) \ast n(r^\prime)
+        - \eta \f{n^3}{6} + \chi \f{n^4}{12} \r\rbrace \\
+        &+ \integrate{r}\l\lbrace
+            \f{1}{2}\l\vert \nabla c(r) \r\vert^2 + \omega f_{mix}(r)
+            \r\rbrace. \nonumber
+\end{align}
+%
+Where the local free energy density of mixing, $f_{mix}$ is now,
+%
+\begin{equation}
+    f_{mix}(r) = \l(n(r) + 1\r)\l(
+            c(r)\ln\l(\f{c(r)}{c_0}\r)
+          + (1-c(r))\ln\l(\f{1-c(r)}{1-c_0}\r) \r)
+          + \f{1}{2} \epsilon (c - c_0)^2.
+\end{equation}
+%
+For simplicity the temperature dependence of the parameter $\epsilon$ is taken
+to be linear about a spinodal temperature $T_c$,
+%
+\begin{equation}
+    \epsilon(T) = -4 + \epsilon_0(T - T_c).
+\end{equation}
+%
+The resulting model has a free energy of mixing that is equivalent to the
+regular solution model and, as such, it makes a clear connection to a well
+used model else where in material science. The regular solution model
+also supplies the essential physics of a non-negligible enthalpy of mixing.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Modelling Correlation Functions} %
+\section{General Correlation Function Model} %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The key insight made by the XPFC model the that, the density-density correlation 
-function can be modelled in such a way as to control the crystall lattice structure
-targetted under cooling and to target different structures at different concentrations.
-Note that the density-density correlation function as the form of a linear combination
-of interpolating functions in concentration, $\zeta(c)$, multiplied by bare correlation
-functions $C(r, r^\prime)$,
+To establish a general phenomenology for modelling density-density 
+correlation functions note that the density-density correlation function
+as the form of a linear combination of interpolating functions in
+concentration, $\zeta(c)$, multiplied by bare correlation functions $C(r,
+r^\prime)$,
 %
 \begin{equation}
     C_{nn}(r, r^\prime; c) = \sum_i \zeta_i(c) C_i(r, r^\prime)
@@ -27,69 +81,41 @@ Each interpolating function, $\zeta_i(c)$, defines a domain of validity for its
 associated correlation function $C_i(r, r^\prime)$. This suggests that we might
 model any density-density correlation function using this general structure:
 the set of correlation function $C_i(r, r^\prime)$ enumerate the various
-structures that may manifest themselves and the associated interpolation
-functions $\zeta_i(c)$ define the concentrations over which these correlations
-are valid.
+structures (correlations) that may manifest themselves and the associated
+interpolation functions $\zeta_i(c)$ define the concentrations over which these
+correlations are valid.
 
-As a simple example we wanted to construct a simple model of the silver-cupper
-eutectic alloy system, we might start with some model correlation function for
-pure silver, $C_\alpha(r, r^\prime)$, and for pure copper, $C_\beta(r,
-r^\prime)$. These two structures, the silver rich $\alpha$ phase and the copper
-rich $\beta$ phase, are the only two relevent crystalline structures in the
-system so to build the full density-density correlation function we just need
-to choose interpolating functions for each. Following Greenwood \textit{et al}
-for example, we might choose,
+As a simple example if we wanted to construct a simple model of the
+silver-cupper eutectic alloy system, we might start with some model correlation
+function for pure silver, $C_\alpha(r, r^\prime)$, and for pure copper,
+$C_\beta(r, r^\prime)$. These two structures, the silver rich $\alpha$ phase
+and the copper rich $\beta$ phase, are the only two relevent crystalline
+structures in the system so to build the full density-density correlation
+function we just need to choose interpolating functions for each. Following
+Greenwood \textit{et al} for example, we might choose,
 %
 \begin{gather}
     \zeta_\alpha(c) = 1 - 3c^2 + 2c^3, \\
     \zeta_\beta(c) = 1 - 3 (1 - c)^2 + 2(1 - c)^3.
 \end{gather}
 %
+To model the $\alpha$ and $\beta$ correlation functions we use the original
+XPFC formalism for modelling bare correlation functions. The $\alpha$ and 
+$\beta$ phase are both FCC so we can use an FCC model for the correlation 
+function as in \cite{GREENWOOD10}.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Equilibrium Properties} %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The regular phase field crystal model is a simplified model that aims to combine 
-the positive aspects of the XPFC and original simplified models together. The 
-original PFC model uses an regular model of mixing so both enthalpic and entropic 
-contribution to the free energy of mixing are considered. This is acheived by
-assuming there is a $k=0$ contribution in the gradient expansion of the 
-concentration-concentration correlation function. If we add this simple component
-to the development of the XPFC free energy functional we find one additional term
-that gives an enthaly of mixing,
-%
-\begin{align}
-    \f{\beta\Delta\F[n, c]}{\rho_0} &= \integrate{r} \l\lbrace
-        \f{1}{2} n(r) \l(1 - C_{nn}(r, r^\prime)\r) \ast n(r^\prime)
-        - \eta \f{n^3}{6} + \chi \f{n^4}{12} \r\rbrace \\
-        &+ \integrate{r}\l\lbrace
-            \f{1}{2}\l\vert \nabla c(r) \r\vert^2 + \omega f_{mix}(r)
-            \r\rbrace. \nonumber
-\end{align}
-%
-Where the local free energy density of mixing, $f_{mix}$ is now,
-%
-\begin{equation}
-    f_{mix}(r) = \l(n(r) + 1\r)\l( 
-            c(r)\ln\l(\f{c(r)}{c_0}\r) + (1-c(r))\ln\l(\f{1-c(r)}{1-c_0}\r) \r) + 
-            \f{1}{2} \epsilon (c - c_0)^2.
-\end{equation}
-%
-The simplicity the temperature dependence if the parameter $\epsilon$ is taken to be
-linear about the spinodal temperature $T_c$,
-%
-\begin{equation}
-    \epsilon(T) = -4 + \epsilon_0(T - T_c).
-\end{equation}
+These two changes to the XPFC formalism extend the possible systems we can 
+study. In this section we'll explore the equilibrium properties of the
+improved XPFC free energy functional specialized for three different material
+phase diagrams: eutectic, syntectic and monotectic.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Equilibrium Properties} %
+\subsection{Eutectic Phase Diagram} %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Here we'll explore the flexibility of the simplified regular PFC model in
-describing various material phase diagrams in binary systems.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Eutectic Phase Diagram} %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 While previous PFC models have shown that elastic energy is a sufficient
 driving force for eutectic solidification our simplified regular model allows
@@ -127,9 +153,9 @@ diagram like that in Fig. \ref{eutectic}.
     }
 \end{figure}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Syntectic Phase Diagram} %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Syntectic Phase Diagram} %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Our regular model also allows for the study of a variety of invariant binary
 reactions that, to date, have not been studied using phase field crystal
@@ -172,9 +198,9 @@ of parameters can be seen in Fig. \ref{syntectic}.
     }
 \end{figure}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Monotectic Phase Diagram} %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Monotectic Phase Diagram} %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 The monotectic reaction is another invariant binary reaction that has not
 previously been studied using PFC models. The monotectic reaction, $l_1
@@ -205,41 +231,9 @@ of parameters as in Fig. \ref{monotectic}.
     }
 \end{figure}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Precipitation from Solution} %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+As we can see, our improvements not only reveal new details in existing
+systems, but also model new systems that haven't been explored with PFC methods
+before. They provide a general framework to explore the landscape of possible
+binary alloys with an emphasis that the liquid free energy is a crucial element
+in this complete description.
 
-We can also model precipitation of nanoparticles from solution. While on its
-surface the equilibrium phase diagram of a solution is that of a simple
-solid-liquid coexistance, in practice the metastable features of the phase
-diagram can have profound implications on the nucleation kinetics of
-precipitate. As an example, precipitation from solution is a typical synthesis
-technique for gold and silver nanoparticles. Recent work by Loh \textit{et al}
-shows that a metastable spinodal may be playing an important role in the growth
-and nucleation of gold nanoparticles under certain diffusive circumstances.
-
-Using the regular XPFC model we can reproduce the condition of a metastable
-liquid spinodal underneath the liquid-solid coexistance curve. The approach to
-produce a phase diagram is the same as that of of a monotectic, with the
-exception that the spinodal temperature, $T_c$, most now be sufficiently low to
-be buried underneath the coexistance curve. In keeping with the concentration
-being that of the solute, we'll also center the gaussian window function about
-$c = 1$. An example, including metastable spinodal, can be seen in Fig.
-\ref{precip}.
-
-\begin{figure}
-    \centering	
-    \includegraphics[scale=0.6]{solution.eps}
-    \caption[Coexistance Phase Diagram with Metastable Spinodal]{
-        \label{precip} Phase Diagram of Solution \color{ForestGreen} fill
-        me in please!!
-    }
-\end{figure}
-
-
-{
-    \color{ForestGreen} Conclude the chapter with discussion of where what we've
-    seen and lead into the discussion for the next chapter of dynamics and
-    applications of this theory to more than just simple equilibrium 
-    phase diagrams
-}
