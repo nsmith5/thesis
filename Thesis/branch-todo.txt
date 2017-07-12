@@ -1,7 +1,0 @@
-  - Address edits from discussion with Nik
-  - Clearly disguish my contribution with the heading "Improvements to the XPFC model"
-    - Perhaps break chapter 4 into 2 chapters to acheive this.
-    - Remove all references to "regular" xpfc and just call my work
-     "improvements" to xpfc
-  - Original model solidifies to BCC only (in chapter 4 there is a mistake)
-  - At 3.3 elaborate about the fitting parameters and PFC in general
