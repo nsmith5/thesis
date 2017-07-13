@@ -1,0 +1,8 @@
+TODO
+====
+
+ - Find references for multistep nucleation (Lutsko & Duran, Loh and more 
+    needed)
+ - Write a real conclusion
+ - Make a decent phase diagram with all parameters used in experiment 
+   with spinodal curve added to it.
