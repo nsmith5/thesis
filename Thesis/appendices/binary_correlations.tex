@@ -1,3 +1,5 @@
+\label{appendix:binary_corr}
+
 When developing the binary PFC model we often change variables from $\A$ and
 $\B$ to $n$ and $c$.  This change of variable is helpful in identifying the
 results of the PFC theory with established results in the field as
@@ -11,19 +13,22 @@ length scale than $n$ must be applied to get the correct solution. The goal,
 ultimately, is to find $C_{n n}$, $C_{n c}$, $C_{c n}$ and $C_{c c}$ in the
 following expression, 
 
-[{\color{ForestGreen} Stopped reviewing here! continue hhere in future}]
-
 %
-\begin{gather}\label{1}
-      \Delta \A \,\rho_0 C_{AA} \ast \Delta \A 
-    + \Delta \A \,\rho_0 C_{AB} \ast \Delta \B 
-    + \Delta \B \,\rho_0 C_{BA} \ast \Delta \A 
-    + \Delta \B \,\rho_0 C_{BB} \ast \Delta \B = \\ \nonumber
-       \l(n \,C_{nn} \ast n 
-        + n \,C_{nc} \ast \Delta c 
-        + \Delta c \,C_{cn}\ast n 
-        + \Delta c \,C_{cc} \ast \Delta c\r).
+\begin{gather}
+    \label{eq:excess_}
+      \Delta \A \ast \rho_0 C_{AA} \ast \Delta \A 
+    + 2 \Delta \A \ast \rho_0 C_{AB} \ast \Delta \B 
+    + \Delta \B \ast \rho_0 C_{BB} \ast \Delta \B \\ \nonumber
+    =     n \ast C_{nn} \ast n 
+        + 2 n \ast C_{nc} \ast \Delta c 
+        + \Delta c \ast C_{cc} \ast \Delta c,
 \end{gather}
+%
+Where $f \ast C \ast g$ is shorthand for,
+%
+\begin{equation}
+    \integrate{r} \integrate{r^\prime} f(r) C(r, r^\prime) g(r).
+\end{equation}
 %
 We begin by rewriting $\Delta \B$,
 %
@@ -33,21 +38,27 @@ We begin by rewriting $\Delta \B$,
         &= \Delta \rho c + \rho_0 \Delta c,
 \end{align*}
 %
-Followed by rewriting $\Delta \A$,
+And likewise $\Delta \A$,
 %
 \begin{align*}
   \Delta \A &= \rho (1 - c) - \rho_0 (1 - c_0) \\
         &= \Delta \rho (1 - c) - \rho_0 \Delta c.
 \end{align*}
 %
-With those forms established, we can expand $\Delta \B \,C_{BB} \ast \Delta \B$:
+With those forms established, we demonstrate the general process by computing one
+term in equation \ref{eq:excess_}: $\Delta \B \ast C_{BB} \ast \Delta \B$. We
+begin by expanding $\Delta \B$
 %
-\begin{align}\label{this}
-  \Delta \B C_{BB} \ast \Delta \B &= \l(\Delta \rho c + \rho_0 \Delta c \r) C_{BB} \ast \l(\Delta \rho c + \rho_0 \Delta c\r) \nonumber\\
-                          &= \Delta \rho c \,C_{BB} \ast \l( \Delta \rho c\r) \nonumber\\
-                          &+ \rho_0 \Delta c \,C_{BB} \ast \l( \Delta \rho c \r) \\
-                          &+ \rho_0 \l(\Delta \rho c\r) \,C_{BB} \ast \Delta c \nonumber\\
-                          &+ \rho_0^2 \Delta c \,C_{BB} \ast \Delta c. \nonumber
+\begin{align}
+    \label{this}
+    \Delta \B \ast C_{BB} \ast \Delta \B &= 
+        \l( \Delta \rho c + \rho_0 \Delta c \r)
+        \ast C_{BB} \ast 
+        \l(\Delta \rho c + \rho_0 \Delta c\r) \nonumber\\
+                          &= \Delta \rho c \ast C_{BB} \ast \l( \Delta \rho c\r) \nonumber\\
+                          &+ \rho_0 \Delta c \ast C_{BB} \ast \l( \Delta \rho c \r) \\
+                          &+ \rho_0 \l(\Delta \rho c\r) \ast C_{BB} \ast \Delta c \nonumber\\
+                          &+ \rho_0^2 \Delta c \ast C_{BB} \ast \Delta c. \nonumber
 \end{align}
 %
 If we examine one term in this expansion in detail, we note that we can

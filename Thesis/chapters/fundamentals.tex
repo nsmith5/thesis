@@ -1,14 +1,11 @@
-\label{fundamentals}
+\label{chapter:cdft_intro}
 
-Many physical theories are derived using a succession of approximations. The
-utility of this approach is that, while each approximation yields a new theory
-that is more narrow in scope, the subsequent theory is typically more tractible
-to either analytical or numerical analysis.  Classical Density Functional
-Theory (CDFT) is derived using this approach and in this chapter we'll examine
-each approximation and the intermediate theory they supply. In the following
-chapter, we'll see how CDFT can be used to examine the problem of
-solidification and how we can derive a more simplified theory, the Phase Field
-Crystal theory, from it.
+Many physical theories are derived using a succession of approximations. While
+each approximation yields a theory that is more narrow in scope, it is
+typically more tractible to either analytical or numerical analysis.  Classical
+Density Functional Theory (CDFT) is derived using this approach and in this
+chapter we'll examine each approximation and the intermediate theory they
+supply. 
 
 CDFT is a theory of statistical mechanics. This means CDFT connects microscopic
 physics to macroscopic observables using statistical
@@ -32,13 +29,15 @@ scheme for these functionals.
 \section{Statistical Mechanics in the Semi-classical limit} %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Although the quantum statistical mechanics picture gives us a link between the
-microscopic and macroscopic reality of thermodynamics systems, it still
-contains too much detail.  For instance, the precise bosonic or fermionic
-nature of the particles in the system often has little consequence on the
-thermodynamic properties.  We can ignore some of these quantum mechanical
-details by looking at statistical mechanics in the \textit{semi-classical
-limit}.
+At a microscopic level, all systems are governed by the fundamental physics of
+quantum mechanics. Statistical mechanics and in particular quantum statistical
+mechanics provides a map between this microscopic reality and macroscopic
+thermodynamic observables. For most applications, quantum statistical mechanics
+is both intractable to analysis and contains more detail than necessary. For
+instance, the precise bosonic or fermionic nature of the particles in the
+system often has little consequence on the thermodynamic properties.  We can
+ignore some of these quantum mechanical details by looking at statistical
+mechanics in the \textit{semi-classical limit}.
 
 For the sake of clarity, we'll look at a system of $N$ identical particles in
 the canonical ensemble which is straight forward to generalize to
@@ -46,17 +45,28 @@ multi-component systems and other ensembles.  We start with the definition of
 the partition function for a system of many particles,  
 %
 \begin{equation}
+    \label{eq:quantum_partition}
     Z = \trace{e^{-\beta\hat{H}}}, 
 \end{equation} 
 %
-where, $\hat{H} = \f{\vert\p\vert^2}{2m} + V(\q)$ and $\p = (p_1, p_2, ...p_N)$
-is the vector of particle momenta.  $\q$ is similarly defined for the particle
-positions.  Wigner \cite{PhysRev.40.749},and, shortly after, Kirkwood
-\cite{PhysRev.44.31} showed that the partition function could be expanded in
-powers of $\hbar$, facilitating the calculation of both a classical limit and
-quantum corrections to the partition function.  Their method, the
-Wigner-Kirkwood expansion, involves evaluating the trace operation over a basis
-of plane wave solutions,
+where, 
+%
+\begin{description}[align=right, labelwidth=1cm]
+    \item[$\hat{H}$]{ is the Hamiltonian $\f{\vert\hat{\p}\vert^2}{2m} +
+        V(\hat{\q})$, 
+    }
+    \item[$\p$] is set of particle momenta $(p_1, p_2, ...p_N)$,
+    \item[$\q$] is similarly the set of particles positions, and,
+    \item[$\beta$]{ is the inverse temperature $1 / k_b T$ where $k_b$ is the
+        Boltzmann constant.
+    }  
+\end{description}
+%
+Wigner \cite{PhysRev.40.749}, and shortly after, Kirkwood \cite{PhysRev.44.31}
+showed that the partition function could be expanded in powers of $\hbar$,
+facilitating the calculation of both a classical limit and quantum corrections
+to the partition function.  Their method, the Wigner-Kirkwood expansion,
+involves evaluating the trace operation over a basis of plane wave solutions,
 %
 \begin{equation}
     \Z(\beta) = \int \f{\mathrm{d}\q \mathrm{d}\p}{(2\pi \hbar)^N}
@@ -74,25 +84,31 @@ derivative,
     \frac{\partial I(\q, \p)}{\partial \beta} = -\pwp\hat{H}\pwm I(\q, \p).
 \end{equation}
 %
-If we then make a change of variables, $I(\q, \p) = e^{-\beta\ham}W(\q, \p)$, where
-$\ham$ is the classical Hamiltonian, and use the explicit form of the quantum
-Hamiltonian we arrive at a partial differential equation for $W$.
+We then make a change of variables, $I(\q, \p) = e^{-\beta\ham}W(\q, \p)$,
+where $\ham$ is the classical Hamiltonian. The new function $W(\q, \p)$ encodes
+the deviation from classical behaviour due a lack of commutation of the potential
+and kinetic energy terms in the Hamiltonian. Using the explicit form of the
+quantum Hamiltonian and after a considerable amount of algebra we find  a partial 
+differential equation for $W$,
 %
 \begin{equation} 
+    \label{eq:uhlenbeck} 
     \f{\partial W}{\partial \beta} = \f{\hbar^2}{2} \l(
         \nabla_{\mathbf{q}}^2 
         - \beta(\nabla_\q^2V)
         + \beta^2(\nabla V)^2 
         - 2\beta(\nabla_\q V)\cdot\nabla_\q
         + 2 \frac{i}{\hbar}\p\cdot(\nabla_\q -\beta\nabla_\q) 
-    \r)W(\q, \p) 
+    \r)W(\q, \p).
 \end{equation}
 %
 The solution can be written as a power series in $\hbar$, $W = 1 + \hbar W_1 +
-\hbar W_2 + ...$.  This creates a power series expansion for the partition
+\hbar^2 W_2 + ...$. By plugging this expansion back into equation
+\ref{eq:quantum_partition} we find a power series expansion for the partition
 function as well,
 %
 \begin{equation}
+    \label{eq:semi-classical-partition}
     \mathcal{Z} = (1 + \hbar \mean{W_1} + \hbar^2 \mean{W_2}+ ...)
         \int d\Gamma e^{\beta\ham}.
 \end{equation}
@@ -102,15 +118,17 @@ Where the average, $\mean{\cdot}$, denotes the the classical average,
 \begin{equation} \langle A(p, q) \rangle = \frac{1}{\Z} \int d\Gamma A(p, q)
 e^{-\beta \ham}.  \end{equation}
 %
-For the sake of brevity we'll quote solution to second order, but
-details can be found in Landau and Lifshitz \cite{LANDAU198079}.
+Solving equation \ref{eq:uhlenbeck} to second order in $\hbar$ and computing
+the classical averages in equation \ref{eq:semi-classical-partition} the
+quantum corrections to the classical partition are computed to second 
+order as\footnote{For detailed calculations see \cite{LANDAU198079}.},
 %
 \begin{gather}
-    \mean{W_1}= 0 \\
-    \mean{W_2} = - \f{\beta^3}{24 m} \mean{\l\vert\nabla_\q V \r\vert^2}
+    \mean{W_1}= 0, \\
+    \mean{W_2} = - \f{\beta^3}{24 m} \mean{\l\vert\nabla_\q V \r\vert^2}.
 \end{gather}
 %
-The first order term is zero, because $W_1(\q, \p)$ is an odd function of $\p$.
+The first order term is zero because $W_1(\q, \p)$ is an odd function of $\p$.
 In terms of the Helmholtz free energy, for example, the corrections to second
 order would be, 
 %
@@ -120,37 +138,41 @@ order would be,
         \mean{ \l\vert \nabla_\q V(\q) \r\vert^2 }.
 \end{equation}
 
-There are a few items of importance in equation \ref{quantumcorr}. First of all
-the correction inversely proportional to both the temperature and the particle
-mass.  For copper at room termperature, for instance, the prefactor
-$\hbar^2\beta^2/(24 m)$ is $\mathcal{O}(10^{-4})$.  The correction is also
-proportional to the mean of the squared force felt by each particle. So high
-density materials will have a higher quantum correction because they sample the
+There are a few items of importance in equation \ref{quantumcorr}. First of
+all, the correction is inversely proportional to both the temperature and the
+particle mass.  For copper at room temperature, for instance, the prefactor
+$\hbar^2\beta^2/(24 m)$ is $\mathcal{O}(10^{-4})$ or at its melting temperature
+the prefactor is $\mathcal{O}(10^{-6})$.  The correction is also proportional
+to the mean of the squared force felt by each particle. So high density
+materials will have a higher quantum correction because they sample the
 short-range repulsive region of the pair potential more than their low density
 counter parts.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Indistinguishability} %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 There is an important distinction to be made between the quantum theory and the
 theory in the semi-classical limit.  The integral over phase space of the
 partition function must only take into account the \textit{physically
-different} states of the system.  In the quantum theory this is acheived by
+different} states of the system.  In the quantum theory this is achieved by
 tracing over any orthonormal basis of the Hilbert space, but in the classical
-theory we need to be careful not to double count states when identical
-particles are in the theory.  Exchange of two identical particles does not
-result in a physically different state and thus this state should only be
+theory we need to be careful not to double count states involving identical
+particle configurations. Classically, exchange of two identical particles does
+not result in a physically different state and thus these state should be
 considered only once in the sum over states in the partition function.  More
 precisely, we should write the classical partition function as,
 %
-\begin{equation} \Z = \int^\prime d\Gamma e^{-\beta \ham}, \end{equation}
+\begin{equation}
+    \Z = \int^\prime d\Gamma e^{-\beta \ham}, 
+\end{equation}
 %
 Where the primed integral denotes integration only over the physically distinct
 states. In the common case of $N$ identical particles, the phase space integral
 becomes, 
 %
-\begin{equation} \int^\prime d\Gamma \rightarrow \f{1}{N!}\int d\Gamma
+\begin{equation}
+    \int^\prime d\Gamma \rightarrow \f{1}{N!}\int d\Gamma
 \end{equation}
 %
 Aggregating our results, we can write the partition function in the
@@ -171,9 +193,11 @@ Of course, to first order in $\hbar$, this is exactly the form taught in
 introductory courses on statistical mechanics and derived by Gibbs\footnote{The
 $\hbar$ in Gibbs' formula was justified on dimensional grounds and was simply a
 scaling factor with units of action ($J\cdot s$)} prior to any knowledge of
-quantum mechanics \cite{Gibbs}.  The key insight here is to understand, in a
-contolled way, when this approximation is accurate and the magnitude of the next
-quantum correction is as seen in equation \ref{quantumcorr}.
+quantum mechanics \cite{Gibbs}. The key insight here is to understand, in a
+controlled way, when this approximation is accurate and the magnitude of the next
+quantum correction is as seen in equation \ref{quantumcorr}. We now apply this
+semi-classical limit of statistical mechanics to the study of the local density
+field.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Classical Density Functional Theory}  %
@@ -201,15 +225,14 @@ From which the thermodynamic observable is,
         \trace{\hat{\rho}(x; \q) f(\q, \p)}
 \end{equation}
 %
-Where, $\trace{\cdot}$ denotes the classical trace\footnote{The classical trace
-in the grand canonical example in this particular case},
+Where, $\trace{\cdot}$ now denotes the classical trace,
 %
 \begin{equation}
-    \trace{A(\q, \p) f(\q, \p)} = \sum_{N =0}^\infty
+    \trace{A(\q, \p) f(\q, \p)} \equiv \sum_{N =0}^\infty
         \f{1}{N!}\int\mathrm{d}\Gamma A(\q, \p) f(\q, \p), 
 \end{equation}
 %
-And, $f(\q, \p)$ is the probability density function,
+And, $f(\q, \p)$ is the equilibrium probability density function,
 %
 \begin{equation} 
     f(\q, \p) = \f{e^{-\beta (\ham - \mu N)}}{\Xi(\mu, \beta)}.
@@ -231,8 +254,8 @@ subject to the aforementioned contraints to find a probability density function
 of the form,
 %
 \begin{equation} 
-    f(\q, \p) \propto \exp\l(-\beta(\ham -\mu N + \int \mathrm{d}x
-        \phi(x)\hat{\rho}(x)\r).
+    f(\q, \p) \propto \exp\l\lbrace-\beta \l(\ham -\mu N + \int \mathrm{d}x
+        \phi(x)\hat{\rho}(x)\r)\r\rbrace.
 \end{equation}
 %
 Where, $\beta$, $\mu$ and $\phi(x)$ are the Lagrange multipliers associated
@@ -251,48 +274,61 @@ We can combine their Lagrange multipliers into one,
         \hat{\rho}(x))\r),
 \end{equation}
 %
-Where, $\psi(x) = \mu - \phi(x)$, is the combined Langrange multiplier named
+Where, $\psi(x) = \mu - \phi(x)$, is the combined Lagrange multiplier named
 the \textit{intrinsic chemical potential}. Recalling that chemical potential is
 the change Helmholtz free energy made by virtue of adding particles to the
 system,
 %
 \begin{equation}
+    \label{eq:chem_potential} 
     \f{\partial F}{\partial N} = \mu,
 \end{equation}
 %
 The interpretation of the intrinsic chemical potential follows as the Helmholtz
 free energy change due to particles being added to a specific location.  We'll
-see this in more detail briefly.  Now, as with all statistical mechanics
-theories, the challenge to is to compute the moment generating function
-(partition function) or equivalently the cumulant generating function (free
-energy) so as to compute the statistics of our observable of choice.  In case
-of observables of the density field, this is made somewhat more technical by
-the fact that the density is an entire function instead of a scalar variable.
-As such the partition function is more precisely called the partition
-\textit{functional} and the free energy function is more precisely called the
-free energy \textit{functional}.  Specifically, the grand canonical partition
-functional is,
+see this in more detail briefly where we'll see a analogous equation for the
+intrinsic chemical potential.
+
+The objective of statistical theories to compute the statistics of some
+observable (random variable) of choice. Two special sets of statistics provide
+a complete description of the observable's probability distribution: the
+\textit{moments} and \textit{cumulants}\footnote{See \cite{KUBO62} for
+discussion of moments, cumulants and their importance in statistical
+mechanics}.  The calculation of moments and cumulants can be aided by use of
+generating functions. In the case of statistical mechanics the generating
+functions of moments and cumulants have special physical significance. The
+generating function of moments is closely related to the partition function and
+the generating function of cumulants is closely related to the associated
+thermodynamic potential. 
+
+In the case where the observable is local density field, this is made somewhat
+more technical by the fact that the density is an entire function instead of a
+scalar variable.  As such the partition function is more precisely called the
+partition \textit{functional} as it depends on an entire function of input. The
+thermodynamic potential will also be a functional.
+Specifically, the grand canonical partition functional is,
 %
 \begin{equation}
     \Xi[\psi(x)] = \trace{\exp\l(-\beta\ham +\beta\int\mathrm{d}x
         \psi(x) \hat{\rho}(x)\r)}.
 \end{equation}
 %
-As eluded to above, the partition function is a type of moment generating
-functional in that repeated functional differentiation yields moments of the
-density field:
+As eluded to above, the partition functional is a type of moment generating
+functional in the sense that repeated (functional) differentiation yields
+moments of the density field:
 %
 \begin{equation}
     \f{\beta^{-n}}{\Xi} \f{\d^n \Xi[\psi]}{\d \psi(x_1) \dots \d\psi(x_n)} 
         = \mean{\hat{\rho}(x_1)\dots\hat{\rho}(x_n)}.
 \end{equation}
 %
-Similarly, we can construct a free enery functional by taking the logarithm of
-the partition function. This free energy functional in particular is called the
-\textit{grand potential functional}.
+Similarly, we can construct a thermodynamic potential by taking the logarithm
+of the partition function. This potential in particular is called the
+\textit{grand potential functional} in analogy with the grand potential of
+thermodynamics,
 %
 \begin{equation}
-    \Omega[\psi(x)] = -k_bT\log\l(\Xi[\psi(r)]\r)
+    \Omega[\psi(x)] = -k_bT\log\l(\Xi[\psi(r)]\r).
 \end{equation}
 %
 The grand potential functional is a type of cumulant generating functional in
@@ -304,8 +340,7 @@ density field:
         = \mean{\hat{\rho}(x_1)\dots\hat{\rho}(x_n)}_c
 \end{equation}
 %
-Where, $\langle A^1\dots A^n \rangle_c$, denotes the n-variable joint
-cumuluant.
+Where, $\langle \cdot \rangle_c$, denotes the cumulant average \cite{KUBO62}.
 
 If we examine the first two cumulants,
 %
@@ -362,6 +397,19 @@ asssociated Euler-Lagrange equation,
 \begin{equation}
     \f{\d \Omega[\rho]}{\d \rho(r)} = 0.
 \end{equation}
+%
+
+Finally, we may construct an analogous equation to equation
+\ref{eq:chem_potential} for the intrinsic chemical potential,
+%
+\begin{equation}
+    \label{eq:int_chem_potential} 
+    \f{\d \F}{\d \rho(x)} = \psi(x).
+\end{equation}
+%
+Equation \ref{eq:int_chem_potential} implies that the intrinsic chemical
+potential is the free energy cost of adding density to the location $x$
+specifically. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Techniques in Density Functional Theory} %
@@ -385,7 +433,7 @@ energy functional exactly,
 Where $\Lambda$ is the thermal de Broglie wavelength,
 %
 \begin{equation}
-    \Lambda = \sqrt{\f{h^2}{2\pi mk_bT}}.
+    \Lambda = \sqrt{\f{2 \pi \hbar^2}{m k_b T}}.
 \end{equation}
 %
 We may then express a deviations from ideality by factoring the ideal
@@ -451,10 +499,10 @@ the ideal contribution,
         = \mu_0 - k_bT\ln\left(\Lambda^3 \rho_0\right).
 \end{equation}
 %
-Should we truncate the expansion in equation \ref{fex_expansion} to second
-order in $\Delta\rho(x)$ and substitute the linear and quadratic terms with
-equation \ref{mu_ex} and \ref{direct_correlation} we can simplify the excess
-free energy to,
+Truncating the expansion in equation \ref{fex_expansion} to second order in
+$\Delta\rho(x)$ and substitute the linear and quadratic terms with equation
+\ref{mu_ex} and \ref{direct_correlation} we can simplify the excess free energy
+to,
 %
 \begin{equation}
     \label{F_ex}

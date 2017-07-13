@@ -6,6 +6,7 @@
 
 % UTF8 encoding
 \usepackage[utf8]{inputenc}
+\usepackage{bbold}
 
 % Graphics and path to graphics
 \usepackage{graphicx}
@@ -35,7 +36,7 @@
 \usepackage{enumitem}
 
 % Page alignment \addtolength{\hoffset}{0pt}
-\addtolength{\voffset}{0pt}
+%\addtolength{\voffset}{0pt}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % -- Aliases and commands -- %
@@ -70,6 +71,17 @@
 % Integral
 \newcommand{\integrate}[1]{\int \mathrm{d}#1\,}
 
+% Lazy tilde
+\newcommand{\til}{\tilde}
+
+% Tensor and vector symbols
+\newcommand*{\tn}[1]{\overline{\overline{#1}}}
+\renewcommand*{\vec}[1]{\overline{#1}}
+
+\newenvironment{conditions}
+  {\par\vspace{\abovedisplayskip}\noindent\begin{tabular}{>{$}l<{$} @{${}={}$} l}}
+  {\end{tabular}\par\vspace{\belowdisplayskip}}
+
 %%%%%%%%%%%%%%%%%%
 % Document Begin %
 %%%%%%%%%%%%%%%%%%
@@ -82,93 +94,35 @@
 %  Front Matter %
 %%%%%%%%%%%%%%%%%
 
-\begin{titlepage}
-    \begin{center}
-        \vspace*{1cm}
-        
-        \Huge
-        \textbf{
-            Thesis Title
-        }
-        
-        \vspace{0.5cm}
-        \LARGE
-        Thesis Subtitle
-        
-        \vspace{1.5cm}
-        \Large 
-        \textbf{Nathan Frederick Smith}
-        
-        \vfill
-
-        \Large
-        A thesis presented in partial fulfillment of the degree of\\
-        Master's of Science
-        
-        \vspace{0.8cm}
-        
-        \includegraphics[width=0.2\textwidth]{crest.eps}
-        
-        \Large
-        Department of Physics\\
-        McGill University, Montreal\\
-        Canada\\
-        ??-??-2017
-        
-    \end{center}
-\end{titlepage}
+\input{scraps/titlepage}
 
 \doublespacing
 
-\section*{Dedication}
-\label{sec:dedication}
-\addcontentsline{toc}{chapter}{\nameref{sec:dedication}}
-
-Dedication here...
+\input{scraps/dedication}
 
 \clearpage
 
-\section*{Acknowledgements}
-\label{sec:acknowledgements}
-\addcontentsline{toc}{chapter}{\nameref{sec:acknowledgements}}
-
-{
-    \color{ForestGreen}
-    \begin{itemize}
-        \item Nik for a million things
-        \item Quentin Stoyel for helping edit
-        \item Matt Frick for editing help
-    \end{itemize}
-}
+\input{scraps/acknowledge}
 
 \clearpage
 
-\section*{Abstract}
-\label{sec:abstract}
-\addcontentsline{toc}{chapter}{\nameref{sec:abstract}}
-
-English abstract...
+\input{scraps/abstracts}
 
 \clearpage
 
-\section*{Abrégé}
-\label{sec:abrege}
-\addcontentsline{toc}{chapter}{\nameref{sec:abrege}}
-
-French abstract...
-
-\clearpage
-
-\tableofcontents 
+\tableofcontents
 \listoffigures
 \listoftables
+
+\clearpage
+
+\input{scraps/list_of_symbols}
 
 %%%%%%%%%%%%%%%%%%%%%
 % -- Main Matter -- %
 %%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Introduction}
-\label{introduction}
 \pagenumbering{arabic}
 \input{chapters/introduction}
 
@@ -176,11 +130,13 @@ French abstract...
 \input{chapters/fundamentals}
 
 \chapter{Classical Density Functional Theory of Freezing}
-\label{dft_of_freezing}
 \input{chapters/dft_of_freezing}
 
 \chapter{Simplified Binary Phase Field Crystal Models}
 \input{chapters/binary_pfc}
+
+\chapter{Improvements to the Binary XPFC Model}
+\input{chapters/xpfc_improvements}
 
 \chapter{Applications}
 \input{chapters/applications}
@@ -192,15 +148,16 @@ French abstract...
 \appendix
 
 \chapter{Noise in Nonlinear Langevin Equations}
-\label{noise}
-\input{chapters/noise}
+\input{appendices/noise}
 
 \chapter{Gaussian Functional Integrals}
-\input{chapters/gaussian}
+\input{appendices/gaussian}
 
 \chapter{Binary Correlation Functions}
-\label{binary_correlations}
-\input{chapters/binary_correlations}
+\input{appendices/binary_correlations}
+
+\chapter{Algorithms}
+\input{appendices/algorithm}
 
 \bibliography{references}
 \bibliographystyle{plain}
