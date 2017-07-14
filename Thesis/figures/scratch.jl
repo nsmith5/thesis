@@ -25,11 +25,11 @@ function analysis(times, phases)
 end
 
 function make_figure(time, fraction)
-    plot(time, fraction)
+    loglog(time, fraction)
     xlim(minimum(time), 550_000)
     xlabel(L"Time ($\Delta t$)")
     ylabel(L"Fraction of Uncrystallized droplets $N_{liq} / N_{total}$")
-    savefig("incubation.svg")
+    savefig("loglogincubation.svg")
 end
 
 function main(args)
