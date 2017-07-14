@@ -7,6 +7,8 @@
 % UTF8 encoding
 \usepackage[utf8]{inputenc}
 \usepackage{bbold}
+\usepackage[backend=biber]{biblatex}
+\addbibresource{references.bib}
 
 % Graphics and path to graphics
 \usepackage{graphicx}
@@ -159,7 +161,6 @@
 \chapter{Algorithms}
 \input{appendices/algorithm}
 
-\bibliography{references}
-\bibliographystyle{plain}
+\printbibliography
 
 \end{document}

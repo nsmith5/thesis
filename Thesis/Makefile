@@ -4,7 +4,7 @@ SOURCES = main.tex\
 		  scraps/* \
 		  references.bib
 
-CRAP=idx,ilg,ind,aux,bbl,blg,dvi,lof,lot,log,toc,out
+CRAP=idx,ilg,ind,aux,bbl,blg,dvi,lof,lot,log,toc,out,xml,bcf
 
 # &> /dev/null silences the noisey latex build process
 # remove these to get your errors and what not back
@@ -12,14 +12,14 @@ all: main.pdf
 
 debug:
 	pdflatex main.tex
-	bibtex main
+	biber main.bcf
 	pdflatex main.tex
 	pdflatex main.tex
 	rm -rf *.{$(CRAP)}
 
 main.pdf: $(SOURCES)
 	pdflatex main.tex &> /dev/null
-	bibtex main &> /dev/null
+	biber main.bcf &> /dev/null
 	pdflatex main.tex &> /dev/null
 	pdflatex main.tex &>/dev/null
 	rm -f *.{$(CRAP)}
