@@ -71,15 +71,15 @@ model is a good fit.
 
 To construct an appropriate free energy functional for this system we consider
 the structure of its equilibrium phase diagram. Precipitation is indicative of
-a simple liquid-solid coexistance curve beneath which we assume there must also
-be a metastable liquid spinodal \cite{DAVEY13}. Producing a system with these
-characteristics is similar to that of a monotectic with the exception that the
-spinodal temperature, $T_c$, must now be sufficiently low to hide below the
-coexistance curve. We will also also use a Gaussian window function $\zeta(c)$
-as the in the monotectic case though this time centring the Gaussian about $c =
-1$ in keeping with interpretting the concentration as a solute concentration.
-An example, including depiction of the metastable spinodal, can be seen in
-figure \ref{fig:precip_phase_dia}.
+a simple liquid-solid coexistance curve beneath which we assume there also a 
+submerged metastable liquid spinodal \cite{DAVEY13}. Producing a system with
+these characteristics is similar to that of a monotectic with the exception
+that the spinodal temperature, $T_c$, must now be sufficiently low to hide
+below the coexistance curve. We will also also use a Gaussian window function
+$\zeta(c)$ as the in the monotectic case though this time centring the Gaussian
+about $c = 1$ in keeping with interpretting the concentration as a solute
+concentration.  An example, including depiction of the metastable spinodal, can
+be seen in figure \ref{fig:precip_phase_dia}.
 
 \begin{figure}
     \centering	
@@ -198,7 +198,7 @@ droplets and their phase (liquid or solid) throughout the simulation. Strictly
 diffusive growth scales like $\mean{R(t)} \sim t^{1/2}$ and so in plotting the
 mean radius versus time on a log-log plot as in figure \ref{fig:scaling} we see
 how the growth of solid and liquid droplets compare to diffusive growth. Early
-solid droplets grow at a slightly hyper-diffusive rate due to the presence of
+solid droplets grow at a weakly hyper-diffusive rate due to the presence of
 the sacrificial liquid droplets and slow to sub-diffusive as they begin to
 coarsen.
 
@@ -210,3 +210,17 @@ coarsen.
         Fraction of uncrystallized droplets in time
     }
 \end{figure}
+
+A more pronounced view of this phenomena can be seen by examining the fraction
+of uncrystallized droplets in the system with respect to time as in figure
+\ref{fig:incubation}. Neither classical nor proposed non-classical nucleation
+theories explain the pronounced reduction in nucleation rate seen once the
+fraction of solid droplets reachs approximately one half. Instead of developing
+via nucleation in the remaining droplets we see liquid droplet anhilation
+beginning to become an important driving factor in increasing the solid
+fraction. As liquid droplets shrink the nucleation rate inside the droplet is
+suppressed by solute and density segregation to solid droplets. In classical
+nucleation theory we would expect an exponential decay and even in proposed
+two-step mechanisms do not account for these solid-liquid droplet effects\cite{MYERSON04, MYERSON09}.
+
+
