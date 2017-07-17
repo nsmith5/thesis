@@ -21,7 +21,7 @@ We will see that for our systems of interest that the full quantum statistical
 theory is completely intractible. To preceed, we'll look at quantum statistical
 mechanics in the \textit{semi-classical limit}. In the semi-classical limit
 we'll develop a theory of inhomogenous fluids called Classical Density
-Functional Theory (CDFT). Finally, we'll see that constructing exactly free
+Functional Theory (CDFT). Finally, we'll see that constructing exact free
 energy functionals for CDFT is rarely possible and look at an approximation
 scheme for these functionals.
 
@@ -40,7 +40,7 @@ ignore some of these quantum mechanical details by looking at statistical
 mechanics in the \textit{semi-classical limit}.
 
 For the sake of clarity, we'll look at a system of $N$ identical particles in
-the canonical ensemble which is straight forward to generalize to
+the canonical ensemble which is straightforward to generalize to
 multi-component systems and other ensembles.  We start with the definition of
 the partition function for a system of many particles,  
 %
@@ -86,10 +86,10 @@ derivative,
 %
 We then make a change of variables, $I(\q, \p) = e^{-\beta\ham}W(\q, \p)$,
 where $\ham$ is the classical Hamiltonian. The new function $W(\q, \p)$ encodes
-the deviation from classical behaviour due a lack of commutation of the potential
-and kinetic energy terms in the Hamiltonian. Using the explicit form of the
-quantum Hamiltonian and after a considerable amount of algebra we find  a partial 
-differential equation for $W$,
+the deviation from classical behaviour due to a lack of commutation of the
+potential and kinetic energy terms in the Hamiltonian. Using the explicit form
+of the quantum Hamiltonian and after a considerable amount of algebra we find
+a partial differential equation for $W$,
 %
 \begin{equation} 
     \label{eq:uhlenbeck} 
@@ -159,7 +159,7 @@ different} states of the system.  In the quantum theory this is achieved by
 tracing over any orthonormal basis of the Hilbert space, but in the classical
 theory we need to be careful not to double count states involving identical
 particle configurations. Classically, exchange of two identical particles does
-not result in a physically different state and thus these state should be
+not result in a physically different state and thus these states should be
 considered only once in the sum over states in the partition function.  More
 precisely, we should write the classical partition function as,
 %
@@ -242,7 +242,7 @@ And, $f(\q, \p)$ is the equilibrium probability density function,
 To construct a theory of the density field we review the usual methodology for
 statistical thermodynamics. We will do so in the frame of entropy maximization
 in which the entropy is maximized subject to the macroscopically available
-information. Taking the existance of a average of the density field, particle
+information. Taking the existence of an average of the density field, particle
 number and energy as the macroscopically available information, we can maximize
 the entropy functional,
 %
@@ -286,10 +286,10 @@ system,
 %
 The interpretation of the intrinsic chemical potential follows as the Helmholtz
 free energy change due to particles being added to a specific location.  We'll
-see this in more detail briefly where we'll see a analogous equation for the
+see this in more detail briefly where we'll see an analogous equation for the
 intrinsic chemical potential.
 
-The objective of statistical theories to compute the statistics of some
+The objective of statistical theories is to compute the statistics of some
 observable (random variable) of choice. Two special sets of statistics provide
 a complete description of the observable's probability distribution: the
 \textit{moments} and \textit{cumulants}\footnote{See \cite{KUBO62} for
@@ -302,18 +302,18 @@ the generating function of cumulants is closely related to the associated
 thermodynamic potential. 
 
 In the case where the observable is local density field, this is made somewhat
-more technical by the fact that the density is an entire function instead of a
-scalar variable.  As such the partition function is more precisely called the
-partition \textit{functional} as it depends on an entire function of input. The
-thermodynamic potential will also be a functional.
-Specifically, the grand canonical partition functional is,
+more technical by the fact that the density is a function instead of a scalar
+variable.  As such the partition function is more precisely called the
+partition \textit{functional} as it depends on a function of input. The
+thermodynamic potential will also be a functional.  Specifically, the grand
+canonical partition functional is,
 %
 \begin{equation}
     \Xi[\psi(x)] = \trace{\exp\l(-\beta\ham +\beta\int\mathrm{d}x
         \psi(x) \hat{\rho}(x)\r)}.
 \end{equation}
 %
-As eluded to above, the partition functional is a type of moment generating
+As alluded to above, the partition functional is a type of moment generating
 functional in the sense that repeated (functional) differentiation yields
 moments of the density field:
 %
@@ -376,7 +376,7 @@ as a functional of the average density, $\psi[\rho(x)]$, and vice versa.
 Furthermore, because all of the higher order cumulants of the density depend on
 the intrinsic chemical potential, they too depend only on the average density.
 
-Given the importance of the average density, $\rho(x)$, if follows that we would
+Given the importance of the average density, $\rho(x)$, it follows that we would
 like to use a thermodynamic potential with a natural dependence on the density.
 We can construct a generalization of the Helmholtz free energy that has
 precisely this characteristic by Legendre transforming the Grand potential,
@@ -418,7 +418,7 @@ specifically.
 The difficulty in formulating a density functional theory is the construction
 of an appropriate free energy functional.  While exact calculations are rarely
 feasible, there are a variety of techniques that help in building approximate
-functionals.  Its important to note first what we \textit{can} compute exactly.
+functionals.  It is important to note first what we \textit{can} compute exactly.
 In the case of the ideal gas, we can compute the grand potential and free
 energy functional exactly,
 %
@@ -436,8 +436,8 @@ Where $\Lambda$ is the thermal de Broglie wavelength,
     \Lambda = \sqrt{\f{2 \pi \hbar^2}{m k_b T}}.
 \end{equation}
 %
-We may then express a deviations from ideality by factoring the ideal
-contribution out of the partition function,
+We may then express deviation from ideality by factoring the ideal contribution
+out of the partition function,
 %
 \begin{equation}
     \Xi[\psi] = \Xi_{id}[\psi]\Xi_{ex}[\psi],
@@ -500,7 +500,7 @@ the ideal contribution,
 \end{equation}
 %
 Truncating the expansion in equation \ref{fex_expansion} to second order in
-$\Delta\rho(x)$ and substitute the linear and quadratic terms with equation
+$\Delta\rho(x)$ and substituting the linear and quadratic terms with equation
 \ref{mu_ex} and \ref{direct_correlation} we can simplify the excess free energy
 to,
 %
@@ -542,17 +542,17 @@ transform,
 \end{equation}
 
 
-Its reasonable to ask at this point whether or not we have really gained
+It is reasonable to ask at this point whether or not we have really gained
 anything with this approximation scheme.  Although we have arrived at a
 relatively simple form for the free energy functional, we've added a lot of
 parameters to the functional based on the reference fluid.  Thankfully, the
 theory of homogeneous liquids, such as our reference liquid, is very well
-established.  This means we may relay on a broad choice of analytical,
+established.  This means we may rely on a broad choice of analytical,
 numerical or experimental techniques to derive these parameters.
 
 Equation \ref{cdft_free_energy} establishes an approximate density functional
 theory for inhomogenous fluids and, as we will see in the following chapter,
-for the seemingly disparate phenonmena of solidification. We see that it can
+for the seemingly disparate phenomena of solidification. We see that it can be
 derived through a series of approximations from a fundamental basis in quantum
 statistical mechanics and requires no more parameters than the thermodynamic
 details of a homogeneous reference fluid.
