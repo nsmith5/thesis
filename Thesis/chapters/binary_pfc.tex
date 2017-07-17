@@ -110,9 +110,9 @@ order polynomial as well,
 Linear couplings to $n(r)$ are dropped by assuming, as we already have, that
 the concentration field varies on a much longer length scale than the total
 density and noting that the total density is defined about its average. This
-argument can also be applied the linear couplings to $n(r)$ in the excess free
+argument can also be applied to the linear couplings to $n(r)$ in the excess free
 energy term which leaves only the $C_{nn}$ and $C_{cc}$ terms. Finally, these
-two terms are approximated with a gradient expansions of the correlation
+two terms are approximated with a gradient expansion of the correlation
 functions,
 %
 \begin{gather}
@@ -124,13 +124,13 @@ functions,
 %
 The expansion parameters, $C_0, C_2,$ and $C_4$ are all dependent on
 temperature and concentration. We are required to expand $C_{nn}$ to fourth
-order because, as noted in chapter \ref{chapter:cdft_of_freezing} the peak of
+order because, as noted in chapter \ref{chapter:cdft_of_freezing}, the peak of
 the direct correlation function in Fourier space is the driving force for
 solidification.  The concentration field is correlated over a longer length
 scale implying that only the short wavevectors are important in $C_{cc}$ so we
 can expand just to quadratic order.
 
-Gathering terms the resulting free energy functional for the original simplified
+Gathering terms, the resulting free energy functional for the original simplified
 binary PFC model\footnote{The orignal simplified binary PFC model was
 expressed using slightly different variables. We expand in $\Delta c(r)$ here to 
 facilitate comparison with other theories} is,
@@ -148,12 +148,12 @@ facilitate comparison with other theories} is,
 The strength of the original simplified binary PFC model is that is retains
 most of the important physics of binary alloys in a very reduced theory. For
 instance, the simplified model is capable of describing the equilibrium phase
-diagrams of both eutectic alloys alloys and materials with a solid state
-spinodal / liquid minimum.  Supplied with a diffusive equation of motion the
-simplified model can model an impressive diversity of dynamic phenomena
-including eutectic growth \cite{ELDER07}, solute segregation \cite{STOLLE14},
-dendritic growth \cite{ELDER07}, epitaxial growth \cite{ELDER10_NANOISLAND,
-LU16} and crack formation \cite{HU17}.
+diagrams of both eutectic alloys and materials with a solid state spinodal /
+liquid minimum.  Supplied with a diffusive equation of motion, the simplified
+model can model an impressive diversity of dynamic phenomena including eutectic
+growth \cite{ELDER07}, solute segregation \cite{STOLLE14}, dendritic growth
+\cite{ELDER07}, epitaxial growth \cite{ELDER10_NANOISLAND, LU16} and crack
+formation \cite{HU17}.
 
 The major limitation of the original simplified model is that the gradient
 expansion of the density-density correlation function gives only a crude
@@ -201,11 +201,11 @@ added to fit the mixing term away from the reference concentration,
 \end{equation}
 %
 This unexpanded free energy of mixing will lead to more accurate global phase
-diagrams. The excess free energy is approximated using the similar assumptions
-as in the original model (linear couplings are dropped), but the density-density
-correlation function is not expanded. Greenwood \textit{et al} all assumed that
-the $k=0$ mode of the concentration-concentration correlation function was zero
-leaving only the quadratic term in the expansion,
+diagrams. The excess free energy is approximated using similar assumptions as
+in the original model (linear couplings are dropped), but the density-density
+correlation function, $C_{nn}$, is not expanded. Greenwood \textit{et al} all
+assumed that the $k=0$ mode of the concentration-concentration correlation
+function was zero leaving only the quadratic term in the expansion,
 %
 \begin{equation}
     C_{cc}(r, r^\prime) = \d(r - r^\prime)W_c \nabla^2.
@@ -240,7 +240,7 @@ Fourier space but assumed to have a specific phenomenological form,
            + \zeta_B(c) C_{BB}(r, r^\prime).
 \end{equation}
 %
-Where $\zeta_A(c)$ and $\zeta_B(c)$ are interpolation function,
+Where $\zeta_A(c)$ and $\zeta_B(c)$ are interpolation functions,
 %
 \begin{gather}
     \zeta_A(c) = 1 - 3c^2 + 2c^3 \\
@@ -248,7 +248,7 @@ Where $\zeta_A(c)$ and $\zeta_B(c)$ are interpolation function,
 \end{gather}
 %
 
-The remaining correlation functions $C_{AA}$ and $C_{BB}$ are modelling
+The remaining correlation functions $C_{AA}$ and $C_{BB}$ are modelled
 using the general XPFC model for correlation functions which we describe
 subsequently.
 
@@ -256,7 +256,7 @@ subsequently.
 \subsection{XPFC Correlation Functions} %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The key insight made by the XPFC model the that, the density-density
+The key insight made by the XPFC model is that the density-density
 correlation function can be modelled in such a way as to control the crystal
 lattice structure formed under solidification and to target different structures at
 different concentrations.  Originally delineated for pure systems, the XPFC
@@ -272,18 +272,20 @@ centred at the reciprocal lattice vector positions,
 \end{equation}
 %
 Where, as in chapter \ref{chapter:cdft_of_freezing}, the index $\alpha$ runs
-over families of point group equivalent reciprocal lattice vectors. The
-temperature dependent prefactors $e^{T / T_\alpha^0}$ give the correct temperature
-scaling of the amplitudes close to the melting point \footnote{The original
-XPFC works used a phenomenological prefacter with $e^{T^2 / C_i}$ for a
-constant $C_i$. This choice is inspired by harmonic analysis in the solid phase
-and the Debye-Waller factor} as discussed by \cite{ALSTER17}.
+over families of point group equivalent reciprocal lattice vectors, $k_\alpha$
+is the length of the reciprocal lattice vectors in $\alpha$ and $\sigma_\alpha$
+is the width of the peak. The temperature dependent prefactors $e^{T /
+T_\alpha^0}$ give the correct temperature scaling of the amplitudes close to
+the melting point \footnote{The original XPFC works used a phenomenological
+prefacter with $e^{T^2 / C_i}$ for a constant $C_i$. This choice is inspired by
+harmonic analysis in the solid phase and the Debye-Waller factor} as discussed
+by \cite{ALSTER17}.
 
 The advantages of the XPFC model are two fold: realistic phase diagrams and
 modelling a variety of crystalline lattices. While the former is relatively
 cosmetic the latter allows for the examination of genuinely novel systems in
-comparison with the original simplified model. For example the binary XPFC
-model as been used to study, peritectic systems \cite{GREENWOOD11_BINARY}, 
+comparison with the original simplified model. For example, the binary XPFC
+model as been used to study peritectic systems \cite{GREENWOOD11_BINARY}, 
 ordered crystals \cite{ALSTER17}, clustering and precipitation 
 \cite{FALLAH12, FALLAH13} and solute drag \cite{GREENWOOD12}.
 
@@ -292,21 +294,21 @@ ordered crystals \cite{ALSTER17}, clustering and precipitation
     \includegraphics[scale=0.7]{eutectic-drawing}
     \caption[Eutectic Phase Diagram with Metastable Projections]{
         \label{fig:eutectic_drawing} Eutectic phase diagram with metastable
-        projects. Stable coexistance lines are rendered solid where as 
+        projects. Stable coexistance lines are rendered solid whereas 
         metastable projections are dashed.
     }
 \end{figure}
 
 Unfortunately, by assuming that the $k=0$ mode of the
-concentration-concentration correlation function is zero the XPFC model
-restricts the its free energy of mixing to an ideal model of mixing. This model
+concentration-concentration correlation function is zero, the XPFC model
+restricts its free energy of mixing to an ideal model of mixing. This model
 of mixing includes only entropic contributions to the free energy. This means
-that the sole driving force for phase seperation is elastic energy as the enthapy
+that the sole driving force for phase separation is elastic energy as the enthapy
 of mixing is always zero. This can be a limitation on modelling a variety of binary
 alloy systems, for instance both monotectic and syntectic systems cannot be
 modelled without a negative enthalpy of mixing. More subtly, even eutectic systems
 have a negative heat of mixing deep below the eutectic point as the metastable
-liquid has a spinodal. This phenomena is shown shown schematically in figure
+liquid has a spinodal. This phenomena is shown schematically in figure
 \ref{fig:eutectic_drawing} where the metastable projections, including solid
 and liquid spinodals, are drawn on a hypothetical eutectic phase diagram.
 Problems such as the stability of nanocrystalline binary alloys require an
@@ -318,5 +320,5 @@ the correlation function as seen in equation \ref{eq:xpfc_corr} implicitly
 assumes that there are well defined structures at $c=0$ and $c=1$. This works
 well for modelling eutectic systems for example, but does not work very well
 when we expect a solid phase at intermediate concentration. We'll look at 
-improvements to both of these short comings in the following chapter.
+improvements to both of these shortcomings in the following chapter.
 

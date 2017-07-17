@@ -2,14 +2,14 @@
 
 In this chapter we look at two improvements to the binary XPFC theory. Both of
 these improvements are novel contributions to the field and significantly
-extend the scope of the XPFC framework. The improvements, as previously eluded
-to, are to first, extend the the free energy to mixing in the XPFC model to one
+extend the scope of the XPFC framework. The improvements, as previously alluded 
+to, are to first, extend the free energy of mixing in the XPFC model to one
 with an enthalpy of mixing and to second, generalize the phenomenological form
 used to model correlation functions.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Regular Mixing Model} %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Extending the free energy of mixing beyond ideal mixing is achieved by removing
 the assumption made by Greenwood \textit{et al.} in deriving the binary XPFC
@@ -47,6 +47,7 @@ For simplicity the temperature dependence of the parameter $\epsilon$ is taken
 to be linear about a spinodal temperature $T_c$,
 %
 \begin{equation}
+    \label{eq:spinodal_model}
     \epsilon(T) = -4 + \epsilon_0(T - T_c).
 \end{equation}
 %
@@ -61,8 +62,7 @@ also supplies the essential physics of a non-negligible enthalpy of mixing.
 
 To establish a general phenomenology for modelling density-density 
 correlation functions note that the density-density correlation function
-as the form of a linear combination of interpolating functions in
-concentration, $\zeta(c)$, multiplied by bare correlation functions $C(r,
+has the form of a linear combination of interpolating functions in concentration, $\zeta(c)$, multiplied by bare correlation functions $C(r,
 r^\prime)$,
 %
 \begin{equation}
@@ -86,11 +86,11 @@ interpolation functions $\zeta_i(c)$ define the concentrations over which these
 correlations are valid.
 
 As a simple example if we wanted to construct a simple model of the
-silver-cupper eutectic alloy system, we might start with some model correlation
+silver-copper eutectic alloy system, we might start with some model correlation
 function for pure silver, $C_\alpha(r, r^\prime)$, and for pure copper,
 $C_\beta(r, r^\prime)$. These two structures, the silver rich $\alpha$ phase
 and the copper rich $\beta$ phase, are the only two relevent crystalline
-structures in the system so to build the full density-density correlation
+structures in the system, so to build the full density-density correlation
 function we just need to choose interpolating functions for each. Following
 Greenwood \textit{et al} for example, we might choose,
 %
@@ -118,19 +118,19 @@ phase diagrams: eutectic, syntectic and monotectic.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 While previous PFC models have shown that elastic energy is a sufficient
-driving force for eutectic solidification our simplified regular model allows
+driving force for eutectic solidification, our simplified regular model allows
 for the examination of the role enthalpy of mixing can play in eutectic solids.
 For instance, Murdoch and Schuh noted that in nanocrystalline binary alloys,
 while a positive enthaply of segregation can stabilize against grain growth via
 solute segregation at the grain boundary, if the enthaply of mixing becomes too
 large this effect can be negated by second phase formation or even macroscopic
-phase seperation\cite{MURDOCH13}. 
+phase separation\cite{MURDOCH13}. 
 
-To specialize our simplified regular model to the case of the binary eutectic
+To specialize our simplified regular model to the case of the binary eutectic,
 we must choose an appropriate model for the correlation function. Choosing an
 $\alpha$ phase around $c = 0$ and $\beta$ phase around $c = 1$, we can recover
 the pair correlation function used in the binary XPFC with a
-particular choice of window functions: 
+particular choice of interpolations functions: 
 %
 \begin{align}
    \zeta_\alpha(c) &= 2c^3 - 3c^2 + 1 \\
@@ -145,10 +145,10 @@ diagram like that in Fig. \ref{eutectic}.
     \centering	
     \includegraphics[scale=0.7]{eutectic}
     \caption[Eutectic Phase Diagram]{
-        \label{eutectic} Eutectic phase diagram triangle $\alpha$ and $\beta$
-        phases. The free energy parameter are $\eta = 2$, $\chi = 1$,
+        \label{eutectic} Eutectic phase diagram for triangle $\alpha$ and
+        $\beta$ phases. The free energy parameter are $\eta = 2$, $\chi = 1$,
         $\omega=0.30$, $\epsilon_0 = 3$ and $T_c = 0.01$. The parameters of the
-        structure functions are $\alpha_{10\alpha} = \alpha_{10\beta} = 0.8$,
+        structure functions are $\sigma_{10\alpha} = \sigma_{10\beta} = 0.8$,
         $k_{10\alpha} = 2\pi$, $k_{10\beta} = 4\pi/\sqrt{3}$ and $T_0 = 1$
     }
 \end{figure}
@@ -163,14 +163,14 @@ models. One such reaction is the syntectic reaction.
 
 The syntectic reaction, $l_1 + l_2 \rightarrow \alpha $, consists of
 solidification at the interface of two liquids. We can achieve this with our
-model by setting the spinodal temperature, $T_c$, sufficiently high and
-producing a density-density correlation function that is peaked at a
-concentration below the spinodal. This can be done by choosing a window
-function that is centered about an intermediate concentration, $c_\alpha$ of
-the solid phase, $\alpha$. 
+model by setting the spinodal temperature, $T_c$, in equation
+\ref{eq:spinodal_model} sufficiently high and producing a density-density
+correlation function that is peaked at a concentration below the spinodal. This
+can be done by choosing a window function that is centered about an
+intermediate concentration, $c_\alpha$ of the solid phase, $\alpha$. 
 %
 \begin{equation}
-  \chi(c) = e^{- \f{(c - c_\alpha)^2}{2 \alpha_c}}
+  \zeta(c) = e^{- \f{(c - c_\alpha)^2}{2 \alpha_c^2}}
 \end{equation}
 %
 The resulting correlation function for a hexagonal lattice in two dimensions,
@@ -178,7 +178,7 @@ for example, would be,
 %
 \begin{equation}
   \tilde{C}_{nn}(k; c) = 
-    e^{-\f{(c - c_\alpha)^2}{2 \alpha_c}}
+    e^{-\f{(c - c_\alpha)^2}{2 \alpha_c^2}}
     e^{-\f{T}{T_0}} 
     e^{-\f{(k - k^\prime)^2}{2\alpha^2}}
 \end{equation}
@@ -206,8 +206,8 @@ The monotectic reaction is another invariant binary reaction that has not
 previously been studied using PFC models. The monotectic reaction, $l_1
 \rightarrow \alpha + l_2$, consists of decomposing liquid into a solute poor
 solid and solute rich liquid. To model a monotectic using our regular model we
-hypothesize a solid phase at $c=0$ and set the spinondal temperature higher
-than the solidification temperature. To achieve this we use a window function
+hypothesize a solid phase at $c=0$ and set the spinodal temperature higher
+than the solidification temperature. To achieve this, we use a window function
 peaked around $c = 0$,
 %
 \begin{equation}
