@@ -19,7 +19,9 @@ from a generic Langevin equation and then calculate two specific examples using
 Model A dynamics and a $\phi^4$ theory and Time Dependent Density Functional
 Theory (TDDFT) and a general Helmholtz free energy.
 
-\section{Generalized Einstein Relations in an Arbitrary Model}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Generalized Einstein Relations in an Arbitrary Model} %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 We start by considering a set of microscopic observables, $a_i(r, t)$, that are
 governed by a nonlinear Langevin equation,
@@ -104,8 +106,8 @@ evaluating the delta function.
 %
 \begin{equation}
     \mathbf{\Gamma}(r, r^\prime) = \lim_{t\rightarrow\infty}
-    \l\langle \hat{\mathbf{a}}(r, t)\hat{\mathbf{a}}^\dagger(r^\prime, t) \r\rangle
-    = \int_0^\infty dz \,e^{\mathbf{M}(r, r_1)z}\ast\mathbf{L}(r_1, r_2)\ast
+    \mean{\hat{\mathbf{a}}(r, t)\hat{\mathbf{a}}^\dagger(r^\prime, t)} =
+    \int_0^\infty dz \,e^{\mathbf{M}(r, r_1)z}\ast\mathbf{L}(r_1, r_2)\ast
     e^{\mathbf{M}^\dagger(r^\prime, r_2)z}
 \end{equation}
 %
@@ -266,8 +268,9 @@ Or equivalently,
 
 \begin{equation} L(x, x^\prime) = 2\Gamma \d(x - x^\prime).  \end{equation}
 
-%% -----------------------------------------------------------------------------
-\section{Example 2 - Time Dependent Density Functional Theory}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Example 2 - Time Dependent Density Functional Theory} %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 In time dependent density functional theory (TDDFT) we have an equation of
 motion of the following form,
