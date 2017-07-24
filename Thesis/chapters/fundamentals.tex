@@ -73,6 +73,7 @@ involves evaluating the trace operation over a basis of plane wave solutions,
         e^{-\frac{i\p\cdot\q}{\hbar}} 
         e^{-\beta \hat{H}} e^{\frac{i\p\cdot\q}{\hbar}} 
         = \int d\Gamma I(\q, \p), 
+        \label{plane_wave_trace}
 \end{equation}
 %
 Where, $\mathrm{d}\Gamma$ is the phase space measure
@@ -82,14 +83,16 @@ derivative,
 %
 \begin{equation}
     \frac{\partial I(\q, \p)}{\partial \beta} = -\pwp\hat{H}\pwm I(\q, \p).
+     \label{I_deriv}
 \end{equation}
 %
 We then make a change of variables, $I(\q, \p) = e^{-\beta\ham}W(\q, \p)$,
-where $\ham$ is the classical Hamiltonian. The new function $W(\q, \p)$ encodes
+where $\ham$ is the {\it classical} Hamiltonian. The new function $W(\q, \p)$ encodes
 the deviation from classical behaviour due to a lack of commutation of the
-potential and kinetic energy terms in the Hamiltonian. Using the explicit form
-of the quantum Hamiltonian and after a considerable amount of algebra we find
-a partial differential equation for $W$,
+potential and kinetic energy terms in the Hamiltonian. \nc{Substituting this 
+redefined form of $I(\q, \p)$ into equation \ref{I_deriv},} using the explicit 
+form of the quantum Hamiltonian and after a considerable amount of algebra 
+we find a partial differential equation for $W$,
 %
 \begin{equation} 
     \label{eq:uhlenbeck} 
@@ -102,14 +105,16 @@ a partial differential equation for $W$,
     \r)W(\q, \p).
 \end{equation}
 %
-The solution can be written as a power series in $\hbar$, $W = 1 + \hbar W_1 +
-\hbar^2 W_2 + ...$. By plugging this expansion back into equation
-\ref{eq:quantum_partition} we find a power series expansion for the partition
+\nc{As in typical in perturbation theories, the solution can be expanded in a 
+power series of a small number, in this case, $\hbar$, according to $W = 1 + 
+\hbar W_1 + \hbar^2 W_2 + ...$. By substituting  this expansion into 
+$I(\q, \p) = e^{-\beta\ham}W(\q, \p)$  and $I(\p,\q)$  back into equation 
+\ref{plane_wave_trace}} we find a power series expansion for the partition
 function as well,
 %
 \begin{equation}
     \label{eq:semi-classical-partition}
-    \mathcal{Z} = (1 + \hbar \mean{W_1} + \hbar^2 \mean{W_2}+ ...)
+    \mathcal{Z} = \left(1 + \hbar \mean{W_1} + \hbar^2 \mean{W_2}+ ...\right)
         \int d\Gamma e^{\beta\ham}.
 \end{equation}
 %
@@ -175,7 +180,7 @@ becomes,
     \int^\prime d\Gamma \rightarrow \f{1}{N!}\int d\Gamma
 \end{equation}
 %
-Aggregating our results, we can write the partition function in the
+Aggregating our results, we can thus write the partition function in the
 semi-classical limit as,
 %
 \begin{equation}
@@ -191,8 +196,8 @@ Or, in the grand canonical ensemble,
 
 Of course, to first order in $\hbar$, this is exactly the form taught in
 introductory courses on statistical mechanics and derived by Gibbs\footnote{The
-$\hbar$ in Gibbs' formula was justified on dimensional grounds and was simply a
-scaling factor with units of action ($J\cdot s$)} prior to any knowledge of
+$\hbar$ in Gibbs' formula was justified on dimensional grounds and was simply 
+introduced as a scaling factor with units of action ($J\cdot s$)} prior to any knowledge of
 quantum mechanics \cite{Gibbs}. The key insight here is to understand, in a
 controlled way, when this approximation is accurate and the magnitude of the next
 quantum correction is as seen in equation \ref{quantumcorr}. We now apply this
@@ -238,19 +243,21 @@ And, $f(\q, \p)$ is the equilibrium probability density function,
     f(\q, \p) = \f{e^{-\beta (\ham - \mu N)}}{\Xi(\mu, \beta)}.
 \end{equation}
 %
+\nc{where $\ham$ is the classical Hamiltonian, $\mu$ the chemical potential of the system and 
+$\Xi(\mu,\beta)$ is the grand partition function of the system.}
 
 To construct a theory of the density field we review the usual methodology for
 statistical thermodynamics. We will do so in the frame of entropy maximization
 in which the entropy is maximized subject to the macroscopically available
 information. Taking the existence of an average of the density field, particle
 number and energy as the macroscopically available information, we can maximize
-the entropy functional,
+the \nc{ Gibb's entropy functional},
 %
 \begin{equation}
     S[f(\q, \p)] = -k_b \trace{f(\q, \p)\ln\l(f(\q, \p)\r)}, 
 \end{equation}
 %
-subject to the aforementioned contraints to find a probability density function
+subject to the aforementioned constraints \nc{(fixed average density, particle number and total energy)} to find a probability density function
 of the form,
 %
 \begin{equation} 
@@ -261,7 +268,7 @@ of the form,
 Where, $\beta$, $\mu$ and $\phi(x)$ are the Lagrange multipliers associated
 with constraints of average energy, number of particles and density
 respectively. As you might imagine, the constraints of average particle number
-and density are not independent and with the insight that,
+and density are not independent and satisfy,
 %
 \begin{equation}
     N = \int dx \hat{\rho}(x),
@@ -301,11 +308,11 @@ generating function of moments is closely related to the partition function and
 the generating function of cumulants is closely related to the associated
 thermodynamic potential. 
 
-In the case where the observable is local density field, this is made somewhat
+In the case where the observable is the local density field, this is made somewhat
 more technical by the fact that the density is a function instead of a scalar
 variable.  As such the partition function is more precisely called the
-partition \textit{functional} as it depends on a function of input. The
-thermodynamic potential will also be a functional.  Specifically, the grand
+partition \textit{functional} as it depends on a function as input. The
+thermodynamic potential will thus also be a functional.  Specifically, the grand
 canonical partition functional is,
 %
 \begin{equation}
@@ -314,11 +321,11 @@ canonical partition functional is,
 \end{equation}
 %
 As alluded to above, the partition functional is a type of moment generating
-functional in the sense that repeated (functional) differentiation yields
-moments of the density field:
+functional in the sense that repeated (functional) differentiation with respect 
+to  the intrinsic  chemical potential yields moments of the density field:
 %
 \begin{equation}
-    \f{\beta^{-n}}{\Xi} \f{\d^n \Xi[\psi]}{\d \psi(x_1) \dots \d\psi(x_n)} 
+    \f{\beta^{-n}}{\Xi}\,\, \f{\d^n \Xi[\psi]}{\d \psi(x_1) \dots \d\psi(x_n)} 
         = \mean{\hat{\rho}(x_1)\dots\hat{\rho}(x_n)}.
 \end{equation}
 %
@@ -336,7 +343,7 @@ the sense that repeated functional differentiation yields cumulants of the
 density field:
 %
 \begin{equation}
-    -\f{\beta^{-n + 1}\d^n\Omega[\psi]}{\d\psi(x_1)\dots\d\psi(x_n)}
+    -\beta^{-n + 1} \f{\d^n\Omega[\psi]}{\d\psi(x_1)\dots\d\psi(x_n)}
         = \mean{\hat{\rho}(x_1)\dots\hat{\rho}(x_n)}_c
 \end{equation}
 %
@@ -351,10 +358,10 @@ If we examine the first two cumulants,
     \label{var_rho} 
     -k_b T\f{\d^2 \Omega[\psi]}{\d \psi(x) \d \psi(x^\prime)}
         = \mean{(\hat{\rho}(x) - \rho(x))
-          (\hat{\rho}(x^\prime) - \rho(x^\prime))},
+          (\hat{\rho}(x^\prime) - \rho(x^\prime))}.
 \end{gather}
 %
-We notice something remarkable: The first, implies that the average density field is a function of only its conjugate
+\nc{We notice two remarkable things}: The first, implies that the average density field is a function of only its conjugate
 field, the intrinsic chemical potential, and the second implies that that
 relationship is invertible\footnote{The inverse function theorem only implies
 local invertibility, there is no guarentee of global invertibility. Indeed
@@ -370,7 +377,7 @@ Jacobian by combining equation \ref{mean_rho} and \ref{var_rho},
 \end{equation}
 %
 The right hand side of equation \ref{jacobian} is an autocorrelation function
-and therefore positive semi-definite by Weiner-Khinchin theorem. This implies
+and therefore positive semi-definite by the Weiner-Khinchin theorem \nb{reference a text}. This implies
 that, at least locally, the intrinsic chemical potential can always be written
 as a functional of the average density, $\psi[\rho(x)]$, and vice versa.
 Furthermore, because all of the higher order cumulants of the density depend on
@@ -383,6 +390,7 @@ precisely this characteristic by Legendre transforming the Grand potential,
 %
 \begin{equation}
     \F[\rho(x)] = \Omega[\psi[\rho]] + \int dx \rho(x) \psi(x).
+    \label{intrinsic_F}
 \end{equation}
 %
 
@@ -396,6 +404,7 @@ asssociated Euler-Lagrange equation,
 %
 \begin{equation}
     \f{\d \Omega[\rho]}{\d \rho(r)} = 0.
+\label{fundamental_CDFT}
 \end{equation}
 %
 
@@ -404,10 +413,10 @@ Finally, we may construct an analogous equation to equation
 %
 \begin{equation}
     \label{eq:int_chem_potential} 
-    \f{\d \F}{\d \rho(x)} = \psi(x).
+    \f{\d \F}{\d \rho(x)} = \psi(x),
 \end{equation}
 %
-Equation \ref{eq:int_chem_potential} implies that the intrinsic chemical
+\nc{which  follows from equation \ref{intrinsic_F} assuming equation \ref{fundamental_CDFT}.} Equation \ref{eq:int_chem_potential} implies that the intrinsic chemical
 potential is the free energy cost of adding density to the location $x$
 specifically. 
 
@@ -456,7 +465,8 @@ makes a direct approach to calculating the excess free energy intractible.
 Though perturbative methods, including the cluster expansion technique
 \cite{MAYER41}, have been developed to treat the interaction potential
 systematically, other approximation schemes for the excess free energy are
-typically more pragmatic.  In particular, we can approximate the excess free
+typically more pragmatic, \nc{particularly where deriving models that are tractable 
+for the numerical simulation of dynamics is concerned}.  In particular, we can approximate the excess free
 energy by expanding around a reference homogeneos fluid with chemical potential
 $\mu_0$ and density $\rho_0$,
 %
@@ -470,26 +480,26 @@ $\mu_0$ and density $\rho_0$,
         + \dots,
 \end{equation}
 %
-Where $\Delta\rho(x) = \rho(x) - \rho_0$ and we have introduced the notation,
-$\ast$ to mean integration over repeated co-ordinates,
+where $\Delta\rho(x) = \rho(x) - \rho_0$ and we have introduced the notation,
+$\ast$ to mean integration over repeated co-ordinates, for example,
 %
 \begin{equation}
     f(x^\prime) \ast g(x^\prime)
         \equiv \int\mathrm{d}x^\prime f(x^\prime) g(x^\prime).
 \end{equation}
 %
-The excess free energy is the generating functional of family of correlation
+The excess free energy is the generating functional of a family of correlation
 functions called \textit{direct correlation functions}, 
 %
 \begin{equation}
     \label{direct_correlation}
     \f{\d^n \F_{ex}[\rho]}{\d \rho(x_1) ... \d \rho(x_n)}
-        = -\beta C^{n}(x_1, \dots, x_n).
+        = -\beta C^{n}(x_1, \dots, x_n),
 \end{equation}
 %
-The first of which, for a uniform fluid, is the excess contribution to the
-chemical potential which we may express as the total chemical potential less
-the ideal contribution, 
+the first of which, for a uniform fluid, is the excess contribution to the
+chemical potential. We may express  this as the total chemical potential less
+the ideal contribution (see equation \ref{F_ideal}), 
 %
 \begin{equation}
     \label{mu_ex}
@@ -500,8 +510,8 @@ the ideal contribution,
 \end{equation}
 %
 Truncating the expansion in equation \ref{fex_expansion} to second order in
-$\Delta\rho(x)$ and substituting the linear and quadratic terms with equation
-\ref{mu_ex} and \ref{direct_correlation} we can simplify the excess free energy
+$\Delta\rho(x)$ and substituting the linear and quadratic terms from  equation
+\ref{mu_ex} and \ref{direct_correlation}, we can simplify the excess free energy
 to,
 %
 \begin{equation}
@@ -511,9 +521,10 @@ to,
             \l\lbrace\mu - k_bT \ln\l(\Lambda^3 \rho_0 \r)
             \r\rbrace \Delta\rho(r)
         - \f{k_b T}{2} \Delta\rho(r) \ast C^{(2)}_0(r, r^\prime) 
-            \ast \Delta\rho(r^\prime)
+            \ast \Delta\rho(r^\prime),
 \end{equation}
 %
+\nc{where $C^{(2)}_0(r, r^\prime)$ denotes the two-point direct correlation function at the reference state.} 
 Combining equation \ref{F_ideal} with the simplified excess free energy in
 equation \ref{F_ex}, we can express total change in free energy, $\Delta \F =
 \F - \F[\rho_0]$, as,
@@ -538,21 +549,25 @@ transform,
             \l\lbrace \rho(r) \l[\ln\l(\f{\rho(r)}{\rho_0} \r) 
             + \beta\phi(r) \r] -  \Delta \rho(r)\r\rbrace 
         - \f{k_b T}{2}\Delta \rho(r) \ast C_0^{(2)}(r, r^\prime) 
-            \ast \Delta \rho(r^\prime).
+            \ast \Delta \rho(r^\prime),
 \end{equation}
+\nc{where $\phi(r)$ is defined as an external potential, introduced into the system for completeness.}
 
-
-It is reasonable to ask at this point whether or not we have really gained
-anything with this approximation scheme.  Although we have arrived at a
-relatively simple form for the free energy functional, we've added a lot of
-parameters to the functional based on the reference fluid.  Thankfully, the
-theory of homogeneous liquids, such as our reference liquid, is very well
-established.  This means we may rely on a broad choice of analytical,
-numerical or experimental techniques to derive these parameters.
+\nc{We see that the density functional theory derived here can be derived 
+through a  series of approximations from a fundamental basis in quantum 
+statistical mechanics  and requires no more parameters than the thermodynamic 
+details of a homogeneous  reference fluid. It is reasonable to ask at this point 
+whether or not we have really gained anything with this approximation scheme.  
+Although we have arrived at a relatively simple form for the free energy functional, 
+we've added several parameters to the functional based on the reference fluid.  
+Thankfully, the theory of homogeneous liquids is very well established.  This 
+implies we may rely on a broad choice of analytical, numerical or experimental 
+techniques to derive these parameters.
 
 Equation \ref{cdft_free_energy} establishes an approximate density functional
-theory for inhomogenous fluids and, as we will see in the following chapter,
-for the seemingly disparate phenomena of solidification. We see that it can be
-derived through a series of approximations from a fundamental basis in quantum
-statistical mechanics and requires no more parameters than the thermodynamic
-details of a homogeneous reference fluid.
+theory for inhomogenous fluids. However, as we will see in the following chapter, 
+the properties of the direct correlation function  $C_o^2(r,r^\prime)$ also carries 
+information  about how the fluid solidifies in the solid state as temperature or density 
+cross into the coexistence. }
+
+

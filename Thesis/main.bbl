@@ -1,0 +1,1950 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.8 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \sortlist[entry]{none/global/}
+    \entry{ELDER07}{article}{}
+      \name{author}{5}{}{%
+        {{hash=b41227759d91a390ddcac4796e687aea}{%
+           family={Elder},
+           familyi={E\bibinitperiod},
+           given={K.\bibnamedelimi R.},
+           giveni={K\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=0cb0d28754a69a44de94fd1ebf24a2dd}{%
+           family={Provatas},
+           familyi={P\bibinitperiod},
+           given={Nikolas},
+           giveni={N\bibinitperiod}}}%
+        {{hash=8b835978f8cf45f73ba85247ff5ac6b6}{%
+           family={Berry},
+           familyi={B\bibinitperiod},
+           given={Joel},
+           giveni={J\bibinitperiod}}}%
+        {{hash=eb6649b1ae0d835de6958b64832372df}{%
+           family={Stefanovic},
+           familyi={S\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+        {{hash=21e3a1adf7babf7fdcf4923afbeff779}{%
+           family={Grant},
+           familyi={G\bibinitperiod},
+           given={Martin},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {American Physical Society}%
+      }
+      \strng{namehash}{3062d212f759a91cdfe2f6b11e150bb1}
+      \strng{fullhash}{2c9e5002c9cdca15d0e836c235467429}
+      \strng{authornamehash}{3062d212f759a91cdfe2f6b11e150bb1}
+      \strng{authorfullhash}{2c9e5002c9cdca15d0e836c235467429}
+      \field{sortinit}{1}
+      \field{sortinithash}{27a2bc5dfb9ed0a0422134d636544b5d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issue}{6}
+      \field{journaltitle}{Phys. Rev. B}
+      \field{month}{2}
+      \field{title}{Phase-field crystal modeling and classical density functional theory of freezing}
+      \field{volume}{75}
+      \field{year}{2007}
+      \field{pages}{064107}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1103/PhysRevB.75.064107
+      \endverb
+      \verb{url}
+      \verb https://link.aps.org/doi/10.1103/PhysRevB.75.064107
+      \endverb
+    \endentry
+    \entry{ELDER11_KIRKENDALL}{article}{}
+      \name{author}{3}{}{%
+        {{hash=fc17c74f77354736f8c170b4ab30c44b}{%
+           family={Elder},
+           familyi={E\bibinitperiod},
+           given={K.R.},
+           giveni={K\bibinitperiod}}}%
+        {{hash=9fc576348d77282a537cd418a61f9ae0}{%
+           family={Thornton},
+           familyi={T\bibinitperiod},
+           given={K.},
+           giveni={K\bibinitperiod}}}%
+        {{hash=624436b70a437eb3cb0939b4f05c673e}{%
+           family={Hoyt},
+           familyi={H\bibinitperiod},
+           given={J.J.},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{0e70370db0c50b2760ee1c10c53c4673}
+      \strng{fullhash}{1d53291ad381e91ea4b25d559406a6e7}
+      \strng{authornamehash}{0e70370db0c50b2760ee1c10c53c4673}
+      \strng{authorfullhash}{1d53291ad381e91ea4b25d559406a6e7}
+      \field{sortinit}{2}
+      \field{sortinithash}{0aa614ace9f3a40ef5a67e7f7a184048}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Philosophical Magazine}
+      \field{number}{1}
+      \field{title}{The Kirkendall effect in the phase field crystal model}
+      \field{volume}{91}
+      \field{year}{2011}
+      \field{pages}{151\bibrangedash 164}
+      \range{pages}{14}
+      \verb{doi}
+      \verb 10.1080/14786435.2010.506427
+      \endverb
+      \verb{eprint}
+      \verb http://dx.doi.org/10.1080/14786435.2010.506427
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1080/14786435.2010.506427
+      \endverb
+    \endentry
+    \entry{LU15}{article}{}
+      \name{author}{4}{}{%
+        {{hash=06d0ac2523107a978b6e1503ce00a747}{%
+           family={Lu},
+           familyi={L\bibinitperiod},
+           given={Guang-Ming},
+           giveni={G\bibinithyphendelim M\bibinitperiod}}}%
+        {{hash=7bda7ee8eea29cb548e9805eb41a7c66}{%
+           family={Lu},
+           familyi={L\bibinitperiod},
+           given={Yan-Li},
+           giveni={Y\bibinithyphendelim L\bibinitperiod}}}%
+        {{hash=41357da1fcfa35a7b6c88a644e3c2cf3}{%
+           family={Hu},
+           familyi={H\bibinitperiod},
+           given={Ting-Ting},
+           giveni={T\bibinithyphendelim T\bibinitperiod}}}%
+        {{hash=05694d0c858ee219eae7bb764b27b7f6}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Zheng},
+           giveni={Z\bibinitperiod}}}%
+      }
+      \strng{namehash}{a956b464222201ffa62a73ba110fd922}
+      \strng{fullhash}{71634b79342a15c3df2b84dbaeb0f594}
+      \strng{authornamehash}{a956b464222201ffa62a73ba110fd922}
+      \strng{authorfullhash}{71634b79342a15c3df2b84dbaeb0f594}
+      \field{sortinit}{2}
+      \field{sortinithash}{0aa614ace9f3a40ef5a67e7f7a184048}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0927-0256}
+      \field{journaltitle}{Computational Materials Science}
+      \field{title}{Phase field crystal study on the phase boundary migration induced by the Kirkendall effect}
+      \field{volume}{106}
+      \field{year}{2015}
+      \field{pages}{170\bibrangedash 174}
+      \range{pages}{5}
+      \verb{doi}
+      \verb http://dx.doi.org/10.1016/j.commatsci.2015.04.047
+      \endverb
+      \verb{url}
+      \verb http://www.sciencedirect.com/science/article/pii/S0927025615002931
+      \endverb
+      \keyw{Phase boundary migration}
+    \endentry
+    \entry{GREENWOOD12}{article}{}
+      \name{author}{3}{}{%
+        {{hash=b7105cfdc84d0fef1656d34b2b8fa6f8}{%
+           family={Greenwood},
+           familyi={G\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+        {{hash=41d20c4e7cdf808963da4a33a2f186e7}{%
+           family={Sinclair},
+           familyi={S\bibinitperiod},
+           given={Chad},
+           giveni={C\bibinitperiod}}}%
+        {{hash=5fa5530355576a930ab575f3e3683b72}{%
+           family={Militzer},
+           familyi={M\bibinitperiod},
+           given={Matthias},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{2183a68de56ecc3c5ae8a29c82321482}
+      \strng{fullhash}{678fbbecbe1292c5da0cb54d0b45c853}
+      \strng{authornamehash}{2183a68de56ecc3c5ae8a29c82321482}
+      \strng{authorfullhash}{678fbbecbe1292c5da0cb54d0b45c853}
+      \field{sortinit}{3}
+      \field{sortinithash}{197da6d6c34c6b20ce45c4d4baace5a4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1359-6454}
+      \field{journaltitle}{Acta Materialia}
+      \field{number}{16}
+      \field{title}{Phase field crystal model of solute drag}
+      \field{volume}{60}
+      \field{year}{2012}
+      \field{pages}{5752\bibrangedash 5761}
+      \range{pages}{10}
+      \verb{doi}
+      \verb http://dx.doi.org/10.1016/j.actamat.2012.06.056
+      \endverb
+      \verb{url}
+      \verb http://www.sciencedirect.com/science/article/pii/S1359645412004284
+      \endverb
+      \keyw{Solute drag}
+    \endentry
+    \entry{FALLAH12}{article}{}
+      \name{author}{5}{}{%
+        {{hash=44e10f283ada211ed0a7aa6d9913d23f}{%
+           family={Fallah},
+           familyi={F\bibinitperiod},
+           given={Vahid},
+           giveni={V\bibinitperiod}}}%
+        {{hash=1696da0700ffa702d428c45378c8d3fb}{%
+           family={Stolle},
+           familyi={S\bibinitperiod},
+           given={Jonathan},
+           giveni={J\bibinitperiod}}}%
+        {{hash=36364f2d692c0554846e9f64ad005e98}{%
+           family={Ofori-Opoku},
+           familyi={O\bibinithyphendelim O\bibinitperiod},
+           given={Nana},
+           giveni={N\bibinitperiod}}}%
+        {{hash=8a98253f5fa3bf7aa0976f1b9389cb84}{%
+           family={Esmaeili},
+           familyi={E\bibinitperiod},
+           given={Shahrzad},
+           giveni={S\bibinitperiod}}}%
+        {{hash=0cb0d28754a69a44de94fd1ebf24a2dd}{%
+           family={Provatas},
+           familyi={P\bibinitperiod},
+           given={Nikolas},
+           giveni={N\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {American Physical Society}%
+      }
+      \strng{namehash}{7f5f01c7f5d696a0ccfbd97870899e9e}
+      \strng{fullhash}{3853fe008a2647c2e8043f49fd8beb8e}
+      \strng{authornamehash}{7f5f01c7f5d696a0ccfbd97870899e9e}
+      \strng{authorfullhash}{3853fe008a2647c2e8043f49fd8beb8e}
+      \field{sortinit}{4}
+      \field{sortinithash}{d221becdd544034cf9082056cd6e6d2d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issue}{13}
+      \field{journaltitle}{Phys. Rev. B}
+      \field{month}{10}
+      \field{title}{Phase-field crystal modeling of early stage clustering and precipitation in metal alloys}
+      \field{volume}{86}
+      \field{year}{2012}
+      \field{pages}{134112}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1103/PhysRevB.86.134112
+      \endverb
+      \verb{url}
+      \verb https://link.aps.org/doi/10.1103/PhysRevB.86.134112
+      \endverb
+    \endentry
+    \entry{FALLAH13}{article}{}
+      \name{author}{5}{}{%
+        {{hash=44e10f283ada211ed0a7aa6d9913d23f}{%
+           family={Fallah},
+           familyi={F\bibinitperiod},
+           given={Vahid},
+           giveni={V\bibinitperiod}}}%
+        {{hash=36364f2d692c0554846e9f64ad005e98}{%
+           family={Ofori-Opoku},
+           familyi={O\bibinithyphendelim O\bibinitperiod},
+           given={Nana},
+           giveni={N\bibinitperiod}}}%
+        {{hash=1696da0700ffa702d428c45378c8d3fb}{%
+           family={Stolle},
+           familyi={S\bibinitperiod},
+           given={Jonathan},
+           giveni={J\bibinitperiod}}}%
+        {{hash=0cb0d28754a69a44de94fd1ebf24a2dd}{%
+           family={Provatas},
+           familyi={P\bibinitperiod},
+           given={Nikolas},
+           giveni={N\bibinitperiod}}}%
+        {{hash=8a98253f5fa3bf7aa0976f1b9389cb84}{%
+           family={Esmaeili},
+           familyi={E\bibinitperiod},
+           given={Shahrzad},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{7f5f01c7f5d696a0ccfbd97870899e9e}
+      \strng{fullhash}{a683928b2c3a048469a695560144a856}
+      \strng{authornamehash}{7f5f01c7f5d696a0ccfbd97870899e9e}
+      \strng{authorfullhash}{a683928b2c3a048469a695560144a856}
+      \field{sortinit}{4}
+      \field{sortinithash}{d221becdd544034cf9082056cd6e6d2d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1359-6454}
+      \field{journaltitle}{Acta Materialia}
+      \field{number}{10}
+      \field{title}{Simulation of early-stage clustering in ternary metal alloys using the phase-field crystal method}
+      \field{volume}{61}
+      \field{year}{2013}
+      \field{pages}{3653\bibrangedash 3666}
+      \range{pages}{14}
+      \verb{doi}
+      \verb http://dx.doi.org/10.1016/j.actamat.2013.02.053
+      \endverb
+      \verb{url}
+      \verb http://www.sciencedirect.com/science/article/pii/S1359645413001833
+      \endverb
+      \keyw{Phase transformation}
+    \endentry
+    \entry{FALLAH13_AlCu_experiment}{article}{}
+      \name{author}{5}{}{%
+        {{hash=44e10f283ada211ed0a7aa6d9913d23f}{%
+           family={Fallah},
+           familyi={F\bibinitperiod},
+           given={Vahid},
+           giveni={V\bibinitperiod}}}%
+        {{hash=4c9620bcbc8e7b19f9261a9b3c44a55d}{%
+           family={Korinek},
+           familyi={K\bibinitperiod},
+           given={Andreas},
+           giveni={A\bibinitperiod}}}%
+        {{hash=36364f2d692c0554846e9f64ad005e98}{%
+           family={Ofori-Opoku},
+           familyi={O\bibinithyphendelim O\bibinitperiod},
+           given={Nana},
+           giveni={N\bibinitperiod}}}%
+        {{hash=0cb0d28754a69a44de94fd1ebf24a2dd}{%
+           family={Provatas},
+           familyi={P\bibinitperiod},
+           given={Nikolas},
+           giveni={N\bibinitperiod}}}%
+        {{hash=8a98253f5fa3bf7aa0976f1b9389cb84}{%
+           family={Esmaeili},
+           familyi={E\bibinitperiod},
+           given={Shahrzad},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{7f5f01c7f5d696a0ccfbd97870899e9e}
+      \strng{fullhash}{fff8c072c31006237e9e013206f04d42}
+      \strng{authornamehash}{7f5f01c7f5d696a0ccfbd97870899e9e}
+      \strng{authorfullhash}{fff8c072c31006237e9e013206f04d42}
+      \field{sortinit}{4}
+      \field{sortinithash}{d221becdd544034cf9082056cd6e6d2d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1359-6454}
+      \field{journaltitle}{Acta Materialia}
+      \field{number}{17}
+      \field{title}{Atomistic investigation of clustering phenomenon in the Al–Cu system: Three-dimensional phase-field crystal simulation and HRTEM/HRSTEM characterization}
+      \field{volume}{61}
+      \field{year}{2013}
+      \field{pages}{6372\bibrangedash 6386}
+      \range{pages}{15}
+      \verb{doi}
+      \verb http://dx.doi.org/10.1016/j.actamat.2013.07.015
+      \endverb
+      \verb{url}
+      \verb http://www.sciencedirect.com/science/article/pii/S135964541300517X
+      \endverb
+      \keyw{Transmission electron microscopy}
+    \endentry
+    \entry{GANAI13}{article}{}
+      \name{author}{3}{}{%
+        {{hash=65a6a6923d2745ea5ad68d6f03226a7e}{%
+           family={Ganai},
+           familyi={G\bibinitperiod},
+           given={Nirmalendu},
+           giveni={N\bibinitperiod}}}%
+        {{hash=652494dc4ff23c9c675df1788f67df1e}{%
+           family={Saha},
+           familyi={S\bibinitperiod},
+           given={Arnab},
+           giveni={A\bibinitperiod}}}%
+        {{hash=6b34cc119453b9c02b89505a59b1785c}{%
+           family={Sengupta},
+           familyi={S\bibinitperiod},
+           given={Surajit},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{96bd797a36d27e7fb9786d1c21dcb694}
+      \strng{fullhash}{07abc5b2ae16a5bf4c8bc829e27513e0}
+      \strng{authornamehash}{96bd797a36d27e7fb9786d1c21dcb694}
+      \strng{authorfullhash}{07abc5b2ae16a5bf4c8bc829e27513e0}
+      \field{sortinit}{5}
+      \field{sortinithash}{c9df3c9fb8f555dd9201cedc5e343021}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{12928941}
+      \field{journaltitle}{European Physical Journal E -- Soft Matter}
+      \field{number}{8}
+      \field{title}{Colloidal particles in a drying suspension: A phase field crystal approach.}
+      \field{volume}{36}
+      \field{year}{2013}
+      \field{pages}{1\bibrangedash 10}
+      \range{pages}{10}
+      \verb{url}
+      \verb http://proxy.library.mcgill.ca/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=a9h&AN=92041940
+      \endverb
+    \endentry
+    \entry{ELDER10_NANOISLAND}{article}{}
+      \name{author}{2}{}{%
+        {{hash=6a741e87aab26ede65758eb033e41256}{%
+           family={Elder},
+           familyi={E\bibinitperiod},
+           given={K\bibnamedelima R},
+           giveni={K\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=652be1c51d3aed47090cf0a921f4c68b}{%
+           family={Huang},
+           familyi={H\bibinitperiod},
+           given={Z-F},
+           giveni={Z\bibinithyphendelim F\bibinitperiod}}}%
+      }
+      \strng{namehash}{be53a4bf494791c4ec8ebe11c4913a92}
+      \strng{fullhash}{be53a4bf494791c4ec8ebe11c4913a92}
+      \strng{authornamehash}{be53a4bf494791c4ec8ebe11c4913a92}
+      \strng{authorfullhash}{be53a4bf494791c4ec8ebe11c4913a92}
+      \field{sortinit}{6}
+      \field{sortinithash}{02bbed3ed82f61ae046619460488516d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Physics: Condensed Matter}
+      \field{number}{36}
+      \field{title}{A phase field crystal study of epitaxial island formation on nanomembranes}
+      \field{volume}{22}
+      \field{year}{2010}
+      \field{pages}{364103}
+      \range{pages}{1}
+      \verb{url}
+      \verb http://stacks.iop.org/0953-8984/22/i=36/a=364103
+      \endverb
+    \endentry
+    \entry{LU16}{article}{}
+      \name{author}{3}{}{%
+        {{hash=5a71bfefda33469fce12a8520c7d7d9b}{%
+           family={Lu},
+           familyi={L\bibinitperiod},
+           given={Yanli},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=7328186b26a2079915a6232f0113f674}{%
+           family={Peng},
+           familyi={P\bibinitperiod},
+           given={Yingying},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=05694d0c858ee219eae7bb764b27b7f6}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Zheng},
+           giveni={Z\bibinitperiod}}}%
+      }
+      \strng{namehash}{38a148ea1a235c703788de5c7c8432df}
+      \strng{fullhash}{23a631131f1fb94ffae4efbe8caaf636}
+      \strng{authornamehash}{38a148ea1a235c703788de5c7c8432df}
+      \strng{authorfullhash}{23a631131f1fb94ffae4efbe8caaf636}
+      \field{sortinit}{6}
+      \field{sortinithash}{02bbed3ed82f61ae046619460488516d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0749-6036}
+      \field{journaltitle}{Superlattices and Microstructures}
+      \field{title}{A binary phase field crystal study for liquid phase heteroepitaxial growth}
+      \field{volume}{97}
+      \field{year}{2016}
+      \field{pages}{132\bibrangedash 139}
+      \range{pages}{8}
+      \verb{doi}
+      \verb http://dx.doi.org/10.1016/j.spmi.2016.05.039
+      \endverb
+      \verb{url}
+      \verb http://www.sciencedirect.com/science/article/pii/S074960361630252X
+      \endverb
+      \keyw{Substrate vicinal angles}
+    \endentry
+    \entry{ALSTER17}{article}{}
+      \name{author}{4}{}{%
+        {{hash=6064da229b8f958647b7c102326d85c4}{%
+           family={Alster},
+           familyi={A\bibinitperiod},
+           given={Eli},
+           giveni={E\bibinitperiod}}}%
+        {{hash=b41227759d91a390ddcac4796e687aea}{%
+           family={Elder},
+           familyi={E\bibinitperiod},
+           given={K.\bibnamedelimi R.},
+           giveni={K\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=a62eb92a46ee06fb5cb49451e2f368ca}{%
+           family={Hoyt},
+           familyi={H\bibinitperiod},
+           given={Jeffrey\bibnamedelima J.},
+           giveni={J\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=16045816cea9f302acc384bfad511bee}{%
+           family={Voorhees},
+           familyi={V\bibinitperiod},
+           given={Peter\bibnamedelima W.},
+           giveni={P\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {American Physical Society}%
+      }
+      \strng{namehash}{0c1ad28177013449a04287ed822bcfe8}
+      \strng{fullhash}{17f224b7a091354370267d9b420c2922}
+      \strng{authornamehash}{0c1ad28177013449a04287ed822bcfe8}
+      \strng{authorfullhash}{17f224b7a091354370267d9b420c2922}
+      \field{sortinit}{7}
+      \field{sortinithash}{6ac7fe70cdec8cba8f65694411ce2532}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issue}{2}
+      \field{journaltitle}{Phys. Rev. E}
+      \field{month}{2}
+      \field{title}{Phase-field-crystal model for ordered crystals}
+      \field{volume}{95}
+      \field{year}{2017}
+      \field{pages}{022105}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1103/PhysRevE.95.022105
+      \endverb
+      \verb{url}
+      \verb https://link.aps.org/doi/10.1103/PhysRevE.95.022105
+      \endverb
+    \endentry
+    \entry{GREENWOOD11_BINARY}{article}{}
+      \name{author}{4}{}{%
+        {{hash=b7105cfdc84d0fef1656d34b2b8fa6f8}{%
+           family={Greenwood},
+           familyi={G\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+        {{hash=36364f2d692c0554846e9f64ad005e98}{%
+           family={Ofori-Opoku},
+           familyi={O\bibinithyphendelim O\bibinitperiod},
+           given={Nana},
+           giveni={N\bibinitperiod}}}%
+        {{hash=6ac742c22b249ed4c3cb98039a3d60ff}{%
+           family={Rottler},
+           familyi={R\bibinitperiod},
+           given={Jörg},
+           giveni={J\bibinitperiod}}}%
+        {{hash=0cb0d28754a69a44de94fd1ebf24a2dd}{%
+           family={Provatas},
+           familyi={P\bibinitperiod},
+           given={Nikolas},
+           giveni={N\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {American Physical Society}%
+      }
+      \strng{namehash}{2183a68de56ecc3c5ae8a29c82321482}
+      \strng{fullhash}{7480aaa91a192129e9154e645c86a3c3}
+      \strng{authornamehash}{2183a68de56ecc3c5ae8a29c82321482}
+      \strng{authorfullhash}{7480aaa91a192129e9154e645c86a3c3}
+      \field{sortinit}{9}
+      \field{sortinithash}{2999ebab86052e6d71b434385f8b4ed2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issue}{6}
+      \field{journaltitle}{Phys. Rev. B}
+      \field{month}{8}
+      \field{title}{Modeling structural transformations in binary alloys with phase field crystals}
+      \field{volume}{84}
+      \field{year}{2011}
+      \field{pages}{064104}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1103/PhysRevB.84.064104
+      \endverb
+      \verb{url}
+      \verb https://link.aps.org/doi/10.1103/PhysRevB.84.064104
+      \endverb
+    \endentry
+    \entry{MKHONTA13}{article}{}
+      \name{author}{3}{}{%
+        {{hash=daf39fce48ccd6ad15a2e3cbf6a45b57}{%
+           family={Mkhonta},
+           familyi={M\bibinitperiod},
+           given={S.\bibnamedelimi K.},
+           giveni={S\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
+        {{hash=b41227759d91a390ddcac4796e687aea}{%
+           family={Elder},
+           familyi={E\bibinitperiod},
+           given={K.\bibnamedelimi R.},
+           giveni={K\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=57928815e0cf77e1c2a31229ad30c4d4}{%
+           family={Huang},
+           familyi={H\bibinitperiod},
+           given={Zhi-Feng},
+           giveni={Z\bibinithyphendelim F\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {American Physical Society}%
+      }
+      \strng{namehash}{bea4a08ff7aed8ce9b211246b82d919b}
+      \strng{fullhash}{7b52d1ffe51d2f2ebd6ddb43b22d1a36}
+      \strng{authornamehash}{bea4a08ff7aed8ce9b211246b82d919b}
+      \strng{authorfullhash}{7b52d1ffe51d2f2ebd6ddb43b22d1a36}
+      \field{sortinit}{1}
+      \field{sortinithash}{27a2bc5dfb9ed0a0422134d636544b5d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issue}{3}
+      \field{journaltitle}{Phys. Rev. Lett.}
+      \field{month}{7}
+      \field{title}{Exploring the Complex World of Two-Dimensional Ordering with Three Modes}
+      \field{volume}{111}
+      \field{year}{2013}
+      \field{pages}{035501}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1103/PhysRevLett.111.035501
+      \endverb
+      \verb{url}
+      \verb https://link.aps.org/doi/10.1103/PhysRevLett.111.035501
+      \endverb
+    \endentry
+    \entry{JAYNES57}{article}{}
+      \name{author}{1}{}{%
+        {{hash=60cf9e44033fe2d5e8d20578f696e158}{%
+           family={Jaynes},
+           familyi={J\bibinitperiod},
+           given={E.\bibnamedelimi T.},
+           giveni={E\bibinitperiod\bibinitdelim T\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {American Physical Society}%
+      }
+      \strng{namehash}{60cf9e44033fe2d5e8d20578f696e158}
+      \strng{fullhash}{60cf9e44033fe2d5e8d20578f696e158}
+      \strng{authornamehash}{60cf9e44033fe2d5e8d20578f696e158}
+      \strng{authorfullhash}{60cf9e44033fe2d5e8d20578f696e158}
+      \field{sortinit}{1}
+      \field{sortinithash}{27a2bc5dfb9ed0a0422134d636544b5d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issue}{4}
+      \field{journaltitle}{Phys. Rev.}
+      \field{month}{5}
+      \field{title}{Information Theory and Statistical Mechanics}
+      \field{volume}{106}
+      \field{year}{1957}
+      \field{pages}{620\bibrangedash 630}
+      \range{pages}{11}
+      \verb{doi}
+      \verb 10.1103/PhysRev.106.620
+      \endverb
+      \verb{url}
+      \verb https://link.aps.org/doi/10.1103/PhysRev.106.620
+      \endverb
+    \endentry
+    \entry{PhysRev.40.749}{article}{}
+      \name{author}{1}{}{%
+        {{hash=b0e67f72358a57ee21194e720005742b}{%
+           family={Wigner},
+           familyi={W\bibinitperiod},
+           given={E.},
+           giveni={E\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {American Physical Society}%
+      }
+      \strng{namehash}{b0e67f72358a57ee21194e720005742b}
+      \strng{fullhash}{b0e67f72358a57ee21194e720005742b}
+      \strng{authornamehash}{b0e67f72358a57ee21194e720005742b}
+      \strng{authorfullhash}{b0e67f72358a57ee21194e720005742b}
+      \field{sortinit}{1}
+      \field{sortinithash}{27a2bc5dfb9ed0a0422134d636544b5d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issue}{5}
+      \field{journaltitle}{Phys. Rev.}
+      \field{month}{6}
+      \field{title}{On the Quantum Correction For Thermodynamic Equilibrium}
+      \field{volume}{40}
+      \field{year}{1932}
+      \field{pages}{749\bibrangedash 759}
+      \range{pages}{11}
+      \verb{doi}
+      \verb 10.1103/PhysRev.40.749
+      \endverb
+      \verb{url}
+      \verb https://link.aps.org/doi/10.1103/PhysRev.40.749
+      \endverb
+    \endentry
+    \entry{PhysRev.44.31}{article}{}
+      \name{author}{1}{}{%
+        {{hash=2bca09c5716a56a7d8d4185ea29bea0d}{%
+           family={Kirkwood},
+           familyi={K\bibinitperiod},
+           given={John\bibnamedelima G.},
+           giveni={J\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {American Physical Society}%
+      }
+      \strng{namehash}{2bca09c5716a56a7d8d4185ea29bea0d}
+      \strng{fullhash}{2bca09c5716a56a7d8d4185ea29bea0d}
+      \strng{authornamehash}{2bca09c5716a56a7d8d4185ea29bea0d}
+      \strng{authorfullhash}{2bca09c5716a56a7d8d4185ea29bea0d}
+      \field{sortinit}{1}
+      \field{sortinithash}{27a2bc5dfb9ed0a0422134d636544b5d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issue}{1}
+      \field{journaltitle}{Phys. Rev.}
+      \field{month}{7}
+      \field{title}{Quantum Statistics of Almost Classical Assemblies}
+      \field{volume}{44}
+      \field{year}{1933}
+      \field{pages}{31\bibrangedash 37}
+      \range{pages}{7}
+      \verb{doi}
+      \verb 10.1103/PhysRev.44.31
+      \endverb
+      \verb{url}
+      \verb https://link.aps.org/doi/10.1103/PhysRev.44.31
+      \endverb
+    \endentry
+    \entry{Uhlenbeck1936729}{article}{}
+      \name{author}{2}{}{%
+        {{hash=f58f5b2e5afdb9296483481f664baa90}{%
+           family={Uhlenbeck},
+           familyi={U\bibinitperiod},
+           given={George\bibnamedelima E.},
+           giveni={G\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+        {{hash=223b8f3a79679eae0bc59765e72eb375}{%
+           family={Beth},
+           familyi={B\bibinitperiod},
+           given={Erich},
+           giveni={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{5bac14b3d155829b3ad86fec0e837d16}
+      \strng{fullhash}{5bac14b3d155829b3ad86fec0e837d16}
+      \strng{authornamehash}{5bac14b3d155829b3ad86fec0e837d16}
+      \strng{authorfullhash}{5bac14b3d155829b3ad86fec0e837d16}
+      \field{sortinit}{1}
+      \field{sortinithash}{27a2bc5dfb9ed0a0422134d636544b5d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0031-8914}
+      \field{journaltitle}{Physica}
+      \field{number}{8}
+      \field{title}{The quantum theory of the non-ideal gas I. Deviations from the classical theory}
+      \field{volume}{3}
+      \field{year}{1936}
+      \field{pages}{729\bibrangedash 745}
+      \range{pages}{17}
+      \verb{doi}
+      \verb https://doi.org/10.1016/S0031-8914(36)80346-2
+      \endverb
+      \verb{url}
+      \verb http://www.sciencedirect.com/science/article/pii/S0031891436803462
+      \endverb
+    \endentry
+    \entry{LANDAU198079}{incollection}{}
+      \name{author}{2}{}{%
+        {{hash=aebf4c6fe4e8faccab45426c87db616e}{%
+           family={Landau},
+           familyi={L\bibinitperiod},
+           given={L.D.},
+           giveni={L\bibinitperiod}}}%
+        {{hash=8ed54692995f728f80913ed4160809c6}{%
+           family={Lifshitz},
+           familyi={L\bibinitperiod},
+           given={E.M.},
+           giveni={E\bibinitperiod}}}%
+      }
+      \name{editor}{2}{}{%
+        {{hash=aebf4c6fe4e8faccab45426c87db616e}{%
+           family={Landau},
+           familyi={L\bibinitperiod},
+           given={L.D.},
+           giveni={L\bibinitperiod}}}%
+        {{hash=8ed54692995f728f80913ed4160809c6}{%
+           family={Lifshitz},
+           familyi={L\bibinitperiod},
+           given={E.M.},
+           giveni={E\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Oxford}%
+      }
+      \list{publisher}{1}{%
+        {Butterworth-Heinemann}%
+      }
+      \strng{namehash}{7d22021658e8f6622c7255a05bd0e287}
+      \strng{fullhash}{7d22021658e8f6622c7255a05bd0e287}
+      \strng{authornamehash}{7d22021658e8f6622c7255a05bd0e287}
+      \strng{authorfullhash}{7d22021658e8f6622c7255a05bd0e287}
+      \strng{editornamehash}{7d22021658e8f6622c7255a05bd0e287}
+      \strng{editorfullhash}{7d22021658e8f6622c7255a05bd0e287}
+      \field{sortinit}{1}
+      \field{sortinithash}{27a2bc5dfb9ed0a0422134d636544b5d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Statistical Physics (Third Edition, Revised and Enlarged)}
+      \field{edition}{Third Edition, Revised and Enlarged}
+      \field{isbn}{978-0-08-057046-4}
+      \field{title}{Chapter III - The Gibbs Distribution}
+      \field{year}{1980}
+      \field{pages}{79\bibrangedash 110}
+      \range{pages}{32}
+      \verb{doi}
+      \verb https://doi.org/10.1016/B978-0-08-057046-4.50010-5
+      \endverb
+      \verb{url}
+      \verb http://www.sciencedirect.com/science/article/pii/B9780080570464500105
+      \endverb
+    \endentry
+    \entry{Gibbs}{book}{}
+      \name{author}{1}{}{%
+        {{hash=7b37784352d399efe38db5ffe31b29e9}{%
+           family={{Gibbs}},
+           familyi={G\bibinitperiod},
+           given={J.\bibnamedelimi Willard},
+           giveni={J\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+      }
+      \strng{namehash}{7b37784352d399efe38db5ffe31b29e9}
+      \strng{fullhash}{7b37784352d399efe38db5ffe31b29e9}
+      \strng{authornamehash}{7b37784352d399efe38db5ffe31b29e9}
+      \strng{authorfullhash}{7b37784352d399efe38db5ffe31b29e9}
+      \field{sortinit}{1}
+      \field{sortinithash}{27a2bc5dfb9ed0a0422134d636544b5d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Elementary principles in statistical mechanics}
+      \field{title}{{Elementary principles in statistical mechanics}}
+      \field{year}{1960}
+      \verb{url}
+      \verb http://hdl.handle.net/2027/mdp.39015023947321
+      \endverb
+    \endentry
+    \entry{KUBO62}{article}{}
+      \name{author}{1}{}{%
+        {{hash=3db80a54dbc22f6e0f8ef62d81d5e4c4}{%
+           family={Kubo},
+           familyi={K\bibinitperiod},
+           given={Ryogo},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{3db80a54dbc22f6e0f8ef62d81d5e4c4}
+      \strng{fullhash}{3db80a54dbc22f6e0f8ef62d81d5e4c4}
+      \strng{authornamehash}{3db80a54dbc22f6e0f8ef62d81d5e4c4}
+      \strng{authorfullhash}{3db80a54dbc22f6e0f8ef62d81d5e4c4}
+      \field{sortinit}{1}
+      \field{sortinithash}{27a2bc5dfb9ed0a0422134d636544b5d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of the Physical Society of Japan}
+      \field{number}{7}
+      \field{title}{Generalized Cumulant Expansion Method}
+      \field{volume}{17}
+      \field{year}{1962}
+      \field{pages}{1100\bibrangedash 1120}
+      \range{pages}{21}
+      \verb{doi}
+      \verb 10.1143/JPSJ.17.1100
+      \endverb
+      \verb{eprint}
+      \verb http://dx.doi.org/10.1143/JPSJ.17.1100
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1143/JPSJ.17.1100
+      \endverb
+    \endentry
+    \entry{HansenAppendixB}{incollection}{}
+      \name{author}{2}{}{%
+        {{hash=17be630b0669caa9c2d86ff6ddc578ff}{%
+           family={Hansen},
+           familyi={H\bibinitperiod},
+           given={Jean-Pierre},
+           giveni={J\bibinithyphendelim P\bibinitperiod}}}%
+        {{hash=66172b2ba1124a17a96fb4d62cc30b27}{%
+           family={McDonald},
+           familyi={M\bibinitperiod},
+           given={Ian\bibnamedelima R.},
+           giveni={I\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+      }
+      \name{editor}{2}{}{%
+        {{hash=17be630b0669caa9c2d86ff6ddc578ff}{%
+           family={Hansen},
+           familyi={H\bibinitperiod},
+           given={Jean-Pierre},
+           giveni={J\bibinithyphendelim P\bibinitperiod}}}%
+        {{hash=66172b2ba1124a17a96fb4d62cc30b27}{%
+           family={McDonald},
+           familyi={M\bibinitperiod},
+           given={Ian\bibnamedelima R.},
+           giveni={I\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Oxford}%
+      }
+      \list{publisher}{1}{%
+        {Academic Press}%
+      }
+      \strng{namehash}{a8b0e65949dbfb1da5936651b7fe385e}
+      \strng{fullhash}{a8b0e65949dbfb1da5936651b7fe385e}
+      \strng{authornamehash}{a8b0e65949dbfb1da5936651b7fe385e}
+      \strng{authorfullhash}{a8b0e65949dbfb1da5936651b7fe385e}
+      \strng{editornamehash}{a8b0e65949dbfb1da5936651b7fe385e}
+      \strng{editorfullhash}{a8b0e65949dbfb1da5936651b7fe385e}
+      \field{sortinit}{1}
+      \field{sortinithash}{27a2bc5dfb9ed0a0422134d636544b5d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Theory of Simple Liquids (Fourth Edition)}
+      \field{edition}{Fourth Edition}
+      \field{isbn}{978-0-12-387032-2}
+      \field{title}{Appendix B: Two Theorems in Density Functional Theory}
+      \field{year}{2013}
+      \field{pages}{587\bibrangedash 589}
+      \range{pages}{3}
+      \verb{doi}
+      \verb https://doi.org/10.1016/B978-0-12-387032-2.00022-2
+      \endverb
+      \verb{url}
+      \verb http://www.sciencedirect.com/science/article/pii/B9780123870322000222
+      \endverb
+    \endentry
+    \entry{MAYER41}{article}{}
+      \name{author}{2}{}{%
+        {{hash=a18506787db39f34056737c29901bf82}{%
+           family={Mayer},
+           familyi={M\bibinitperiod},
+           given={Joseph\bibnamedelima E.},
+           giveni={J\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+        {{hash=59e83d28ac3b901b53750dcfd16d14db}{%
+           family={Montroll},
+           familyi={M\bibinitperiod},
+           given={Elliott},
+           giveni={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{66cdb5e77bd858c1292ecbcae7835d0c}
+      \strng{fullhash}{66cdb5e77bd858c1292ecbcae7835d0c}
+      \strng{authornamehash}{66cdb5e77bd858c1292ecbcae7835d0c}
+      \strng{authorfullhash}{66cdb5e77bd858c1292ecbcae7835d0c}
+      \field{sortinit}{2}
+      \field{sortinithash}{0aa614ace9f3a40ef5a67e7f7a184048}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{The Journal of Chemical Physics}
+      \field{number}{1}
+      \field{title}{Molecular Distribution}
+      \field{volume}{9}
+      \field{year}{1941}
+      \field{pages}{2\bibrangedash 16}
+      \range{pages}{15}
+      \verb{doi}
+      \verb 10.1063/1.1750822
+      \endverb
+      \verb{eprint}
+      \verb http://dx.doi.org/10.1063/1.1750822
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1063/1.1750822
+      \endverb
+    \endentry
+    \entry{HANSEN-CH6}{incollection}{}
+      \name{author}{2}{}{%
+        {{hash=17be630b0669caa9c2d86ff6ddc578ff}{%
+           family={Hansen},
+           familyi={H\bibinitperiod},
+           given={Jean-Pierre},
+           giveni={J\bibinithyphendelim P\bibinitperiod}}}%
+        {{hash=66172b2ba1124a17a96fb4d62cc30b27}{%
+           family={McDonald},
+           familyi={M\bibinitperiod},
+           given={Ian\bibnamedelima R.},
+           giveni={I\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+      }
+      \name{editor}{2}{}{%
+        {{hash=17be630b0669caa9c2d86ff6ddc578ff}{%
+           family={Hansen},
+           familyi={H\bibinitperiod},
+           given={Jean-Pierre},
+           giveni={J\bibinithyphendelim P\bibinitperiod}}}%
+        {{hash=66172b2ba1124a17a96fb4d62cc30b27}{%
+           family={McDonald},
+           familyi={M\bibinitperiod},
+           given={Ian\bibnamedelima R.},
+           giveni={I\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Oxford}%
+      }
+      \list{publisher}{1}{%
+        {Academic Press}%
+      }
+      \strng{namehash}{a8b0e65949dbfb1da5936651b7fe385e}
+      \strng{fullhash}{a8b0e65949dbfb1da5936651b7fe385e}
+      \strng{authornamehash}{a8b0e65949dbfb1da5936651b7fe385e}
+      \strng{authorfullhash}{a8b0e65949dbfb1da5936651b7fe385e}
+      \strng{editornamehash}{a8b0e65949dbfb1da5936651b7fe385e}
+      \strng{editorfullhash}{a8b0e65949dbfb1da5936651b7fe385e}
+      \field{sortinit}{2}
+      \field{sortinithash}{0aa614ace9f3a40ef5a67e7f7a184048}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Theory of Simple Liquids (Fourth Edition)}
+      \field{edition}{Fourth Edition}
+      \field{isbn}{978-0-12-387032-2}
+      \field{title}{Chapter 6 - Inhomogeneous Fluids}
+      \field{year}{2013}
+      \field{pages}{203\bibrangedash 264}
+      \range{pages}{62}
+      \verb{doi}
+      \verb https://doi.org/10.1016/B978-0-12-387032-2.00006-4
+      \endverb
+      \verb{url}
+      \verb http://www.sciencedirect.com/science/article/pii/B9780123870322000064
+      \endverb
+      \keyw{Replica method}
+    \endentry
+    \entry{KIRKWOOD_MONROE41}{article}{}
+      \name{author}{2}{}{%
+        {{hash=2bca09c5716a56a7d8d4185ea29bea0d}{%
+           family={Kirkwood},
+           familyi={K\bibinitperiod},
+           given={John\bibnamedelima G.},
+           giveni={J\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+        {{hash=f4cbb7270aa0dce4c6a60aca431329ef}{%
+           family={Monroe},
+           familyi={M\bibinitperiod},
+           given={Elizabeth},
+           giveni={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{5ec4d4b55d23ea3339f513d406fffff2}
+      \strng{fullhash}{5ec4d4b55d23ea3339f513d406fffff2}
+      \strng{authornamehash}{5ec4d4b55d23ea3339f513d406fffff2}
+      \strng{authorfullhash}{5ec4d4b55d23ea3339f513d406fffff2}
+      \field{sortinit}{2}
+      \field{sortinithash}{0aa614ace9f3a40ef5a67e7f7a184048}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{The Journal of Chemical Physics}
+      \field{number}{7}
+      \field{title}{Statistical Mechanics of Fusion}
+      \field{volume}{9}
+      \field{year}{1941}
+      \field{pages}{514\bibrangedash 526}
+      \range{pages}{13}
+      \verb{doi}
+      \verb 10.1063/1.1750949
+      \endverb
+      \verb{eprint}
+      \verb http://dx.doi.org/10.1063/1.1750949
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1063/1.1750949
+      \endverb
+    \endentry
+    \entry{RAMAKRISHNAN79}{article}{}
+      \name{author}{2}{}{%
+        {{hash=4035d0b1a8f8bc3fe750410520367776}{%
+           family={Ramakrishnan},
+           familyi={R\bibinitperiod},
+           given={T.\bibnamedelimi V.},
+           giveni={T\bibinitperiod\bibinitdelim V\bibinitperiod}}}%
+        {{hash=cdb7d5af7108c1497a406b8bfbda7a37}{%
+           family={Yussouff},
+           familyi={Y\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {American Physical Society}%
+      }
+      \strng{namehash}{4dc64acaf21b88479d10a21d0bef8a8b}
+      \strng{fullhash}{4dc64acaf21b88479d10a21d0bef8a8b}
+      \strng{authornamehash}{4dc64acaf21b88479d10a21d0bef8a8b}
+      \strng{authorfullhash}{4dc64acaf21b88479d10a21d0bef8a8b}
+      \field{sortinit}{2}
+      \field{sortinithash}{0aa614ace9f3a40ef5a67e7f7a184048}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issue}{5}
+      \field{journaltitle}{Phys. Rev. B}
+      \field{month}{3}
+      \field{title}{First-principles order-parameter theory of freezing}
+      \field{volume}{19}
+      \field{year}{1979}
+      \field{pages}{2775\bibrangedash 2794}
+      \range{pages}{20}
+      \verb{doi}
+      \verb 10.1103/PhysRevB.19.2775
+      \endverb
+      \verb{url}
+      \verb http://link.aps.org/doi/10.1103/PhysRevB.19.2775
+      \endverb
+    \endentry
+    \entry{HANSEN69}{article}{}
+      \name{author}{2}{}{%
+        {{hash=17be630b0669caa9c2d86ff6ddc578ff}{%
+           family={Hansen},
+           familyi={H\bibinitperiod},
+           given={Jean-Pierre},
+           giveni={J\bibinithyphendelim P\bibinitperiod}}}%
+        {{hash=b665c644852d672fc230756e66313c23}{%
+           family={Verlet},
+           familyi={V\bibinitperiod},
+           given={Loup},
+           giveni={L\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {American Physical Society}%
+      }
+      \strng{namehash}{dda7ff326b5b0cfa1f1a0ac88ad0ef3e}
+      \strng{fullhash}{dda7ff326b5b0cfa1f1a0ac88ad0ef3e}
+      \strng{authornamehash}{dda7ff326b5b0cfa1f1a0ac88ad0ef3e}
+      \strng{authorfullhash}{dda7ff326b5b0cfa1f1a0ac88ad0ef3e}
+      \field{sortinit}{2}
+      \field{sortinithash}{0aa614ace9f3a40ef5a67e7f7a184048}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issue}{1}
+      \field{journaltitle}{Phys. Rev.}
+      \field{month}{8}
+      \field{title}{Phase Transitions of the Lennard-Jones System}
+      \field{volume}{184}
+      \field{year}{1969}
+      \field{pages}{151\bibrangedash 161}
+      \range{pages}{11}
+      \verb{doi}
+      \verb 10.1103/PhysRev.184.151
+      \endverb
+      \verb{url}
+      \verb https://link.aps.org/doi/10.1103/PhysRev.184.151
+      \endverb
+    \endentry
+    \entry{ESPANOL09}{article}{}
+      \name{author}{2}{}{%
+        {{hash=71c8ca790b6ca27c20ad6b984ca40172}{%
+           family={Español},
+           familyi={E\bibinitperiod},
+           given={Pep},
+           giveni={P\bibinitperiod}}}%
+        {{hash=51f282463b35b3efe039d5a2e6aace93}{%
+           family={Löwen},
+           familyi={L\bibinitperiod},
+           given={Hartmut},
+           giveni={H\bibinitperiod}}}%
+      }
+      \strng{namehash}{e59f822164d9dc8ff32d71d00030ad7b}
+      \strng{fullhash}{e59f822164d9dc8ff32d71d00030ad7b}
+      \strng{authornamehash}{e59f822164d9dc8ff32d71d00030ad7b}
+      \strng{authorfullhash}{e59f822164d9dc8ff32d71d00030ad7b}
+      \field{sortinit}{2}
+      \field{sortinithash}{0aa614ace9f3a40ef5a67e7f7a184048}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{The Journal of Chemical Physics}
+      \field{number}{24}
+      \field{title}{Derivation of dynamical density functional theory using the projection operator technique}
+      \field{volume}{131}
+      \field{year}{2009}
+      \field{pages}{244101}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1063/1.3266943
+      \endverb
+      \verb{eprint}
+      \verb http://dx.doi.org/10.1063/1.3266943
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1063/1.3266943
+      \endverb
+    \endentry
+    \entry{MT1999}{article}{}
+      \name{author}{2}{}{%
+        {{hash=f1e0bf76ffad48d51af8191f555b3369}{%
+           family={Marconi},
+           familyi={M\bibinitperiod},
+           given={Umberto\bibnamedelimb Marini\bibnamedelima Bettolo},
+           giveni={U\bibinitperiod\bibinitdelim M\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+        {{hash=4bf010af6adb7d3a2b2b3c11e6340307}{%
+           family={Tarazona},
+           familyi={T\bibinitperiod},
+           given={Pedro},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{347f1fb14e6dca1bcdfb5a57a7600253}
+      \strng{fullhash}{347f1fb14e6dca1bcdfb5a57a7600253}
+      \strng{authornamehash}{347f1fb14e6dca1bcdfb5a57a7600253}
+      \strng{authorfullhash}{347f1fb14e6dca1bcdfb5a57a7600253}
+      \field{sortinit}{3}
+      \field{sortinithash}{197da6d6c34c6b20ce45c4d4baace5a4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Physics: Condensed Matter}
+      \field{number}{8A}
+      \field{title}{Dynamic density functional theory of fluids}
+      \field{volume}{12}
+      \field{year}{2000}
+      \field{pages}{A413}
+      \range{pages}{-1}
+      \verb{url}
+      \verb http://stacks.iop.org/0953-8984/12/i=8A/a=356
+      \endverb
+    \endentry
+    \entry{AR2004}{article}{}
+      \name{author}{2}{}{%
+        {{hash=e4c7e79757d81145a31839e192d931ac}{%
+           family={Archer},
+           familyi={A\bibinitperiod},
+           given={Andrew\bibnamedelima J},
+           giveni={A\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=f8b2f217bc0c738e397d56f2cbd137e3}{%
+           family={Rauscher},
+           familyi={R\bibinitperiod},
+           given={Markus},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{e692f534cbdd6ec1cb3b0d7acf734ed7}
+      \strng{fullhash}{e692f534cbdd6ec1cb3b0d7acf734ed7}
+      \strng{authornamehash}{e692f534cbdd6ec1cb3b0d7acf734ed7}
+      \strng{authorfullhash}{e692f534cbdd6ec1cb3b0d7acf734ed7}
+      \field{sortinit}{3}
+      \field{sortinithash}{197da6d6c34c6b20ce45c4d4baace5a4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Physics A: Mathematical and General}
+      \field{number}{40}
+      \field{title}{Dynamical density functional theory for interacting Brownian particles: stochastic or deterministic?}
+      \field{volume}{37}
+      \field{year}{2004}
+      \field{pages}{9325}
+      \range{pages}{1}
+      \verb{url}
+      \verb http://stacks.iop.org/0305-4470/37/i=40/a=001
+      \endverb
+    \endentry
+    \entry{STOLLE14}{article}{}
+      \name{author}{2}{}{%
+        {{hash=1696da0700ffa702d428c45378c8d3fb}{%
+           family={Stolle},
+           familyi={S\bibinitperiod},
+           given={Jonathan},
+           giveni={J\bibinitperiod}}}%
+        {{hash=0cb0d28754a69a44de94fd1ebf24a2dd}{%
+           family={Provatas},
+           familyi={P\bibinitperiod},
+           given={Nikolas},
+           giveni={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{2b3263e0a23f66f255853b310edd1301}
+      \strng{fullhash}{2b3263e0a23f66f255853b310edd1301}
+      \strng{authornamehash}{2b3263e0a23f66f255853b310edd1301}
+      \strng{authorfullhash}{2b3263e0a23f66f255853b310edd1301}
+      \field{sortinit}{3}
+      \field{sortinithash}{197da6d6c34c6b20ce45c4d4baace5a4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0927-0256}
+      \field{journaltitle}{Computational Materials Science}
+      \field{title}{Characterizing solute segregation and grain boundary energy in binary alloy phase field crystal models}
+      \field{volume}{81}
+      \field{year}{2014}
+      \field{pages}{493\bibrangedash 502}
+      \range{pages}{10}
+      \verb{doi}
+      \verb http://dx.doi.org/10.1016/j.commatsci.2013.09.002
+      \endverb
+      \verb{url}
+      \verb http://www.sciencedirect.com/science/article/pii/S092702561300517X
+      \endverb
+      \keyw{Grain boundary segregation}
+    \endentry
+    \entry{HU17}{article}{}
+      \name{author}{4}{}{%
+        {{hash=27b399d96a5e4bb9a4f3b558d886fe8d}{%
+           family={Hu},
+           familyi={H\bibinitperiod},
+           given={Shi},
+           giveni={S\bibinitperiod}}}%
+        {{hash=05694d0c858ee219eae7bb764b27b7f6}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Zheng},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=69f9ee14dc2bfdb9951d6007930b189a}{%
+           family={Xi},
+           familyi={X\bibinitperiod},
+           given={Wen},
+           giveni={W\bibinitperiod}}}%
+        {{hash=a8132da450eeb5965e9dc7c61dce6bdc}{%
+           family={Peng},
+           familyi={P\bibinitperiod},
+           given={Ying-Ying},
+           giveni={Y\bibinithyphendelim Y\bibinitperiod}}}%
+      }
+      \strng{namehash}{a947eb32c83bff3690af9755ac722a00}
+      \strng{fullhash}{4e8628282f00e960dc5732dab3d82b9b}
+      \strng{authornamehash}{a947eb32c83bff3690af9755ac722a00}
+      \strng{authorfullhash}{4e8628282f00e960dc5732dab3d82b9b}
+      \field{sortinit}{3}
+      \field{sortinithash}{197da6d6c34c6b20ce45c4d4baace5a4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1573-4803}
+      \field{journaltitle}{Journal of Materials Science}
+      \field{month}{5}
+      \field{number}{10}
+      \field{title}{Phase-field-crystal study on the evolution behavior of microcracks initiated on grain boundaries under constant strain}
+      \field{volume}{52}
+      \field{year}{2017}
+      \field{pages}{5641\bibrangedash 5651}
+      \range{pages}{11}
+      \verb{doi}
+      \verb 10.1007/s10853-017-0799-x
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1007/s10853-017-0799-x
+      \endverb
+    \endentry
+    \entry{MURDOCH13}{article}{}
+      \name{author}{2}{}{%
+        {{hash=0b0abd1908388b44c9c5e6679219536b}{%
+           family={Murdoch},
+           familyi={M\bibinitperiod},
+           given={Heather\bibnamedelima A.},
+           giveni={H\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=bfec53a2096e7859eb3eb62a84117ece}{%
+           family={Schuh},
+           familyi={S\bibinitperiod},
+           given={Christopher\bibnamedelima A.},
+           giveni={C\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \strng{namehash}{b7130a2affceb68c2ff069d2f4b9550e}
+      \strng{fullhash}{b7130a2affceb68c2ff069d2f4b9550e}
+      \strng{authornamehash}{b7130a2affceb68c2ff069d2f4b9550e}
+      \strng{authorfullhash}{b7130a2affceb68c2ff069d2f4b9550e}
+      \field{sortinit}{4}
+      \field{sortinithash}{d221becdd544034cf9082056cd6e6d2d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1359-6454}
+      \field{journaltitle}{Acta Materialia}
+      \field{number}{6}
+      \field{title}{Stability of binary nanocrystalline alloys against grain growth and phase separation}
+      \field{volume}{61}
+      \field{year}{2013}
+      \field{pages}{2121\bibrangedash 2132}
+      \range{pages}{12}
+      \verb{doi}
+      \verb http://dx.doi.org/10.1016/j.actamat.2012.12.033
+      \endverb
+      \verb{url}
+      \verb http://www.sciencedirect.com/science/article/pii/S1359645412008919
+      \endverb
+      \keyw{Thermodynamic stability}
+    \endentry
+    \entry{SUBRAMANIAN93}{article}{}
+      \name{author}{2}{}{%
+        {{hash=f03fca44e8121fc7aff7be804cefa0d3}{%
+           family={Subramanian},
+           familyi={S\bibinitperiod},
+           given={P.\bibnamedelimi R.},
+           giveni={P\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=4ca1aba9263f1ab840748949336fa6c7}{%
+           family={Perepezko},
+           familyi={P\bibinitperiod},
+           given={J.\bibnamedelimi H.},
+           giveni={J\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+      }
+      \strng{namehash}{9983713bbb1229de5002970ba8f7c6ae}
+      \strng{fullhash}{9983713bbb1229de5002970ba8f7c6ae}
+      \strng{authornamehash}{9983713bbb1229de5002970ba8f7c6ae}
+      \strng{authorfullhash}{9983713bbb1229de5002970ba8f7c6ae}
+      \field{sortinit}{4}
+      \field{sortinithash}{d221becdd544034cf9082056cd6e6d2d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issue}{1}
+      \field{journaltitle}{Journal of Phase Equilibria}
+      \field{title}{The Ag-Cu (Silver-Copper) System}
+      \field{volume}{14}
+      \field{year}{1993}
+      \field{pages}{62\bibrangedash 75}
+      \range{pages}{14}
+    \endentry
+    \entry{GREENWOOD10}{article}{}
+      \name{author}{3}{}{%
+        {{hash=b7105cfdc84d0fef1656d34b2b8fa6f8}{%
+           family={Greenwood},
+           familyi={G\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+        {{hash=0cb0d28754a69a44de94fd1ebf24a2dd}{%
+           family={Provatas},
+           familyi={P\bibinitperiod},
+           given={Nikolas},
+           giveni={N\bibinitperiod}}}%
+        {{hash=6ac742c22b249ed4c3cb98039a3d60ff}{%
+           family={Rottler},
+           familyi={R\bibinitperiod},
+           given={Jörg},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {American Physical Society}%
+      }
+      \strng{namehash}{2183a68de56ecc3c5ae8a29c82321482}
+      \strng{fullhash}{5a254c6fc405444c1e74b5737f91b879}
+      \strng{authornamehash}{2183a68de56ecc3c5ae8a29c82321482}
+      \strng{authorfullhash}{5a254c6fc405444c1e74b5737f91b879}
+      \field{sortinit}{4}
+      \field{sortinithash}{d221becdd544034cf9082056cd6e6d2d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issue}{4}
+      \field{journaltitle}{Phys. Rev. Lett.}
+      \field{month}{7}
+      \field{title}{Free Energy Functionals for Efficient Phase Field Crystal Modeling of Structural Phase Transformations}
+      \field{volume}{105}
+      \field{year}{2010}
+      \field{pages}{045702}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1103/PhysRevLett.105.045702
+      \endverb
+      \verb{url}
+      \verb https://link.aps.org/doi/10.1103/PhysRevLett.105.045702
+      \endverb
+    \endentry
+    \entry{LOH17}{article}{}
+      \name{author}{9}{}{%
+        {{hash=af06dfd9d45a975279c9560dbb48040f}{%
+           family={Loh},
+           familyi={L\bibinitperiod},
+           given={N.\bibnamedelimi Duane},
+           giveni={N\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=f1013d79a55d5be42e1ff4335aca1529}{%
+           family={Sen},
+           familyi={S\bibinitperiod},
+           given={Soumyo},
+           giveni={S\bibinitperiod}}}%
+        {{hash=2845bbd71b8a2b3d3081711719003762}{%
+           family={Bosman},
+           familyi={B\bibinitperiod},
+           given={Michel},
+           giveni={M\bibinitperiod}}}%
+        {{hash=0d7e43e863ff5fb0335e1a2ab7cf12db}{%
+           family={Tan},
+           familyi={T\bibinitperiod},
+           given={Shu\bibnamedelima Fen},
+           giveni={S\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+        {{hash=68902cd8b73663550470cbcf889f3620}{%
+           family={Zhong},
+           familyi={Z\bibinitperiod},
+           given={Jun},
+           giveni={J\bibinitperiod}}}%
+        {{hash=ea5a8568c1fd1e7d78069dacf84c194c}{%
+           family={Nijhuis},
+           familyi={N\bibinitperiod},
+           given={Christian\bibnamedelima A.},
+           giveni={C\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=cfd548f0179767f3bb83054a14bd82b3}{%
+           family={Král},
+           familyi={K\bibinitperiod},
+           given={Petr},
+           giveni={P\bibinitperiod}}}%
+        {{hash=48763d74ce26cf58f1978a8c80002561}{%
+           family={Matsudaira},
+           familyi={M\bibinitperiod},
+           given={Paul},
+           giveni={P\bibinitperiod}}}%
+        {{hash=9192f5d13961745c8e5dc302f2767aac}{%
+           family={Mirsaidov},
+           familyi={M\bibinitperiod},
+           given={Utkur},
+           giveni={U\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Nature Publishing Group}%
+      }
+      \strng{namehash}{5f8a6e6dba400c5c21364c72d368758e}
+      \strng{fullhash}{4412854624c9a332dfafa8cfd5b67639}
+      \strng{authornamehash}{5f8a6e6dba400c5c21364c72d368758e}
+      \strng{authorfullhash}{4412854624c9a332dfafa8cfd5b67639}
+      \field{sortinit}{5}
+      \field{sortinithash}{c9df3c9fb8f555dd9201cedc5e343021}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Nat Chem}
+      \field{month}{1}
+      \field{title}{Multistep nucleation of nanocrystals in aqueous solution}
+      \field{volume}{9}
+      \field{year}{2017}
+    \endentry
+    \entry{WALLACE13}{article}{}
+      \name{author}{9}{}{%
+        {{hash=776fcff434c26726e4a69a3c52c503e2}{%
+           family={Wallace},
+           familyi={W\bibinitperiod},
+           given={Adam\bibnamedelima F.},
+           giveni={A\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+        {{hash=61f27cc204fffb9a89935c128479dff5}{%
+           family={Hedges},
+           familyi={H\bibinitperiod},
+           given={Lester\bibnamedelima O.},
+           giveni={L\bibinitperiod\bibinitdelim O\bibinitperiod}}}%
+        {{hash=9af0d0cdbc306d7b71ef338733cda20e}{%
+           family={Fernandez-Martinez},
+           familyi={F\bibinithyphendelim M\bibinitperiod},
+           given={Alejandro},
+           giveni={A\bibinitperiod}}}%
+        {{hash=91562894232005026809ac68cc136292}{%
+           family={Raiteri},
+           familyi={R\bibinitperiod},
+           given={Paolo},
+           giveni={P\bibinitperiod}}}%
+        {{hash=2765c2cb60dd77b2614870940c0cde2b}{%
+           family={Gale},
+           familyi={G\bibinitperiod},
+           given={Julian\bibnamedelima D.},
+           giveni={J\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=780ed7f87be90409f887e0d7a6e48b17}{%
+           family={Waychunas},
+           familyi={W\bibinitperiod},
+           given={Glenn\bibnamedelima A.},
+           giveni={G\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=f76baeec84bc6196a7bd35f2e60fac4c}{%
+           family={Whitelam},
+           familyi={W\bibinitperiod},
+           given={Stephen},
+           giveni={S\bibinitperiod}}}%
+        {{hash=c2f7ca77368d07195fad134cf0d8cbd9}{%
+           family={Banfield},
+           familyi={B\bibinitperiod},
+           given={Jillian\bibnamedelima F.},
+           giveni={J\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+        {{hash=86a2160fe735ac7610dcaa87cf7a86ca}{%
+           family={De\bibnamedelima Yoreo},
+           familyi={D\bibinitperiod\bibinitdelim Y\bibinitperiod},
+           given={James\bibnamedelima J.},
+           giveni={J\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {American Association for the Advancement of Science}%
+      }
+      \strng{namehash}{81bd1158957eeee461d59235c74bc6e2}
+      \strng{fullhash}{5b76c0151666fc9950ee1ad212ebe356}
+      \strng{authornamehash}{81bd1158957eeee461d59235c74bc6e2}
+      \strng{authorfullhash}{5b76c0151666fc9950ee1ad212ebe356}
+      \field{sortinit}{5}
+      \field{sortinithash}{c9df3c9fb8f555dd9201cedc5e343021}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0036-8075}
+      \field{journaltitle}{Science}
+      \field{number}{6148}
+      \field{title}{Microscopic Evidence for Liquid-Liquid Separation in Supersaturated CaCO3 Solutions}
+      \field{volume}{341}
+      \field{year}{2013}
+      \field{pages}{885\bibrangedash 889}
+      \range{pages}{5}
+      \verb{doi}
+      \verb 10.1126/science.1230915
+      \endverb
+      \verb{eprint}
+      \verb http://science.sciencemag.org/content/341/6148/885.full.pdf
+      \endverb
+      \verb{url}
+      \verb http://science.sciencemag.org/content/341/6148/885
+      \endverb
+    \endentry
+    \entry{DAVEY13}{article}{}
+      \name{author}{3}{}{%
+        {{hash=40d5dd7c3762cfc08c169bb70f115030}{%
+           family={Davey},
+           familyi={D\bibinitperiod},
+           given={Roger\bibnamedelima J.},
+           giveni={R\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=80fd3ac62aabe7efb076457e525ee388}{%
+           family={Schroeder},
+           familyi={S\bibinitperiod},
+           given={Sven\bibnamedelimb L.\bibnamedelimi M.},
+           giveni={S\bibinitperiod\bibinitdelim L\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=2a17892541dcf1c3659546cdcd666007}{%
+           family={Horst},
+           familyi={H\bibinitperiod},
+           given={Joop\bibnamedelima H.},
+           giveni={J\bibinitperiod\bibinitdelim H\bibinitperiod},
+           prefix={ter},
+           prefixi={t\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {WILEY-VCH Verlag}%
+      }
+      \strng{namehash}{643190e7dc5a7898c0f513f481afc69c}
+      \strng{fullhash}{4e854596e2545079512ce9afe1c30eff}
+      \strng{authornamehash}{643190e7dc5a7898c0f513f481afc69c}
+      \strng{authorfullhash}{4e854596e2545079512ce9afe1c30eff}
+      \field{sortinit}{5}
+      \field{sortinithash}{c9df3c9fb8f555dd9201cedc5e343021}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1521-3773}
+      \field{journaltitle}{Angewandte Chemie International Edition}
+      \field{number}{8}
+      \field{title}{Nucleation of Organic Crystals—A Molecular Perspective}
+      \field{volume}{52}
+      \field{year}{2013}
+      \field{pages}{2166\bibrangedash 2179}
+      \range{pages}{14}
+      \verb{doi}
+      \verb 10.1002/anie.201204824
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1002/anie.201204824
+      \endverb
+      \keyw{crystal nucleation,crystallization processes,molecular self-association,nucleation kinetics,polymorphism}
+    \endentry
+    \entry{GEBAUER11}{article}{}
+      \name{author}{2}{}{%
+        {{hash=2afe31c9eb940086a5cf667ca1db3a54}{%
+           family={Gebauer},
+           familyi={G\bibinitperiod},
+           given={Denis},
+           giveni={D\bibinitperiod}}}%
+        {{hash=57dcf3b88594b096e1bd3d67ab2148b5}{%
+           family={Cölfen},
+           familyi={C\bibinitperiod},
+           given={Helmut},
+           giveni={H\bibinitperiod}}}%
+      }
+      \strng{namehash}{aa1d308b72b139ccc3e9f9a3dba71f24}
+      \strng{fullhash}{aa1d308b72b139ccc3e9f9a3dba71f24}
+      \strng{authornamehash}{aa1d308b72b139ccc3e9f9a3dba71f24}
+      \strng{authorfullhash}{aa1d308b72b139ccc3e9f9a3dba71f24}
+      \field{sortinit}{5}
+      \field{sortinithash}{c9df3c9fb8f555dd9201cedc5e343021}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1748-0132}
+      \field{journaltitle}{Nano Today}
+      \field{number}{6}
+      \field{title}{Prenucleation clusters and non-classical nucleation}
+      \field{volume}{6}
+      \field{year}{2011}
+      \field{pages}{564\bibrangedash 584}
+      \range{pages}{21}
+      \verb{doi}
+      \verb http://dx.doi.org/10.1016/j.nantod.2011.10.005
+      \endverb
+      \verb{url}
+      \verb http://www.sciencedirect.com/science/article/pii/S1748013211001174
+      \endverb
+      \keyw{Prenucleation clusters}
+    \endentry
+    \entry{MYERSON04}{article}{}
+      \name{author}{3}{}{%
+        {{hash=bc742ac13c18ed6ac09d92c759e56659}{%
+           family={Knezic},
+           familyi={K\bibinitperiod},
+           given={Dragutin},
+           giveni={D\bibinitperiod}}}%
+        {{hash=2842860de18c2e8e92821a7ebab8fdb4}{%
+           family={Zaccaro},
+           familyi={Z\bibinitperiod},
+           given={Julien},
+           giveni={J\bibinitperiod}}}%
+        {{hash=e7562283c63f5dea152fe3c2b06f80d2}{%
+           family={Myerson},
+           familyi={M\bibinitperiod},
+           given={Allan\bibnamedelima S.},
+           giveni={A\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \strng{namehash}{ec95b2b8e762e6327ae8a8b6c3a921c5}
+      \strng{fullhash}{d30370434ddc201fccb571ce5d2c657b}
+      \strng{authornamehash}{ec95b2b8e762e6327ae8a8b6c3a921c5}
+      \strng{authorfullhash}{d30370434ddc201fccb571ce5d2c657b}
+      \field{sortinit}{5}
+      \field{sortinithash}{c9df3c9fb8f555dd9201cedc5e343021}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{The Journal of Physical Chemistry B}
+      \field{number}{30}
+      \field{title}{Nucleation Induction Time in Levitated Droplets}
+      \field{volume}{108}
+      \field{year}{2004}
+      \field{pages}{10672\bibrangedash 10677}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1021/jp049586s
+      \endverb
+      \verb{eprint}
+      \verb http://dx.doi.org/10.1021/jp049586s
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1021/jp049586s
+      \endverb
+    \endentry
+    \entry{LUTSKO15}{article}{}
+      \name{author}{2}{}{%
+        {{hash=55fbbd4bfc5a584d41ab990ad73782b7}{%
+           family={Lutsko},
+           familyi={L\bibinitperiod},
+           given={James\bibnamedelima F},
+           giveni={J\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+        {{hash=75d1b8f43818eeb7c01dcffef40fac05}{%
+           family={Duran-Olivencia},
+           familyi={D\bibinithyphendelim O\bibinitperiod},
+           given={Miguel\bibnamedelima A},
+           giveni={M\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \strng{namehash}{d0705642cfc1c67b5ca3a00fd8c959f0}
+      \strng{fullhash}{d0705642cfc1c67b5ca3a00fd8c959f0}
+      \strng{authornamehash}{d0705642cfc1c67b5ca3a00fd8c959f0}
+      \strng{authorfullhash}{d0705642cfc1c67b5ca3a00fd8c959f0}
+      \field{sortinit}{5}
+      \field{sortinithash}{c9df3c9fb8f555dd9201cedc5e343021}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Physics: Condensed Matter}
+      \field{number}{23}
+      \field{title}{A two-parameter extension of classical nucleation theory}
+      \field{volume}{27}
+      \field{year}{2015}
+      \field{pages}{235101}
+      \range{pages}{1}
+      \verb{url}
+      \verb http://stacks.iop.org/0953-8984/27/i=23/a=235101
+      \endverb
+    \endentry
+    \entry{MYERSON09}{article}{}
+      \name{author}{3}{}{%
+        {{hash=b6fbd818e49d403b99c6be977d547692}{%
+           family={Erdemir},
+           familyi={E\bibinitperiod},
+           given={Deniz},
+           giveni={D\bibinitperiod}}}%
+        {{hash=6b9f174ab8e512fd234928d0996ecdcd}{%
+           family={Lee},
+           familyi={L\bibinitperiod},
+           given={Alfred\bibnamedelima Y.},
+           giveni={A\bibinitperiod\bibinitdelim Y\bibinitperiod}}}%
+        {{hash=e7562283c63f5dea152fe3c2b06f80d2}{%
+           family={Myerson},
+           familyi={M\bibinitperiod},
+           given={Allan\bibnamedelima S.},
+           giveni={A\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \strng{namehash}{e2450b86a6b12a9b54a18b2e497542e8}
+      \strng{fullhash}{c35954a4c4785e5646927744a4236a68}
+      \strng{authornamehash}{e2450b86a6b12a9b54a18b2e497542e8}
+      \strng{authorfullhash}{c35954a4c4785e5646927744a4236a68}
+      \field{sortinit}{5}
+      \field{sortinithash}{c9df3c9fb8f555dd9201cedc5e343021}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Accounts of Chemical Research}
+      \field{note}{PMID: 19402623}
+      \field{number}{5}
+      \field{title}{Nucleation of Crystals from Solution: Classical and Two-Step Models}
+      \field{volume}{42}
+      \field{year}{2009}
+      \field{pages}{621\bibrangedash 629}
+      \range{pages}{9}
+      \verb{doi}
+      \verb 10.1021/ar800217x
+      \endverb
+      \verb{eprint}
+      \verb http://dx.doi.org/10.1021/ar800217x
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1021/ar800217x
+      \endverb
+    \endentry
+    \entry{OnsagerMachlup}{article}{}
+      \name{author}{2}{}{%
+        {{hash=9877368167726dd57abaab368f6e4a94}{%
+           family={Onsager},
+           familyi={O\bibinitperiod},
+           given={L.},
+           giveni={L\bibinitperiod}}}%
+        {{hash=d2cd4cf6603a89eb42645152bb9f6230}{%
+           family={Machlup},
+           familyi={M\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {American Physical Society}%
+      }
+      \strng{namehash}{deb741fd6b5bc2db5cb44820b2402a52}
+      \strng{fullhash}{deb741fd6b5bc2db5cb44820b2402a52}
+      \strng{authornamehash}{deb741fd6b5bc2db5cb44820b2402a52}
+      \strng{authorfullhash}{deb741fd6b5bc2db5cb44820b2402a52}
+      \field{sortinit}{6}
+      \field{sortinithash}{02bbed3ed82f61ae046619460488516d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issue}{6}
+      \field{journaltitle}{Phys. Rev.}
+      \field{month}{9}
+      \field{title}{Fluctuations and Irreversible Processes}
+      \field{volume}{91}
+      \field{year}{1953}
+      \field{pages}{1505\bibrangedash 1512}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1103/PhysRev.91.1505
+      \endverb
+      \verb{url}
+      \verb http://link.aps.org/doi/10.1103/PhysRev.91.1505
+      \endverb
+    \endentry
+    \entry{Lax}{article}{}
+      \name{author}{1}{}{%
+        {{hash=bc6a8bd75ac85b8fee992e1e3cdd0c4b}{%
+           family={Lax},
+           familyi={L\bibinitperiod},
+           given={Melvin},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {American Physical Society}%
+      }
+      \strng{namehash}{bc6a8bd75ac85b8fee992e1e3cdd0c4b}
+      \strng{fullhash}{bc6a8bd75ac85b8fee992e1e3cdd0c4b}
+      \strng{authornamehash}{bc6a8bd75ac85b8fee992e1e3cdd0c4b}
+      \strng{authorfullhash}{bc6a8bd75ac85b8fee992e1e3cdd0c4b}
+      \field{sortinit}{6}
+      \field{sortinithash}{02bbed3ed82f61ae046619460488516d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issue}{1}
+      \field{journaltitle}{Rev. Mod. Phys.}
+      \field{month}{1}
+      \field{title}{Fluctuations from the Nonequilibrium Steady State}
+      \field{volume}{32}
+      \field{year}{1960}
+      \field{pages}{25\bibrangedash 64}
+      \range{pages}{40}
+      \verb{doi}
+      \verb 10.1103/RevModPhys.32.25
+      \endverb
+      \verb{url}
+      \verb http://link.aps.org/doi/10.1103/RevModPhys.32.25
+      \endverb
+    \endentry
+    \entry{Ronis}{article}{}
+      \name{author}{3}{}{%
+        {{hash=64a0a0ca0b38f2d89776687ff9f630f4}{%
+           family={Ronis},
+           familyi={R\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod}}}%
+        {{hash=bcb302aa5fdd4c5eddb0b92bc0820286}{%
+           family={Procaccia},
+           familyi={P\bibinitperiod},
+           given={Itamar},
+           giveni={I\bibinitperiod}}}%
+        {{hash=b4b63fa339b38276f7188d36359e0144}{%
+           family={Machta},
+           familyi={M\bibinitperiod},
+           given={Jonathan},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {American Physical Society}%
+      }
+      \strng{namehash}{d48e0f43d915f49f62feaf65ea31852f}
+      \strng{fullhash}{234a1feae0b3302fd2d342d3e4d16672}
+      \strng{authornamehash}{d48e0f43d915f49f62feaf65ea31852f}
+      \strng{authorfullhash}{234a1feae0b3302fd2d342d3e4d16672}
+      \field{sortinit}{6}
+      \field{sortinithash}{02bbed3ed82f61ae046619460488516d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issue}{2}
+      \field{journaltitle}{Phys. Rev. A}
+      \field{month}{8}
+      \field{title}{Statistical mechanics of stationary states. VI. Hydrodynamic fluctuation theory far from equilibrium}
+      \field{volume}{22}
+      \field{year}{1980}
+      \field{pages}{714\bibrangedash 724}
+      \range{pages}{11}
+      \verb{doi}
+      \verb 10.1103/PhysRevA.22.714
+      \endverb
+      \verb{url}
+      \verb http://link.aps.org/doi/10.1103/PhysRevA.22.714
+      \endverb
+    \endentry
+    \entry{Fox_and_Uhlenbeck}{article}{}
+      \name{author}{2}{}{%
+        {{hash=057541763131b34bae91539331f85f88}{%
+           family={Fox},
+           familyi={F\bibinitperiod},
+           given={Ronald\bibnamedelima Forrest},
+           giveni={R\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+        {{hash=f58f5b2e5afdb9296483481f664baa90}{%
+           family={Uhlenbeck},
+           familyi={U\bibinitperiod},
+           given={George\bibnamedelima E.},
+           giveni={G\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+      }
+      \strng{namehash}{c6998566007305392a975aca11b2d219}
+      \strng{fullhash}{c6998566007305392a975aca11b2d219}
+      \strng{authornamehash}{c6998566007305392a975aca11b2d219}
+      \strng{authorfullhash}{c6998566007305392a975aca11b2d219}
+      \field{sortinit}{6}
+      \field{sortinithash}{02bbed3ed82f61ae046619460488516d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Physics of Fluids}
+      \field{number}{8}
+      \field{title}{Contributions to Non‐Equilibrium Thermodynamics. I. Theory of Hydrodynamical Fluctuations}
+      \field{volume}{13}
+      \field{year}{1970}
+      \field{pages}{1893\bibrangedash 1902}
+      \range{pages}{10}
+      \verb{doi}
+      \verb http://dx.doi.org/10.1063/1.1693183
+      \endverb
+      \verb{url}
+      \verb http://scitation.aip.org/content/aip/journal/pof1/13/8/10.1063/1.1693183
+      \endverb
+    \endentry
+    \entry{Kardar}{book}{}
+      \name{author}{1}{}{%
+        {{hash=c064bd732249f4144aaa50c56650894d}{%
+           family={{Kardar}},
+           familyi={K\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{c064bd732249f4144aaa50c56650894d}
+      \strng{fullhash}{c064bd732249f4144aaa50c56650894d}
+      \strng{authornamehash}{c064bd732249f4144aaa50c56650894d}
+      \strng{authorfullhash}{c064bd732249f4144aaa50c56650894d}
+      \field{sortinit}{6}
+      \field{sortinithash}{02bbed3ed82f61ae046619460488516d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Statistical Physics of Fields, by Mehran Kardar, pp.~424.~Cambridge University Press, .~ISBN-10: .~ISBN-13:}
+      \field{month}{6}
+      \field{title}{{Statistical Physics of Fields}}
+      \field{year}{2006}
+      \field{pages}{424}
+      \range{pages}{1}
+    \endentry
+  \endsortlist
+\endrefsection
+\endinput
+
