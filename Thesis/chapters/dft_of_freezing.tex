@@ -13,13 +13,13 @@ significantly refined by Youssof and Ramakrishnan \cite{RAMAKRISHNAN79}.
 We'll see that the approach of Youssof and Ramakrishnan was very successful at
 explaining the solidification in the thermodynamic sense. That is to say, it
 elucidates the parameters responsible for solidification but not the dynamical
-pathway responsible for the transition. To discuss the pathway toward  equilibrium
-and the non-equilibrium artifacts introduced along the way into many solids (e.g. grain
-boundaries, vacancies, dislocations, etc) we proceed to extend the CDFT
-framework using the Dynamic Density Functional Theory (DDFT). Noting that the
-full DDFT framework can be intractable in practice, we conclude by introducing a
-simplified density functional theory called the Phase Field Crystal (PFC)
-theory.
+pathway responsible for the transition. To discuss the pathway toward
+equilibrium and the non-equilibrium artifacts introduced along the way into
+many solids (e.g. grain boundaries, vacancies, dislocations, etc) we proceed to
+extend the CDFT framework using the Dynamic Density Functional Theory (DDFT).
+Noting that the full DDFT framework can be intractable in practice, we conclude
+by introducing a simplified density functional theory called the Phase Field
+Crystal (PFC) theory.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Amplitude Expansions} %
@@ -65,9 +65,9 @@ vectors in the crystal lattice and the amplitudes, $\xi_\mathbf{G}$, serve as
 order parameters for freezing. In the liquid phase all amplitudes are zero and
 the average density is uniform, while in the solid phase there are finite
 amplitudes that describe the periodic profile of the crystal lattice. By
-design, $\bar{n}$ is zero for the liquid phase at the melting point 
-\nc{(for that reference density)} and $\bar{n}$ is the fractional density 
-change of solidification, $\eta$ of the solid phase at the melting point, where
+design, $\bar{n}$ is zero for the liquid phase at the melting point (for that
+reference density) and $\bar{n}$ is the fractional density change of
+solidification, $\eta$ of the solid phase at the melting point, where
 %
 \begin{equation}
     \label{eq:eta_def} 
@@ -76,7 +76,7 @@ change of solidification, $\eta$ of the solid phase at the melting point, where
 %
 and in which $\rho_s$ is the macroscopic density of the solid phase.
 
-The amplitudes are constrained by the \nc{point group symmetries of the lattice}.
+The amplitudes are constrained by the point group symmetries of the lattice.
 Grouping the amplitudes of symmetry-equivalent reciprocal lattice vectors
 together we can write the density profile as,
 %
@@ -89,12 +89,18 @@ together we can write the density profile as,
 \end{equation}
 %
 Where $\alpha$ is a label running over sets of symmetry-equivalent reciprocal
-lattice vectors, \nc{and $\lbrace\mathbf{G}\rbrace_\alpha$ represents the set 
-of reciprocal lattice vectors transforming under the symmetry element of the point group
-labelled by $\alpha$.}
+lattice vectors. More precisely, if we apply the projection operator of the
+totally symmetric representation of the lattice point group to the reciprocal
+lattice vectors we may label the distinct linear combinations
+\footnote{These linear combinations are all formally equal to zero. It is
+important to treat opposite vectors ($\mathbf{v}$ and $-\mathbf{v}$) as
+distinct for the sake of calculating the set
+$\lbrace\mathbf{G}\rbrace_\alpha$.} with $\alpha$ \cite{KIM99}. The members of
+these distinct linear combinations form the set
+$\lbrace\mathbf{G}\rbrace_\alpha$.
 
 If we insert equation \ref{amplitudes} into equation \ref{gp} and integrate
-over the unit cell \nc{of the particular crystal we wish to develop the theory for,} 
+over the unit cell of the particular crystal we wish to develop the theory for,
 we find,
 %
 \begin{align}
@@ -118,20 +124,19 @@ factor and the Ornstein-Zernike equation}, namely,
     \rho_l \tilde{C}_0^2(k) = \f{S(k) - 1}{S(k)}\,\,\,\,\forall \,\,k \ne 0.
 \end{equation}
 %
-\nb{had forgotten the subscript $l$ and $C_0^2$?} 
 It follows that solidification must occur when the product $\rho_l
 \tilde{C}^{(2)}_0(\mathbf{G}_\alpha)$ (or equivalently, the reference structure
-factor $S_0(\mathbf{G}_\alpha)$) is large enough to stabilize a
-finite amplitude by creating a new minimum away from zero.  This phenomena is shown
+factor $S_0(\mathbf{G}_\alpha)$) is large enough to stabilize a finite
+amplitude by creating a new minimum away from zero.  This phenomena is shown
 schematically in figure \ref{fig:amplitude_transition} where the grand
 potential is projected on to a particular $\xi_\alpha$ axis and plotted for
 different values of the reference structure factor. When the reference
 structure factors are less than some set of critical critical structure factors 
-(denoted as $S^*(\mathbf{G}_\alpha)$), only zero amplitude solutions are stable. 
-When the reference structure factors are critical both the zero and non-zero amplitude
-solutions are stable and we find liquid-solid coexistence.  Once the reference
-structure factors are greater than critical one the periodic crystalline
-solutions is stable.
+(denoted as $S^*(\mathbf{G}_\alpha)$), only zero amplitude solutions are
+stable.  When the reference structure factors are critical both the zero and
+non-zero amplitude solutions are stable and we find liquid-solid coexistence.
+Once the reference structure factors are greater than critical one the periodic
+crystalline solutions is stable.
 %
 \begin{figure}
     \centering
@@ -203,8 +208,8 @@ majority of the grand potential energy of solidification\cite{RAMAKRISHNAN79}.
         bcc systems and comparison to experiment from \cite{RAMAKRISHNAN79}.
         Theory I uses one order parameter, theory II uses two order parameters
         and theory III uses two order parameters with a higher (third) order
-        expansion in the free energy \nb{does this mean uses a three-point direct correlation function?}. $\eta$ is the fractional density change of
-        solidification from equation \ref{eq:eta_def}
+        expansion in the free energy. $\eta$ is the fractional density change
+        of solidification from equation \ref{eq:eta_def}
     }
 \end{table}
 
@@ -281,7 +286,7 @@ over with the non-equilibrium distribution,
         \trace{\hat{\rho}(x; \q) f(\q, \p, t)}.
 \end{equation}
 %
-Where $\mean{\cdot}_{ne}$ denotes the non-equilibrium average, \nc{(i.e., using $f(\q, \p,t)$)}. Just as the
+Where $\mean{\cdot}_{ne}$ denotes the non-equilibrium average, (i.e., using $f(\q, \p,t)$). Just as the
 non-equilibrium probability distribution is driven to equilibrium by the
 Liouville Equation, so too is the density profile by its own equation of
 motion.
@@ -313,7 +318,7 @@ where $\nabla^\prime$ denotes differentiation with $r^\prime$, and $\mathbf{D}(r
         \hat{\mathbf{J}}(r^\prime, \tau^\prime)},
 \end{equation}
 %
-\nb{$f(\q,\p,t)$ should be $f(\q,\p,t')$ in Eq.(3.15), no?} in which $\hat{\mathbf{J}}(r, t)$ is the local density flux,
+in which $\hat{\mathbf{J}}(r, t)$ is the local density flux,
 %
 \begin{equation}
     \hat{\mathbf{J}}(r, t) \equiv 
@@ -339,7 +344,7 @@ Where $D_0$ is the diffusion coefficient,
 %
 \begin{equation}
     D_0 = \f{1}{3 m^2} \int_0^\infty \mathrm{d}t 
-        \trace{f(\q, \p, t) \nc{p_i(0) \cdot p_i(t)}}.
+        \trace{f(\q, \p, t) p_i(0) \cdot p_i(t)}.
 \end{equation}
 %
 Substituting into equation \ref{eq:mean_eom} we find a simplified equation of
@@ -385,38 +390,38 @@ functional theory of equation \ref{eq:marconi_eom} or \ref{eq:langevin_eom} we
 would face a major impediment: the solid state solutions of the density
 functional theory approach yield sharply peaked solutions at the position of
 the atoms in the lattice. While this is realistic, they are a major challenge
-for numerical algorithms \nc{that aim to explore long-time microstructure evolution}. 
-The challenges are two-fold. First, these sharp peaks
-require a fine mesh to be resolved resulting in intractably large memory requirement to
-simulate domains of any non-trivial scale. Second, linear stability analysis
-of most algorithms demonstrates that the time step size is a monotonically 
-increasing function of the grid spacing, thus only small time steps can be taken
-on a fine mesh. \nc{This further restricts the time scales of microstructure evolution 
-that can be practicality explored to  times scales comparable to those of molecular 
-dynamics --perhaps somewhat longer.}
+for numerical algorithms that aim to explore long-time microstructure
+evolution.  The challenges are two-fold. First, these sharp peaks require a
+fine mesh to be resolved resulting in intractably large memory requirement to
+simulate domains of any non-trivial scale. Second, linear stability analysis of
+most algorithms demonstrates that the time step size is a monotonically
+increasing function of the grid spacing, thus only small time steps can be
+taken on a fine mesh. This further restricts the time scales of microstructure
+evolution that can be practicality explored to times scales comparable to those
+of molecular dynamics --perhaps somewhat longer.
 
 One pragmatic solution to this problem is to further approximate the free
 energy functional of equation \ref{cdft_free_energy} in such a way as to
 produce a theory that retains the essential physics of solidification but
-produces a solid state that is more smoothly peaked. As we will see next,
-the Phase Field Crystal (PFC) theory, \nc{the topic of this thesis, aims to 
-achieve} precisely this balance.
+produces a solid state that is more smoothly peaked. As we will see next, the
+Phase Field Crystal (PFC) theory, the topic of this thesis, aims to achieve
+precisely this balance.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Phase Field Crystal Theory} %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The phase field crystal theory (PFC) presents a solution to the aforementioned numerical
-difficulties faced by DDFT methods by approximating the free energy in such a
-way as to retain the basic features of the theory using a smoother solid state
-description of density . Starting with the approximate free energy functional of equation
-\ref{cdft_free_energy} we proceed as previously by scaling out a factor of the
-reference density and changing variables to a dimensionless density $n(r) =
-(\rho(r) - \rho_l) / \rho_l$,
+The phase field crystal theory (PFC) presents a solution to the aforementioned
+numerical difficulties faced by DDFT methods by approximating the free energy
+in such a way as to retain the basic features of the theory using a smoother
+solid state description of density . Starting with the approximate free energy
+functional of equation \ref{cdft_free_energy} we proceed as previously by
+scaling out a factor of the reference density and changing variables to a
+dimensionless density $n(r) = (\rho(r) - \rho_l) / \rho_l$,
 %
 \begin{equation}
     \f{\beta \F[n(r)]}{\rho_l} = 
-        \int dr \l\lbrace (n(r) + 1) \ln( n(r) + 1) - (1 - \beta\mu)n(r) \r\rbrace
+        \int dr \l\lbrace (n(r) + 1) \ln( n(r) + 1) - (1 - \beta\mu_0)n(r) \r\rbrace
         - \f{1}{2} n(r) \ast \rho_l C^{(2)}_0(r, r^\prime) \ast n(r^\prime).
 \end{equation}
 %
@@ -431,7 +436,7 @@ $n(r) = 0$, to fourth order,
 \end{equation}
 %
 Where the linear term can be dropped by redefining the density $n(r)$ about its
-average \nb{also assumes that $\mu$ is expanded about $\mu_o$, and dropping higher order susceptibility terms, right?}.  Most phase field crystal theories also use a simplified equation of
+average. Most phase field crystal theories also use a simplified equation of
 motion as well,
 %
 \begin{equation}
@@ -440,4 +445,17 @@ motion as well,
 \end{equation}
 %
 
-\nc{As alluded to above, these two simplifications formally make the PFC theory different from CDFT, turning it instead into a type of Ginzgurb-Landau type of field theory, where $n$ represents an order parameter that becomes periodic in the solid state. As has been shown in the PFC literature, this apparently gross over-simplification of CDFT manages to correctly reproduce many of the qualitative physics of solidification, such as nucleation, grain boundary misorientation energy, elastic response and dislocations in the solid phase, vacancy diffusion and creep, grain boundary pre-melting, vacancy trapping, and numerous other effects. It is thus hoped that by progressively improving on the parameterization of  PFC theories, guided always by inspection of the underlying  forms and parametrization of CDFT and DDFT, it will be possible to eventually develop a PFC theory that also captures the physics of the aforementioned processes quantitatively.}
+As alluded to above, these two simplifications formally make the PFC theory
+different from CDFT, turning it instead into a type of Ginzgurb-Landau type of
+field theory, where $n$ represents an order parameter that becomes periodic in
+the solid state. As has been shown in the PFC literature, this apparently gross
+over-simplification of CDFT manages to correctly reproduce many of the
+qualitative physics of solidification, such as nucleation, grain boundary
+misorientation energy, elastic response and dislocations in the solid phase,
+vacancy diffusion and creep, grain boundary pre-melting, vacancy trapping, and
+numerous other effects. It is thus hoped that by progressively improving on the
+parameterization of  PFC theories, guided always by inspection of the
+underlying  forms and parametrization of CDFT and DDFT, it will be possible to
+eventually develop a PFC theory that also captures the physics of the
+aforementioned processes quantitatively.
+
