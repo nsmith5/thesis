@@ -1,0 +1,30 @@
+# Yaml Initialization file for simulation
+# !!!ATTN!!!: always put a space between parameters and values!
+
+# Numerical parameters
+N  : 1024
+dx : 0.125
+dt : 0.00250
+
+# Thermodynamic parameters
+eta     : 2.0
+chi     : 1.0
+epsilon0 : 30.0
+sigma0  : 0.15
+sigma   : 0.07
+omega   : 0.30
+Wc      : 3.0
+
+# Mobilities
+Mn : 1.0
+Mc : 1.0
+
+# Correlation function parameters
+k0      : 6.283185307179586
+alpha   : 0.8
+beta    : 6.0
+rho     : 0.8660254037844386
+alphac  : 0.5
+
+n0 : 0.05
+c0 : 0.3
