@@ -1,14 +1,14 @@
-# LibBinary
+# libbinary
 
-LibBinary is a high performance C library for simulating the binary XPFC model.
+libbinary is a high performance C library for simulating the binary XPFC model.
 It uses MPI for large scale distributed parallelism. 
 
 # Building and Dependencies
 
-LibBinary is an MPI library and as such it requires an MPI Compiler. Both
+libbinary is an MPI library and as such it requires an MPI Compiler. Both
 OpenMPI and MPICH have been tested to work, but once you chose one you must be
 sure that you compile all relevant dependencies with the same thing. Speaking of
-dependencies, LibBinary requires:
+dependencies, libbinary requires:
 
  - `gsl` the GNU Scientific Library
  - `HDF5` a high performance parallel I/O library for saving simulation results
