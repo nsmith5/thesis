@@ -1,19 +1,19 @@
-#include <stdlib.h>
+#include <stdlib.h>         // malloc etc
 #include <math.h>
 #include <fftw3-mpi.h>
 #include <fftw3.h>
-#include <gsl/gsl_rng.h>
-#include <time.h>
-#include <sys/types.h>
-#include <unistd.h>
+#include <gsl/gsl_rng.h>    // Random number generator
+#include <time.h>           // Time seed
+#include <sys/types.h>      // I forget why this is here...
+#include <unistd.h>         // Get pid and parent pid for seed
 
-#include "binary.h"
+#include "binary.h"         // libbinary header
 
 #define PI 2*acos(0)
 
 static double ipow (double x, int p)
 {
-    /* Unsafe x^p computation */
+    /* Unsafe recursive x^p computation */
     if (p == 1) return x;
     else return x*ipow(x, p-1);
 }
@@ -32,6 +32,7 @@ double calc_k (int i, int j, int N, double dx)
 
 void set_k2 (state* s)
 {
+    /* Precompute laplacian (up to a negative) for each index [i,j]*/
     double k;
     int ij;
 
@@ -50,9 +51,13 @@ void set_k2 (state* s)
 
 state* create_state (int N, double dx, double dt)
 {
-    /* Make a state pointer */
+    /* Allocate memory for a state given numerical details*/
+
+    /* MPI Rank */    
     int rank;
-    ptrdiff_t local_alloc;
+    
+    /* Local allocation of arrays (FFTW will tell us this) */
+    ptrdiff_t local_alloc;     
 
     state *s = malloc (sizeof (state));
     if (s == NULL) return NULL;
@@ -72,12 +77,15 @@ state* create_state (int N, double dx, double dt)
         return NULL;
     }
     MPI_Comm_rank (MPI_COMM_WORLD, &rank);
+
+    /* Fairly *random* seed */
     gsl_rng_set (s->rng, (
           (unsigned long)time(NULL) 
         + (unsigned long)clock()
         + (unsigned long)getpid()
-        + (unsigned long)getppid()) * (rank + 1));   // Super entropy!!!!!!!!
+        + (unsigned long)getppid()) * (rank + 1));
 
+    /* Ask FFTW how much memory this process will manage */
     local_alloc =
         fftw_mpi_local_size_2d_transposed (N,
                                            N/2 + 1,
@@ -87,7 +95,7 @@ state* create_state (int N, double dx, double dt)
                                            &s->local_n1,
                                            &s->local_1_start);
 
-    /* Allocate soo much memory */
+    /* Allocate a small mountain of memory */
     s->c    = fftw_alloc_real (2 * local_alloc);
     s->n    = fftw_alloc_real (2 * local_alloc);
     s->fnnl = fftw_alloc_complex (local_alloc);
@@ -131,6 +139,7 @@ state* create_state (int N, double dx, double dt)
          s->Qc    == NULL ||
          s->Lc    == NULL)
     {
+        /* If it wasn't obtained, free it and return NULL */
         fftw_free (s->c);
         fftw_free (s->n);
         fftw_free (s->fnnl);
@@ -154,7 +163,12 @@ state* create_state (int N, double dx, double dt)
         return NULL;
     }
 
-    /* Make FFT Plans */
+    /*      Make FFT Plans
+     * 
+     * This particular transform will *not* be transposed because that 
+     * doesn't matter to us. It *does* mean that the library looks a 
+     * little different than other FFTW examples you'll find online
+     */
     s->fft_plan =
         fftw_mpi_plan_dft_r2c_2d (N,
                                   N,
@@ -171,16 +185,18 @@ state* create_state (int N, double dx, double dt)
                                   MPI_COMM_WORLD,
                                   FFTW_MEASURE | FFTW_MPI_TRANSPOSED_IN);
 
-    /* Make k2 operator */
+    /* Make Laplacian operator (up to a negative) */
     set_k2 (s);
 
+    /* Wait for everyone to finish up */
     MPI_Barrier(MPI_COMM_WORLD);
+
   	return s;
 }
 
 void destroy_state (state* s)
 {
-    // Free Memory of state
+    /* Throw the state in the trash (free everything) */
     if (s != NULL)
     {
         fftw_destroy_plan (s->fft_plan);
@@ -212,7 +228,8 @@ void destroy_state (state* s)
 
 void set_C (state* s)
 {
-    /*
+    /*      Set the density-density correlation function
+     * 
      * Call this function if the temperature has changed and the correlation
      * function must be reset
      */
