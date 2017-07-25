@@ -45,6 +45,8 @@ h5pcc obj/input.o -Bstatic -lbinary -I../include -L../ -Wall -O3 -std=c11 -Bdyna
 rm obj/restart.o obj/input.o obj/benchmark.o
 ```
 
-# Usage
+# Hacking and Usage
+
+
 
 # Questions
