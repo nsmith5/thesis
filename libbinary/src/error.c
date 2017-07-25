@@ -1,7 +1,4 @@
 /*
- * This is a part of Diffusion Equation MPI
- * Nathan Smith (c) 2016
- *
  * This code implements error handling. If an error is detected somewhere
  * an error can be thrown by calling error("<Error string here>").
  */

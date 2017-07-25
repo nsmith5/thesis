@@ -1,8 +1,8 @@
 /*
- * This file is part of Diffusion Equation MPI
- * Nathan Smith (c) 2016
- *
  * This file impliments I/0 using HDF5
+ *
+ * Just a warning: this is a hairy one. Read the HDF5 docs
+ * for help on the details.
  */
 
 
@@ -31,6 +31,8 @@ void mpi_print (const char *str)
 
 hid_t io_init_from_file (const char *filename)
 {
+    /* Open HDF5 file and pass back file ID */
+
     MPI_Comm comm = MPI_COMM_WORLD;
     MPI_Info info = MPI_INFO_NULL;
     hid_t plist_id;
@@ -53,8 +55,8 @@ hid_t io_init_from_file (const char *filename)
 hid_t io_init_new_file (const char *filename)
 {
     /*
-    *  Create a file to save data to for this session
-    */
+     *  Create a file to save data to for this session
+     */
     MPI_Comm comm = MPI_COMM_WORLD;
     MPI_Info info = MPI_INFO_NULL;
     hid_t plist_id;     /* Property list id */
@@ -77,6 +79,7 @@ hid_t io_init_new_file (const char *filename)
 
 herr_t io_finalize (hid_t file_id)
 {
+    /* Close HDF5 file */
     return H5Fclose(file_id);
 }
 
@@ -85,6 +88,10 @@ herr_t write_array_dataset (const char *name,
                             double     *arr,
                             state      *s)
 {
+     /* 
+      * Write an N x N double array *arr* to
+      * group with id *group_id*. Name it *name*.
+      */
      hid_t dset_id, dataspace;
      hid_t memspace, plist_id;
      herr_t status;
@@ -149,6 +156,7 @@ herr_t read_array_dataset (const char *name,
                            double     *arr,
                            state      *s)
 {
+    /* Opposite of *write_array_dataset* */
     hid_t dset_id, dataspace;
     hid_t memspace, plist_id;
     herr_t status;
@@ -201,6 +209,10 @@ herr_t write_double_attribute (const char *name,
                                hid_t       group_id,
                                double     *value)
 {
+     /* 
+      * Write a double attribute to the group *group_id*
+      * under the name *name*
+      */
      hsize_t size = 1;
      herr_t status;
      hid_t attr_id, dataspace;
@@ -223,7 +235,7 @@ herr_t read_double_attribute (const char *name,
                               hid_t       group_id,
                               double     *value)
 {
-    /* Read integer attribute from dataset 'group_id' */
+    /* Read double attribute from dataset 'group_id' */
     hid_t attr_id;
     herr_t status;
 
@@ -238,6 +250,7 @@ herr_t write_int_attribute (const char *name,
                             hid_t       group_id,
                             int        *value)
 {
+     /* ..... you get the idea... */
      hsize_t size = 1;
      herr_t status;
      hid_t attr_id, dataspace;
@@ -275,12 +288,12 @@ herr_t read_int_attribute (const char *name,
 herr_t save_state (state *s,
                    hid_t  file_id)
 {
+     /* Save entire state at a time step */
      hid_t group_id;
      herr_t status;
      int N_int;
 
      /* Make Group from simulation time `t` */
-
      char groupname[50];
      char step_str[10];
      sprintf(step_str, "%d", s->step);
@@ -383,6 +396,7 @@ state* load_state (hid_t       file_id,
 
 state* new_state_from_file (const char *filename)
 {
+    /* Read state out of a YAML file *filename* */
     FILE *ifp;
     char *mode = "r";
     state* s;
@@ -392,22 +406,29 @@ state* new_state_from_file (const char *filename)
     double dt, dx;
     double n0, c0;
 
+    // Open up the file
     ifp = fopen (filename, mode);
     assert (ifp != NULL);
 
     while (fscanf(ifp, "%s : %lf", name, &value) != EOF)
     {
+        // Scan for the numerical details
         if (strcmp (name, "N") == 0)        N = (int)value;
         else if (strcmp(name, "dx") == 0)   dx = value;
         else if (strcmp(name, "dt") == 0)   dt = value;
     }
 
+    // Allocate state with *ZERO* assertion that we
+    // have legitimate values (pretty dangerous)
     s = create_state (N, dx, dt);
     assert (s != NULL);
+    
+    // Rewind to the start of the file
     rewind (ifp);
 
     while (fscanf(ifp, "%s : %lf", name, &value) != EOF)
     {
+        // Scan for all other variables from the YAML file
         if (strcmp (name, "eta") == 0)          s->eta = value;
         else if (strcmp (name, "Mc") == 0)      s->Mc = value;
         else if (strcmp (name, "Mn") == 0)      s->Mn = value;
@@ -426,6 +447,7 @@ state* new_state_from_file (const char *filename)
         else if (strcmp (name, "c0") == 0)      c0 = value;
     }
 
+    // Initialize the fields as uniform from n0 and c0 parameters
     for (int i = 0; i < s->local_n0; i++)
     {
         for (int j = 0; j < N; j++)
@@ -436,11 +458,12 @@ state* new_state_from_file (const char *filename)
         }
     }
 
-
     s->step = 0;
     s->t = 0.0;
     set_C (s);
     set_propagators (s);
 
+    // Ultra dangerously return the state without any checking that
+    // this process actually worked
     return s;
 }
