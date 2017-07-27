@@ -11,12 +11,46 @@
 
 #define PI 2*acos(0)
 
+/* Field methods */
+
+field* create_field (ptrdiff_t size)
+{
+    field *f = malloc (sizeof (field));
+    f->real = fftw_alloc_real (2 * size);
+    f->fourier = fftw_alloc_complex (size);
+    return f;
+}
+
+
+void destroy_field (field *f)
+{
+    fftw_free(f->real);
+    fftw_free(f->fourier);
+    free(f);
+}
+
+
+void fft(fftw_plan plan, field *f)
+{
+    /* Fourier transform field */
+    fftw_mpi_execute_dft_r2c(plan, f->real, f->fourier);
+}
+
+
+void ifft(fftw_plan plan, field *f)
+{
+    /* Inverse Fourier transform field */
+    fftw_mpi_execute_dft_c2r(plan, f->fourier, f->real);
+}
+
+
 static double ipow (double x, int p)
 {
     /* Unsafe recursive x^p computation */
     if (p == 1) return x;
     else return x*ipow(x, p-1);
 }
+
 
 double calc_k (int i, int j, int N, double dx)
 {
@@ -29,6 +63,7 @@ double calc_k (int i, int j, int N, double dx)
 
     return sqrt(kx2 + ky2);
 }
+
 
 void set_k2 (state* s)
 {
@@ -49,18 +84,20 @@ void set_k2 (state* s)
     return;
 }
 
+
 state* create_state (int N, double dx, double dt)
 {
     /* Allocate memory for a state given numerical details*/
 
-    /* MPI Rank */    
-    int rank;
+    int rank;  // MPI Rank
     
     /* Local allocation of arrays (FFTW will tell us this) */
-    ptrdiff_t local_alloc;     
+    ptrdiff_t local_alloc;
 
     state *s = malloc (sizeof (state));
-    if (s == NULL) return NULL;
+
+    /* Get MPI Rank */
+    MPI_Comm_rank (MPI_COMM_WORLD, &rank);
 
     /* Get numerical parameters sorted */
     s->N = N;
@@ -69,16 +106,10 @@ state* create_state (int N, double dx, double dt)
     s->t = 0.0;
     s->step = 0;
 
-    /* Allocate RNG and seed */
+    /* Allocate RNG */
     s->rng = gsl_rng_alloc (gsl_rng_default);
-    if (s->rng == NULL)
-    {
-        gsl_rng_free (s->rng);
-        return NULL;
-    }
-    MPI_Comm_rank (MPI_COMM_WORLD, &rank);
 
-    /* Fairly *random* seed */
+    /* Fairly *random* seed (very UNIX platform specific)*/
     gsl_rng_set (s->rng, (
           (unsigned long)time(NULL) 
         + (unsigned long)clock()
@@ -86,28 +117,20 @@ state* create_state (int N, double dx, double dt)
         + (unsigned long)getppid()) * (rank + 1));
 
     /* Ask FFTW how much memory this process will manage */
-    local_alloc =
-        fftw_mpi_local_size_2d_transposed (N,
-                                           N/2 + 1,
-                                           MPI_COMM_WORLD,
-                                           &s->local_n0,
-                                           &s->local_0_start,
-                                           &s->local_n1,
-                                           &s->local_1_start);
+    local_alloc = fftw_mpi_local_size_2d_transposed (N, N/2 + 1, MPI_COMM_WORLD,
+                                                     &s->local_n0, &s->local_0_start,
+                                                     &s->local_n1, &s->local_1_start);
 
     /* Allocate a small mountain of memory */
-    s->c    = fftw_alloc_real (2 * local_alloc);
-    s->n    = fftw_alloc_real (2 * local_alloc);
-    s->fnnl = fftw_alloc_complex (local_alloc);
-    s->fcnl = fftw_alloc_complex (local_alloc);
-    s->fc   = fftw_alloc_complex (local_alloc);
-    s->fn   = fftw_alloc_complex (local_alloc);
-    s->fCn  = fftw_alloc_complex (local_alloc);
+    s->c = create_field (local_alloc);
+    s->n = create_field (local_alloc);
+    s->cnl = create_field (local_alloc);
+    s->nnl = create_field (local_alloc);
+    s->Cn = create_field (local_alloc);
+
     s->fxin = fftw_alloc_complex (local_alloc);
     s->fxic = fftw_alloc_complex (local_alloc);
-    s->Cn   = fftw_alloc_real (2 * local_alloc);
-    s->nnl  = fftw_alloc_real (2 * local_alloc);
-    s->cnl  = fftw_alloc_real (2 * local_alloc);
+
     s->k2   = fftw_alloc_real (local_alloc);
     s->C    = fftw_alloc_real (local_alloc);
 	s->Pn 	= fftw_alloc_real (local_alloc);
@@ -117,73 +140,19 @@ state* create_state (int N, double dx, double dt)
 	s->Qc 	= fftw_alloc_real (local_alloc);
 	s->Lc 	= fftw_alloc_real (local_alloc);
 
-    /* Check that our mountain of memory was obtained */
-    if ( s->c     == NULL ||
-         s->n     == NULL ||
-         s->fnnl  == NULL ||
-         s->fcnl  == NULL ||
-         s->fc    == NULL ||
-         s->fn    == NULL ||
-         s->fCn   == NULL ||
-         s->fxin  == NULL ||
-         s->fxic  == NULL ||
-         s->Cn    == NULL ||
-         s->nnl   == NULL ||
-         s->cnl   == NULL ||
-         s->k2    == NULL ||
-         s->C     == NULL ||
-		 s->Pn	  == NULL ||
-         s->Qn    == NULL ||
-         s->Ln    == NULL ||
-         s->Pc    == NULL ||
-         s->Qc    == NULL ||
-         s->Lc    == NULL)
-    {
-        /* If it wasn't obtained, free it and return NULL */
-        fftw_free (s->c);
-        fftw_free (s->n);
-        fftw_free (s->fnnl);
-        fftw_free (s->fcnl);
-        fftw_free (s->fc);
-        fftw_free (s->fn);
-        fftw_free (s->fCn);
-        fftw_free (s->fxin);
-        fftw_free (s->fxic);
-        fftw_free (s->Cn);
-        fftw_free (s->nnl);
-        fftw_free (s->cnl);
-        fftw_free (s->k2);
-        fftw_free (s->C);
-        fftw_free (s->Pn);
-        fftw_free (s->Qn);
-        fftw_free (s->Ln);
-        fftw_free (s->Pc);
-        fftw_free (s->Qc);
-        fftw_free (s->Lc);
-        return NULL;
-    }
-
     /*      Make FFT Plans
      * 
      * This particular transform will *not* be transposed because that 
      * doesn't matter to us. It *does* mean that the library looks a 
      * little different than other FFTW examples you'll find online
      */
-    s->fft_plan =
-        fftw_mpi_plan_dft_r2c_2d (N,
-                                  N,
-                                  s->c,
-                                  s->fc,
-                                  MPI_COMM_WORLD,
-                                  FFTW_MEASURE | FFTW_MPI_TRANSPOSED_OUT);
+    s->fft_plan = fftw_mpi_plan_dft_r2c_2d (N, N, s->c->real, s->c->fourier, 
+                                            MPI_COMM_WORLD,
+                                            FFTW_MEASURE | FFTW_MPI_TRANSPOSED_OUT);
 
-    s->ifft_plan =
-        fftw_mpi_plan_dft_c2r_2d (N,
-                                  N,
-                                  s->fc,
-                                  s->c,
-                                  MPI_COMM_WORLD,
-                                  FFTW_MEASURE | FFTW_MPI_TRANSPOSED_IN);
+    s->ifft_plan = fftw_mpi_plan_dft_c2r_2d (N, N, s->c->fourier, s->c->real,
+                                             MPI_COMM_WORLD,
+                                             FFTW_MEASURE | FFTW_MPI_TRANSPOSED_IN);
 
     /* Make Laplacian operator (up to a negative) */
     set_k2 (s);
@@ -197,33 +166,30 @@ state* create_state (int N, double dx, double dt)
 void destroy_state (state* s)
 {
     /* Throw the state in the trash (free everything) */
-    if (s != NULL)
-    {
-        fftw_destroy_plan (s->fft_plan);
-        fftw_destroy_plan (s->ifft_plan);
-        fftw_free (s->c);
-        fftw_free (s->n);
-        fftw_free (s->fnnl);
-        fftw_free (s->fcnl);
-        fftw_free (s->fc);
-        fftw_free (s->fn);
-        fftw_free (s->fCn);
-        fftw_free (s->fxin);
-        fftw_free (s->fxic);
-        fftw_free (s->Cn);
-        fftw_free (s->nnl);
-        fftw_free (s->cnl);
-        fftw_free (s->k2);
-        fftw_free (s->C);
-        fftw_free (s->Pn);
-        fftw_free (s->Qn);
-        fftw_free (s->Ln);
-        fftw_free (s->Pc);
-        fftw_free (s->Qc);
-        fftw_free (s->Lc);
-        gsl_rng_free (s->rng);
-  	    free (s);
-    }
+    fftw_destroy_plan (s->fft_plan);
+    fftw_destroy_plan (s->ifft_plan);
+
+    destroy_field (s->c);
+    destroy_field (s->n);
+    destroy_field (s->cnl);
+    destroy_field (s->nnl);
+    destroy_field (s->Cn);
+
+    fftw_free (s->fxin);
+    fftw_free (s->fxic);
+
+    fftw_free (s->k2);
+    fftw_free (s->C);
+    fftw_free (s->Pn);
+    fftw_free (s->Qn);
+    fftw_free (s->Ln);
+    fftw_free (s->Pc);
+    fftw_free (s->Qc);
+    fftw_free (s->Lc);
+
+    gsl_rng_free (s->rng);
+
+    free (s);
 }
 
 void set_C (state* s)
@@ -275,4 +241,20 @@ void set_propagators (state* s)
             s->Qc[ij] = -s->k2[ij] * s->Lc[ij];
 		}
 	}
+}
+
+void set_uniform (double* arr, double value, ptrdiff_t M, ptrdiff_t N)
+{
+    /* Set array to uniform value */
+    int ij;
+
+    for (int i = 0; i < M; i++)
+    {
+        for (int j = 0; j < N; j++)
+        {
+            // A somewhat odd index due to FFTW allocation specs
+            ij = i * 2 * ((N >> 1) + 1) + j;
+            arr[ij] = value;
+        }
+    }
 }

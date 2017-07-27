@@ -9,8 +9,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <signal.h>     // Catch signals for killing the simulation gracefully
-#include <stdbool.h>    // Booleans...just because they help reading
 
 #include "binary.h"
 

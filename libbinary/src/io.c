@@ -332,8 +332,8 @@ herr_t save_state (state *s,
      N_int = (int)s->N;
      status = write_int_attribute ("N", group_id, &N_int);
 
-     status = write_array_dataset ("Concentration", group_id, s->c, s);
-     status = write_array_dataset ("Density",   group_id, s->n, s);
+     status = write_array_dataset ("Concentration", group_id, s->c->real, s);
+     status = write_array_dataset ("Density",   group_id, s->n->real, s);
 
      status = H5Gclose (group_id);
 
@@ -348,7 +348,6 @@ state* load_state (hid_t       file_id,
     int N_int;
     double dx, dt;
     hid_t group_id;
-    herr_t status;
 
     group_id = H5Gopen2 (file_id, datafile, H5P_DEFAULT);
 
@@ -359,37 +358,36 @@ state* load_state (hid_t       file_id,
     N = (ptrdiff_t)N_int;
 
     s = create_state (N, dx, dt);
-    assert (s != NULL);
 
     /* Read state attributes */
 
-    status = read_double_attribute ("eta",      group_id, &s->eta);
-    status = read_double_attribute ("chi",      group_id, &s->chi);
-    status = read_double_attribute ("epsilon_0",group_id, &s->epsilon0);
-    status = read_double_attribute ("sigma0",   group_id, &s->sigma0);
-    status = read_double_attribute ("sigma",    group_id, &s->sigma);
-    status = read_double_attribute ("omega",    group_id, &s->omega);
-    status = read_double_attribute ("Wc",       group_id, &s->Wc);
+    read_double_attribute ("eta",      group_id, &s->eta);
+    read_double_attribute ("chi",      group_id, &s->chi);
+    read_double_attribute ("epsilon_0",group_id, &s->epsilon0);
+    read_double_attribute ("sigma0",   group_id, &s->sigma0);
+    read_double_attribute ("sigma",    group_id, &s->sigma);
+    read_double_attribute ("omega",    group_id, &s->omega);
+    read_double_attribute ("Wc",       group_id, &s->Wc);
 
-    status = read_double_attribute ("Mn", group_id, &s->Mn);
-    status = read_double_attribute ("Mc", group_id, &s->Mc);
+    read_double_attribute ("Mn", group_id, &s->Mn);
+    read_double_attribute ("Mc", group_id, &s->Mc);
 
-    status = read_double_attribute ("k0",     group_id, &s->k0);
-    status = read_double_attribute ("alpha",  group_id, &s->alpha);
-    status = read_double_attribute ("beta",   group_id, &s->beta);
-    status = read_double_attribute ("rho",    group_id, &s->rho);
-    status = read_double_attribute ("alphac", group_id, &s->alphac);
+    read_double_attribute ("k0",     group_id, &s->k0);
+    read_double_attribute ("alpha",  group_id, &s->alpha);
+    read_double_attribute ("beta",   group_id, &s->beta);
+    read_double_attribute ("rho",    group_id, &s->rho);
+    read_double_attribute ("alphac", group_id, &s->alphac);
 
-    status = read_double_attribute ("Time",   group_id, &s->t);
-    status = read_int_attribute ("Time Step", group_id, &s->step);
+    read_double_attribute ("Time",   group_id, &s->t);
+    read_int_attribute ("Time Step", group_id, &s->step);
 
-    status = read_array_dataset ("Concentration", group_id, s->c, s);
-    status = read_array_dataset ("Density",   group_id, s->n, s);
+    read_array_dataset ("Concentration", group_id, s->c->real, s);
+    read_array_dataset ("Density",   group_id, s->n->real, s);
 
     set_C (s);
     set_propagators (s);
 
-    status = H5Gclose (group_id);
+    H5Gclose (group_id);
 
     return s;
 }
@@ -406,6 +404,10 @@ state* new_state_from_file (const char *filename)
     double dt, dx;
     double n0, c0;
 
+    /* Setinal Values */
+    dt = dx = c0 = n0 = -1.0;
+    N = -1;
+
     // Open up the file
     ifp = fopen (filename, mode);
     assert (ifp != NULL);
@@ -418,8 +420,13 @@ state* new_state_from_file (const char *filename)
         else if (strcmp(name, "dt") == 0)   dt = value;
     }
 
+    if (N == -1 || dx == -1.0 || dt == -1.0)
+    {
+        my_error("Failed to load numerical values from YAML file");
+    }
+
     // Allocate state with *ZERO* assertion that we
-    // have legitimate values (pretty dangerous)
+    // have legitimate values for N, dx, or dt.
     s = create_state (N, dx, dt);
     assert (s != NULL);
     
@@ -447,16 +454,14 @@ state* new_state_from_file (const char *filename)
         else if (strcmp (name, "c0") == 0)      c0 = value;
     }
 
-    // Initialize the fields as uniform from n0 and c0 parameters
-    for (int i = 0; i < s->local_n0; i++)
+    if (n0 == -1.0 || c0 == -1.0)
     {
-        for (int j = 0; j < N; j++)
-        {
-            int ij = i*2*((N>>1) + 1) + j;
-            s->c[ij] = c0;
-            s->n[ij] = n0;
-        }
+        my_error ("Failed to load initial density n0 or initial concentration c0 from YAML file");
     }
+
+    // Initialize the fields as uniform from n0 and c0 parameters
+    set_uniform (s->n->real, n0, s->local_n0, N);
+    set_uniform (s->c->real, c0, s->local_n0, N);
 
     s->step = 0;
     s->t = 0.0;

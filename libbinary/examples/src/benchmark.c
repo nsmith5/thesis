@@ -51,15 +51,8 @@ int main(int argc,
     set_C(s);
     set_propagators (s);
 
-    for (int i = 0; i < s->local_n0; i++)
-    {
-        for (int j = 0; j < N; j++)
-        {
-            int ij = i * 2 * ((N >> 1) + 1) + j;
-            s->c[ij] = 0.3;
-            s->n[ij] = 0.05;
-        }
-    }
+    set_uniform(s->c->real, 0.3, s->local_n0, N);
+    set_uniform(s->n->real, 0.05, s->local_n0, N);
 
     mpi_print("Starting...");
     MPI_Barrier(MPI_COMM_WORLD);

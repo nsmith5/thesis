@@ -5,6 +5,21 @@
 
 /* State structure and Functions */
 
+/* Field with real and Fourier representations */
+typedef struct
+{
+	double* real;
+	fftw_complex* fourier;
+
+}
+field;
+
+field* create_field (ptrdiff_t);
+void destroy_field (field*);
+
+void fft (fftw_plan, field*);
+void ifft (fftw_plan, field*);
+
 typedef struct
 {
 	/* Free Energy Parameters */
@@ -28,32 +43,26 @@ typedef struct
 	double alphac;
 
 	/* Numerical Parameters */
-	double dx;
-	double dt;
-	double t;
-	int step;
-	ptrdiff_t N;
-	ptrdiff_t local_n0;
-	ptrdiff_t local_0_start;
-	ptrdiff_t local_n1;
-	ptrdiff_t local_1_start;
+	double dx;					// Grid spacing
+	double dt;					// Time step size
+	double t;					// "time"
+	int step;					// Time step number
+	ptrdiff_t N;				// Size of domain (N x N)
+	ptrdiff_t local_n0;			// Local number of rows in real space
+	ptrdiff_t local_0_start;	// Local start row in real space
+	ptrdiff_t local_n1;			// Local number of rows in fourier space
+	ptrdiff_t local_1_start;	// Local start row in fourier space
 
 	/* Fields */
-	double *c;
-	double *n;
+	field *c;		// Concentration
+	field *n;		// Reduced density (rho - rho0) / rho
+	
+	field *cnl;	 	// Nonlinear part of concentration EOM
+	field *nnl;  	// Nonlinear part of density EOM
+	field *Cn;	 	// C * n term
 
-	/* Temporary fields */
-	fftw_complex *fnnl;
-	fftw_complex *fcnl;
-	fftw_complex *fc;
-	fftw_complex *fn;
-	fftw_complex *fCn;
-	fftw_complex *fxin;
-	fftw_complex *fxic;
-
-	double *Cn;
-	double *nnl;
-	double *cnl;
+	fftw_complex *fxin;		// Fourier space noise for density
+	fftw_complex *fxic;		// Fourier space noise for concentration
 
 	/* Propagator fields */
 	double *Pn;
@@ -76,32 +85,33 @@ typedef struct
 }
 state;
 
-state* create_state (int N, double dx,double dt);
-void destroy_state (state* s);
-void set_C (state *s);
-void set_propagators (state *s);
-void make_square (state *s, double h);
-void make_const (state *s, double h);
-double calc_k (int i, int j, int N, double dx);
+state* create_state (int, double, double);
+void destroy_state (state*s);
+
+double calc_k(int, int, int, double);
+void set_C (state*);
+void set_k2 (state*);
+void set_propagators (state*);
+
+void set_uniform (double*, double, ptrdiff_t, ptrdiff_t);
 
 /* I/O Functions */
 
-void mpi_print (const char *str);
-hid_t io_init_new_file (const char *filename);
-hid_t io_init_from_file (const char *filename);
-herr_t io_finalize (hid_t file_id);
-herr_t save_state (state* s, hid_t file_id);
-state* load_state (hid_t file_id, const char *datafile);
-state* new_state_from_file (const char *filename);
+void mpi_print (const char*);
+hid_t io_init_new_file (const char*);
+hid_t io_init_from_file (const char*);
+herr_t io_finalize (hid_t);
+herr_t save_state (state*, hid_t);
+state* load_state (hid_t, const char *);
+state* new_state_from_file (const char*);
 
 /* Error handling */
 
-void my_error (const char* error_string);
+void my_error (const char*);
 
 /* Time stepping Algorithm Functions */
 
 void step (state *s);
-void normalize (state *s, fftw_complex *field);
 
 /* Simulation Setup Functions */
 
