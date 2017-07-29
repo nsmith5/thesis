@@ -2,10 +2,13 @@
 
 In this chapter we will review two current simplified binary PFC models.  The
 first is the original binary PFC model of Elder \textit{et al.} \cite{ELDER07}
-and the second is the binary structural PFC model  model of Greenwood
-\textit{et al.} \cite{GREENWOOD11_BINARY} --coined the binary XPFC model. We
-begin by establishing background shared by  all binary PFC models and move on
-to summarize and review each.
+and the second is the binary structural PFC (XPFC) model of Greenwood
+\textit{et al.} \cite{GREENWOOD11_BINARY}. We begin by establishing background
+shared by all binary PFC models and move on to summarize and review each.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Binary PFC Background} %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 We begin with a multicomponent variant of the approximate free energy
 functional established in Chapter \ref{chapter:cdft_intro},
@@ -37,7 +40,8 @@ free energy functional in these new variables into three parts,
         + \f{\beta\F_{ex}[n, c]}{\rho_0},
 \end{equation}
 %
-where,
+where, $\F_{id}$, $\F_{mix}$ and $\F_{ex}$ are the ideal, mixing and excess
+free energies respectively. These are defined as,
 %
 \begin{gather}
     \label{binary_ideal}
@@ -170,21 +174,20 @@ A second limitation of the original simplified model is that it is local in
 concentration. This means that realistic phase diagrams from 0 to 100\%
 concentration cannot be produced, only local phase diagrams around the
 reference concentration\footnote{Indeed, the original model "concentration" was
-in fact a density difference, not  true concentration.}.  To construct
-experimentally relevant phase diagrams, we require the entire free energy of
-mixing term in equation \ref{binary_mixing}. It is important to mention
-that global phase diagram couched in terms of the variable $c$ is important for
-sharing binary PFC results with the wider material science community, and
-establishing a shared language.
+in fact a density difference, not true concentration.}. The limited
+concentration range is problematic for comparing to experimental phase
+diagrams. To obtain relatable and testable results, a major motivation for
+binary XPFC and this work, we require the entire free energy of mixing term in
+eqution \ref{binary_mixing}.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Original Binary Structural Phase Field Crystal  Model} %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Original Binary Structural Phase Field Crystal Model} %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 The binary structural phase field crystal theory (XPFC) seeks to remedy the two
-short comings of the original simplified model. That is, it seeks to construct
-realistic phase diagrams for binary systems and seeks to reproduce a variety of
-crystal lattice structure. We'll begin with a derivation of the theory and
+short comings of the original simplified model. That is, it seeks to reproduce
+a variety of crystal lattice structure and to construct  phase diagrams of a
+range of concentrations. We'll begin with a derivation of the theory and
 compare with the original model.
 
 First, the ideal free energy is expanded in precisely the same manner resulting
@@ -298,7 +301,8 @@ example, the binary XPFC model has been used to study peritectic systems
 \cite{GREENWOOD11_BINARY}, ordered crystals \cite{ALSTER17},
 dislocation-assisted solute clustering and precipitation \cite{FALLAH12,
 FALLAH13} and solute drag \cite{GREENWOOD12}. It is noteworthy, that the above
-works on clustering was validated experimentally in binary and ternary alloys.
+works on clustering have been validated experimentally in binary and ternary
+alloys.
 
 \begin{figure}
     \centering
@@ -315,23 +319,20 @@ concentration-concentration correlation function is zero, the XPFC model
 restricts its free energy of mixing to an ideal model of mixing. This model of
 mixing includes only entropic contributions to the free energy. In the solid
 state, this means that the sole driving force for phase separation is elastic
-energy as the enthapy of mixing is always zero. This is also precludes the
-modelling a variety of binary alloy systems, for instance both monotectic and
-syntectic systems cannot be modelled without a negative enthalpy of mixing.
-More subtly, in the present XPFC alloy model, even eutectic systems have a
-negative heat of mixing deep below the eutectic point as the metastable liquid
-has a spinodal. This phenomena is shown schematically in figure
-\ref{fig:eutectic_drawing}, where the metastable projections, including solid
-and liquid spinodals, are drawn on a hypothetical eutectic phase diagram.
-Problems such as the stability of nanocrystalline binary alloys require an
-examination that balances elastic energies and bulk mixing free energy
-\cite{MURDOCH13}.
+energy as the enthapy of mixing is always zero. This inhibits the modelling a
+variety of binary alloy systems, for instance both monotectic and syntectic
+systems cannot be modelled without a negative enthalpy of mixing.  More subtly,
+in the present XPFC alloy model, even eutectic systems have a negative heat of
+mixing deep below the eutectic point as the metastable liquid has a spinodal.
+This phenomena is shown schematically in figure \ref{fig:eutectic_drawing},
+where the metastable projections, including solid and liquid spinodals, are
+drawn on a hypothetical eutectic phase diagram.
 
 A second disadvantage of the present XPFC model is that the phenomenological
 form for the correlation function as seen in equation \ref{eq:xpfc_corr}
 implicitly assumes that there are well defined structures at $c=0$ and $c=1$.
 This works well for modelling eutectic systems for example, but does not work
-very well when we expect a solid phase at intermediate concentration. This
-thesis will offer improvements to both of these shortcomings in the following
-chapter.
+very well when we expect a solid phase at intermediate concentration. These
+shortcomings are the motivation for the improvements developed in this thsis
+which are presented in the following chapter.
 
