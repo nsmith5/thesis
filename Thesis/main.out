@@ -1,0 +1,51 @@
+\BOOKMARK [0][-]{section*.1}{Dedication}{}% 1
+\BOOKMARK [0][-]{section*.2}{Acknowledgements}{}% 2
+\BOOKMARK [0][-]{section*.3}{Abstract}{}% 3
+\BOOKMARK [0][-]{section*.4}{Abr\351g\351}{}% 4
+\BOOKMARK [0][-]{chapter*.7}{List of Tables}{}% 5
+\BOOKMARK [0][-]{chapter.1}{Introduction}{}% 6
+\BOOKMARK [0][-]{chapter.2}{Introduction to Classical Density Functional Theory}{}% 7
+\BOOKMARK [1][-]{section.2.1}{Statistical Mechanics in the Semi-classical limit}{chapter.2}% 8
+\BOOKMARK [2][-]{subsection.2.1.1}{Indistinguishability}{section.2.1}% 9
+\BOOKMARK [1][-]{section.2.2}{Classical Density Functional Theory}{chapter.2}% 10
+\BOOKMARK [1][-]{section.2.3}{Techniques in Density Functional Theory}{chapter.2}% 11
+\BOOKMARK [0][-]{chapter.3}{Classical Density Functional Theory of Freezing}{}% 12
+\BOOKMARK [1][-]{section.3.1}{Amplitude Expansions}{chapter.3}% 13
+\BOOKMARK [1][-]{section.3.2}{Dynamic Density Functional Theory}{chapter.3}% 14
+\BOOKMARK [2][-]{subsection.3.2.1}{Overview of Non-equilibrium Statistical Mechanics}{section.3.2}% 15
+\BOOKMARK [2][-]{subsection.3.2.2}{Equation of Motion for the Density}{section.3.2}% 16
+\BOOKMARK [1][-]{section.3.3}{Phase Field Crystal Theory}{chapter.3}% 17
+\BOOKMARK [0][-]{chapter.4}{Simplified Binary Phase Field Crystal Models}{}% 18
+\BOOKMARK [1][-]{section.4.1}{Original Binary Phase Field Crystal Model}{chapter.4}% 19
+\BOOKMARK [1][-]{section.4.2}{Original Binary Structural Phase Field Crystal Model}{chapter.4}% 20
+\BOOKMARK [2][-]{subsection.4.2.1}{XPFC Correlation Functions}{section.4.2}% 21
+\BOOKMARK [0][-]{chapter.5}{Improvements to the Binary XPFC Model}{}% 22
+\BOOKMARK [1][-]{section.5.1}{Adding an Enthalpy of Mixing}{chapter.5}% 23
+\BOOKMARK [1][-]{section.5.2}{Generalizing the Two-Point Correlation Function}{chapter.5}% 24
+\BOOKMARK [1][-]{section.5.3}{Equilibrium Properties of Binary Alloys}{chapter.5}% 25
+\BOOKMARK [2][-]{subsection.5.3.1}{Eutectic Phase Diagram}{section.5.3}% 26
+\BOOKMARK [2][-]{subsection.5.3.2}{Syntectic Phase Diagram}{section.5.3}% 27
+\BOOKMARK [2][-]{subsection.5.3.3}{Monotectic Phase Diagram}{section.5.3}% 28
+\BOOKMARK [0][-]{chapter.6}{Applications}{}% 29
+\BOOKMARK [1][-]{subsection.6.0.1}{XPFC Dynamics}{chapter.6}% 30
+\BOOKMARK [1][-]{section.6.1}{Multi-Step Nucleation of Nanoparticles in Solution}{chapter.6}% 31
+\BOOKMARK [2][-]{subsection.6.1.1}{Classical and Non-classical Nucleation Theories}{section.6.1}% 32
+\BOOKMARK [2][-]{subsection.6.1.2}{XPFC Modelling of Precipitation}{section.6.1}% 33
+\BOOKMARK [2][-]{subsection.6.1.3}{Dynamics of Precipitation: Results and Discussion}{section.6.1}% 34
+\BOOKMARK [1][-]{section.6.2}{Outlook and Future Applications}{chapter.6}% 35
+\BOOKMARK [0][-]{chapter.7}{Conclusion}{}% 36
+\BOOKMARK [0][-]{appendix.A}{Noise in Nonlinear Langevin Equations}{}% 37
+\BOOKMARK [1][-]{section.A.1}{Generalized Einstein Relations in an Arbitrary Model}{appendix.A}% 38
+\BOOKMARK [1][-]{section.A.2}{Example 1 - Model A}{appendix.A}% 39
+\BOOKMARK [2][-]{subsection.A.2.1}{The partition function route}{section.A.2}% 40
+\BOOKMARK [2][-]{subsection.A.2.2}{The Equation of Motion Route}{section.A.2}% 41
+\BOOKMARK [1][-]{section.A.3}{Example 2 - Time Dependent Density Functional Theory}{appendix.A}% 42
+\BOOKMARK [2][-]{subsection.A.3.1}{Pair Correlation from the Partition Functional}{section.A.3}% 43
+\BOOKMARK [2][-]{subsection.A.3.2}{Linearing the equation of motion}{section.A.3}% 44
+\BOOKMARK [0][-]{appendix.B}{Gaussian Functional Integrals}{}% 45
+\BOOKMARK [0][-]{appendix.C}{Binary Correlation Functions}{}% 46
+\BOOKMARK [0][-]{appendix.D}{Algorithms}{}% 47
+\BOOKMARK [1][-]{section.D.1}{Semi-Implicit Spectral Methods for Systems of First Order PDEs}{appendix.D}% 48
+\BOOKMARK [1][-]{section.D.2}{Applications to the Binary XPFC Model}{appendix.D}% 49
+\BOOKMARK [2][-]{subsection.D.2.1}{Algorithm for the Concentration c\(x,t\)}{section.D.2}% 50
+\BOOKMARK [2][-]{subsection.D.2.2}{Algorithm for the Total Density n\(x,t\)}{section.D.2}% 51
