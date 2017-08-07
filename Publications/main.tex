@@ -14,21 +14,8 @@
 \graphicspath{ {figures/} }
 \usepackage{subcaption}
 
-
 % Colors, especially for highlighting and editing
 \usepackage[usenames, dvipsnames]{color}
-
-% Margins, links etc..
-\usepackage{float}
-\floatplacement{figure}{H}   % Place Figures at same position defined
-\usepackage[letterpaper, margin=1in]{geometry}
-\usepackage{hyperref}
-\hypersetup{
-  colorlinks   = true,  %Colours links instead of ugly boxes
-  urlcolor     = blue,  %Colour for external hyperlinks
-  linkcolor    = black, %Colour of internal links
-  citecolor    = black   %Colour of citations
-}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % -- Aliases and commands -- %
@@ -93,14 +80,103 @@
 \section{Introduction} %
 %%%%%%%%%%%%%%%%%%%%%%%%
 
-[Introduction here]
+% Thesis introduction outline: https://student.unsw.edu.au/introductions
+
+% 1) State the general topic and give some background
+
+The study of alloys in materials physics is a pursuit of incredibly broad
+impact since the functional properties of materials depend on their
+microstructure, which forms through non-equilibrium phase transformations
+during the process of forming a material. As a result, industries  as diverse
+as those dealing in commercial products based on steel and aluminium to the
+burgeoning  markets dealing in nano-fabrication and optoelectronics are
+affected by research in alloy materials.  One of the most useful paradigms for
+understanding complex alloy microstructure is that of the binary alloy.
+
+One surprising aspect of binary alloys is the rich diversity of properties and
+behaviours they display. Because material properties depend on the
+microstructural details of the material, they have a strong processing path
+dependence.  Grain boundaries, vacancies, dislocations and other
+microstructural artifacts are all intimately tied to the manufacturing process
+of the alloy. This means that the study of solids can never be completely
+separated from the study of solidification. As such, the diversity of material
+properties and behaviours we see in binary alloys can be directly attributed to
+the diversity of processes for their construction.
+
+% 2) Outline the current situation
+
+In this paper, we'll focus on extending a branch of binary PFC theory known as
+the binary {\it XPFC} model --where the "X" in XPFC signifies a class of PFC
+models  constructed to controllably simulate a robust range of metallic and
+non-metallic crystal symmetries compared to the original PFC models. PFC binary
+models have been successful in describing a broad selection of phenomena in
+binary alloys.  These successes include eutectic and dendritic solidification
+\cite{ELDER07}, the Kirkendall effect \cite{ELDER11_KIRKENDALL, LU15}, solute
+drag \cite{GREENWOOD12}, clustering and precipitation \cite{FALLAH12, FALLAH13,
+FALLAH13_AlCu_experiment}, colloidal ordering in drying suspensions
+\cite{GANAI13}, epitaxial growth and island formation \cite{ELDER10_NANOISLAND,
+LU16}, and ordered crystals \cite{ALSTER17} to name a few. 
+
+The PFC theory is derived from Classical Density Functional Theory (CDFT) and
+as such, it can be considered a simplified density functional theory.  In
+practice, two different variants of the PFC theory are used, as alluded to
+above: the original model developed by Elder \textit{et al} \cite{ELDER07} and
+the Structural Phase Field Crystal (XPFC) model developed by Greenwood
+\textit{et al.} \cite{GREENWOOD11_BINARY}.
+
+The original model was the first PFC theory of binary alloys and contains some
+important physical properties of binary alloys. However, it is a very reduced
+form of CDFT and it therefore lacks completeness in its ability to describe
+binary alloys. Specifically, the original model uses an expansion in
+concentration that is actually a density difference not a concentration, and
+the model has a limited ability to describe a realistic or robust range of
+phase diagrams. The original model also uses a very simplified correlation
+kernel which limits its ability to describe a variety of crystal lattice
+structures.
+
+The XPFC model is an improvement that ameliorates the above problems. The
+concentration is left unexpanded allowing for construction of realistic global
+phase diagrams instead of local expansions. More significantly, the XPFC model
+provides a phenomenology for modelling two-point correlation functions that
+succeeded in describing solidification of a variety of lattice structures, as
+well as transformations between different crystal lattices. Simplifications of
+the multi-modal approach first introduced with the XPFC formalism has been used
+to produce hexagonal, square, kagome, honeycomb, rectangular and other lattices
+in 2 dimensions \cite{MKHONTA13}.
+
+% 3) Evaluate the current situation and identify a gap
+
+In introducing its phenomenology for modelling correlation functions, the
+binary XFPC theory tacitly assumes that there is some preferred structure at
+high concentration and some other structure preferred at low concentration.
+This assumption can be limiting in situations that have a specific crystalline
+structure at intermediate concentrations, such as materials with a syntectic
+phase diagram. At the syntectic point a solid of intermediate concentration
+solidifies along the interface between a solute rich and solute poor liquid.
+The XPFC model also assumes no long wavelength correlations in the
+concentration field which, in practice, means the model has an ideal free
+energy of mixing.  This is another limitation of the XPFC model because the
+enthalpy of mixing is not generally zero for alloy systems.
+
+% 5) State the research goals and aims
+
+The goal of the current research is threefold: The first two goals are to
+present two important improvements to the binary XPFC theory. The first
+improvement is a more general phenomenology for modelling pair correlation
+functions of a binary material. The second improvement is to extend the free
+energy of mixing beyond ideality to account for circumstances when the enthalpy of
+mixing is not negligible. The third goal is to use the new XPFC model derived
+herein to the elucidate the multi-step nucleation process seen in certain
+diffusion-limited systems including gold and silver nanoparticles \cite{LOH17}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Binary PFC Background} %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-We begin with a multicomponent variant of the approximate free energy
-functional established in Chapter \ref{chapter:cdft_intro},
+We begin with a binary classical density functional theory. The intrinsic free
+energy functional can be approximated by expanding about a reference mixture
+with number densities $\rho_A^0$ for component A and $\rho_B^0$ for component
+B,
 %
 \begin{align}
     \label{binary_cdft_free_energy}
@@ -111,6 +187,15 @@ functional established in Chapter \ref{chapter:cdft_intro},
         \ast \Delta\rho_j(r^\prime). \nonumber
 \end{align}
 %
+Where,
+\begin{description}
+    \item[$\mu_i^0$] is the reference chemical potential of component $i$,
+    \item[$\Delta\rho_i$] is the deviation from the reference density,
+    \item[$C^{(2)}_{ij}(r, r^\prime)$] is the direct correlation function
+        of the reference mixture and,
+    \item[$\ast$] denotes an integral over repeated arguments.
+\end{description}
+
 It is convenient to change variables to a dimensionless total density, $n(r)$
 and local concentration, $c(r)$,
 %
@@ -134,11 +219,11 @@ free energies respectively. These are defined as,
 %
 \begin{gather}
     \label{binary_ideal}
-    \f{\beta\F_{id}[n]}{\rho_0} =
+    \f{\beta\F_{id}}{\rho_0} =
         \int \mathrm{d}r \,\l\lbrace (n(r) + 1)\ln(n(r) + 1) 
         - (1 - \beta\mu^0)n(r) \r\rbrace \\
     \label{binary_mixing}
-    \f{\beta\F_{mix}[n, c]}{\rho_0} =
+    \f{\beta\F_{mix}}{\rho_0} =
         \int \mathrm{d}r \,\l\lbrace (n(r) + 1)\l( 
             c\ln\l(\f{c}{c_0}\r) + (1-c)\ln\l(\f{1-c}{1-c_0}\r) \r)\r\rbrace, 
 \end{gather}
@@ -395,7 +480,7 @@ alloys.
 
 \begin{figure}
     \centering
-    \includegraphics[scale=0.7]{eutectic-drawing}
+    \includegraphics[scale=0.4]{eutectic-drawing}
     \caption[Eutectic Phase Diagram with Metastable Projections]{
         \label{fig:eutectic_drawing} Eutectic phase diagram with metastable
         projections. Stable coexistance lines are rendered solid whereas 
@@ -585,8 +670,7 @@ unstable with respect to phase separation whereas the binodal line indicates
 the coexistance curve of the decomposed metastable liquid.
 
 \begin{figure}[h]
-    \centering	
-    \includegraphics[scale=0.7]{eutectic}
+    \includegraphics[scale=0.45]{eutectic}
     \caption[Eutectic Phase Diagram]{
         \label{eutectic} Eutectic phase diagram for triangle $\alpha$ and
         $\beta$ solid phases and $l$ denotes the liquid. The free energy
@@ -652,8 +736,7 @@ A phase diagram that produces a syntectic reaction with an appropriate choice
 of parameters can be seen in Fig. \ref{syntectic}.
 
 \begin{figure}
-    \centering
-	\includegraphics[scale=0.7]{syntectic.eps}
+	\includegraphics[scale=0.5]{syntectic.eps}
     \caption[Syntectic Phase Diagram]{
         \label{syntectic} Phase Diagram of Syntectic Alloy with a hexagonal
         solid phase $\alpha$. The free energy parameters are $\eta=2$,
@@ -685,8 +768,7 @@ produce a phase diagram with a monotectic reaction with an appropriate choice
 of parameters as in Fig. \ref{monotectic}.
 
 \begin{figure}
-    \centering
-	\includegraphics[scale=0.7]{monotectic.eps}
+	\includegraphics[scale=0.5]{monotectic.eps}
     \caption[Monotectic Phase Diagram]{
         \label{monotectic} Phase Diagram of Monotectic Alloy with hexagonal
         $\alpha$ phase. The free energy parameters are $\eta = 2$, $\chi=1$,
@@ -884,7 +966,7 @@ coexistence curve.
 
 \begin{figure}
     \centering	
-    \includegraphics[scale=0.8]{solution.eps}
+    \includegraphics[scale=0.5]{solution.eps}
     \caption[Coexistance Phase Diagram with Metastable Spinodal]{
         \label{fig:precip_phase_dia} Phase Diagram of a Precipitating Solution
         with hexagonal $\alpha$ phase solid. The free energy parameters are
@@ -930,57 +1012,57 @@ uncrystallized solute-rich regions. We refer to this phenomena as
 %
 \begin{figure}
     \centering
-    \begin{subfigure}[b]{0.3\textwidth}
+    \begin{subfigure}[b]{0.3\columnwidth}
         \includegraphics[width=\textwidth]{initial}
         \label{fig:initial}
         \caption{}
     \end{subfigure}
     ~
-    \begin{subfigure}[b]{0.3\textwidth}
+    \begin{subfigure}[b]{0.3\columnwidth}
         \includegraphics[width=\textwidth]{early_spinodal}
         \label{fig:early_spinodal}
         \caption{}
     \end{subfigure}
     ~
-    \begin{subfigure}[b]{0.3\textwidth}
+    \begin{subfigure}[b]{0.3\columnwidth}
         \includegraphics[width=\textwidth]{devel_spinodal.png}
         \label{fig:devel_spinodal}
         \caption{}
     \end{subfigure}
 
     \vspace{0.25cm}
-    \begin{subfigure}[b]{0.3\textwidth}
+    \begin{subfigure}[b]{0.3\columnwidth}
         \includegraphics[width=\textwidth]{nucleation}
         \label{fig:nucleation}
         \caption{}
     \end{subfigure}
     ~
-    \begin{subfigure}[b]{0.3\textwidth}
+    \begin{subfigure}[b]{0.3\columnwidth}
         \includegraphics[width=\textwidth]{nucleation_and_sacrificial_growth}
         \label{fig:nucleation_and_growth}
         \caption{} 
     \end{subfigure}
     ~
-    \begin{subfigure}[b]{0.3\textwidth}
+    \begin{subfigure}[b]{0.3\columnwidth}
         \includegraphics[width=\textwidth]{sacrificalgrowth}
         \label{fig:sacrifical_growth}
         \caption{}
     \end{subfigure}
     
     \vspace{0.25cm}
-    \begin{subfigure}[b]{0.3\textwidth}
+    \begin{subfigure}[b]{0.3\columnwidth}
         \includegraphics[width=\textwidth]{crystalgrowth}
         \label{fig:crystalgrowth}
         \caption{}
     \end{subfigure}
     ~
-    \begin{subfigure}[b]{0.3\textwidth}
+    \begin{subfigure}[b]{0.3\columnwidth}
         \includegraphics[width=\textwidth]{crystalgrowth2}
         \label{fig:crystalgrowth2}
         \caption{}
     \end{subfigure}
     ~ 
-    \begin{subfigure}[b]{0.3\textwidth}
+    \begin{subfigure}[b]{0.3\columnwidth}
         \includegraphics[width=\textwidth]{crystalgrowth3}
         \label{fig:crystalgrowth3}
         \caption{}
@@ -1028,7 +1110,7 @@ crystalline regions grow at a hyper-diffusive rate.
 %
 \begin{figure}
     \centering
-    \includegraphics[width=\textwidth]{scaling}
+    \includegraphics[width=\columnwidth]{scaling}
     \caption{
         \label{fig:scaling}
         Droplet growth $\langle R(t) \rangle$ Versus time. Black line show
@@ -1058,7 +1140,7 @@ dominates, consistent with our expected hypothesis above.
 %
 \begin{figure}
     \centering
-    \includegraphics[width=1.0\textwidth]{incubation}
+    \includegraphics[width=\columnwidth]{incubation}
     \caption[Fraction of uncrystallized droplets in time]{
         \label{fig:incubation}
         Fraction of uncrystallized droplets in time.
