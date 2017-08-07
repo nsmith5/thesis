@@ -1,17 +1,16 @@
 TARGET = main
 
-$(TARGET).pdf: $(TARGET).tex references/references.bib
-	pdflatex -shell-escape $(TARGET).tex
+CRAP =bcf,xml,aux,log,out,bbl,blg
+
+$(TARGET).pdf: $(TARGET).tex references.bib
+	pdflatex $(TARGET).tex
 	bibtex $(TARGET)
 	pdflatex $(TARGET).tex
 	pdflatex $(TARGET).tex
-	mv $(TARGET).pdf crap.pdf
-	mv $(TARGET).tex crap.tex
-	rm $(TARGET)*
-	mv crap.tex $(TARGET).tex
-	mv crap.pdf $(TARGET).pdf
+	rm -f *.{$(CRAP)} mainNotes.bib
 
 .PHONY: clean
 
 clean:
-	rm $(TARGET).pdf
+	rm -f main.pdf
+	rm -f *.{$(CRAP)} mainNotes.bib
