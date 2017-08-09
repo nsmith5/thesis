@@ -246,13 +246,13 @@ concentration from the reference.  The $n-c$ pair correlation introduced in the
 excess free energy are,
 %
 \begin{align}
-    C_{nn} &= \rho_0\l(c^2 C_{BB} + (1 - c)^2C_{AA} + 2c(1-c)C_{AB}\r) \label{orig_nnC}\\
+    C_{nn} &= \rho_0\l(c^2 C_{BB} + (1 - c)^2C_{AA} + 2c(1-c)C_{AB}\r) \label{binaryCs}\\
     C_{nc} &= \rho_0\l(c C_{BB} - (1 - c) C_{AA} + (1 - 2c)C_{AB}\r) \\
     C_{cn} &= C_{nc} \\
     C_{cc} &= \rho_0\l(C_{BB} + C_{AA} - 2 C_{AB}\r)
 \end{align}
 %
-Explicit derivations of these terms can be found in Appendix \ref{appendix:binary_corr}.
+
 Differences in the various simplified binary PFC theories stem from differing
 approximations of the terms in the free energy stated in equations 
 \ref{binary_ideal}, \ref{binary_mixing} and \ref{binary_excess}.
@@ -300,12 +300,11 @@ two terms are approximated with a gradient expansion of the form,
 %
 The expansion parameters, $C_0, C_2,$ and $C_4$ are all dependent on
 temperature and concentration. We are required to expand $C_{nn}$ to fourth
-order because, as noted in chapter \ref{chapter:cdft_of_freezing}, the peak of
-the direct correlation function in Fourier space is the driving force for
-solidification.  The concentration field is correlated over a longer length
-scale implying that only the short wavevectors are important in $C_{cc}$ so we
-can expand just to quadratic order, effectively treating $c$ as in the
-traditional Cahn-Hilliard theory.
+order because the peak of the direct correlation function in Fourier space is
+the driving force for solidification.  The concentration field is correlated
+over a longer length scale implying that only the short wavevectors are
+important in $C_{cc}$ so we can expand just to quadratic order, effectively
+treating $c$ as in the traditional Cahn-Hilliard theory.
 
 Gathering terms, the resulting free energy functional for the original
 simplified binary PFC model\footnote{The orignal simplified binary PFC model
@@ -336,9 +335,7 @@ The major limitation of the original simplified model is that the gradient
 expansion of the density-density correlation function gives only a crude
 control over the crystal structures that can be formed. In fact, as this theory
 only controls a single peak in Fourier space it can only solidify into the BCC
-phase. As noted in chapter \ref{chapter:cdft_of_freezing}, the ability to
-solidify into an arbitrary structure demands control of the density-density
-correlation function at all reciprocal lattice vectors.
+phase.
 
 A second limitation of the original simplified model is that it is local in
 concentration. This means that realistic phase diagrams from 0 to 100\%
@@ -431,9 +428,9 @@ The remaining elemental correlation functions $C_{AA}$ and $C_{BB}$ are modelled
 using the general XPFC model for correlation functions, which we describe
 subsequently.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{XPFC Correlation Functions} %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 The key insight made by the XPFC model is that the density-density
 correlation function can be modelled in such a way as to control the crystal
@@ -446,22 +443,21 @@ at the reciprocal lattice vector positions. We can achieve this with Gaussian
 peaks centred at the reciprocal lattice vector positions,
 %
 \begin{equation}
-    \tilde{C}(k) = \sum_{\alpha} e^{\f{T}{T_0}}
+    \tilde{C}(k) = \sum_{\alpha} e^{-\f{T}{T_0}}
         e^{ - \f{(k - k_\alpha)^2}{2\sigma_\alpha^2}}
         \label{XPFC_C2}
 \end{equation}
 %
-Where, as in chapter \ref{chapter:cdft_of_freezing}, the index $\alpha$ runs
-over families of point group symmetry-equivalent reciprocal lattice vectors,
-$k_\alpha$ is the length of the reciprocal lattice vectors in $\alpha$ and
-$\sigma_\alpha$ is the width of the peak. Temperature dependence of the
-correlation peaks in the is achieved through the prefactors $e^{T / T_0}$ give
-the correct temperature scaling of the amplitudes at temperatures much higher
-than the Debye temperature\footnote{The original XPFC works used a
-phenomenological prefactor $e^{\sigma^2 / C_i}$, where $\sigma$ was considered
-a model temperature parameter and $C_i$ a constant. That choice was inspired by
-harmonic analysis in the solid phase and the Debye-Waller factor.} as discussed
-by \cite{ALSTER17}.
+Where the index $\alpha$ runs over sets of point group symmetry-equivalent
+reciprocal lattice vectors, $k_\alpha$ is the length of the reciprocal lattice
+vectors in $\alpha$ and $\sigma_\alpha$ is the width of the peak. Temperature
+dependence of the correlation peaks in the is achieved through the prefactors
+$e^{-T / T_0}$ give the correct temperature scaling of the amplitudes at
+temperatures much higher than the Debye temperature\footnote{The original XPFC
+works used a phenomenological prefactor $e^{-\sigma^2 / C}$, where $\sigma$
+was considered a model temperature parameter and $C$ a constant. That choice
+was inspired by harmonic analysis in the solid phase and the Debye-Waller
+factor.} as discussed by \cite{ALSTER17}.
 
 The primary advantages of the XPFC model are two fold: they produce realistic
 phase diagrams and they model a variety of crystalline lattices. While the
@@ -474,16 +470,6 @@ FALLAH13} and solute drag \cite{GREENWOOD12}. It is noteworthy, that the above
 works on clustering have been validated experimentally in binary and ternary
 alloys.
 
-\begin{figure}
-    \centering
-    \includegraphics[scale=0.4]{eutectic-drawing}
-    \caption[Eutectic Phase Diagram with Metastable Projections]{
-        \label{fig:eutectic_drawing} Eutectic phase diagram with metastable
-        projections. Stable coexistance lines are rendered solid whereas 
-        metastable projections are dashed.
-    }
-\end{figure}
-
 Unfortunately, by assuming that the $k=0$ mode of the
 concentration-concentration correlation function is zero, the XPFC model
 restricts its free energy of mixing to an ideal model of mixing. This model of
@@ -491,35 +477,30 @@ mixing includes only entropic contributions to the free energy. In the solid
 state, this means that the sole driving force for phase separation is elastic
 energy as the enthapy of mixing is always zero. This inhibits the modelling a
 variety of binary alloy systems, for instance both monotectic and syntectic
-systems cannot be modelled without a negative enthalpy of mixing.  More subtly,
-in the present XPFC alloy model, even eutectic systems have a negative heat of
-mixing deep below the eutectic point as the metastable liquid has a spinodal.
-This phenomena is shown schematically in figure \ref{fig:eutectic_drawing},
-where the metastable projections, including solid and liquid spinodals, are
-drawn on a hypothetical eutectic phase diagram.
+systems cannot be modelled without a negative enthalpy of mixing. 
 
 A second disadvantage of the present XPFC model is that the phenomenological
 form for the correlation function as seen in equation \ref{eq:xpfc_corr}
 implicitly assumes that there are well defined structures at $c=0$ and $c=1$.
 This works well for modelling eutectic systems for example, but does not work
 very well when we expect a solid phase at intermediate concentration. These
-shortcomings are the motivation for the improvements developed in this thsis
-which are presented in the following chapter.
+shortcomings are the motivation for the improvements developed in this paper
+which are presented in the following section.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Improvements to the Binary Phase Field Crystal Model} %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\label{sec:improvements}
 
-In this chapter we look at two improvements to the binary XPFC theory. Both of
-these improvements are novel contributions to the field and significantly
-extend the scope of the XPFC framework. The improvements, as previously alluded
-to, are to first, extend the free energy of mixing in the XPFC model to one
-with an enthalpy of mixing and to second, generalize the phenomenological
-for of the two-point correlation function in binary alloys.
+In this section we look at two improvements to the binary XPFC theory. The
+improvements, as previously alluded to, are to first, extend the free energy of
+mixing in the XPFC model to one with an enthalpy of mixing and to second,
+generalize the phenomenological for of the two-point correlation function in
+binary alloys.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Adding an Enthalpy of Mixing} %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Adding an Enthalpy of Mixing} %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Extending the free energy of mixing beyond ideal mixing is achieved by removing
 the assumption made by Greenwood \textit{et al.} in deriving the binary XPFC
@@ -567,9 +548,9 @@ regular solution model and, as such, it makes a clear connection to a well used
 model elsewhere in material science. The regular solution model also supplies
 the essential physics of a non-negligible enthalpy of mixing. 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Generalizing the Two-Point Correlation Function} %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Generalizing the Two-Point Correlation Function} %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 To establish a general phenomenology for modelling density-density correlation
 functions in alloys, note that the density-density correlation function has the
@@ -583,8 +564,8 @@ individual components,
 %
 where the index $i$ is, for the moment, an arbitrary label. For example, in the
 exact theory that emerges from the original alloy CDFT theory (equation
-\ref{binaryCs}), we use the labels $\lbrace AA, AB, BB\rbrace$ and have
-interpolation functions,
+\ref{binaryCs}), we use the labels $\lbrace AA, AB, BB\rbrace$ to enumerate the
+interpolation functions, 
 %
 \begin{gather}
     \zeta_{AA}(c) = \rho_0 (1 - c^2), \\
@@ -593,7 +574,7 @@ interpolation functions,
 \end{gather}
 %
 This suggests the following new definition that we introduce herein to
-generalizethe density-density correlation function for a binary alloy: Use the
+generalize the density-density correlation function for a binary alloy: Use the
 labels $i$ to enumerate the set of crystal structures known to manifest
 themselves in an alloy system. The correlation functions, $C_i(r, r^\prime)$
 are then direct correlation functions that model the crystal structure $i$ and
@@ -682,20 +663,20 @@ It is noted that the phase diagram in Fig. \ref{eutectic} and in what follows
 were done using the same approach that was used in numerous PFC literature
 \cite{GREENWOOD11_BINARY}. The approach is as follows: a mode expansion for the
 density is assumed for each crystal phases (zero amplitudes for the liquid
-phase). For each  phase, an amplitude equation analogous to equation
-\ref{amplitude_gp} results, except in this case, it is a function of
-amplitudes, average density {\it and} concentration. This coarse grained free
-energy of each phase is then minimized with respect to the amplitudes, leaving
-a free energy density for each phase that is a function only of the average
-density and concentration. At this juncture, we simplify matters by assuming
-that the average density is a constant for the system. We then minimize the
-total free energy of the system with respect to concentration, assuming a
-conserved total concentration field. This latter step considers separately the
-coexistence of  (1) $\alpha$-liquid, (2)  $\beta$-liquid, (3) $\alpha$-$\beta$
-over different temperature/concentration ranges. Original code was developed to
-carry our these phase diagram constructions, and implemented using
-\texttt{Julia} \cite{JULIA}, \texttt{Maxima.jl} \cite{MAXIMAJL} and the
-\texttt{Maxima} symbolic computation engine \cite{MAXIMA}.  
+phase). For each  phase, an amplitude equation results, except in this case, it
+is a function of amplitudes, average density {\it and} concentration. This
+coarse grained free energy of each phase is then minimized with respect to the
+amplitudes, leaving a free energy density for each phase that is a function
+only of the average density and concentration. At this juncture, we simplify
+matters by assuming that the average density is a constant for the system. We
+then minimize the total free energy of the system with respect to
+concentration, assuming a conserved total concentration field. This latter step
+considers separately the coexistence of  (1) $\alpha$-liquid, (2)
+$\beta$-liquid, (3) $\alpha$-$\beta$ over different temperature/concentration
+ranges. Original code was developed to carry our these phase diagram
+constructions, and implemented using \texttt{Julia} \cite{JULIA},
+\texttt{Maxima.jl} \cite{MAXIMAJL} and the \texttt{Maxima} symbolic computation
+engine \cite{MAXIMA}.  
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Syntectic Phase Diagram} %
@@ -785,8 +766,12 @@ also noteworthy that the approach introduced here is extendable in a
 straightforward way to multi-component alloys if the interpolation functions
 become multivariate functions of the concentrations.
 
-In this chapter we discuss applications of the improved binary XPFC model
-introduced in Chapter \ref{chapter:improvements} to an application in
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Application to Precipitating Nanoparticles from Solution} %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In this section we discuss applications of the improved binary XPFC model
+introduced in section \ref{sec:improvements} to an application in
 microstructure evolution.  We first begin with, we introduce  a
 phenomenological set of equations of motion that describe solute and density
 diffusion in the binary XPFC model. We then apply these to the examination of
