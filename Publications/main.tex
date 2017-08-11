@@ -66,7 +66,17 @@
 
 \begin{abstract}
 
-[Abstract here]
+Two improvements to the binary Structural Phase Field Crystal (XPFC) theory are
+presented. The first is a general phenomenology for modelling density-density
+correlation functions and the second extends the free energy of mixing term in
+the binary XPFC model beyond ideal mixing to a regular solution model. These
+improvements are applied to study kinetics of precipitation from solution. We
+see a two-step nucleation pathway similar to recent experimental work
+\cite{LOH17, WALLACE13} in which the solution first decomposes into solute-poor
+and solute-rich regions followed by nucleation in the solute-rich regions.
+Additionally, we find a phenomena not previously described in literature in
+which the growth of precipitates is accelerated in the presence of
+uncrystallized solute-rich regions.
 
 \end{abstract}
 
@@ -173,25 +183,33 @@ We begin with a binary classical density functional theory. The intrinsic free
 energy functional can be approximated by expanding about a reference mixture
 with number densities $\rho_A^0$ for component A and $\rho_B^0$ for component
 B,
+\begin{widetext}
 %
-\begin{align}
-    \label{binary_cdft_free_energy}
-    \beta\F[\A, \B] &= \sum_{i=A, B} \int \mathrm{d}r 
-        \,\rho_i(r) \ln\l(\f{\rho_i(r)}{\rho_i^0}\r) 
-        - (1 - \beta\mu_i^0)\Delta\rho_i(r)\\
-    &- \f{1}{2} \sum_{i,j=A, B} \Delta\rho_i(r) \ast C^{(2)}_{ij}(r, r^\prime) 
-        \ast \Delta\rho_j(r^\prime). \nonumber
-\end{align}
+\begin{gather}\label{binary_cdft_free_energy}
+    \beta\F[\A, \B] = \sum_{i} \integrate{r} 
+        \l\lbrace \rho_i(r) \ln\l(\f{\rho_i(r)}{\rho_i^0}\r) 
+        - (1 - \beta\mu_i^0)\Delta\rho_i(r) \r\rbrace
+    - \f{1}{2} \sum_{i,j} \Delta\rho_i(r) \ast C^{(2)}_{ij}(r, r^\prime) 
+        \ast \Delta\rho_j(r^\prime). 
+\end{gather}
 %
-Where,
+\end{widetext}
+Where the sums run over components $A$ and $B$ and,
 \begin{description}
     \item[$\mu_i^0$] is the reference chemical potential of component $i$,
     \item[$\Delta\rho_i$] is the deviation from the reference density,
     \item[$C^{(2)}_{ij}(r, r^\prime)$] is the direct correlation function
         of the reference mixture and,
-    \item[$\ast$] denotes an integral over repeated arguments.
 \end{description}
-
+%
+$\ast$ denotes an integral over repeated arguments as demonstrated
+in equation \ref{eq:ast_def}.
+%
+\begin{equation}
+    \label{eq:ast_def}
+    f(r) \ast g(r) \equiv \integrate{r} f(r) g(r)
+\end{equation}
+%
 It is convenient to change variables to a dimensionless total density, $n(r)$
 and local concentration, $c(r)$,
 %
@@ -213,14 +231,16 @@ free energy functional in these new variables into three parts,
 where, $\F_{id}$, $\F_{mix}$ and $\F_{ex}$ are the ideal, mixing and excess
 free energies respectively. These are defined as,
 %
-\begin{gather}
+\begin{equation}
     \label{binary_ideal}
     \f{\beta\F_{id}}{\rho_0} =
         \int \mathrm{d}r \,\l\lbrace (n(r) + 1)\ln(n(r) + 1) 
-        - (1 - \beta\mu^0)n(r) \r\rbrace \\
+        - (1 - \beta\mu^0)n(r) \r\rbrace
+\end{equation}
+\begin{gather}
     \label{binary_mixing}
     \f{\beta\F_{mix}}{\rho_0} =
-        \int \mathrm{d}r \,\l\lbrace (n(r) + 1)\l( 
+        \int \mathrm{d}r \,\l\lbrace (n(r) + 1) \l( 
             c\ln\l(\f{c}{c_0}\r) + (1-c)\ln\l(\f{1-c}{1-c_0}\r) \r)\r\rbrace, 
 \end{gather}
 %
@@ -233,12 +253,10 @@ becomes
 \begin{align}
     \label{binary_excess}
     \f{\beta\F_{ex}[n, c]}{\rho_0}
-        = &-\f{1}{2} n(r) \ast \l[ 
-            C_{nn}(r, r^\prime) \ast n(r^\prime) 
-          + C_{nc}(r, r^\prime) \ast \Delta c(r^\prime)\r] \\
-        &-\f{1}{2} \Delta c(r) \ast \l[
-            C_{cn}(r, r^\prime) \ast n(r^\prime) 
-          + C_{cc}(r, r^\prime) \ast \Delta c(r^\prime)\r], \nonumber
+        = -\f{1}{2} \big\lbrace &n(r) \ast C_{nn}(r, r^\prime) \ast n(r^\prime) \\
+          + & n(r) \ast C_{nc}(r, r^\prime) \ast \Delta c(r^\prime) \nonumber \\
+          + &\Delta c(r) \ast C_{cn}(r, r^\prime) \ast n(r^\prime) \nonumber \\ 
+          + &\Delta c(r) \ast C_{cc}(r, r^\prime) \ast \Delta c(r^\prime) \big\rbrace, \nonumber
 \end{align}
 %
 where we have introduced  and $\Delta c(r) = c(r) - c_0$ as the deviation of the 
@@ -805,15 +823,14 @@ conservative dynamics for both $n(x, t)$ and $c(x, t)$.
 \end{gather}
 %
 where $M_n$ and $M_c$ are the solute and density mobilities. The noise terms
-$\xi_n(x, t)$ and $\xi_c(x, t)$ model thermal fluctuations. Their dynamics
-follow the fluctuation-dissipation theorem, the theory of which is derived in
-the Appendix \ref{appendix:noise}. These equations of motion are largely
+$\xi_n(x, t)$ and $\xi_c(x, t)$ model thermal fluctuations by obeying a
+generalized Einstein relation. These equations of motion are largely
 phenomenological as, strictly speaking, there is no reason that the local
 concentration should be conserved.  This conservation can be justified in the
 limit that the total density does not deviate far from the reference. When this
 is the case we have $c \equiv \B / \rho \approx \B / \rho_0$ which \textit{is}
-conserved. For simplicity, we will carry out simulations in this paper in
-this limit.
+conserved. For simplicity, we will carry out simulations in this paper in this
+limit.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Multi-Step Nucleation of Nanoparticles in Solution} %
@@ -832,11 +849,22 @@ solution can follow a pathway vary different from that assumed by Classical
 Nucleation Theory (CNT) \cite{LOH17, WALLACE13}. CNT assumes that, for binary
 systems, changes in composition occur simultaneously to changes in order. In
 contrast, these experimental findings suggest that in certain systems changes
-in composition can precede changes in order via spinodal decomposition. While
-there is some dispute about whether or not to call this process a non-classical
-\textit{nucleation} pathway \cite{DAVEY13, GEBAUER11}, the observed pathway to
-precipitation raises several questions about its classification, regardless of
-semantics.
+in composition can precede changes in order via spinodal decomposition.
+\textit{In situ} measurements of this multi-step nucleation process taken by
+Loh \textit{et al}\cite{LOH17} for gold and silver nanoparticles can be seen
+figure \ref{loh_figure}. While there is some dispute about whether or not to
+call this process a non-classical \textit{nucleation} pathway \cite{DAVEY13,
+GEBAUER11}, the observed pathway to precipitation raises several questions
+about its classification, regardless of semantics.
+
+\begin{figure}
+    \includegraphics[width=\columnwidth]{natchemfig}
+    \caption{
+        \label{loh_figure} [description here]
+    }
+\end{figure}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Classical and Non-classical Nucleation Theories} %
