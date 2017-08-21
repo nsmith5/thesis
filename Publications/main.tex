@@ -48,7 +48,7 @@
 \newcommand{\mean}[1]{\left\langle #1 \right\rangle}
 
 % Integral
-\newcommand{\integrate}[1]{\int \mathrm{d}#1\,}
+\newcommand{\integrate}[1]{\int\!\mathrm{d}#1}
 
 % Lazy tilde
 \newcommand{\til}{\tilde}
@@ -57,7 +57,7 @@
 
 %% Front (Top really...) Matter
 
-\title{Improvements to the  Binary Phase Field Crystal Model}
+\title{Generalization of the Binary Phase Field Crystal Model}
 \author{Nathan Smith}
 \affiliation{McGill Department of Physics}
 \author{Nikolas Provatas}
@@ -175,9 +175,9 @@ mixing is not negligible. The third goal is to use the new XPFC model derived
 herein to the elucidate the multi-step nucleation process seen in certain
 diffusion-limited systems including gold and silver nanoparticles \cite{LOH17}.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Binary PFC Background} %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%
+\section{Binary CDFT} %
+%%%%%%%%%%%%%%%%%%%%%%%
 
 We begin with a binary classical density functional theory. The intrinsic free
 energy functional can be approximated by expanding about a reference mixture
@@ -207,7 +207,7 @@ in equation \ref{eq:ast_def}.
 %
 \begin{equation}
     \label{eq:ast_def}
-    f(r) \ast g(r) \equiv \integrate{r} f(r) g(r)
+    f(r) \ast g(r) \equiv \integrate{r} \, f(r) \, g(r)
 \end{equation}
 %
 It is convenient to change variables to a dimensionless total density, $n(r)$
@@ -231,18 +231,17 @@ free energy functional in these new variables into three parts,
 where, $\F_{id}$, $\F_{mix}$ and $\F_{ex}$ are the ideal, mixing and excess
 free energies respectively. These are defined as,
 %
-\begin{equation}
+\begin{multline}
     \label{binary_ideal}
     \f{\beta\F_{id}}{\rho_0} =
-        \int \mathrm{d}r \,\l\lbrace (n(r) + 1)\ln(n(r) + 1) 
-        - (1 - \beta\mu^0)n(r) \r\rbrace
-\end{equation}
-\begin{gather}
+        \integrate{r} \Big\{ \l(n(r) + 1\r)\ln\l(n(r) + 1\r) \\
+    - (1 - \beta\mu^0)n(r) \Big\} 
+\end{multline}
+\begin{multline}
     \label{binary_mixing}
-    \f{\beta\F_{mix}}{\rho_0} =
-        \int \mathrm{d}r \,\l\lbrace (n(r) + 1) \l( 
-            c\ln\l(\f{c}{c_0}\r) + (1-c)\ln\l(\f{1-c}{1-c_0}\r) \r)\r\rbrace, 
-\end{gather}
+    \f{\beta\F_{mix}}{\rho_0} = \integrate{r} \bigg\{ (n(r) + 1) \\
+    \l(c\ln\l(\f{c}{c_0}\r) + (1-c)\ln\l(\f{1-c}{1-c_0}\r) \r) \bigg\},
+\end{multline}
 %
 where we have introduced $\mu^0=\mu_A^0+\mu_B^0$ as the total chemical
 potential of the reference mixture, and $c_0 = \B^0 / \rho_0$ as the reference
@@ -253,10 +252,10 @@ becomes
 \begin{align}
     \label{binary_excess}
     \f{\beta\F_{ex}[n, c]}{\rho_0}
-        = -\f{1}{2} \big\lbrace &n(r) \ast C_{nn}(r, r^\prime) \ast n(r^\prime) \\
+        = -\f{1}{2} \Big\lbrace &n(r) \ast C_{nn}(r, r^\prime) \ast n(r^\prime) \\
           + & n(r) \ast C_{nc}(r, r^\prime) \ast \Delta c(r^\prime) \nonumber \\
           + &\Delta c(r) \ast C_{cn}(r, r^\prime) \ast n(r^\prime) \nonumber \\ 
-          + &\Delta c(r) \ast C_{cc}(r, r^\prime) \ast \Delta c(r^\prime) \big\rbrace, \nonumber
+          + &\Delta c(r) \ast C_{cc}(r, r^\prime) \ast \Delta c(r^\prime) \Big\rbrace, \nonumber
 \end{align}
 %
 where we have introduced  and $\Delta c(r) = c(r) - c_0$ as the deviation of the 
@@ -275,9 +274,9 @@ Differences in the various simplified binary PFC theories stem from differing
 approximations of the terms in the free energy stated in equations 
 \ref{binary_ideal}, \ref{binary_mixing} and \ref{binary_excess}.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Original Binary Phase Field Crystal Model} %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Original Binary PFC Model} %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 In the original simplified binary PFC theory, all terms in the free energy are
 expanded about $n(r) = 0$ and $c(r) = c_0$ (ie., about their reference states).
@@ -329,14 +328,13 @@ simplified binary PFC model\footnote{The orignal simplified binary PFC model
 was expressed using slightly different variables. We expand in $\Delta c(r)$
 here to facilitate comparison with other theories} is,
 %
-\begin{align}
-    \f{\beta\F[n, c]}{\rho_0} &= \integrate{r} \l\lbrace 
-        \f{1}{2} n(r) \l( 1 - C_0 - C_2 \nabla^2 - C_4\nabla^4 \r) n(r)
-      - \eta\f{n(r)^3}{6} + \chi\f{n(r)^4}{12} \r\rbrace \\
-    &+ \integrate{r} \l\lbrace
-        \f{1}{2} \Delta c(r) \l( 4 - \epsilon - W_c\nabla^2 \r) \Delta c(r) 
-      + \f{4 \Delta c(r)^4}{3} \r\rbrace. \nonumber
-\end{align}
+\begin{multline}
+    \f{\beta\F}{\rho_0} = \integrate{r} \Bigg\{ 
+        \f{1}{2} n\l( 1 - C_0 - C_2 \nabla^2 - C_4\nabla^4 \r) n
+    - \eta\f{n^3}{6} \\+ \chi\f{n^4}{12}
+    + \f{1}{2} \Delta c\l( 4 - \epsilon - W_c\nabla^2 \r) \Delta c
+    + \f{4 \Delta c^4}{3} \Bigg\} 
+\end{multline}
 %
 
 The strength of the original simplified binary PFC model is that is retains
@@ -365,9 +363,9 @@ diagrams. To obtain relatable and testable results, a major motivation for
 binary XPFC and this work, we require the entire free energy of mixing term in
 eqution \ref{binary_mixing}.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Original Binary Structural Phase Field Crystal Model} %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Original Binary XPFC Model} %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 The binary structural phase field crystal theory (XPFC) seeks to remedy the two
 short comings of the original simplified model. That is, it seeks to reproduce
@@ -379,7 +377,7 @@ First, the ideal free energy is expanded in precisely the same manner resulting
 in the same fourth order polynomial,
 %
 \begin{equation}
-    \f{\beta\Delta\F_{id}[n]}{\rho_0} = \integrate{r}
+    \f{\beta\F_{id}[n]}{\rho_0} = \integrate{r}
         \l\lbrace \f{n(r)^2}{2} - \eta \f{n(r)^3}{6} + \chi\f{n(r)^4}{12}
         \r\rbrace. \tag{\ref{ideal_expansion} revisited}
 \end{equation}
@@ -387,11 +385,11 @@ in the same fourth order polynomial,
 The free energy of mixing is left unexpanded but an overall scale $\omega$ is
 added to fit the mixing term away from the reference concentration,
 %
-\begin{equation}
+\begin{multline}
     \f{\beta\F_{mix}[n, c]}{\rho_0} =
-        \integrate{r} \l\lbrace \omega (n(r) + 1)\l( 
-            c\ln\l(\f{c}{c_0}\r) + (1-c)\ln\l(\f{1-c}{1-c_0}\r) \r)\r\rbrace. 
-\end{equation}
+        \integrate{r} \Bigg\{ \omega (n(r) + 1) \\ \l( 
+            c\ln\l(\f{c}{c_0}\r) + (1-c)\ln\l(\f{1-c}{1-c_0}\r) \r) \Bigg\}. 
+\end{multline}
 %
 This unexpanded free energy of mixing will lead to more accurate global phase
 diagrams. The excess free energy is approximated using similar assumptions as
@@ -407,21 +405,19 @@ correlation function was zero leaving only the quadratic term in the expansion,
 Grouping terms together, the complete free energy functional for the binary
 XPFC model is,
 %
-\begin{align}
-    \f{\beta\Delta\F[n, c]}{\rho_0} &= \integrate{r} \l\lbrace
-        \f{1}{2} n(r) \l(1 - C_{nn}(r, r^\prime)\r) \ast n(r^\prime)
-        - \eta \f{n^3}{6} + \chi \f{n^4}{12} \r\rbrace \\
-        &+ \integrate{r}\l\lbrace
-            \f{W_c}{2}\l\vert \nabla c(r) \r\vert^2 + \omega f_{mix}(r)
-            \r\rbrace. \nonumber
-\end{align}
+\begin{multline}
+    \f{\beta\F}{\rho_0} = \integrate{r} \Bigg\{ 
+        \f{1}{2} n(r) \l(1 - C_{nn}(r, r^\prime)\r) \ast n(r^\prime) \\
+        - \eta \f{n^3}{6} + \chi \f{n^4}{12}
+        + \f{W_c}{2}\l\vert \nabla c(r) \r\vert^2 + \omega f_{mix}(r)\Bigg\}. 
+\end{multline}
 %
 Where $f_{mix}(r)$ is the local free energy density of mixing,
 %
-\begin{equation}
-    f_{mix}(r) = \l(n(r) + 1\r)\l( 
-            c(r)\ln\l(\f{c(r)}{c_0}\r) + (1-c(r))\ln\l(\f{1-c(r)}{1-c_0}\r) \r).
-\end{equation}
+\begin{multline}
+    f_{mix}(r) = \l(n(r) + 1\r)\Bigg( 
+            c(r)\ln\l(\f{c(r)}{c_0}\r) \\+ (1-c(r))\ln\l(\f{1-c(r)}{1-c_0}\r) \Bigg).
+\end{multline}
 %
 
 The density-density correlation function, $C_{nn}$, is left unexpanded in 
@@ -505,9 +501,9 @@ very well when we expect a solid phase at intermediate concentration. These
 shortcomings are the motivation for the improvements developed in this paper
 which are presented in the following section.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Improvements to the Binary Phase Field Crystal Model} %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Generalization of the Binary Phase Field Crystal Model} %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \label{sec:improvements}
 
 In this section we look at two improvements to the binary XPFC theory. The
@@ -535,23 +531,22 @@ Specifically, the correlation function is expanded as,
 where $\epsilon$ is a parameter that is possibly temperature dependent. This
 form results in a free energy functional of the form,
 %
-\begin{align}
-    \f{\beta\Delta\F[n, c]}{\rho_0} &= \integrate{r} \l\lbrace
+\begin{multline}
+    \f{\beta\F}{\rho_0} = \integrate{r} \Bigg\{ 
         \f{1}{2} n(r) \l(1 - C_{nn}(r, r^\prime)\r) \ast n(r^\prime)
-        - \eta \f{n^3}{6} + \chi \f{n^4}{12} \r\rbrace \\
-        &+ \integrate{r}\l\lbrace
-            \f{W_c}{2}\l\vert \nabla c(r) \r\vert^2 + \omega f_{mix}(r)
-            \r\rbrace, \nonumber
-\end{align}
+        \\- \eta \f{n^3}{6} + \chi \f{n^4}{12}
+        + \f{W_c}{2}\l\vert \nabla c(r) \r\vert^2 + \omega f_{mix}(r)
+            \Bigg\}, 
+\end{multline}
 %
 where the local free energy density of mixing, $f_{mix}$ is now,
 %
-\begin{equation}
-    f_{mix}(r) = \l(n(r) + 1\r)\l(
+\begin{multline}
+    f_{mix}(r) = \l(n(r) + 1\r)\Bigg(
             c(r)\ln\l(\f{c(r)}{c_0}\r)
-          + (1-c(r))\ln\l(\f{1-c(r)}{1-c_0}\r) \r)
+          \\+ (1-c(r))\ln\l(\f{1-c(r)}{1-c_0}\r) \Bigg)
           + \f{1}{2} \epsilon (c - c_0)^2.
-\end{equation}
+\end{multline}
 %
 For simplicity the temperature dependence of the parameter $\epsilon$ is taken
 to be linear about a spinodal temperature $T_c$,
@@ -860,7 +855,12 @@ about its classification, regardless of semantics.
 \begin{figure}
     \includegraphics[width=\columnwidth]{natchemfig}
     \caption{
-        \label{loh_figure} [description here]
+        \label{loh_figure} 
+        Experimental observations of multi-step nucleation and proposed
+        three-step pathway due to Loh \textit{et al}\cite{LOH17}. Series (a)
+        and (c) show TEM images of supersaturated gold and silver aqueous
+        solutions precipitating.  Series (b) shows a schematic of the preposed
+        mechanism.
     }
 \end{figure}
 
@@ -954,9 +954,9 @@ function for a 2 dimensional hexagonal precipitate would thus be,
 %
 \begin{equation}
     \label{eq:precip_corr}
-    \tilde{C}_{nn}(k; c) = \exp\l\lbrace - \f{(c - 1)^2}{2\sigma_c^2}\r\rbrace
-        \exp\l\lbrace \f{T}{T_0} \r\rbrace 
-        \exp\l\lbrace - \f{(k - k_{10})^2}{2\sigma^2} \r\rbrace,
+    \tilde{C}_{nn}(k; c) = e^{- \f{(c - 1)^2}{2\sigma_c^2}}
+        e^{-\f{T}{T_0}}
+        e^{- \f{(k - k_{10})^2}{2\sigma^2}},
 \end{equation}
 %
 where,
@@ -975,7 +975,7 @@ coexistence curve.
 
 \begin{figure}
     \centering	
-    \includegraphics[scale=0.5]{solution.eps}
+    \includegraphics[width=\columnwidth]{solution.eps}
     \caption[Coexistance Phase Diagram with Metastable Spinodal]{
         \label{fig:precip_phase_dia} Phase Diagram of a Precipitating Solution
         with hexagonal $\alpha$ phase solid. The free energy parameters are
@@ -998,108 +998,103 @@ with corresponding equilibrium phase diagram in figure
 a temperature below the metastable spinodal curve. The spinodal curve marks an
 inflection point in the liquid free energy meaning the metastable liquid
 becomes fully unstable and decomposes into regions of differing concentration
-as a result. A typical microstructure evolution sequence results for a typical
-quench of a uniform solution of $c = 0.3$ from the liquid phase to a
-temperature $T/T_0 = 0.07$ is shown in figure \ref{fig:precipitation}.
-Frames (a)-(c) show the initial decmposition of the liquid, once below the
-spinodal temperature, into two regions of high and low compositions. Frames
-(d)-(f) show that once the concentration in the solute-rich regions of the
-decomposed liquid occurs, nucleation of the solid phase begins to occur in
-these confined liquid volumes. Once nucleated, the solid regions start/continue
-to grow at the expense of the liquid phase. Finally, in frames (g)-(i), the
-nucleated nanoparticles undergo growth and coarsening. This simulation is a
-typical example where the nucleation of precipitates in preceded by spinodal
-decomposition, which is consistent with the  the experimental findings
-mentioned above for the nanoparticle and calcium carbonate systems \cite{LOH17,
-WALLACE13}. While one simulation sequence is show here, this scenario was
-typical of all ensembles we ran and from which we gathered statistics for the
-data shown below. As mentioned above, we observed that once any solute-rich
-regions crystallize, their growth is accelerated at the expense of
-uncrystallized solute-rich regions. We refer to this phenomena as
-\textit{sacrificial growth} (frames (d)-(f) in figure
-\ref{fig:precipitation})). 
+as a result.
 %
-\begin{figure}
+\begin{figure*}
     \centering
-    \begin{subfigure}[b]{0.3\columnwidth}
+    \begin{subfigure}[b]{0.2\textwidth}
         \includegraphics[width=\textwidth]{initial}
         \label{fig:initial}
         \caption{}
     \end{subfigure}
     ~
-    \begin{subfigure}[b]{0.3\columnwidth}
+    \begin{subfigure}[b]{0.2\textwidth}
         \includegraphics[width=\textwidth]{early_spinodal}
         \label{fig:early_spinodal}
         \caption{}
     \end{subfigure}
     ~
-    \begin{subfigure}[b]{0.3\columnwidth}
+    \begin{subfigure}[b]{0.2\textwidth}
         \includegraphics[width=\textwidth]{devel_spinodal.png}
         \label{fig:devel_spinodal}
         \caption{}
     \end{subfigure}
-
-    \vspace{0.25cm}
-    \begin{subfigure}[b]{0.3\columnwidth}
+    ~
+    \begin{subfigure}[b]{0.2\textwidth}
         \includegraphics[width=\textwidth]{nucleation}
         \label{fig:nucleation}
         \caption{}
     \end{subfigure}
-    ~
-    \begin{subfigure}[b]{0.3\columnwidth}
+    
+    \vspace{0.25cm}
+    \begin{subfigure}[b]{0.2\textwidth}
         \includegraphics[width=\textwidth]{nucleation_and_sacrificial_growth}
         \label{fig:nucleation_and_growth}
         \caption{} 
     \end{subfigure}
     ~
-    \begin{subfigure}[b]{0.3\columnwidth}
+    \begin{subfigure}[b]{0.2\textwidth}
         \includegraphics[width=\textwidth]{sacrificalgrowth}
         \label{fig:sacrifical_growth}
         \caption{}
     \end{subfigure}
-    
-    \vspace{0.25cm}
-    \begin{subfigure}[b]{0.3\columnwidth}
+    ~ 
+    \begin{subfigure}[b]{0.2\textwidth}
         \includegraphics[width=\textwidth]{crystalgrowth}
         \label{fig:crystalgrowth}
         \caption{}
     \end{subfigure}
-    ~
-    \begin{subfigure}[b]{0.3\columnwidth}
-        \includegraphics[width=\textwidth]{crystalgrowth2}
-        \label{fig:crystalgrowth2}
-        \caption{}
-    \end{subfigure}
-    ~ 
-    \begin{subfigure}[b]{0.3\columnwidth}
-        \includegraphics[width=\textwidth]{crystalgrowth3}
-        \label{fig:crystalgrowth3}
-        \caption{}
-    \end{subfigure}
-    \caption[Stages of precipitation of nanoparticles from solution]{
+    \caption{
         \label{fig:precipitation}
         Various stages of precipitation of nanoparticles from solution. All
         thermodynamic parameters are shared with figure
         \ref{fig:precip_phase_dia}. The initial condition is a uniform solution
         quenched abruptly to $T$ = 0.07. The initial condition has
-        concentration $c = 0.3$ and relative density is set to $n = 0.05$. Mobilities
-        $M_n$ and $M_c$ are set to 1 and $W_c$ is set to 3.0. Numerical
-        parameters are grid spacing $\Delta x = 0.125$ on a 1024 by 1024
-        lattice with time step size $\Delta t = 0.0025$. Sub-figures (a) - (c)
-        show spinodal decomposition of the liquid into solute right and solute
-        poor regions. Sub-figures (d) - (f) show nucleation of the solid and
-        solid growth at the expense of liquid regions.  The remaining
-        sub-figures show only nanoparticle growth and coarsening.
+        concentration $c = 0.3$ and relative density is set to $n = 0.05$.
+        Mobilities $M_n$ and $M_c$ are set to 1 and $W_c$ is set to 3.0.
+        Numerical parameters are grid spacing $\Delta x = 0.125$ on a 1024 by
+        1024 lattice with time step size $\Delta t = 0.0025$. Sub-figures (a) -
+        (d) show spinodal decomposition of the liquid and initial nucleation.
+        Sub-figures (e) and (f) show further nucleation and solid growth at the
+        expense of liquid regions.   
     }
-\end{figure}
+\end{figure*}
 %
-
+A typical microstructure evolution sequence results for a typical quench of a
+uniform solution of $c = 0.3$ from the liquid phase to a temperature $T/T_0 =
+0.07$ is shown in figure \ref{fig:precipitation}.  Frames (a)-(c) show the
+initial decmposition of the liquid, once below the spinodal temperature, into
+regions of high and low compositions. Frames (d)-(g) show that once the
+concentration in the solute-rich regions of the decomposed liquid occurs,
+nucleation of the solid phase begins to occur in these confined liquid volumes.
+Once nucleated, the solid regions start/continue to grow at the expense of the
+liquid phase. This simulation is a typical example where the nucleation of
+precipitates in preceded by spinodal decomposition, which is consistent with
+the  the experimental findings mentioned above for the nanoparticle and calcium
+carbonate systems \cite{LOH17, WALLACE13}. While one simulation sequence is
+show here, this scenario was typical of all ensembles we ran and from which we
+gathered statistics for the data shown below. As mentioned above, we observed
+that once any solute-rich regions crystallize, their growth is accelerated at
+the expense of uncrystallized solute-rich regions. We refer to this phenomena
+as \textit{sacrificial growth} (frames (d)-(f) in figure \ref{fig:precipitation})). 
+%
+\begin{figure*}
+    \centering
+    \includegraphics[width=0.6\textwidth]{scaling}
+    \caption{
+        \label{fig:scaling}
+        Droplet growth $\langle R(t) \rangle$ Versus time. Black line show
+        $\sim t^{1/2}$ growth. Insets show early hyper-diffusive growth
+        of crystalline nanoparticles and late stage hypo-diffusive growth.
+    }
+\end{figure*}
+%
 % Discuss the growth picture (hyper / hypo diffusive)
 %
 To quantify the phenomena shown in figure \ref{fig:precipitation}, we examine
 the mean radius $\mean{R(t)}$ of solute-rich domains as a function of time, and
 average the results over an ensemble of 120 quenches analogous to those shown in 
-figure \ref{ig:crystalgrowth3}. Here we define the mean
+figure \ref{fig:precipitation}. Here we define the mean
 radius as the square root of the mean area,
 %
 \begin{equation}
@@ -1116,18 +1111,6 @@ figure \ref{fig:scaling} we plot $\langle R(t)\rangle$ on a log-log graph.
 Lines corresponding to the diffusive growth exponent are also drawn for
 comparison to numerical results. The data shows that for early times,
 crystalline regions grow at a hyper-diffusive rate. 
-%
-\begin{figure}
-    \centering
-    \includegraphics[width=\columnwidth]{scaling}
-    \caption{
-        \label{fig:scaling}
-        Droplet growth $\langle R(t) \rangle$ Versus time. Black line show
-        $\sim t^{1/2}$ growth. Insets show early hyper-diffusive growth
-        of crystalline nanoparticles and late stage hypo-diffusive growth.
-    }
-\end{figure}
-%
 \noindent This decays to hypo-diffusive after uncrystallized regions have disappeared and
 coarsening takes over the kinetics of precipitation.
 
