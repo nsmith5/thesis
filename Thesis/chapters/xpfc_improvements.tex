@@ -72,9 +72,8 @@ individual components,
 \end{equation}
 %
 where the index $i$ is, for the moment, an arbitrary label. For example, in the
-exact theory that emerges from the original alloy CDFT theory (equation
-\ref{binaryCs}), we use the labels $\lbrace AA, AB, BB\rbrace$ and have
-interpolation functions,
+exact theory that emerges from the original alloy CDFT theory (equation \ref{orig_nnC}), 
+we use the labels $\lbrace AA, AB, BB\rbrace$ and have interpolation functions,
 %
 \begin{gather}
     \zeta_{AA}(c) = \rho_0 (1 - c^2), \\
@@ -83,7 +82,7 @@ interpolation functions,
 \end{gather}
 %
 This suggests the following new definition that we introduce herein to
-generalizethe density-density correlation function for a binary alloy: Use the
+generalize the density-density correlation function for a binary alloy: Use the
 labels $i$ to enumerate the set of crystal structures known to manifest
 themselves in an alloy system. The correlation functions, $C_i(r, r^\prime)$
 are then direct correlation functions that model the crystal structure $i$ and
@@ -99,7 +98,7 @@ r^\prime)$. These two structures, the silver rich $\alpha$ phase and the copper
 rich $\beta$ phase, are the only two relevant crystalline phases in the system,
 so to build the full density-density correlation function we just need to
 choose interpolating functions for each phase. Following Greenwood \textit{et
-al} for example, we might choose,
+al.} for example, we might choose,
 %
 \begin{gather}
     \zeta_\alpha(c) = 1 - 3c^2 + 2c^3, \\
@@ -108,7 +107,7 @@ al} for example, we might choose,
 %
 To model the $\alpha$ and $\beta$ correlation functions we use the original
 XPFC formalism for modelling bare correlation functions (i.e. equation
-\ref{XPFC_C2}). The $\alpha$ and $\beta$ phase are both FCC
+\ref{XPFC_C2}). The $\alpha$ and $\beta$ phases are both FCC
 \cite{SUBRAMANIAN93} so we can use an FCC model for the correlation function as
 in \cite{GREENWOOD10}.
 
@@ -138,7 +137,7 @@ To specialize our simplified regular model to the case of the binary eutectic,
 we must choose an appropriate model for the correlation function. Choosing an
 $\alpha$ phase around $c = 0$ and $\beta$ phase around $c = 1$, we can recover
 the pair correlation function used in the binary XPFC of Greenwood \textit{et
-al.} with a particular choice of interpolations functions: 
+al.} with a particular choice of interpolation functions: 
 %
 \begin{align}
    \zeta_\alpha(c) &= 2c^3 - 3c^2 + 1 \\
@@ -172,7 +171,7 @@ the coexistance curve of the decomposed metastable liquid.
 It is noted that the phase diagram in Fig. \ref{eutectic} and in what follows
 were done using the same approach that was used in numerous PFC literature
 \cite{GREENWOOD11_BINARY}. The approach is as follows: a mode expansion for the
-density is assumed for each crystal phases (zero amplitudes for the liquid
+density is assumed for each crystal phase (zero amplitudes for the liquid
 phase). For each  phase, an amplitude equation analogous to equation
 \ref{amplitude_gp} results, except in this case, it is a function of
 amplitudes, average density {\it and} concentration. This coarse grained free
@@ -272,7 +271,7 @@ of parameters as in Fig. \ref{monotectic}.
 The improvements to the XPFC formalism made in this chapter not only reveal new
 details in existing systems, but also model new systems that haven't been
 explored with PFC methods before. They provide a general framework to explore
-the landscape of other possible possible binary alloys with an emphasis that
+the landscape of other possible binary alloys with an emphasis that
 the liquid free energy is a crucial element in this complete description. It is
 also noteworthy that the approach introduced here is extendable in a
 straightforward way to multi-component alloys if the interpolation functions
